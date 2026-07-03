@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
   aboutParagraphs,
   aboutStats,
-  caseStudyOutcomes,
   contactItems,
   devToolkit,
   footerLinks,
@@ -125,7 +124,6 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
-  const [failedAvatars, setFailedAvatars] = useState<Set<string>>(new Set());
   const [formTab, setFormTab] = useState<"service" | "feedback">("service");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmdesign");
@@ -138,9 +136,6 @@ export default function Home() {
 
   const allProjects = useQuery(api.projects.list, {}) ?? [];
   const testimonials = useQuery(api.testimonials.listApproved) ?? [];
-  const allProjectsSorted = sortByOrder(allProjects);
-  const featuredCaseStudies = allProjectsSorted.slice(0, 3);
-
   const projectsByBrand = {
     gmcode: sortByOrder(allProjects.filter((p) => p.subBrand === "gmcode")),
     gmdesign: sortByOrder(allProjects.filter((p) => p.subBrand === "gmdesign")),
@@ -155,6 +150,38 @@ export default function Home() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>(".reveal-on-scroll"));
+    if (elements.length === 0) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    elements.forEach((element) => {
+      element.classList.remove("is-visible");
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [allProjects.length, testimonials.length, activeBrand, formTab]);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -210,17 +237,17 @@ export default function Home() {
         <section id="home" className="section-pad-tight pt-24 sm:pt-28">
           <div className="container">
             <div className="hero-grid">
-              <div className="hero-copy">
+              <div className="hero-copy reveal-on-scroll">
                 <p className="eyebrow">Graphic & Web Designer · Nairobi</p>
                 <h1 className="hero-title">
                   <span className="font-script text-blue-600 dark:text-blue-400">Create.</span>
                   <span className="font-hand">Elevate.</span>
                   <span className="font-display font-bold">Convert.</span>
                 </h1>
-                <p className="lead">
+                <p className="lead type-subtitle-serif">
                   Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites.
                 </p>
-                <p className="sublead">Available for freelance, contract, and full-time opportunities.</p>
+                <p className="sublead type-subtitle-hand">Available for freelance, contract, and full-time opportunities.</p>
 
                 <div className="stack gap-3">
                   <TagList items={toolkit} />
@@ -243,7 +270,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="hero-photo">
+              <div className="hero-photo reveal-on-scroll">
                 <img src="/mike.png" alt="Mike Waitindi" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -254,12 +281,12 @@ export default function Home() {
           <div className="container">
             <SectionHeader label="About" title="Mike Waitindi" />
             <div className="about-grid">
-              <div className="stack gap-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              <div className="stack gap-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed reveal-on-scroll">
                 {aboutParagraphs.map((p) => (
-                  <p key={p.slice(0, 24)}>{p}</p>
+                  <p key={p.slice(0, 24)} className="type-subtitle-display">{p}</p>
                 ))}
               </div>
-              <div className="stat-grid">
+              <div className="stat-grid reveal-on-scroll">
                 {aboutStats.map((stat) => (
                   <div key={stat.label} className="minimal-card p-3 sm:p-4">
                     <div className="stat-value">{stat.value}</div>
@@ -276,8 +303,8 @@ export default function Home() {
             <SectionHeader label="Skills" title="Tools & capabilities" />
             <div className="skills-grid">
               {skillGroups.map((group) => (
-                <div key={group.title} className="minimal-card p-4">
-                  <h3 className="text-sm font-semibold mb-2 text-gray-800 dark:text-gray-200">{group.title}</h3>
+                <div key={group.title} className="minimal-card p-4 reveal-on-scroll">
+                  <h3 className="text-sm font-semibold mb-2 text-gray-800 dark:text-gray-200 section-title-display">{group.title}</h3>
                   <TagList items={group.skills} />
                 </div>
               ))}
@@ -292,12 +319,12 @@ export default function Home() {
               {[...services, ...supplementaryServices].map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article key={service.title} className="minimal-card p-4">
+                  <article key={service.title} className="minimal-card p-4 reveal-on-scroll">
                     <div className="flex gap-3">
                       <div className="icon-chip shrink-0"><Icon size={16} /></div>
                       <div className="min-w-0">
-                        <h3 className="text-sm font-semibold mb-1">{service.title}</h3>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{service.desc}</p>
+                        <h3 className="text-sm font-semibold mb-1 section-title-display">{service.title}</h3>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed type-subtitle-hand">{service.desc}</p>
                       </div>
                     </div>
                   </article>
@@ -307,10 +334,10 @@ export default function Home() {
 
             <div className="process-grid mt-6 sm:mt-8">
               {processSteps.map((step, i) => (
-                <div key={step.title} className="minimal-card p-4">
+                <div key={step.title} className="minimal-card p-4 reveal-on-scroll">
                   <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Step {i + 1}</p>
-                  <h3 className="text-sm font-semibold mb-1">{step.title}</h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{step.desc}</p>
+                  <h3 className="text-sm font-semibold mb-1 section-title-display">{step.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 type-subtitle-display">{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -320,33 +347,6 @@ export default function Home() {
         <section id="work" className="section-pad-tight">
           <div className="container">
             <SectionHeader label="Portfolio" title="My work" />
-
-            {featuredCaseStudies.length > 0 && (
-              <div className="featured-grid mb-6 sm:mb-8">
-                {featuredCaseStudies.map((project, i) => {
-                  const projectKey = getProjectKey(project);
-                  return (
-                    <article key={`feature-${project._id}`} className="minimal-card overflow-hidden">
-                      <ProjectThumbnail
-                        project={project}
-                        failed={failedImages.has(projectKey)}
-                        onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
-                        placeholderIndex={i}
-                      />
-                      <div className="p-4">
-                        <h3 className="text-sm font-semibold mb-2">{project.name}</h3>
-                        <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
-                        <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Outcome</p>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                          {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished experience aligned to business goals."}
-                        </p>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            )}
 
             <div className="tab-row mb-5">
               {subBrands.map((brand) => {
@@ -374,7 +374,7 @@ export default function Home() {
                   const isMarketing = project.subBrand === "gmmarketing";
                   const projectKey = getProjectKey(project);
                   return (
-                    <article key={projectKey} className="minimal-card overflow-hidden">
+                    <article key={projectKey} className="minimal-card overflow-hidden reveal-on-scroll">
                       <ProjectThumbnail
                         project={project}
                         failed={failedImages.has(projectKey)}
@@ -388,8 +388,8 @@ export default function Home() {
                             <span className="text-[10px] px-1.5 py-0.5 border border-purple-200 dark:border-purple-800/50 text-purple-700 dark:text-purple-300">{project.techStack[1]}</span>
                           </div>
                         )}
-                        <h3 className="text-sm font-semibold mb-1">{project.name}</h3>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
+                        <h3 className="text-sm font-semibold mb-1 section-title-display">{project.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2 type-subtitle-display">{project.description}</p>
                         {project.subBrand === "gmcode" ? (
                           <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
                             View project →
@@ -429,16 +429,16 @@ export default function Home() {
               {pricingRows.map((row) => {
                 const Icon = row.icon;
                 return (
-                  <div key={row.service} className="minimal-card pricing-row">
+                  <div key={row.service} className="minimal-card pricing-row reveal-on-scroll">
                     <div className="icon-chip shrink-0"><Icon size={15} /></div>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                        <h3 className="text-sm font-semibold">{row.service}</h3>
+                        <h3 className="text-sm font-semibold section-title-display">{row.service}</h3>
                         <span className="text-[10px] px-1.5 py-0.5 border border-gray-200 dark:border-slate-700 text-gray-500">{row.model}</span>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{row.range}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 type-subtitle-display">{row.range}</p>
                     </div>
-                    <p className="text-sm font-semibold shrink-0">{row.starting}</p>
+                    <p className="text-sm font-semibold shrink-0 section-title-display">{row.starting}</p>
                   </div>
                 );
               })}
@@ -459,23 +459,15 @@ export default function Home() {
                 {[...testimonials, ...testimonials].map((t, i) => {
                   const avatarKey = `${t._id ?? t.name}-${i}`;
                   return (
-                    <article key={avatarKey} className="minimal-card marquee-card">
-                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">&ldquo;{t.text}&rdquo;</p>
+                    <article key={avatarKey} className="minimal-card marquee-card reveal-on-scroll">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 type-subtitle-display">&ldquo;{t.text}&rdquo;</p>
                       <div className="flex items-center gap-2">
-                        {!failedAvatars.has(avatarKey) && t.avatar ? (
-                          <img
-                            src={t.avatar}
-                            alt={t.name}
-                            loading="lazy"
-                            className="w-7 h-7 rounded-full object-cover bg-gray-200 dark:bg-slate-700"
-                            onError={() => setFailedAvatars((prev) => new Set(prev).add(avatarKey))}
-                          />
-                        ) : (
-                          <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">{t.name.charAt(0)}</div>
-                        )}
+                        <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">
+                          {t.name.charAt(0)}
+                        </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-medium truncate">{t.name}</p>
-                          <p className="text-[10px] text-gray-400 truncate">{t.role}</p>
+                          <p className="text-xs font-medium truncate section-title-display">{t.name}</p>
+                          <p className="text-[10px] text-gray-400 truncate type-subtitle-display">{t.role}</p>
                         </div>
                       </div>
                     </article>
@@ -492,7 +484,7 @@ export default function Home() {
             <div className="contact-grid">
               <div className="stack gap-4">
                 {contactItems.map((item) => (
-                  <div key={item.label} className="flex items-start gap-3">
+                  <div key={item.label} className="flex items-start gap-3 reveal-on-scroll">
                     <div className="icon-chip shrink-0">
                       {item.label === "Email" && <Mail size={15} />}
                       {item.label === "Phone" && <Phone size={15} />}
@@ -519,7 +511,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="minimal-card overflow-hidden">
+              <div className="minimal-card overflow-hidden reveal-on-scroll">
                 <div className="flex border-b border-gray-200 dark:border-slate-700">
                   <button type="button" onClick={() => setFormTab("service")} className={`form-tab ${formTab === "service" ? "is-active" : ""}`}>Request service</button>
                   <button type="button" onClick={() => setFormTab("feedback")} className={`form-tab ${formTab === "feedback" ? "is-active" : ""}`}>Leave review</button>
