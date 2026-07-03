@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -18,7 +17,6 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
-  const [failedAvatars, setFailedAvatars] = useState<Set<number>>(new Set());
   const [formTab, setFormTab] = useState<"service" | "feedback">("service");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const seed = useMutation(api.seed.seed);
@@ -72,7 +70,6 @@ export default function Home() {
   ];
 
   const allProjects = useQuery(api.projects.list, {}) ?? [];
-  const testimonials = useQuery(api.testimonials.listApproved) ?? [];
 
   const projectsByBrand: Record<string, typeof allProjects> = {
     gmcode: allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmcode"),
@@ -91,9 +88,14 @@ export default function Home() {
       {/* Header */}
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 dark:bg-[#0a0f1a]/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800/50" : "bg-transparent"}`}>
         <div className="container flex justify-between items-center py-4">
-          <span className="flex items-center gap-2">
-            <img src="/brand1.png" alt="GMLink" className="h-10 w-auto bg-white dark:bg-slate-900 rounded-none p-0.5" />
+          <span className="flex items-center gap-2.5">
+            <img src="/brand1.png" alt="GMLink" className="h-10 w-auto" />
             <span className="text-lg font-bold tracking-tight font-display">GMLink</span>
+            <span className="hidden sm:flex items-center gap-1 ml-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            </span>
           </span>
 
           <nav className="hidden md:flex gap-8 items-center">
@@ -141,10 +143,10 @@ export default function Home() {
                 Design & Development Studio
               </div>
 
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
+              <h1 className="font-script text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.2] tracking-normal text-blue-600 mb-8">
                 Code meets
                 <br />
-                <span className="text-blue-600">canvas</span>
+                canvas
               </h1>
 
               <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-10 max-w-xl leading-relaxed">
@@ -161,22 +163,27 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="shrink-0">
-              <img
-                src="/mike.png"
-                alt="Mike Waitindi"
-                className="w-64 h-64 md:w-80 md:h-80 object-cover border border-gray-200 dark:border-slate-700/50"
-              />
+            <div className="shrink-0 photo-glow">
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-slate-700/50 shadow-lg">
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-purple-600/15 z-10 pointer-events-none" />
+                <img
+                  src="/mike.png"
+                  alt="Mike Waitindi"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      <div className="section-divider mx-auto max-w-6xl" />
+
       {/* About */}
       <section id="about" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
         <div className="container">
           <div className="max-w-2xl mb-20">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+            <h2 className="font-hand text-4xl md:text-5xl font-normal mb-6">
               About me
             </h2>
             <div className="space-y-5 text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -196,8 +203,8 @@ export default function Home() {
               { label: "Users supported", value: "500+" },
               { label: "Sub-brands", value: "3" },
             ].map((stat, i) => (
-              <div key={i} className="bg-white dark:bg-slate-800/60 rounded-none p-6 border border-gray-200 dark:border-slate-700/50">
-                <div className="font-display text-3xl font-bold text-blue-600 mb-1">{stat.value}</div>
+              <div key={i} className={`bg-white dark:bg-slate-800/60 rounded-none p-6 border transition-all duration-200 group hover:-translate-y-0.5 hover:shadow-md ${i === 0 ? 'border-blue-200 dark:border-blue-800/50 md:scale-[1.04] md:origin-left' : 'border-gray-200 dark:border-slate-700/50'}`}>
+                <div className={`font-display font-bold mb-1 transition-colors ${i === 0 ? 'text-4xl text-blue-600' : 'text-3xl text-blue-600'}`}>{stat.value}</div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
               </div>
             ))}
@@ -205,11 +212,13 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider mx-auto max-w-6xl" />
+
       {/* Services */}
       <section id="services" className="py-24 md:py-32">
         <div className="container">
           <div className="max-w-xl mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+            <h2 className="font-beanie text-4xl md:text-5xl font-normal mb-6">
               What I do
             </h2>
             <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -221,7 +230,7 @@ export default function Home() {
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md transition-all duration-200">
+                <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200">
                   <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
                     <Icon size={20} className="text-blue-600 dark:text-blue-400" />
                   </div>
@@ -233,6 +242,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Pricing */}
       <section id="pricing" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
@@ -246,41 +257,44 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="overflow-hidden border border-gray-200 dark:border-slate-700/50">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 dark:bg-slate-800/60 border-b border-gray-200 dark:border-slate-700/50">
-                  <th className="text-left px-5 py-3.5 font-semibold text-gray-700 dark:text-gray-300">Service</th>
-                  <th className="text-left px-5 py-3.5 font-semibold text-gray-700 dark:text-gray-300">Starting from</th>
-                  <th className="text-left px-5 py-3.5 font-semibold text-gray-700 dark:text-gray-300 hidden sm:table-cell">Typical range</th>
-                  <th className="text-right px-5 py-3.5 font-semibold text-gray-700 dark:text-gray-300">Pricing model</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { service: "Software Development", starting: "KSh 60,000", range: "KSh 60,000 – 250,000", model: "Per project" },
-                  { service: "UX/UI & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 – 100,000", model: "Per project" },
-                  { service: "IT Support & Helpdesk", starting: "KSh 15,000", range: "KSh 15,000 – 50,000", model: "Monthly retainer" },
-                  { service: "System Integration", starting: "KSh 80,000", range: "KSh 80,000 – 300,000", model: "Per project" },
-                  { service: "Network & Security", starting: "KSh 50,000", range: "KSh 50,000 – 200,000", model: "Per project" },
-                  { service: "Training & Documentation", starting: "KSh 25,000", range: "KSh 25,000 – 80,000", model: "Per session" },
-                ].map((row, i) => (
-                  <tr key={i} className="border-b border-gray-100 dark:border-slate-700/30 hover:bg-white dark:hover:bg-slate-800/40 transition-colors">
-                    <td className="px-5 py-4 font-medium text-gray-800 dark:text-gray-200">{row.service}</td>
-                    <td className="px-5 py-4 text-gray-600 dark:text-gray-400">{row.starting}</td>
-                    <td className="px-5 py-4 text-gray-500 dark:text-gray-400 hidden sm:table-cell">{row.range}</td>
-                    <td className="px-5 py-4 text-right text-gray-500 dark:text-gray-400">{row.model}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {[
+            { service: "Software Development", starting: "KSh 60,000", range: "KSh 60,000 – 250,000", model: "Per project", icon: Code },
+            { service: "UX/UI & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 – 100,000", model: "Per project", icon: Palette },
+            { service: "IT Support & Helpdesk", starting: "KSh 15,000", range: "KSh 15,000 – 50,000", model: "Monthly retainer", icon: Zap },
+            { service: "System Integration", starting: "KSh 80,000", range: "KSh 80,000 – 300,000", model: "Per project", icon: Layers },
+            { service: "Network & Security", starting: "KSh 50,000", range: "KSh 50,000 – 200,000", model: "Per project", icon: Smartphone },
+            { service: "Training & Documentation", starting: "KSh 25,000", range: "KSh 25,000 – 80,000", model: "Per session", icon: Printer },
+          ].map((row, i) => {
+            const Icon = row.icon;
+            return (
+              <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 p-5 mb-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md last:mb-0">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon size={18} className="text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
+                      <h3 className="font-display font-semibold text-gray-800 dark:text-gray-200">{row.service}</h3>
+                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 inline-block w-fit">{row.model}</span>
+                    </div>
+                    <div className="flex items-baseline gap-3 flex-wrap">
+                      <span className="text-lg font-bold text-gray-900 dark:text-white">{row.starting}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">—</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{row.range}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 text-center">
             Prices are indicative and may vary based on scope. <a href="#contact" className="text-blue-600 dark:text-blue-400 hover:underline" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Get in touch</a> for a custom quote.
           </p>
         </div>
       </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Projects */}
       <section id="projects" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
@@ -317,37 +331,44 @@ export default function Home() {
 
           {/* Projects grid */}
           {projectsByBrand[activeBrand].length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-6">
-              {projectsByBrand[activeBrand]!.map((project: { name: string; description: string; url: string; image: string; subBrand: string }, i: number) => (
-                <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden hover:shadow-md transition-all duration-200">
-                  <div className="aspect-[16/10] bg-gray-100 dark:bg-slate-800 overflow-hidden">
-                    {project.subBrand === "gmmarketing" ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projectsByBrand[activeBrand]!.map((project: { name: string; description: string; url: string; image: string; subBrand: string }, i: number, arr: typeof projectsByBrand['gmcode']) => {
+                const isMarketing = project.subBrand === "gmmarketing";
+                const isDesign = project.subBrand === "gmdesign";
+                const count = arr.length;
+                const isLastAloneMd = count % 2 !== 0 && i === count - 1;
+                const isLastAloneLg = count % 3 !== 0 && i === count - 1;
+                const lastAloneCls = isLastAloneMd ? 'md:col-span-2 md:max-w-[50%] md:mx-auto' : '';
+                const lastAloneClsLg = isLastAloneLg ? 'lg:col-span-3 lg:max-w-[33.333%] lg:mx-auto' : '';
+                return (
+                <div key={i} className={`bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group ${lastAloneCls} ${lastAloneClsLg}`}>
+                  <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-800 overflow-hidden">
+                    {isMarketing ? (
                       <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
-                    ) : project.subBrand === "gmdesign" && !failedImages.has(i) && project.image ? (
-                      <img src={project.image} alt={project.name} className="w-full h-full object-contain bg-white dark:bg-slate-900 p-2" onError={() => handleImageError(i)} />
                     ) : !failedImages.has(i) && project.image ? (
-                      <img src={project.image} alt={project.name} className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500" onError={() => handleImageError(i)} />
+                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-white dark:bg-slate-900 p-2' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(i)} />
                     ) : (
                       <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
                         <span className="font-display text-3xl font-bold">{getProjectPlaceholder(project.name)}</span>
                       </div>
                     )}
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-display font-bold text-lg mb-1.5">{project.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">{project.description}</p>
+                  <div className="p-4 lg:p-5">
+                    <h3 className="font-display font-bold text-base lg:text-lg mb-1.5">{project.name}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed line-clamp-3 lg:line-clamp-2">{project.description}</p>
                     {project.subBrand === "gmcode" ? (
                       <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium">
                         View project &rarr;
                       </a>
                     ) : (
-                      <button onClick={() => setPreviewImage(project.subBrand === "gmmarketing" ? project.url : project.image)} className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer">
+                      <button onClick={() => setPreviewImage(isMarketing ? project.url : project.image)} className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer">
                         View project &rarr;
                       </button>
                     )}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20 bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50">
@@ -372,40 +393,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="py-24 md:py-32 overflow-hidden">
-        <div className="container mb-12">
-          <div className="max-w-xl">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-              Client feedback
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-              Trust built through delivering results.
-            </p>
-          </div>
-        </div>
+      <div className="section-divider mx-auto max-w-6xl" />
 
-        <div className="marquee-container">
-          <div className="marquee-track">
-            {[...testimonials, ...testimonials].map((testimonial: { name: string; role: string; text: string; avatar?: string }, i: number) => (
-              <div key={i} className="min-w-[200px] max-w-[200px] p-4 bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 shrink-0">
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">"{testimonial.text}"</p>
-                <div className="flex items-center gap-2.5">
-                  {!failedAvatars.has(i) && testimonial.avatar ? (
-                    <img src={testimonial.avatar} alt={testimonial.name} className="w-7 h-7 rounded-full object-cover shrink-0" onError={() => setFailedAvatars(prev => new Set(prev).add(i))} />
-                  ) : (
-                    <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">{testimonial.name.charAt(0)}</div>
-                  )}
-                  <div className="min-w-0">
-                    <div className="font-medium text-sm text-gray-900 dark:text-white truncate">{testimonial.name}</div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500 truncate">{testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Contact */}
       <section id="contact" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
@@ -496,7 +486,14 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-sm text-gray-400 dark:text-gray-500">
-              <img src="/brand1.png" alt="GMLink" className="h-10 w-auto bg-white dark:bg-slate-900 rounded-none p-0.5" />
+              <div className="flex items-center gap-2">
+                <img src="/brand1.png" alt="GMLink" className="h-9 w-auto" />
+                <span className="flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-blue-500" />
+                  <span className="w-1 h-1 rounded-full bg-purple-500" />
+                  <span className="w-1 h-1 rounded-full bg-amber-500" />
+                </span>
+              </div>
               &copy; 2026 GMLink. All rights reserved.
             </div>
             <div className="flex gap-6 text-sm text-gray-400 dark:text-gray-500">
