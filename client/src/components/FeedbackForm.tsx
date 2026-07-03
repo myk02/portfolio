@@ -32,15 +32,15 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="p-8">
-      <h3 className="text-2xl font-bold mb-2">Rate My Work</h3>
-      <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-        Your feedback helps me improve and builds trust with future clients.
+    <div className="p-8 form-shell">
+      <h3 className="text-2xl font-bold mb-2 section-title-accent">Leave a review</h3>
+      <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm section-subtitle">
+        If we have worked together, I'd appreciate your honest feedback.
       </p>
 
       {submitted && (
         <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-none text-sm">
-          Thank you! Your feedback has been submitted and will appear after review.
+          Thank you. Your review was sent and will show up after I approve it.
         </div>
       )}
 
@@ -73,7 +73,7 @@ export default function FeedbackForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-4 py-2.5 rounded-none bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-sm"
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
         />
 
         <input
@@ -81,21 +81,21 @@ export default function FeedbackForm() {
           placeholder="Your Role / Company (optional)"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="w-full px-4 py-2.5 rounded-none bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-sm"
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
         />
 
         <textarea
-          placeholder="Share your experience working with me..."
+          placeholder="What was it like working with me?"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
           rows={4}
-          className="w-full px-4 py-2.5 rounded-none bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-sm resize-none"
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm resize-none"
         />
 
         <Button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-none"
+          className="w-full btn-gradient font-semibold py-2.5 rounded-none"
         >
           Submit Feedback
         </Button>
