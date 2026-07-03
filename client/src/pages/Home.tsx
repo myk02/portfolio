@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Code, Palette, Zap, Printer, Layers, Smartphone, Mail, Phone, MapPin, ArrowRight, Menu, X, Moon, Sun } from "lucide-react";
+import { Code, Palette, Printer, Layers, BarChart3, Video, Shield, Headphones, Mail, Phone, MapPin, ArrowRight, Menu, X, Moon, Sun, CheckCircle2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useQuery, useMutation } from "convex/react";
@@ -53,28 +53,88 @@ export default function Home() {
   }, []);
 
   const services = [
-    { icon: Code, title: "Software Development", desc: "Full-stack web apps built with modern frameworks, TypeScript, Python, and cloud infrastructure. I also build and customize sites on WordPress and Webflow." },
-    { icon: Palette, title: "UX/UI & Graphic Design", desc: "User-centered interfaces, brand identity, and visual design using Figma and the Adobe Suite." },
-    { icon: Zap, title: "IT Support & Helpdesk", desc: "Technical support, hardware troubleshooting, and system maintenance across multiple platforms." },
-    { icon: Layers, title: "System Integration", desc: "APIs, cloud solutions, Active Directory, and enterprise system integration." },
-    { icon: Smartphone, title: "Network & Security", desc: "Network architecture, security audits, backup strategies, and infrastructure." },
-    { icon: Printer, title: "Training & Documentation", desc: "IT training, practical guides, and documentation that empower teams to work independently." },
+    { icon: Palette, title: "Brand & Graphic Design", desc: "Logos, brand colours, social posts, email graphics, presentations, and print work. I use Figma, Adobe Creative Suite, and Canva." },
+    { icon: Code, title: "Web Design & WordPress", desc: "I design and build websites on WordPress and Webflow. I also code with JavaScript, TypeScript, Python, PHP, and SQL when a project needs more than a template." },
+    { icon: Video, title: "Motion & Social Video", desc: "Short videos, GIFs, and simple motion graphics for social media. I use CapCut Pro, Canva, and Adobe tools." },
+    { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
+    { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
+    { icon: Printer, title: "Print & Event Materials", desc: "Brochures, banners, merch, and event materials that match the rest of your brand." },
   ];
 
-  const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmcode");
+  const toolkit = ["Figma", "Adobe CC", "WordPress", "Canva", "CapCut Pro", "HTML/CSS", "GA4", "Webflow"];
+
+  const devToolkit = ["JavaScript", "TypeScript", "Python", "PHP", "SQL", "REST APIs", "Git", "GitHub", "Vercel", "Azure", "Postman"];
+
+  const skillGroups = [
+    {
+      title: "Design & Brand",
+      skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
+    },
+    {
+      title: "Web & Development",
+      skills: ["WordPress", "Webflow", "HTML/CSS", "JavaScript", "TypeScript", "Python", "PHP", "SQL", "REST APIs", "Responsive Design", "Accessible Design"],
+    },
+    {
+      title: "Cloud & Developer Tools",
+      skills: ["Azure", "Git", "GitHub", "Vercel", "Postman", "Ubuntu Linux", "macOS", "Figma Handoffs", "AI Workflow Tools"],
+    },
+    {
+      title: "Web Management & Analytics",
+      skills: ["Uptime Monitoring", "Site Speed", "On-page SEO", "GA4", "Scheduled Updates", "Hosting Support"],
+    },
+    {
+      title: "IT Support & Infrastructure",
+      skills: ["Jira", "Active Directory", "Microsoft 365", "ERP Systems", "LAN/WAN", "DNS", "DHCP", "Wi-Fi", "Security Patching", "Backup & Restore", "Training & Documentation"],
+    },
+    {
+      title: "Languages",
+      skills: ["English (Fluent)", "Kiswahili (Fluent)"],
+    },
+  ];
+
+  const supplementaryServices = [
+    { icon: BarChart3, title: "Website Management", desc: "I keep client sites updated and running. I track uptime, watch page speed, apply patches on schedule, and call hosting support when a site goes down." },
+    { icon: Headphones, title: "IT Support & Helpdesk", desc: "Hardware problems, software errors, locked accounts, and AV setup for meetings and events. I log everything in Jira so there is a clear record." },
+    { icon: Shield, title: "Network & Security", desc: "LAN and WAN issues, DNS, DHCP, Wi-Fi problems, security checks, patches, and backups that are actually tested." },
+  ];
+
+  const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmdesign");
 
   const subBrands = [
-    { id: "gmcode" as const, label: "GMCode", icon: Code },
     { id: "gmdesign" as const, label: "GMDesign", icon: Palette },
-    { id: "gmmarketing" as const, label: "GM Marketing", icon: Zap },
+    { id: "gmmarketing" as const, label: "GM Marketing", icon: Video },
+    { id: "gmcode" as const, label: "GMCode", icon: Code },
   ];
 
+  const sortByOrder = <T extends { order?: number }>(items: T[]) =>
+    [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
   const allProjects = useQuery(api.projects.list, {}) ?? [];
+  const allProjectsSorted = sortByOrder(allProjects);
+  const featuredCaseStudies = allProjectsSorted.slice(0, 3);
+  const caseStudyOutcomes: Record<string, string> = {
+    gmcode: "Built for measurable growth and smoother customer journeys.",
+    gmdesign: "Crafted to strengthen brand recall across print and digital touchpoints.",
+    gmmarketing: "Designed to increase engagement with short-form storytelling.",
+  };
+
+  const researchBackedRules = [
+    "Clear positioning in the hero with who I help and the outcome I deliver.",
+    "A curated set of deep project stories instead of a crowded gallery.",
+    "Scannable case-study structure: challenge, approach, and outcome.",
+    "Strong CTA repeated at key moments to reduce drop-off.",
+  ];
+
+  const processSteps = [
+    { title: "1. Discover", desc: "Align on goals, audience, and constraints before any visual work starts." },
+    { title: "2. Design", desc: "Shape concepts, systems, and prototypes with feedback loops and iteration." },
+    { title: "3. Deliver", desc: "Build, test, and launch with performance, accessibility, and SEO basics in place." },
+  ];
 
   const projectsByBrand: Record<string, typeof allProjects> = {
-    gmcode: allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmcode"),
-    gmdesign: allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmdesign"),
-    gmmarketing: allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmmarketing"),
+    gmcode: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmcode")),
+    gmdesign: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmdesign")),
+    gmmarketing: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmmarketing")),
   };
 
   const scrollToSection = (id: string) => {
@@ -99,7 +159,7 @@ export default function Home() {
           </span>
 
           <nav className="hidden md:flex gap-8 items-center">
-            {["home", "about", "services", "pricing", "projects", "contact"].map((item) => (
+            {["home", "about", "skills", "services", "pricing", "projects", "contact"].map((item) => (
               <button key={item} onClick={() => scrollToSection(item)} className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </button>
@@ -124,7 +184,7 @@ export default function Home() {
         {isMenuOpen && (
           <div className="md:hidden bg-white dark:bg-[#0a0f1a] border-t border-gray-100 dark:border-slate-800">
             <nav className="flex flex-col p-4 gap-1">
-              {["home", "about", "services", "pricing", "projects", "contact"].map((item) => (
+              {["home", "about", "skills", "services", "pricing", "projects", "contact"].map((item) => (
                 <button key={item} onClick={() => scrollToSection(item)} className="text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium rounded-none hover:bg-gray-50 dark:hover:bg-slate-800/50 transition">
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </button>
@@ -135,31 +195,56 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section id="home" className="pt-36 pb-20 md:pb-32">
+      <section id="home" className="pt-36 pb-20 md:pb-28">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div className="flex-1 max-w-3xl text-center md:text-left md:mx-0">
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 dark:bg-slate-800/60 text-gray-500 dark:text-gray-400 rounded-none text-xs font-medium mb-8 border border-gray-200 dark:border-slate-700/50">
-                Design & Development Studio
+                Graphic & Web Designer
               </div>
 
-              <h1 className="font-script text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.2] tracking-normal text-blue-600 mb-8">
-                Code meets
-                <br />
-                canvas
+              <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight mb-6 text-slate-900 dark:text-slate-100">
+                <span className="block font-script text-blue-600 dark:text-blue-400">Create.</span>
+                <span className="block font-hand">Elevate.</span>
+                <span className="block font-display font-bold">Convert.</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-10 max-w-xl leading-relaxed">
-                I'm a designer and developer based in Nairobi. I build digital products — from clean interfaces to solid backends — and I care about how things look just as much as how they work.
+              <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-5 max-w-2xl leading-relaxed">
+                Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites so the final result is consistent from first concept to production.
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-8 font-medium">
+                Available for freelance, contract, and full-time opportunities.
               </p>
 
-              <div className="flex gap-4 flex-wrap justify-center md:justify-start">
+              <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
+                {toolkit.map((skill) => (
+                  <span key={skill} className="text-xs px-3 py-1.5 bg-gray-50 dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50 font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-10 justify-center md:justify-start">
+                {devToolkit.map((skill) => (
+                  <span key={skill} className="text-xs px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex gap-4 flex-wrap justify-center md:justify-start mb-8">
                 <Button onClick={() => scrollToSection("projects")} className="bg-blue-600 hover:bg-blue-700 text-white gap-2 px-6 py-3 rounded-none font-medium shadow-sm">
-                  See my work <ArrowRight size={16} />
+                  View case studies <ArrowRight size={16} />
                 </Button>
                 <Button onClick={() => scrollToSection("contact")} variant="outline" className="px-6 py-3 rounded-none font-medium border-2">
-                  Get in touch
+                  Book a discovery call
                 </Button>
+              </div>
+
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500 dark:text-gray-400 justify-center md:justify-start">
+                <span>4+ years experience</span>
+                <span>15+ design projects</span>
+                <span>7+ live websites</span>
               </div>
             </div>
 
@@ -179,6 +264,21 @@ export default function Home() {
 
       <div className="section-divider mx-auto max-w-6xl" />
 
+      <section className="py-12 md:py-14">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-6">
+            {researchBackedRules.map((rule) => (
+              <div key={rule} className="flex items-start gap-3 bg-gray-50 dark:bg-slate-800/30 border border-gray-200 dark:border-slate-700/50 p-4">
+                <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{rule}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
+
       {/* About */}
       <section id="about" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
         <div className="container">
@@ -188,24 +288,58 @@ export default function Home() {
             </h2>
             <div className="space-y-5 text-gray-600 dark:text-gray-400 leading-relaxed">
               <p>
-                I've been working in IT for close to four years. Most of my time is split between building web applications and fixing things when they break — which means I understand how systems are put together from both sides.
+                I've been working in IT and design for close to four years. My time is split between fixing things when they break, building websites and software, and designing the look and feel on top. I did an ICT internship at the Council of Legal Education and IT support work at IEBC during elections. Now I freelance for clients in healthcare, education, retail, legal, and tech.
               </p>
               <p>
-                I also design. Interfaces, brand identities, user flows — I use Figma and the Adobe Suite to create work that's as functional as it is intentional. At <strong className="text-blue-600">GMLink</strong>, I operate through three sub-brands: <strong className="text-blue-600">GMCode</strong>, <strong className="text-purple-600">GMDesign</strong>, and <strong className="text-amber-600">GM Marketing</strong> — software, design, and growth under one roof.
+                For design work I use Figma, Adobe Creative Suite, Canva, and CapCut Pro. For websites I use WordPress, Webflow, JavaScript, TypeScript, Python, PHP, and SQL. I try to keep branding consistent, make pages accessible, and check GA4 and basic SEO so sites actually get found. I run GMLink with three parts: <strong className="text-purple-600">GMDesign</strong> for brand and visual work, <strong className="text-amber-600">GM Marketing</strong> for campaigns and video, and <strong className="text-blue-600">GMCode</strong> for web development.
+              </p>
+              <p>
+                <strong className="text-gray-800 dark:text-gray-200">Bachelor of Information Technology</strong>, South Eastern Kenya University (SEKU), Kitui. I speak English and Kiswahili fluently.
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Years in IT", value: "4+" },
-              { label: "Live projects", value: "6+" },
-              { label: "Users supported", value: "500+" },
-              { label: "Sub-brands", value: "3" },
+              { label: "Years experience", value: "4+" },
+              { label: "Design projects", value: "15+" },
+              { label: "Live websites", value: "7+" },
+              { label: "Tools & skills", value: "40+" },
             ].map((stat, i) => (
               <div key={i} className={`bg-white dark:bg-slate-800/60 rounded-none p-6 border transition-all duration-200 group hover:-translate-y-0.5 hover:shadow-md ${i === 0 ? 'border-blue-200 dark:border-blue-800/50 md:scale-[1.04] md:origin-left' : 'border-gray-200 dark:border-slate-700/50'}`}>
                 <div className={`font-display font-bold mb-1 transition-colors ${i === 0 ? 'text-4xl text-blue-600' : 'text-3xl text-blue-600'}`}>{stat.value}</div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
+
+      {/* Skills */}
+      <section id="skills" className="py-24 md:py-32">
+        <div className="container">
+          <div className="max-w-xl mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+              Skills & tools
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
+              Here is what I work with, from design tools through to IT support.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50">
+                <h3 className="font-display font-bold text-base mb-4 text-gray-800 dark:text-gray-200">{group.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span key={skill} className="text-xs px-2.5 py-1 bg-gray-50 dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -222,7 +356,7 @@ export default function Home() {
               What I do
             </h2>
             <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-              From concept to deployment — I cover the full spectrum of building digital products.
+              I design brands, build websites, and make marketing materials.
             </p>
           </div>
 
@@ -239,6 +373,39 @@ export default function Home() {
                 </div>
               );
             })}
+            {supplementaryServices.map((service, i) => {
+              const Icon = service.icon;
+              return (
+                <div key={`supp-${i}`} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200">
+                  <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <h3 className="font-display font-bold text-base mb-2">{service.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{service.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
+
+      <section className="py-24 md:py-28">
+        <div className="container">
+          <div className="max-w-xl mb-12">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 tracking-tight">How I run projects</h2>
+            <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
+              A simple process focused on outcomes, not just visuals.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {processSteps.map((step) => (
+              <div key={step.title} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50">
+                <h3 className="font-display font-semibold mb-2 text-gray-800 dark:text-gray-100">{step.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -253,17 +420,17 @@ export default function Home() {
               Pricing
             </h2>
             <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-              Transparent rates for every service. All prices in Kenya Shillings (KES).
+              Starting prices for common jobs. All amounts are in Kenya Shillings (KES).
             </p>
           </div>
 
           {[
-            { service: "Software Development", starting: "KSh 60,000", range: "KSh 60,000 – 250,000", model: "Per project", icon: Code },
-            { service: "UX/UI & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 – 100,000", model: "Per project", icon: Palette },
-            { service: "IT Support & Helpdesk", starting: "KSh 15,000", range: "KSh 15,000 – 50,000", model: "Monthly retainer", icon: Zap },
-            { service: "System Integration", starting: "KSh 80,000", range: "KSh 80,000 – 300,000", model: "Per project", icon: Layers },
-            { service: "Network & Security", starting: "KSh 50,000", range: "KSh 50,000 – 200,000", model: "Per project", icon: Smartphone },
-            { service: "Training & Documentation", starting: "KSh 25,000", range: "KSh 25,000 – 80,000", model: "Per session", icon: Printer },
+            { service: "Brand & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 to 100,000", model: "Per project", icon: Palette },
+            { service: "Web Design & WordPress", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
+            { service: "Motion & Social Video", starting: "KSh 15,000", range: "KSh 15,000 to 60,000", model: "Per project", icon: Video },
+            { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
+            { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
+            { service: "Print & Event Materials", starting: "KSh 15,000", range: "KSh 15,000 to 80,000", model: "Per project", icon: Printer },
           ].map((row, i) => {
             const Icon = row.icon;
             return (
@@ -279,7 +446,6 @@ export default function Home() {
                     </div>
                     <div className="flex items-baseline gap-3 flex-wrap">
                       <span className="text-lg font-bold text-gray-900 dark:text-white">{row.starting}</span>
-                      <span className="text-xs text-gray-400 dark:text-gray-500">—</span>
                       <span className="text-sm text-gray-500 dark:text-gray-400">{row.range}</span>
                     </div>
                   </div>
@@ -289,7 +455,7 @@ export default function Home() {
           })}
 
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 text-center">
-            Prices are indicative and may vary based on scope. <a href="#contact" className="text-blue-600 dark:text-blue-400 hover:underline" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Get in touch</a> for a custom quote.
+            Final price depends on the job. <a href="#contact" className="text-blue-600 dark:text-blue-400 hover:underline" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact me</a> for a quote.
           </p>
         </div>
       </section>
@@ -304,9 +470,33 @@ export default function Home() {
               My work
             </h2>
             <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-              Three sub-brands, one studio. Browse projects by category — software, design, or marketing.
+              {activeBrand === "gmdesign"
+                ? "Logos, packaging, social posts, print, and colour studies. Sorted by type."
+                : "Design work, marketing videos, and live websites. Pick a category below."}
             </p>
           </div>
+
+          {featuredCaseStudies.length > 0 && (
+            <div className="mb-12">
+              <h3 className="font-display text-lg font-semibold mb-4">Featured case-study highlights</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                {featuredCaseStudies.map((project) => (
+                  <div key={`feature-${project._id}`} className="bg-white dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/50 p-5">
+                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">{project.description}</p>
+                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Approach</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
+                      Combined brand direction, UX thinking, and practical implementation decisions.
+                    </p>
+                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Outcome</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                      {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished final experience aligned to business goals."}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Sub-brand tabs */}
           <div className="flex gap-2 mb-10 flex-wrap">
@@ -332,7 +522,7 @@ export default function Home() {
           {/* Projects grid */}
           {projectsByBrand[activeBrand].length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsByBrand[activeBrand]!.map((project: { name: string; description: string; url: string; image: string; subBrand: string }, i: number, arr: typeof projectsByBrand['gmcode']) => {
+              {projectsByBrand[activeBrand]!.map((project: { name: string; description: string; url: string; image: string; subBrand: string; techStack?: string[] }, i: number, arr: typeof projectsByBrand['gmcode']) => {
                 const isMarketing = project.subBrand === "gmmarketing";
                 const isDesign = project.subBrand === "gmdesign";
                 const count = arr.length;
@@ -346,7 +536,7 @@ export default function Home() {
                     {isMarketing ? (
                       <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
                     ) : !failedImages.has(i) && project.image ? (
-                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-white dark:bg-slate-900 p-2' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(i)} />
+                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-gray-50 dark:bg-slate-900 p-3' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(i)} />
                     ) : (
                       <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
                         <span className="font-display text-3xl font-bold">{getProjectPlaceholder(project.name)}</span>
@@ -354,8 +544,18 @@ export default function Home() {
                     )}
                   </div>
                   <div className="p-4 lg:p-5">
-                    <h3 className="font-display font-bold text-base lg:text-lg mb-1.5">{project.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed line-clamp-3 lg:line-clamp-2">{project.description}</p>
+                    {isDesign && project.techStack && project.techStack.length >= 2 && (
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        <span className="text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 font-semibold uppercase tracking-wide">
+                          {project.techStack[0]}
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50 font-medium">
+                          {project.techStack[1]}
+                        </span>
+                      </div>
+                    )}
+                    <h3 className="font-display font-bold text-base lg:text-lg mb-1.5 leading-snug">{project.name}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
                     {project.subBrand === "gmcode" ? (
                       <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium">
                         View project &rarr;
@@ -374,7 +574,7 @@ export default function Home() {
             <div className="text-center py-20 bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50">
               <div className="text-4xl mb-4 text-gray-300 dark:text-gray-600">&lowast;</div>
               <h3 className="font-display text-xl font-bold mb-1 text-gray-500 dark:text-gray-400">Coming soon</h3>
-              <p className="text-sm text-gray-400 dark:text-gray-500">Projects for this sub-brand are in the works.</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">Nothing here yet. I'm adding more work to this section.</p>
             </div>
           )}
 
@@ -395,8 +595,6 @@ export default function Home() {
 
       <div className="section-divider mx-auto max-w-6xl" />
 
-      <div className="section-divider mx-auto max-w-6xl" />
-
       {/* Contact */}
       <section id="contact" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421]">
         <div className="container">
@@ -405,7 +603,7 @@ export default function Home() {
               Get in touch
             </h2>
             <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-              Have a project in mind? I'd love to hear about it.
+              Got a project? Send me a message.
             </p>
           </div>
 
