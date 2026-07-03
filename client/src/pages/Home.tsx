@@ -25,11 +25,21 @@ import { api } from "../../../convex/_generated/api";
 import FeedbackForm from "@/components/FeedbackForm";
 import ServiceRequestForm from "@/components/ServiceRequestForm";
 
-function SectionHeader({ label, title }: { label: string; title: string }) {
+function SectionHeader({ 
+  label, 
+  title,
+  labelClassName = "section-kicker text-gray-500 dark:text-gray-400",
+  headingClassName = "section-heading"
+}: { 
+  label: string; 
+  title: string;
+  labelClassName?: string;
+  headingClassName?: string;
+}) {
   return (
     <div className="section-intro mb-5 sm:mb-6">
-      <p className="section-kicker text-gray-500 dark:text-gray-400">{label}</p>
-      <h2 className="section-heading">{title}</h2>
+      <p className={labelClassName}>{label}</p>
+      <h2 className={headingClassName}>{title}</h2>
     </div>
   );
 }
@@ -156,7 +166,10 @@ export default function Home() {
     if (elements.length === 0) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      elements.forEach((element) => element.classList.add("is-visible"));
+      elements.forEach((element) => {
+        element.style.removeProperty("--reveal-delay");
+        element.classList.add("is-visible");
+      });
       return;
     }
 
@@ -175,12 +188,17 @@ export default function Home() {
       },
     );
 
-    elements.forEach((element) => {
+    elements.forEach((element, index) => {
+      const staggerIndex = Number(element.dataset.revealIndex ?? `${index % 6}`);
+      element.style.setProperty("--reveal-delay", `${Math.min(staggerIndex, 5) * 60}ms`);
       element.classList.remove("is-visible");
       observer.observe(element);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      elements.forEach((element) => element.style.removeProperty("--reveal-delay"));
+    };
   }, [allProjects.length, testimonials.length, activeBrand, formTab]);
 
   const scrollToSection = (id: string) => {
@@ -237,15 +255,15 @@ export default function Home() {
         <section id="home" className="section-pad-tight pt-24 sm:pt-28">
           <div className="container">
             <div className="hero-grid">
-              <div className="hero-copy reveal-on-scroll">
-                <p className="eyebrow">Graphic & Web Designer · Nairobi</p>
+              <div className="hero-copy reveal-on-scroll" data-reveal-index="0">
+                <p className="eyebrow">Graphic Designer & Full-Stack Web Developer · Nairobi</p>
                 <h1 className="hero-title">
                   <span className="font-script text-blue-600 dark:text-blue-400">Create.</span>
                   <span className="font-hand">Elevate.</span>
                   <span className="font-display font-bold">Convert.</span>
                 </h1>
                 <p className="lead type-subtitle-serif">
-                  Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites.
+                  Nairobi-based graphic designer and full-stack web developer for service businesses, startups, and growing brands. I handle brand direction, user-focused interfaces, and launch-ready web experiences from frontend to backend.
                 </p>
                 <p className="sublead type-subtitle-hand">Available for freelance, contract, and full-time opportunities.</p>
 
@@ -270,7 +288,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="hero-photo reveal-on-scroll">
+              <div className="hero-photo reveal-on-scroll" data-reveal-index="1">
                 <img src="/mike.png" alt="Mike Waitindi" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -279,7 +297,12 @@ export default function Home() {
 
         <section id="about" className="section-pad-tight section-muted">
           <div className="container">
-            <SectionHeader label="About" title="Mike Waitindi" />
+            <SectionHeader 
+              label="About" 
+              title="Mike Waitindi"
+              labelClassName="section-kicker-about"
+              headingClassName="section-heading-about"
+            />
             <div className="about-grid">
               <div className="stack gap-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed reveal-on-scroll">
                 {aboutParagraphs.map((p) => (
@@ -300,7 +323,12 @@ export default function Home() {
 
         <section id="skills" className="section-pad-tight">
           <div className="container">
-            <SectionHeader label="Skills" title="Tools & capabilities" />
+            <SectionHeader 
+              label="Skills" 
+              title="Tools & capabilities"
+              labelClassName="section-kicker-skills"
+              headingClassName="section-heading-skills"
+            />
             <div className="skills-grid">
               {skillGroups.map((group) => (
                 <div key={group.title} className="minimal-card p-4 reveal-on-scroll">
@@ -314,7 +342,12 @@ export default function Home() {
 
         <section id="services" className="section-pad-tight section-muted">
           <div className="container">
-            <SectionHeader label="Services" title="What I do" />
+            <SectionHeader 
+              label="Services" 
+              title="What I do"
+              labelClassName="section-kicker-services"
+              headingClassName="section-heading-services"
+            />
             <div className="services-grid">
               {[...services, ...supplementaryServices].map((service) => {
                 const Icon = service.icon;
@@ -346,7 +379,12 @@ export default function Home() {
 
         <section id="work" className="section-pad-tight">
           <div className="container">
-            <SectionHeader label="Portfolio" title="My work" />
+            <SectionHeader 
+              label="Portfolio" 
+              title="My work"
+              labelClassName="section-kicker-portfolio"
+              headingClassName="section-heading-portfolio"
+            />
 
             <div className="tab-row mb-5">
               {subBrands.map((brand) => {
@@ -375,32 +413,32 @@ export default function Home() {
                   const projectKey = getProjectKey(project);
                   return (
                     <article key={projectKey} className="minimal-card overflow-hidden reveal-on-scroll">
-                      <ProjectThumbnail
-                        project={project}
-                        failed={failedImages.has(projectKey)}
-                        onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
-                        placeholderIndex={i}
-                      />
-                      <div className="p-3 sm:p-4">
-                        {isDesign && project.techStack && project.techStack.length >= 2 && (
-                          <div className="flex flex-wrap gap-1 mb-2">
-                            <span className="text-[10px] px-1.5 py-0.5 border border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-300">{project.techStack[0]}</span>
-                            <span className="text-[10px] px-1.5 py-0.5 border border-purple-200 dark:border-purple-800/50 text-purple-700 dark:text-purple-300">{project.techStack[1]}</span>
-                          </div>
-                        )}
-                        <h3 className="text-sm font-semibold mb-1 section-title-display">{project.name}</h3>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2 type-subtitle-display">{project.description}</p>
-                        {project.subBrand === "gmcode" ? (
-                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
-                            View project →
-                          </a>
-                        ) : (
-                          <button type="button" onClick={() => setPreviewImage(isMarketing ? project.url : project.image)} className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
-                            View project →
-                          </button>
-                        )}
-                      </div>
-                    </article>
+                    <ProjectThumbnail
+                      project={project}
+                      failed={failedImages.has(projectKey)}
+                      onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
+                      placeholderIndex={i}
+                    />
+                    <div className="p-2.5 sm:p-3">
+                      {isDesign && project.techStack && project.techStack.length >= 2 && (
+                        <div className="flex flex-wrap gap-0.5 mb-1.5">
+                          <span className="text-[9px] px-1 py-0.25 border border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-300">{project.techStack[0]}</span>
+                          <span className="text-[9px] px-1 py-0.25 border border-purple-200 dark:border-purple-800/50 text-purple-700 dark:text-purple-300">{project.techStack[1]}</span>
+                        </div>
+                      )}
+                      <h3 className="text-xs sm:text-sm font-semibold mb-0.5 section-title-display">{project.name}</h3>
+                      <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mb-1.5 type-subtitle-display">{project.description}</p>
+                      {project.subBrand === "gmcode" ? (
+                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-[10px] sm:text-xs text-blue-600 dark:text-blue-400 font-medium">
+                          View project →
+                        </a>
+                      ) : (
+                        <button type="button" onClick={() => setPreviewImage(isMarketing ? project.url : project.image)} className="text-[10px] sm:text-xs text-blue-600 dark:text-blue-400 font-medium">
+                          View project →
+                        </button>
+                      )}
+                    </div>
+                  </article>
                   );
                 })}
               </div>
@@ -424,7 +462,12 @@ export default function Home() {
 
         <section id="pricing" className="section-pad-tight section-muted">
           <div className="container">
-            <SectionHeader label="Pricing" title="Starting prices (KES)" />
+            <SectionHeader 
+              label="Pricing" 
+              title="Starting prices (KES)"
+              labelClassName="section-kicker-pricing"
+              headingClassName="section-heading-pricing"
+            />
             <div className="pricing-list">
               {pricingRows.map((row) => {
                 const Icon = row.icon;
@@ -452,7 +495,12 @@ export default function Home() {
         {testimonials.length > 0 && (
           <section id="reviews" className="section-pad-tight overflow-x-clip">
             <div className="container mb-4">
-              <SectionHeader label="Reviews" title={`Client feedback (${testimonials.length})`} />
+              <SectionHeader 
+                label="Reviews" 
+                title={`Client feedback (${testimonials.length})`}
+                labelClassName="section-kicker-reviews"
+                headingClassName="section-heading-reviews"
+              />
             </div>
             <div className="marquee-container">
               <div className="marquee-track">
@@ -480,7 +528,12 @@ export default function Home() {
 
         <section id="contact" className="section-pad-tight section-muted">
           <div className="container">
-            <SectionHeader label="Contact" title="Get in touch" />
+            <SectionHeader 
+              label="Contact" 
+              title="Get in touch"
+              labelClassName="section-kicker-contact"
+              headingClassName="section-heading-contact"
+            />
             <div className="contact-grid">
               <div className="stack gap-4">
                 {contactItems.map((item) => (

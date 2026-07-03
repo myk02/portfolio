@@ -430,14 +430,18 @@
   font-family: var(--font-serif);
 }
 
+.reveal-on-scroll {
+  --reveal-delay: 0ms;
+}
+
 .reveal-on-scroll:not(.is-visible) {
   opacity: 0;
-  transform: translate3d(0, 28px, 0) scale(0.98);
-  filter: blur(10px);
+  transform: translate3d(0, 22px, 0) scale(0.985);
+  filter: blur(8px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.7s ease;
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
+    filter 0.8s ease var(--reveal-delay);
   will-change: opacity, transform, filter;
 }
 
@@ -571,6 +575,150 @@
     padding-top: 3.25rem;
     padding-bottom: 3.25rem;
   }
+}
+
+/* Custom section header styles */
+.section-kicker-about {
+  font-family: var(--font-hand);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+.dark .section-kicker-about {
+  color: #93c5fd;
+}
+
+.section-heading-about {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.2;
+  color: #2563eb;
+}
+.dark .section-heading-about {
+  color: #93c5fd;
+}
+
+.section-kicker-skills {
+  font-family: var(--font-script);
+  font-size: 0.9rem;
+  color: #7c3aed;
+}
+.dark .section-kicker-skills {
+  color: #c4b5fd;
+}
+
+.section-heading-skills {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.2;
+  color: #7c3aed;
+}
+.dark .section-heading-skills {
+  color: #c4b5fd;
+}
+
+.section-kicker-services {
+  font-family: var(--font-beanie);
+  font-size: 1.1rem;
+  color: #059669;
+}
+.dark .section-kicker-services {
+  color: #6ee7b7;
+}
+
+.section-heading-services {
+  font-family: var(--font-hand);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.2;
+  color: #059669;
+}
+.dark .section-heading-services {
+  color: #6ee7b7;
+}
+
+.section-kicker-portfolio {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #dc2626;
+}
+.dark .section-kicker-portfolio {
+  color: #fca5a5;
+}
+
+.section-heading-portfolio {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.2;
+  color: #dc2626;
+}
+.dark .section-heading-portfolio {
+  color: #fca5a5;
+}
+
+.section-kicker-pricing {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: #b45309;
+}
+.dark .section-kicker-pricing {
+  color: #fbbf24;
+}
+
+.section-heading-pricing {
+  font-family: var(--font-beanie);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  color: #b45309;
+}
+.dark .section-heading-pricing {
+  color: #fbbf24;
+}
+
+.section-kicker-reviews {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0891b2;
+}
+.dark .section-kicker-reviews {
+  color: #67e8f9;
+}
+
+.section-heading-reviews {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.2;
+  color: #0891b2;
+}
+.dark .section-heading-reviews {
+  color: #67e8f9;
+}
+
+.section-kicker-contact {
+  font-family: var(--font-hand);
+  font-size: 0.85rem;
+  color: #7c3aed;
+}
+.dark .section-kicker-contact {
+  color: #c4b5fd;
+}
+
+.section-heading-contact {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  line-height: 1.2;
+  color: #7c3aed;
+}
+.dark .section-heading-contact {
+  color: #c4b5fd;
 }
 
 .section-heading {
@@ -888,7 +1036,7 @@
 .project-thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 3;
   overflow: hidden;
   background: #f3f4f6;
   isolation: isolate;
@@ -929,8 +1077,8 @@
 }
 
 .icon-chip {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -974,8 +1122,8 @@
 .pricing-row {
   display: flex;
   align-items: flex-start;
-  gap: 0.65rem;
-  padding: 0.75rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
 }
 
 .marquee-card {

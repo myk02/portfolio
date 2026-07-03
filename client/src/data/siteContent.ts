@@ -35,9 +35,17 @@ export const toolkit = [
 export const devToolkit = [
   "JavaScript",
   "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "Express",
+  "Tailwind CSS",
   "Python",
   "PHP",
   "SQL",
+  "PostgreSQL",
+  "Supabase",
+  "Convex",
   "REST APIs",
   "Git",
   "GitHub",
@@ -60,8 +68,8 @@ export const aboutStats = [
 ];
 
 export const aboutParagraphs = [
-  "I've been working in IT and design for close to four years. My time is split between fixing things when they break, building websites and software, and designing the look and feel on top. I did an ICT internship at the Council of Legal Education and IT support work at IEBC during elections. Now I freelance for clients in healthcare, education, retail, legal, and tech.",
-  "For design work I use Figma, Adobe Creative Suite, Canva, and CapCut Pro. For websites I use WordPress, Webflow, JavaScript, TypeScript, Python, PHP, and SQL. I try to keep branding consistent, make pages accessible, and check GA4 and basic SEO so sites actually get found. I run GMLink with three parts: GMDesign for brand and visual work, GM Marketing for campaigns and video, and GMCode for web development.",
+  "I am a graphic designer and full-stack web developer with close to four years of hands-on experience across IT support, product design, and software delivery. My work combines strong visual communication with practical engineering so brands get websites and digital tools that both look sharp and perform well.",
+  "On the development side, I build responsive frontends and scalable backends using React, Next.js, TypeScript, Node.js, Express, SQL, PostgreSQL, Supabase, and REST APIs. On the design side, I use Figma, Adobe Creative Suite, Canva, and CapCut Pro to shape identities, interfaces, and campaign assets that feel consistent across every touchpoint.",
   "Bachelor of Information Technology, South Eastern Kenya University (SEKU), Kitui. I speak English and Kiswahili fluently.",
 ];
 
@@ -71,8 +79,8 @@ export const skillGroups = [
     skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
   },
   {
-    title: "Web & Development",
-    skills: ["WordPress", "Webflow", "HTML/CSS", "JavaScript", "TypeScript", "Python", "PHP", "SQL", "REST APIs", "Responsive Design", "Accessible Design"],
+    title: "Full-Stack Web Development",
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
   },
   {
     title: "Cloud & Developer Tools",
@@ -96,7 +104,7 @@ export type ServiceItem = { icon: LucideIcon; title: string; desc: string };
 
 export const services: ServiceItem[] = [
   { icon: Palette, title: "Brand & Graphic Design", desc: "Logos, brand colours, social posts, email graphics, presentations, and print work. I use Figma, Adobe Creative Suite, and Canva." },
-  { icon: Code, title: "Web Design & WordPress", desc: "I design and build websites on WordPress and Webflow. I also code with JavaScript, TypeScript, Python, PHP, and SQL when a project needs more than a template." },
+  { icon: Code, title: "Full-Stack Web Development", desc: "I design and build fast, responsive websites and custom web apps with React, Next.js, TypeScript, Node.js, APIs, and databases. From landing pages to full-stack platforms, I handle both frontend and backend delivery." },
   { icon: Video, title: "Motion & Social Video", desc: "Short videos, GIFs, and simple motion graphics for social media. I use CapCut Pro, Canva, and Adobe tools." },
   { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
   { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
@@ -117,7 +125,7 @@ export const processSteps = [
 
 export const pricingRows = [
   { service: "Brand & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 to 100,000", model: "Per project", icon: Palette },
-  { service: "Web Design & WordPress", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
+  { service: "Full-Stack Web Development", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
   { service: "Motion & Social Video", starting: "KSh 15,000", range: "KSh 15,000 to 60,000", model: "Per project", icon: Video },
   { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
   { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
