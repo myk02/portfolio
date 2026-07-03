@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Code, Palette, Zap, Printer, Layers, Smartphone, Mail, Phone, MapPin, ArrowRight, Menu, X, Moon, Sun, Github, Linkedin, Instagram } from "lucide-react";
+import { Code, Palette, Zap, Printer, Layers, Smartphone, Mail, Phone, MapPin, ArrowRight, Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useQuery, useMutation } from "convex/react";
@@ -451,17 +451,25 @@ export default function Home() {
               <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-700/50">
                 <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium mb-3">Social</div>
                 <div className="flex gap-3">
-                  <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-none bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 flex items-center justify-center hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                    <Mail size={16} />
+                  <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 transition group">
+                    <img src="https://cdn.simpleicons.org/gmail/64748b" alt="Email" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
+                    <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
-                  <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-none bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 flex items-center justify-center hover:bg-pink-100 dark:hover:bg-pink-900/30 hover:text-pink-600 dark:hover:text-pink-400 transition">
-                    <Instagram size={16} />
+                  <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-green-600 dark:hover:bg-green-600 transition group">
+                    <img src="https://cdn.simpleicons.org/whatsapp/64748b" alt="WhatsApp" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
+                    <img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
-                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-none bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 flex items-center justify-center hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                    <Linkedin size={16} />
+                  <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 dark:hover:from-purple-600 dark:hover:via-pink-500 dark:hover:to-orange-400 transition group">
+                    <img src="https://cdn.simpleicons.org/instagram/64748b" alt="Instagram" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
+                    <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
-                  <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-none bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white transition">
-                    <Github size={16} />
+                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 transition group">
+                    <img src="https://cdn.simpleicons.org/linkedin/64748b" alt="LinkedIn" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
+                    <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                  <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-gray-900 dark:hover:bg-gray-900 transition group">
+                    <img src="https://cdn.simpleicons.org/github/64748b" alt="GitHub" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
+                    <img src="https://cdn.simpleicons.org/github/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </div>
               </div>
@@ -504,6 +512,7 @@ export default function Home() {
             </div>
             <div className="flex gap-6 text-sm text-gray-400 dark:text-gray-500">
               <a href="mailto:wrootmike@gmail.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Email</a>
+              <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 dark:hover:text-green-400 transition">WhatsApp</a>
               <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 dark:hover:text-pink-400 transition">Instagram</a>
               <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition">LinkedIn</a>
               <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition">GitHub</a>
