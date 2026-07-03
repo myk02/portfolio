@@ -16,15 +16,18 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [formTab, setFormTab] = useState<"service" | "feedback">("service");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const seed = useMutation(api.seed.seed);
 
   useEffect(() => { seed(); }, [seed]);
 
-  const handleImageError = (index: number) => {
-    setFailedImages(prev => new Set(prev).add(index));
+  const getProjectKey = (project: { _id?: string; name: string; image: string; url: string }) =>
+    project._id ?? `${project.name}-${project.image || project.url}`;
+
+  const handleImageError = (projectKey: string) => {
+    setFailedImages(prev => new Set(prev).add(projectKey));
   };
 
   const getProjectPlaceholder = (name: string) => {
@@ -50,23 +53,6 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll(".reveal-on-scroll"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -50px 0px" },
-    );
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
   }, []);
 
   const services = [
@@ -154,6 +140,33 @@ export default function Home() {
     gmmarketing: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmmarketing")),
   };
 
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll(".reveal-on-scroll:not(.is-visible)"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    elements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        el.classList.add("is-visible");
+      } else {
+        observer.observe(el);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [allProjects.length, activeBrand]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -177,7 +190,7 @@ export default function Home() {
 
           <nav className="hidden md:flex gap-8 items-center">
             {["home", "about", "skills", "services", "pricing", "projects", "contact"].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item)} className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <button key={item} onClick={() => scrollToSection(item)} className="type-nav text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </button>
             ))}
@@ -212,11 +225,11 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section id="home" className="pt-36 pb-20 md:pb-28 reveal-on-scroll">
+      <section id="home" className="pt-36 pb-20 md:pb-28">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div className="flex-1 max-w-3xl text-center md:text-left md:mx-0">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 dark:bg-slate-800/60 text-gray-500 dark:text-gray-400 rounded-none text-xs font-medium mb-8 border border-gray-200 dark:border-slate-700/50">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/70 dark:bg-slate-800/70 text-gray-500 dark:text-gray-400 rounded-none type-hero-badge mb-8 border border-gray-200 dark:border-slate-700/50 backdrop-blur-sm">
                 Graphic & Web Designer
               </div>
 
@@ -226,10 +239,10 @@ export default function Home() {
                 <span className="block font-display font-bold">Convert.</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-5 max-w-2xl leading-relaxed">
+              <p className="type-body-lg text-gray-500 dark:text-gray-400 mb-5 max-w-2xl">
                 Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites so the final result is consistent from first concept to production.
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-8 font-medium">
+              <p className="type-subtitle-serif text-gray-600 dark:text-gray-300 mb-8">
                 Available for freelance, contract, and full-time opportunities.
               </p>
 
@@ -258,7 +271,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500 dark:text-gray-400 justify-center md:justify-start">
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs type-stat-label text-gray-500 dark:text-gray-400 justify-center md:justify-start">
                 <span>4+ years experience</span>
                 <span>15+ design projects</span>
                 <span>7+ live websites</span>
@@ -285,9 +298,9 @@ export default function Home() {
         <div className="container">
           <div className="grid md:grid-cols-2 gap-6">
             {researchBackedRules.map((rule) => (
-              <div key={rule} className="flex items-start gap-3 bg-gray-50 dark:bg-slate-800/30 border border-gray-200 dark:border-slate-700/50 p-4">
+              <div key={rule} className="flex items-start gap-3 bg-white/90 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700/50 p-4 backdrop-blur-sm">
                 <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{rule}</p>
+                <p className="type-subtitle-hand text-sm text-gray-600 dark:text-gray-300">{rule}</p>
               </div>
             ))}
           </div>
@@ -297,14 +310,14 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* About */}
-      <section id="about" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421] reveal-on-scroll">
+      <section id="about" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
         <div className="container">
           <div className="max-w-2xl mb-20">
             <p className="section-kicker section-kicker-amber">Profile</p>
-            <h2 className="font-hand text-4xl md:text-5xl font-normal mb-6 section-title-accent">
+            <h2 className="section-title-hand text-4xl md:text-5xl font-normal mb-6 section-title-accent">
               About me
             </h2>
-            <div className="space-y-5 text-gray-600 dark:text-gray-400 leading-relaxed section-subtitle">
+            <div className="space-y-5 text-gray-600 dark:text-gray-400 type-body-lg">
               <p>
                 I've been working in IT and design for close to four years. My time is split between fixing things when they break, building websites and software, and designing the look and feel on top. I did an ICT internship at the Council of Legal Education and IT support work at IEBC during elections. Now I freelance for clients in healthcare, education, retail, legal, and tech.
               </p>
@@ -324,9 +337,9 @@ export default function Home() {
               { label: "Live websites", value: "7+" },
               { label: "Tools & skills", value: "40+" },
             ].map((stat, i) => (
-              <div key={i} className={`bg-white dark:bg-slate-800/60 rounded-none p-6 border transition-all duration-200 group hover:-translate-y-0.5 hover:shadow-md ${i === 0 ? 'border-blue-200 dark:border-blue-800/50 md:scale-[1.04] md:origin-left' : 'border-gray-200 dark:border-slate-700/50'}`}>
-                <div className={`font-display font-bold mb-1 transition-colors ${i === 0 ? 'text-4xl text-blue-600' : 'text-3xl text-blue-600'}`}>{stat.value}</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
+              <div key={i} className={`bg-white dark:bg-slate-800/90 rounded-none p-6 border transition-all duration-200 group hover:-translate-y-0.5 hover:shadow-md ${i === 0 ? 'border-blue-200 dark:border-blue-800/50 md:scale-[1.04] md:origin-left' : 'border-gray-200 dark:border-slate-700/50'}`}>
+                <div className={`type-stat-value font-bold mb-1 transition-colors ${i === 0 ? 'text-4xl text-blue-600' : 'text-3xl text-blue-600'}`}>{stat.value}</div>
+                <div className="type-stat-label text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -336,22 +349,22 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Skills */}
-      <section id="skills" className="py-24 md:py-32 reveal-on-scroll">
+      <section id="skills" className="py-24 md:py-32">
         <div className="container">
           <div className="max-w-xl mb-16">
             <p className="section-kicker section-kicker-blue">Capabilities</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight section-title-accent">
+            <h2 className="section-title-display text-3xl md:text-4xl mb-6 tracking-tight section-title-accent">
               Skills & tools
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <p className="text-gray-500 dark:text-gray-400 type-subtitle-hand">
               Here is what I work with, from design tools through to IT support.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillGroups.map((group) => (
-              <div key={group.title} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
-                <h3 className="font-display font-bold text-base mb-4 text-gray-800 dark:text-gray-200 card-subheading">{group.title}</h3>
+              <div key={group.title} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
+                <h3 className="type-card-script text-lg mb-4 text-gray-800 dark:text-gray-200">{group.title}</h3>
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
                     <span key={skill} className="text-xs px-2.5 py-1 bg-gray-50 dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50">
@@ -368,14 +381,14 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Services */}
-      <section id="services" className="py-24 md:py-32 reveal-on-scroll">
+      <section id="services" className="py-24 md:py-32">
         <div className="container">
           <div className="max-w-xl mb-16">
             <p className="section-kicker section-kicker-purple">Services</p>
-            <h2 className="font-beanie text-4xl md:text-5xl font-normal mb-6 section-title-accent">
+            <h2 className="section-title-beanie mb-6 section-title-accent">
               What I do
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <p className="text-gray-500 dark:text-gray-400 type-subtitle-display">
               I design brands, build websites, and make marketing materials.
             </p>
           </div>
@@ -384,24 +397,24 @@ export default function Home() {
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
+                <div key={i} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
                   <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
                     <Icon size={20} className="text-blue-600 dark:text-blue-400" />
                   </div>
-                  <h3 className="font-display font-bold text-base mb-2 card-subheading">{service.title}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{service.desc}</p>
+                  <h3 className="type-card-hand text-lg mb-2 text-gray-800 dark:text-gray-100">{service.title}</h3>
+                  <p className="type-body text-sm text-gray-500 dark:text-gray-400">{service.desc}</p>
                 </div>
               );
             })}
             {supplementaryServices.map((service, i) => {
               const Icon = service.icon;
               return (
-                <div key={`supp-${i}`} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
+                <div key={`supp-${i}`} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
                   <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
                     <Icon size={20} className="text-blue-600 dark:text-blue-400" />
                   </div>
-                  <h3 className="font-display font-bold text-base mb-2 card-subheading">{service.title}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{service.desc}</p>
+                  <h3 className="type-card-serif text-base mb-2 text-gray-800 dark:text-gray-100">{service.title}</h3>
+                  <p className="type-body text-sm text-gray-500 dark:text-gray-400">{service.desc}</p>
                 </div>
               );
             })}
@@ -411,20 +424,20 @@ export default function Home() {
 
       <div className="section-divider mx-auto max-w-6xl" />
 
-      <section className="py-24 md:py-28 reveal-on-scroll">
+      <section className="py-24 md:py-28">
         <div className="container">
           <div className="max-w-xl mb-12">
             <p className="section-kicker section-kicker-emerald">Workflow</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 tracking-tight section-title-accent">How I run projects</h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <h2 className="section-title-script text-3xl md:text-4xl mb-4 section-title-accent">How I run projects</h2>
+            <p className="text-gray-500 dark:text-gray-400 type-body-lg">
               A simple process focused on outcomes, not just visuals.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-5">
             {processSteps.map((step) => (
-              <div key={step.title} className="bg-white dark:bg-slate-800/40 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
-                <h3 className="font-display font-semibold mb-2 text-gray-800 dark:text-gray-100 card-subheading">{step.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{step.desc}</p>
+              <div key={step.title} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
+                <h3 className="type-card-beanie mb-2 text-gray-800 dark:text-gray-100">{step.title}</h3>
+                <p className="type-body text-sm text-gray-500 dark:text-gray-400">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -434,14 +447,14 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Pricing */}
-      <section id="pricing" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421] reveal-on-scroll">
+      <section id="pricing" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
         <div className="container">
           <div className="max-w-xl mb-16">
             <p className="section-kicker section-kicker-blue">Investment</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight section-title-accent">
+            <h2 className="section-title-serif text-3xl md:text-4xl mb-6 section-title-accent">
               Pricing
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <p className="text-gray-500 dark:text-gray-400 type-subtitle-script">
               Starting prices for common jobs. All amounts are in Kenya Shillings (KES).
             </p>
           </div>
@@ -456,18 +469,18 @@ export default function Home() {
           ].map((row, i) => {
             const Icon = row.icon;
             return (
-              <div key={i} className="bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 p-5 mb-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md last:mb-0 reveal-on-scroll">
+              <div key={i} className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 p-5 mb-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md last:mb-0 reveal-on-scroll">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0 mt-0.5">
                     <Icon size={18} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
-                      <h3 className="font-display font-semibold text-gray-800 dark:text-gray-200 card-subheading">{row.service}</h3>
+                      <h3 className="type-card-hand text-lg text-gray-800 dark:text-gray-200">{row.service}</h3>
                       <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 inline-block w-fit">{row.model}</span>
                     </div>
                     <div className="flex items-baseline gap-3 flex-wrap">
-                      <span className="text-lg font-bold text-gray-900 dark:text-white">{row.starting}</span>
+                      <span className="type-price text-gray-900 dark:text-white">{row.starting}</span>
                       <span className="text-sm text-gray-500 dark:text-gray-400">{row.range}</span>
                     </div>
                   </div>
@@ -485,14 +498,14 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Projects */}
-      <section id="projects" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421] reveal-on-scroll">
+      <section id="projects" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
         <div className="container">
           <div className="max-w-xl mb-16">
             <p className="section-kicker section-kicker-purple">Portfolio</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight section-title-accent">
+            <h2 className="section-title-hand text-3xl md:text-4xl mb-6 section-title-accent">
               My work
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <p className="text-gray-500 dark:text-gray-400 type-subtitle-display">
               {activeBrand === "gmdesign"
                 ? "Logos, packaging, social posts, print, and colour studies. Sorted by type."
                 : "Design work, marketing videos, and live websites. Pick a category below."}
@@ -501,17 +514,17 @@ export default function Home() {
 
           {featuredCaseStudies.length > 0 && (
             <div className="mb-12">
-              <h3 className="font-display text-lg font-semibold mb-4 section-title-accent">Featured case-study highlights</h3>
+              <h3 className="type-card-serif text-xl mb-4 section-title-accent">Featured case-study highlights</h3>
               <div className="grid md:grid-cols-3 gap-4">
                 {featuredCaseStudies.map((project) => (
-                  <div key={`feature-${project._id}`} className="bg-white dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/50 p-5 reveal-on-scroll">
-                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">{project.description}</p>
-                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Approach</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
+                  <div key={`feature-${project._id}`} className="bg-white dark:bg-slate-800/90 border border-gray-200 dark:border-slate-700/50 p-5 reveal-on-scroll">
+                    <p className="type-label text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
+                    <p className="type-body text-sm text-gray-500 dark:text-gray-400 mb-3">{project.description}</p>
+                    <p className="type-label text-purple-600 dark:text-purple-400 mb-1">Approach</p>
+                    <p className="type-subtitle-hand text-sm text-gray-500 dark:text-gray-400 mb-3">
                       Combined brand direction, UX thinking, and practical implementation decisions.
                     </p>
-                    <p className="text-[11px] uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">Outcome</p>
+                    <p className="type-label text-emerald-600 dark:text-emerald-400 mb-1">Outcome</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                       {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished final experience aligned to business goals."}
                     </p>
@@ -545,21 +558,17 @@ export default function Home() {
           {/* Projects grid */}
           {projectsByBrand[activeBrand].length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsByBrand[activeBrand]!.map((project: { name: string; description: string; url: string; image: string; subBrand: string; techStack?: string[] }, i: number, arr: typeof projectsByBrand['gmcode']) => {
+              {projectsByBrand[activeBrand]!.map((project: { _id: string; name: string; description: string; url: string; image: string; subBrand: string; techStack?: string[] }, i: number) => {
                 const isMarketing = project.subBrand === "gmmarketing";
                 const isDesign = project.subBrand === "gmdesign";
-                const count = arr.length;
-                const isLastAloneMd = count % 2 !== 0 && i === count - 1;
-                const isLastAloneLg = count % 3 !== 0 && i === count - 1;
-                const lastAloneCls = isLastAloneMd ? 'md:col-span-2 md:max-w-[50%] md:mx-auto' : '';
-                const lastAloneClsLg = isLastAloneLg ? 'lg:col-span-3 lg:max-w-[33.333%] lg:mx-auto' : '';
+                const projectKey = getProjectKey(project);
                 return (
-                <div key={i} className={`bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group reveal-on-scroll ${lastAloneCls} ${lastAloneClsLg}`}>
+                <div key={projectKey} className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group">
                   <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-800 overflow-hidden">
                     {isMarketing ? (
                       <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
-                    ) : !failedImages.has(i) && project.image ? (
-                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-gray-50 dark:bg-slate-900 p-3' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(i)} />
+                    ) : !failedImages.has(projectKey) && project.image ? (
+                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-gray-50 dark:bg-slate-900 p-3' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(projectKey)} />
                     ) : (
                       <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
                         <span className="font-display text-3xl font-bold">{getProjectPlaceholder(project.name)}</span>
@@ -577,7 +586,7 @@ export default function Home() {
                         </span>
                       </div>
                     )}
-                    <h3 className="font-display font-bold text-base lg:text-lg mb-1.5 leading-snug card-subheading">{project.name}</h3>
+                    <h3 className="type-card-display font-bold text-base lg:text-lg mb-1.5 leading-snug text-gray-900 dark:text-gray-100">{project.name}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
                     {project.subBrand === "gmcode" ? (
                       <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium">
@@ -619,14 +628,14 @@ export default function Home() {
       <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Contact */}
-      <section id="contact" className="py-24 md:py-32 bg-gray-50 dark:bg-[#0d1421] reveal-on-scroll">
+      <section id="contact" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
         <div className="container">
           <div className="max-w-xl mb-16">
             <p className="section-kicker section-kicker-emerald">Contact</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 tracking-tight section-title-accent">
+            <h2 className="section-title-beanie text-3xl md:text-4xl mb-6 section-title-accent">
               Get in touch
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 leading-relaxed section-subtitle">
+            <p className="text-gray-500 dark:text-gray-400 type-subtitle-serif">
               Got a project? Send me a message.
             </p>
           </div>
@@ -640,7 +649,7 @@ export default function Home() {
                     <Mail size={16} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium">Email</div>
+                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Email</div>
                     <a href="mailto:wrootmike@gmail.com" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
                       wrootmike@gmail.com
                     </a>
@@ -652,7 +661,7 @@ export default function Home() {
                     <Phone size={16} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium">Phone</div>
+                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Phone</div>
                     <a href="tel:+254792618156" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
                       +254 792 618 156
                     </a>
@@ -664,14 +673,14 @@ export default function Home() {
                     <MapPin size={16} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium">Location</div>
+                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Location</div>
                     <p className="text-sm text-gray-700 dark:text-gray-300">Nairobi, Kenya &middot; Remote</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-700/50">
-                <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium mb-3">Social</div>
+                <div className="type-label text-gray-400 dark:text-gray-500 mb-3">Social</div>
                 <div className="flex gap-3">
                   <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#EA4335] transition">
                     <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" className="w-5 h-5" />
@@ -694,7 +703,7 @@ export default function Home() {
 
             {/* Tabbed forms */}
             <div>
-              <div className="bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden">
+              <div className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden">
                 <div className="flex border-b border-gray-200 dark:border-slate-700/50">
                   <button onClick={() => setFormTab("service")} className={`flex-1 py-3.5 px-4 text-sm font-medium transition ${formTab === "service" ? "bg-blue-600 text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-700/30"}`}>
                     Request a service
@@ -713,7 +722,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-100 dark:border-slate-800/50">
+      <footer className="py-12 border-t border-gray-100 dark:border-slate-800/50 type-footer">
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-sm text-gray-400 dark:text-gray-500">

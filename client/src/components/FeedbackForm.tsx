@@ -33,8 +33,8 @@ export default function FeedbackForm() {
 
   return (
     <div className="p-8 form-shell">
-      <h3 className="text-2xl font-bold mb-2 section-title-accent">Leave a review</h3>
-      <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm section-subtitle">
+      <h3 className="text-2xl font-bold mb-2 type-form-title section-title-accent">Leave a review</h3>
+      <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm type-subtitle-hand">
         If we have worked together, I'd appreciate your honest feedback.
       </p>
 

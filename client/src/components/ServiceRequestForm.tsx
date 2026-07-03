@@ -22,7 +22,7 @@ export default function ServiceRequestForm() {
 
   return (
     <div className="p-8 form-shell">
-      <h3 className="text-2xl font-bold mb-6 section-title-accent">Tell me about your project</h3>
+      <h3 className="text-2xl font-bold mb-6 type-form-title section-title-accent">Tell me about your project</h3>
       <form onSubmit={handleSubmit} className="space-y-5">
         <input type="text" placeholder="Full Name" required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm" />
         <input type="email" placeholder="Email Address" required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm" />
