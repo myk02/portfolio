@@ -1,4 +1,5 @@
 import { mutation } from "./_generated/server";
+import { AVATAR_BY_NAME, TESTIMONIAL_SEEDS } from "./testimonialData";
 
 const designProjects = [
   {
@@ -218,34 +219,18 @@ export const seed = mutation({
     }
 
     const existingTestimonials = await ctx.db.query("testimonials").collect();
-    if (existingTestimonials.length > 0) return;
 
-    const skinTones = ["5C3A21","8B5E3C","6B4226","7B4A2B","4A2C17","9C6B4E","3E2212","A0674B"];
-    const testimonials = [
-      { name: "James Otieno", role: "Legal Firm Partner", text: "LegalFlow replaced three separate tools we were using. Matter tracking, billing, and client communication in one place.", avatar: `https://ui-avatars.com/api/?name=James+Otieno&background=${skinTones[0]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Grace Wanjiku", role: "Education Director", text: "CodeMaster is exactly what our students needed. The structured approach to learning coding is unmatched.", avatar: `https://ui-avatars.com/api/?name=Grace+Wanjiku&background=${skinTones[1]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Kevin Mwangi", role: "Car Rental Entrepreneur", text: "Finding and booking a car through CarSoko was seamless. The platform is intuitive and the service professional.", avatar: `https://ui-avatars.com/api/?name=Kevin+Mwangi&background=${skinTones[2]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Faith Nyambura", role: "Startup Founder", text: "Working with the team was seamless. They understood our needs, delivered on time, and communicated clearly.", avatar: `https://ui-avatars.com/api/?name=Faith+Nyambura&background=${skinTones[3]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Peter Kamau", role: "Tech Company CEO", text: "The software solution transformed our operations. We've seen a 40% increase in efficiency since implementation.", avatar: `https://ui-avatars.com/api/?name=Peter+Kamau&background=${skinTones[4]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Nancy Akinyi", role: "Marketing Manager", text: "The platform design is intuitive and beautiful. Our customers love the new experience.", avatar: `https://ui-avatars.com/api/?name=Nancy+Akinyi&background=${skinTones[5]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Samuel Kiprop", role: "IT Director", text: "System integration was seamless and the training provided was top-notch. Highly recommended.", avatar: `https://ui-avatars.com/api/?name=Samuel+Kiprop&background=${skinTones[6]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Diana Wambui", role: "Non-Profit Lead", text: "We needed a platform that could scale with our growing community. The solution delivered beyond expectations.", avatar: `https://ui-avatars.com/api/?name=Diana+Wambui&background=${skinTones[7]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Brian Omondi", role: "E-commerce Owner", text: "Sales have doubled since the new site launched. The user experience is smooth and the checkout flow is flawless.", avatar: `https://ui-avatars.com/api/?name=Brian+Omondi&background=${skinTones[0]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Catherine Njeri", role: "University Admin", text: "The learning management system revolutionized how we deliver education. Students and faculty both love it.", avatar: `https://ui-avatars.com/api/?name=Catherine+Njeri&background=${skinTones[1]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "David Muthomi", role: "Healthcare Executive", text: "Patient management has never been easier. The system is reliable, secure, and our staff adapted quickly.", avatar: `https://ui-avatars.com/api/?name=David+Muthomi&background=${skinTones[2]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Esther Chebet", role: "Event Coordinator", text: "The booking platform streamlined our entire process. We've reduced no-shows by 60%.", avatar: `https://ui-avatars.com/api/?name=Esther+Chebet&background=${skinTones[3]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Francis Njoroge", role: "Real Estate Agent", text: "Property listings now look stunning online. The virtual tour integration was a game-changer.", avatar: `https://ui-avatars.com/api/?name=Francis+Njoroge&background=${skinTones[4]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Gladys Jeruto", role: "Banking Consultant", text: "Security and reliability were our top concerns. The system exceeded all our requirements.", avatar: `https://ui-avatars.com/api/?name=Gladys+Jeruto&background=${skinTones[5]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Henry Kiplagat", role: "Logistics Manager", text: "Fleet management has never been this efficient. Real-time tracking saved us hours of manual work.", avatar: `https://ui-avatars.com/api/?name=Henry+Kiplagat&background=${skinTones[6]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Irene Achieng", role: "Retail Chain Owner", text: "Multi-store inventory system is now fully integrated. Stock management became effortless.", avatar: `https://ui-avatars.com/api/?name=Irene+Achieng&background=${skinTones[7]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "John Kioko", role: "Restaurant Group Owner", text: "The reservation and ordering system transformed our business. Online orders now make up 60% of revenue.", avatar: `https://ui-avatars.com/api/?name=John+Kioko&background=${skinTones[0]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Khadija Hassan", role: "Media Producer", text: "Content management became effortless. The team delivered exactly what we envisioned.", avatar: `https://ui-avatars.com/api/?name=Khadija+Hassan&background=${skinTones[1]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Lawrence Mutua", role: "Manufacturing Lead", text: "Production tracking went digital. We now have real-time visibility across all factory lines.", avatar: `https://ui-avatars.com/api/?name=Lawrence+Mutua&background=${skinTones[2]}&color=fff&size=80`, rating: 5, isApproved: true },
-      { name: "Margaret Wairimu", role: "HR Director", text: "The HR management system simplified recruitment, payroll, and performance tracking. A complete game-changer.", avatar: `https://ui-avatars.com/api/?name=Margaret+Wairimu&background=${skinTones[3]}&color=fff&size=80`, rating: 5, isApproved: true },
-    ];
+    for (const testimonial of existingTestimonials) {
+      const avatar = AVATAR_BY_NAME[testimonial.name];
+      if (avatar && testimonial.avatar !== avatar) {
+        await ctx.db.patch(testimonial._id, { avatar });
+      }
+    }
 
-    for (const t of testimonials) {
-      await ctx.db.insert("testimonials", t);
+    if (existingTestimonials.length === 0) {
+      for (const t of TESTIMONIAL_SEEDS) {
+        await ctx.db.insert("testimonials", t);
+      }
     }
   },
 });

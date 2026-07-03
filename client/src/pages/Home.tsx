@@ -1,16 +1,56 @@
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Code, Palette, Printer, Layers, BarChart3, Video, Shield, Headphones, Mail, Phone, MapPin, ArrowRight, Menu, X, Moon, Sun, CheckCircle2 } from "lucide-react";
-import { useState, useEffect } from "react";
+  aboutParagraphs,
+  aboutStats,
+  caseStudyOutcomes,
+  contactItems,
+  devToolkit,
+  footerLinks,
+  heroStats,
+  NAV_ITEMS,
+  pricingRows,
+  processSteps,
+  services,
+  skillGroups,
+  socialLinks,
+  subBrands,
+  supplementaryServices,
+  toolkit,
+} from "@/data/siteContent";
+import { ArrowRight, Mail, MapPin, Menu, Moon, Phone, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useQuery, useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import FeedbackForm from "@/components/FeedbackForm";
 import ServiceRequestForm from "@/components/ServiceRequestForm";
+
+function SectionHeader({ label, title }: { label: string; title: string }) {
+  return (
+    <div className="section-intro mb-5 sm:mb-6">
+      <p className="section-kicker text-gray-500 dark:text-gray-400">{label}</p>
+      <h2 className="section-heading">{title}</h2>
+    </div>
+  );
+}
+
+function TagList({ items, variant = "neutral" }: { items: string[]; variant?: "neutral" | "accent" }) {
+  const classes =
+    variant === "accent"
+      ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/50"
+      : "bg-white/80 dark:bg-slate-800/70 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-slate-700/50";
+
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {items.map((item) => (
+        <span key={item} className={`text-[11px] sm:text-xs px-2 py-1 border font-medium ${classes}`}>
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -20,24 +60,27 @@ export default function Home() {
   const [failedAvatars, setFailedAvatars] = useState<Set<string>>(new Set());
   const [formTab, setFormTab] = useState<"service" | "feedback">("service");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmdesign");
   const seed = useMutation(api.seed.seed);
 
   useEffect(() => { seed(); }, [seed]);
 
+  const sortByOrder = <T extends { order?: number }>(items: T[]) =>
+    [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+  const allProjects = useQuery(api.projects.list, {}) ?? [];
+  const testimonials = useQuery(api.testimonials.listApproved) ?? [];
+  const allProjectsSorted = sortByOrder(allProjects);
+  const featuredCaseStudies = allProjectsSorted.slice(0, 3);
+
+  const projectsByBrand = {
+    gmcode: sortByOrder(allProjects.filter((p) => p.subBrand === "gmcode")),
+    gmdesign: sortByOrder(allProjects.filter((p) => p.subBrand === "gmdesign")),
+    gmmarketing: sortByOrder(allProjects.filter((p) => p.subBrand === "gmmarketing")),
+  };
+
   const getProjectKey = (project: { _id?: string; name: string; image: string; url: string }) =>
     project._id ?? `${project.name}-${project.image || project.url}`;
-
-  const handleImageError = (projectKey: string) => {
-    setFailedImages(prev => new Set(prev).add(projectKey));
-  };
-
-  const getProjectPlaceholder = (name: string) => {
-    const words = name.split(/[\s-]+/);
-    if (words.length >= 2) {
-      return (words[0][0] + words[1][0]).toUpperCase();
-    }
-    return name.slice(0, 2).toUpperCase();
-  };
 
   const placeholderColors = [
     "from-blue-400 to-blue-600",
@@ -48,756 +91,401 @@ export default function Home() {
     "from-cyan-400 to-cyan-600",
   ];
 
+  const getProjectPlaceholder = (name: string) => {
+    const words = name.split(/[\s-]+/);
+    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+    return name.slice(0, 2).toUpperCase();
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const services = [
-    { icon: Palette, title: "Brand & Graphic Design", desc: "Logos, brand colours, social posts, email graphics, presentations, and print work. I use Figma, Adobe Creative Suite, and Canva." },
-    { icon: Code, title: "Web Design & WordPress", desc: "I design and build websites on WordPress and Webflow. I also code with JavaScript, TypeScript, Python, PHP, and SQL when a project needs more than a template." },
-    { icon: Video, title: "Motion & Social Video", desc: "Short videos, GIFs, and simple motion graphics for social media. I use CapCut Pro, Canva, and Adobe tools." },
-    { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
-    { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
-    { icon: Printer, title: "Print & Event Materials", desc: "Brochures, banners, merch, and event materials that match the rest of your brand." },
-  ];
-
-  const toolkit = ["Figma", "Adobe CC", "WordPress", "Canva", "CapCut Pro", "HTML/CSS", "GA4", "Webflow"];
-
-  const devToolkit = ["JavaScript", "TypeScript", "Python", "PHP", "SQL", "REST APIs", "Git", "GitHub", "Vercel", "Azure", "Postman"];
-
-  const skillGroups = [
-    {
-      title: "Design & Brand",
-      skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
-    },
-    {
-      title: "Web & Development",
-      skills: ["WordPress", "Webflow", "HTML/CSS", "JavaScript", "TypeScript", "Python", "PHP", "SQL", "REST APIs", "Responsive Design", "Accessible Design"],
-    },
-    {
-      title: "Cloud & Developer Tools",
-      skills: ["Azure", "Git", "GitHub", "Vercel", "Postman", "Ubuntu Linux", "macOS", "Figma Handoffs", "AI Workflow Tools"],
-    },
-    {
-      title: "Web Management & Analytics",
-      skills: ["Uptime Monitoring", "Site Speed", "On-page SEO", "GA4", "Scheduled Updates", "Hosting Support"],
-    },
-    {
-      title: "IT Support & Infrastructure",
-      skills: ["Jira", "Active Directory", "Microsoft 365", "ERP Systems", "LAN/WAN", "DNS", "DHCP", "Wi-Fi", "Security Patching", "Backup & Restore", "Training & Documentation"],
-    },
-    {
-      title: "Languages",
-      skills: ["English (Fluent)", "Kiswahili (Fluent)"],
-    },
-  ];
-
-  const supplementaryServices = [
-    { icon: BarChart3, title: "Website Management", desc: "I keep client sites updated and running. I track uptime, watch page speed, apply patches on schedule, and call hosting support when a site goes down." },
-    { icon: Headphones, title: "IT Support & Helpdesk", desc: "Hardware problems, software errors, locked accounts, and AV setup for meetings and events. I log everything in Jira so there is a clear record." },
-    { icon: Shield, title: "Network & Security", desc: "LAN and WAN issues, DNS, DHCP, Wi-Fi problems, security checks, patches, and backups that are actually tested." },
-  ];
-
-  const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmdesign");
-
-  const subBrands = [
-    { id: "gmdesign" as const, label: "GMDesign", icon: Palette },
-    { id: "gmmarketing" as const, label: "GM Marketing", icon: Video },
-    { id: "gmcode" as const, label: "GMCode", icon: Code },
-  ];
-
-  const sortByOrder = <T extends { order?: number }>(items: T[]) =>
-    [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-  const allProjects = useQuery(api.projects.list, {}) ?? [];
-  const testimonials = useQuery(api.testimonials.listApproved) ?? [];
-  const allProjectsSorted = sortByOrder(allProjects);
-  const featuredCaseStudies = allProjectsSorted.slice(0, 3);
-  const caseStudyOutcomes: Record<string, string> = {
-    gmcode: "Built for measurable growth and smoother customer journeys.",
-    gmdesign: "Crafted to strengthen brand recall across print and digital touchpoints.",
-    gmmarketing: "Designed to increase engagement with short-form storytelling.",
-  };
-
-  const researchBackedRules = [
-    "Clear positioning in the hero with who I help and the outcome I deliver.",
-    "A curated set of deep project stories instead of a crowded gallery.",
-    "Scannable case-study structure: challenge, approach, and outcome.",
-    "Strong CTA repeated at key moments to reduce drop-off.",
-  ];
-
-  const processSteps = [
-    { title: "1. Discover", desc: "Align on goals, audience, and constraints before any visual work starts." },
-    { title: "2. Design", desc: "Shape concepts, systems, and prototypes with feedback loops and iteration." },
-    { title: "3. Deliver", desc: "Build, test, and launch with performance, accessibility, and SEO basics in place." },
-  ];
-
-  const projectsByBrand: Record<string, typeof allProjects> = {
-    gmcode: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmcode")),
-    gmdesign: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmdesign")),
-    gmmarketing: sortByOrder(allProjects.filter((p: { subBrand: string }) => p.subBrand === "gmmarketing")),
-  };
-
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll(".reveal-on-scroll:not(.is-visible)"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    elements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (inView) {
-        el.classList.add("is-visible");
-      } else {
-        observer.observe(el);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, [allProjects.length, activeBrand]);
-
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
 
-  return (
-    <div className="site-gradient-bg text-slate-900 dark:text-white min-h-screen transition-colors duration-300">
-      {/* Header */}
-      <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 dark:bg-[#0a0f1a]/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800/50" : "bg-transparent"}`}>
-        <div className="container flex justify-between items-center py-4">
-          <span className="flex items-center gap-2.5">
-            <img src="/brand1.png" alt="GMLink" className="h-10 w-auto" />
-            <span className="text-lg font-bold tracking-tight font-display">GMLink</span>
-            <span className="hidden sm:flex items-center gap-1 ml-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-            </span>
-          </span>
+  const navItems = NAV_ITEMS.filter((item) => item.id !== "reviews" || testimonials.length > 0);
 
-          <nav className="hidden md:flex gap-8 items-center">
-            {["home", "about", "skills", "services", "pricing", "projects", "contact"].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item)} className="type-nav text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {item.charAt(0).toUpperCase() + item.slice(1)}
+  return (
+    <div className="site-minimal text-slate-900 dark:text-white min-h-screen">
+      <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+        <div className="container header-inner">
+          <button type="button" onClick={() => scrollToSection("home")} className="brand-lockup">
+            <img src="/brand1.png" alt="GMLink" className="h-7 sm:h-8 w-auto" />
+            <span className="font-display font-semibold text-sm sm:text-base">GMLink</span>
+          </button>
+
+          <nav className="hidden xl:flex items-center gap-4">
+            {navItems.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToSection(item.id)} className="nav-link">
+                {item.label}
               </button>
             ))}
           </nav>
 
-          <div className="flex gap-2 items-center">
+          <div className="header-actions">
             {toggleTheme && (
-              <button onClick={toggleTheme} className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 rounded-none transition">
-                {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+              <button type="button" onClick={toggleTheme} className="icon-btn" aria-label="Toggle theme">
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
               </button>
             )}
-            <Button onClick={() => scrollToSection("contact")} className="hidden md:inline-flex btn-gradient rounded-none px-5 py-2 text-sm font-medium">
-              Get in Touch
+            <Button type="button" onClick={() => scrollToSection("contact")} className="hidden md:inline-flex btn-gradient rounded-none px-3 py-1.5 text-xs sm:text-sm">
+              Contact
             </Button>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-none transition">
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)} className="icon-btn xl:hidden" aria-label="Menu">
+              {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-[#0a0f1a] border-t border-gray-100 dark:border-slate-800">
-            <nav className="flex flex-col p-4 gap-1">
-              {["home", "about", "skills", "services", "pricing", "projects", "contact"].map((item) => (
-                <button key={item} onClick={() => scrollToSection(item)} className="text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium rounded-none hover:bg-gray-50 dark:hover:bg-slate-800/50 transition">
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </button>
-              ))}
-            </nav>
-          </div>
+          <nav className="mobile-nav xl:hidden">
+            {navItems.map((item) => (
+              <button key={item.id} type="button" onClick={() => scrollToSection(item.id)} className="mobile-nav-link">
+                {item.label}
+              </button>
+            ))}
+          </nav>
         )}
       </header>
 
-      {/* Hero */}
-      <section id="home" className="pt-36 pb-20 md:pb-28">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-            <div className="flex-1 max-w-3xl text-center md:text-left md:mx-0">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/70 dark:bg-slate-800/70 text-gray-500 dark:text-gray-400 rounded-none type-hero-badge mb-8 border border-gray-200 dark:border-slate-700/50 backdrop-blur-sm">
-                Graphic & Web Designer
-              </div>
+      <main>
+        <section id="home" className="section-pad-tight pt-24 sm:pt-28">
+          <div className="container">
+            <div className="hero-grid">
+              <div className="hero-copy">
+                <p className="eyebrow">Graphic & Web Designer · Nairobi</p>
+                <h1 className="hero-title">
+                  <span className="font-script text-blue-600 dark:text-blue-400">Create.</span>
+                  <span className="font-hand">Elevate.</span>
+                  <span className="font-display font-bold">Convert.</span>
+                </h1>
+                <p className="lead">
+                  Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites.
+                </p>
+                <p className="sublead">Available for freelance, contract, and full-time opportunities.</p>
 
-              <h1 className="text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tight mb-6 text-slate-900 dark:text-slate-100">
-                <span className="block font-script text-blue-600 dark:text-blue-400">Create.</span>
-                <span className="block font-hand">Elevate.</span>
-                <span className="block font-display font-bold">Convert.</span>
-              </h1>
+                <div className="stack gap-3">
+                  <TagList items={toolkit} />
+                  <TagList items={devToolkit} variant="accent" />
+                </div>
 
-              <p className="type-body-lg text-gray-500 dark:text-gray-400 mb-5 max-w-2xl">
-                Nairobi-based designer and developer for service businesses, startups, and growing brands. I handle strategy, visual identity, and launch-ready websites so the final result is consistent from first concept to production.
-              </p>
-              <p className="type-subtitle-serif text-gray-600 dark:text-gray-300 mb-8">
-                Available for freelance, contract, and full-time opportunities.
-              </p>
+                <div className="hero-actions">
+                  <Button type="button" onClick={() => scrollToSection("work")} className="btn-gradient rounded-none">
+                    View work <ArrowRight size={15} />
+                  </Button>
+                  <Button type="button" onClick={() => scrollToSection("contact")} variant="outline" className="rounded-none border">
+                    Get in touch
+                  </Button>
+                </div>
 
-              <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
-                {toolkit.map((skill) => (
-                  <span key={skill} className="text-xs px-3 py-1.5 bg-gray-50 dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50 font-medium">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-10 justify-center md:justify-start">
-                {devToolkit.map((skill) => (
-                  <span key={skill} className="text-xs px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 font-medium">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-4 flex-wrap justify-center md:justify-start mb-8">
-                <Button onClick={() => scrollToSection("projects")} className="btn-gradient gap-2 px-6 py-3 rounded-none font-medium shadow-sm">
-                  View case studies <ArrowRight size={16} />
-                </Button>
-                <Button onClick={() => scrollToSection("contact")} variant="outline" className="px-6 py-3 rounded-none font-medium border-2">
-                  Book a discovery call
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs type-stat-label text-gray-500 dark:text-gray-400 justify-center md:justify-start">
-                <span>4+ years experience</span>
-                <span>15+ design projects</span>
-                <span>7+ live websites</span>
-              </div>
-            </div>
-
-            <div className="shrink-0 photo-glow">
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-gray-200/50 dark:border-slate-700/50 shadow-lg">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-purple-600/15 z-10 pointer-events-none" />
-                <img
-                  src="/mike.png"
-                  alt="Mike Waitindi"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      <section className="py-12 md:py-14 reveal-on-scroll">
-        <div className="container">
-          <div className="grid md:grid-cols-2 gap-6">
-            {researchBackedRules.map((rule) => (
-              <div key={rule} className="flex items-start gap-3 bg-white/90 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700/50 p-4 backdrop-blur-sm">
-                <CheckCircle2 size={18} className="text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                <p className="type-subtitle-hand text-sm text-gray-600 dark:text-gray-300">{rule}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {/* About */}
-      <section id="about" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
-        <div className="container">
-          <div className="max-w-2xl mb-20">
-            <p className="section-kicker section-kicker-amber">Profile</p>
-            <h2 className="section-title-hand text-4xl md:text-5xl font-normal mb-6 section-title-accent">
-              About me
-            </h2>
-            <div className="space-y-5 text-gray-600 dark:text-gray-400 type-body-lg">
-              <p>
-                I've been working in IT and design for close to four years. My time is split between fixing things when they break, building websites and software, and designing the look and feel on top. I did an ICT internship at the Council of Legal Education and IT support work at IEBC during elections. Now I freelance for clients in healthcare, education, retail, legal, and tech.
-              </p>
-              <p>
-                For design work I use Figma, Adobe Creative Suite, Canva, and CapCut Pro. For websites I use WordPress, Webflow, JavaScript, TypeScript, Python, PHP, and SQL. I try to keep branding consistent, make pages accessible, and check GA4 and basic SEO so sites actually get found. I run GMLink with three parts: <strong className="text-purple-600">GMDesign</strong> for brand and visual work, <strong className="text-amber-600">GM Marketing</strong> for campaigns and video, and <strong className="text-blue-600">GMCode</strong> for web development.
-              </p>
-              <p>
-                <strong className="text-gray-800 dark:text-gray-200">Bachelor of Information Technology</strong>, South Eastern Kenya University (SEKU), Kitui. I speak English and Kiswahili fluently.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { label: "Years experience", value: "4+" },
-              { label: "Design projects", value: "15+" },
-              { label: "Live websites", value: "7+" },
-              { label: "Tools & skills", value: "40+" },
-            ].map((stat, i) => (
-              <div key={i} className={`bg-white dark:bg-slate-800/90 rounded-none p-6 border transition-all duration-200 group hover:-translate-y-0.5 hover:shadow-md ${i === 0 ? 'border-blue-200 dark:border-blue-800/50 md:scale-[1.04] md:origin-left' : 'border-gray-200 dark:border-slate-700/50'}`}>
-                <div className={`type-stat-value font-bold mb-1 transition-colors ${i === 0 ? 'text-4xl text-blue-600' : 'text-3xl text-blue-600'}`}>{stat.value}</div>
-                <div className="type-stat-label text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {/* Skills */}
-      <section id="skills" className="py-24 md:py-32">
-        <div className="container">
-          <div className="max-w-xl mb-16">
-            <p className="section-kicker section-kicker-blue">Capabilities</p>
-            <h2 className="section-title-display text-3xl md:text-4xl mb-6 tracking-tight section-title-accent">
-              Skills & tools
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 type-subtitle-hand">
-              Here is what I work with, from design tools through to IT support.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillGroups.map((group) => (
-              <div key={group.title} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
-                <h3 className="type-card-script text-lg mb-4 text-gray-800 dark:text-gray-200">{group.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.skills.map((skill) => (
-                    <span key={skill} className="text-xs px-2.5 py-1 bg-gray-50 dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50">
-                      {skill}
-                    </span>
+                <div className="hero-stats">
+                  {heroStats.map((s) => (
+                    <span key={s.label}>{s.value} {s.label.toLowerCase()}</span>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {/* Services */}
-      <section id="services" className="py-24 md:py-32">
-        <div className="container">
-          <div className="max-w-xl mb-16">
-            <p className="section-kicker section-kicker-purple">Services</p>
-            <h2 className="section-title-beanie mb-6 section-title-accent">
-              What I do
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 type-subtitle-display">
-              I design brands, build websites, and make marketing materials.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <div key={i} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
-                  <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
-                    <Icon size={20} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <h3 className="type-card-hand text-lg mb-2 text-gray-800 dark:text-gray-100">{service.title}</h3>
-                  <p className="type-body text-sm text-gray-500 dark:text-gray-400">{service.desc}</p>
-                </div>
-              );
-            })}
-            {supplementaryServices.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <div key={`supp-${i}`} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800/50 transition-all duration-200 reveal-on-scroll">
-                  <div className="w-11 h-11 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-4">
-                    <Icon size={20} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <h3 className="type-card-serif text-base mb-2 text-gray-800 dark:text-gray-100">{service.title}</h3>
-                  <p className="type-body text-sm text-gray-500 dark:text-gray-400">{service.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      <section className="py-24 md:py-28">
-        <div className="container">
-          <div className="max-w-xl mb-12">
-            <p className="section-kicker section-kicker-emerald">Workflow</p>
-            <h2 className="section-title-script text-3xl md:text-4xl mb-4 section-title-accent">How I run projects</h2>
-            <p className="text-gray-500 dark:text-gray-400 type-body-lg">
-              A simple process focused on outcomes, not just visuals.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {processSteps.map((step) => (
-              <div key={step.title} className="bg-white dark:bg-slate-800/90 rounded-none p-6 border border-gray-200 dark:border-slate-700/50 reveal-on-scroll">
-                <h3 className="type-card-beanie mb-2 text-gray-800 dark:text-gray-100">{step.title}</h3>
-                <p className="type-body text-sm text-gray-500 dark:text-gray-400">{step.desc}</p>
+              <div className="hero-photo">
+                <img src="/mike.png" alt="Mike Waitindi" className="w-full h-full object-cover" />
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {/* Pricing */}
-      <section id="pricing" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
-        <div className="container">
-          <div className="max-w-xl mb-16">
-            <p className="section-kicker section-kicker-blue">Investment</p>
-            <h2 className="section-title-serif text-3xl md:text-4xl mb-6 section-title-accent">
-              Pricing
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 type-subtitle-script">
-              Starting prices for common jobs. All amounts are in Kenya Shillings (KES).
-            </p>
-          </div>
-
-          {[
-            { service: "Brand & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 to 100,000", model: "Per project", icon: Palette },
-            { service: "Web Design & WordPress", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
-            { service: "Motion & Social Video", starting: "KSh 15,000", range: "KSh 15,000 to 60,000", model: "Per project", icon: Video },
-            { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
-            { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
-            { service: "Print & Event Materials", starting: "KSh 15,000", range: "KSh 15,000 to 80,000", model: "Per project", icon: Printer },
-          ].map((row, i) => {
-            const Icon = row.icon;
-            return (
-              <div key={i} className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 p-5 mb-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md last:mb-0 reveal-on-scroll">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon size={18} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-1">
-                      <h3 className="type-card-hand text-lg text-gray-800 dark:text-gray-200">{row.service}</h3>
-                      <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 inline-block w-fit">{row.model}</span>
-                    </div>
-                    <div className="flex items-baseline gap-3 flex-wrap">
-                      <span className="type-price text-gray-900 dark:text-white">{row.starting}</span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">{row.range}</span>
-                    </div>
-                  </div>
-                </div>
+        <section id="about" className="section-pad-tight section-muted">
+          <div className="container">
+            <SectionHeader label="About" title="Mike Waitindi" />
+            <div className="about-grid">
+              <div className="stack gap-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+                {aboutParagraphs.map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
               </div>
-            );
-          })}
-
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-4 text-center">
-            Final price depends on the job. <a href="#contact" className="text-blue-600 dark:text-blue-400 hover:underline" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact me</a> for a quote.
-          </p>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {/* Projects */}
-      <section id="projects" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
-        <div className="container">
-          <div className="max-w-xl mb-16">
-            <p className="section-kicker section-kicker-purple">Portfolio</p>
-            <h2 className="section-title-hand text-3xl md:text-4xl mb-6 section-title-accent">
-              My work
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 type-subtitle-display">
-              {activeBrand === "gmdesign"
-                ? "Logos, packaging, social posts, print, and colour studies. Sorted by type."
-                : "Design work, marketing videos, and live websites. Pick a category below."}
-            </p>
-          </div>
-
-          {featuredCaseStudies.length > 0 && (
-            <div className="mb-12">
-              <h3 className="type-card-serif text-xl mb-4 section-title-accent">Featured case-study highlights</h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                {featuredCaseStudies.map((project) => (
-                  <div key={`feature-${project._id}`} className="bg-white dark:bg-slate-800/90 border border-gray-200 dark:border-slate-700/50 p-5 reveal-on-scroll">
-                    <p className="type-label text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
-                    <p className="type-body text-sm text-gray-500 dark:text-gray-400 mb-3">{project.description}</p>
-                    <p className="type-label text-purple-600 dark:text-purple-400 mb-1">Approach</p>
-                    <p className="type-subtitle-hand text-sm text-gray-500 dark:text-gray-400 mb-3">
-                      Combined brand direction, UX thinking, and practical implementation decisions.
-                    </p>
-                    <p className="type-label text-emerald-600 dark:text-emerald-400 mb-1">Outcome</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                      {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished final experience aligned to business goals."}
-                    </p>
+              <div className="stat-grid">
+                {aboutStats.map((stat) => (
+                  <div key={stat.label} className="minimal-card p-3 sm:p-4">
+                    <div className="stat-value">{stat.value}</div>
+                    <div className="stat-label">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
-          )}
-
-          {/* Sub-brand tabs */}
-          <div className="flex gap-2 mb-10 flex-wrap">
-            {subBrands.map((brand) => {
-              const Icon = brand.icon;
-              return (
-                <button
-                  key={brand.id}
-                  onClick={() => setActiveBrand(brand.id)}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-none text-sm font-medium transition-all ${
-                    activeBrand === brand.id
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "bg-white dark:bg-slate-800/60 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-600"
-                  }`}
-                >
-                  <Icon size={15} />
-                  {brand.label}
-                </button>
-              );
-            })}
           </div>
+        </section>
 
-          {/* Projects grid */}
-          {projectsByBrand[activeBrand].length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsByBrand[activeBrand]!.map((project: { _id: string; name: string; description: string; url: string; image: string; subBrand: string; techStack?: string[] }, i: number) => {
-                const isMarketing = project.subBrand === "gmmarketing";
-                const isDesign = project.subBrand === "gmdesign";
-                const projectKey = getProjectKey(project);
-                return (
-                <div key={projectKey} className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group">
-                  <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-800 overflow-hidden">
-                    {isMarketing ? (
-                      <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
-                    ) : !failedImages.has(projectKey) && project.image ? (
-                      <img src={project.image} alt={project.name} className={`w-full h-full ${isDesign ? 'object-contain bg-gray-50 dark:bg-slate-900 p-3' : 'object-cover group-hover:scale-[1.03]'} transition-transform duration-500`} onError={() => handleImageError(projectKey)} />
-                    ) : (
-                      <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
-                        <span className="font-display text-3xl font-bold">{getProjectPlaceholder(project.name)}</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4 lg:p-5">
-                    {isDesign && project.techStack && project.techStack.length >= 2 && (
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        <span className="text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50 font-semibold uppercase tracking-wide">
-                          {project.techStack[0]}
-                        </span>
-                        <span className="text-[10px] px-2 py-0.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50 font-medium">
-                          {project.techStack[1]}
-                        </span>
-                      </div>
-                    )}
-                    <h3 className="type-card-display font-bold text-base lg:text-lg mb-1.5 leading-snug text-gray-900 dark:text-gray-100">{project.name}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
-                    {project.subBrand === "gmcode" ? (
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium">
-                        View project &rarr;
-                      </a>
-                    ) : (
-                      <button onClick={() => setPreviewImage(isMarketing ? project.url : project.image)} className="text-sm text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer">
-                        View project &rarr;
-                      </button>
-                    )}
-                  </div>
+        <section id="skills" className="section-pad-tight">
+          <div className="container">
+            <SectionHeader label="Skills" title="Tools & capabilities" />
+            <div className="skills-grid">
+              {skillGroups.map((group) => (
+                <div key={group.title} className="minimal-card p-4">
+                  <h3 className="text-sm font-semibold mb-2 text-gray-800 dark:text-gray-200">{group.title}</h3>
+                  <TagList items={group.skills} />
                 </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-white dark:bg-slate-800/40 rounded-none border border-gray-200 dark:border-slate-700/50">
-              <div className="text-4xl mb-4 text-gray-300 dark:text-gray-600">&lowast;</div>
-              <h3 className="font-display text-xl font-bold mb-1 text-gray-500 dark:text-gray-400">Coming soon</h3>
-              <p className="text-sm text-gray-400 dark:text-gray-500">Nothing here yet. I'm adding more work to this section.</p>
-            </div>
-          )}
-
-          <Dialog open={!!previewImage} onOpenChange={(open) => { if (!open) setPreviewImage(null); }}>
-            <DialogContent className="max-w-4xl w-[90vw] bg-black dark:bg-black border border-gray-200 dark:border-slate-700/50 rounded-none p-0 overflow-hidden flex items-center justify-center">
-              <DialogTitle className="sr-only">Project preview</DialogTitle>
-              {previewImage && (
-                previewImage.endsWith(".mp4") ? (
-                  <video src={previewImage} controls autoPlay className="w-full h-auto max-h-[85vh]" />
-                ) : (
-                  <img src={previewImage} alt="Project preview" className="w-full h-auto max-h-[85vh] object-contain" />
-                )
-              )}
-            </DialogContent>
-          </Dialog>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-6xl" />
-
-      {testimonials.length > 0 && (
-        <section id="testimonials" className="py-24 md:py-32 overflow-hidden reveal-on-scroll">
-          <div className="container mb-12">
-            <div className="max-w-xl">
-              <p className="section-kicker section-kicker-purple">Social proof</p>
-              <h2 className="section-title-display text-3xl md:text-4xl mb-6 tracking-tight section-title-accent">
-                Client feedback
-              </h2>
-              <p className="text-gray-500 dark:text-gray-400 type-subtitle-hand">
-                Trust built through delivering results.
-              </p>
-            </div>
-          </div>
-          <div className="marquee-container">
-            <div className="marquee-track">
-              {[...testimonials, ...testimonials].map((testimonial, i) => {
-                const avatarKey = `${testimonial._id ?? testimonial.name}-${i}`;
-                return (
-                  <div
-                    key={avatarKey}
-                    className="min-w-[240px] max-w-[240px] p-5 bg-white/90 dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 shrink-0"
-                  >
-                    <p className="type-body text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
-                      &ldquo;{testimonial.text}&rdquo;
-                    </p>
-                    <div className="flex items-center gap-2.5">
-                      {!failedAvatars.has(avatarKey) && testimonial.avatar ? (
-                        <img
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                          className="w-7 h-7 rounded-full object-cover shrink-0"
-                          onError={() => setFailedAvatars((prev) => new Set(prev).add(avatarKey))}
-                        />
-                      ) : (
-                        <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
-                          {testimonial.name.charAt(0)}
-                        </div>
-                      )}
-                      <div className="min-w-0">
-                        <div className="font-medium text-sm text-gray-900 dark:text-white truncate">{testimonial.name}</div>
-                        <div className="text-xs text-gray-400 dark:text-gray-500 truncate">{testimonial.role}</div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              ))}
             </div>
           </div>
         </section>
-      )}
 
-      {testimonials.length > 0 && <div className="section-divider mx-auto max-w-6xl" />}
+        <section id="services" className="section-pad-tight section-muted">
+          <div className="container">
+            <SectionHeader label="Services" title="What I do" />
+            <div className="services-grid">
+              {[...services, ...supplementaryServices].map((service) => {
+                const Icon = service.icon;
+                return (
+                  <article key={service.title} className="minimal-card p-4">
+                    <div className="flex gap-3">
+                      <div className="icon-chip shrink-0"><Icon size={16} /></div>
+                      <div className="min-w-0">
+                        <h3 className="text-sm font-semibold mb-1">{service.title}</h3>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{service.desc}</p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
 
-      {/* Contact */}
-      <section id="contact" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">
-        <div className="container">
-          <div className="max-w-xl mb-16">
-            <p className="section-kicker section-kicker-emerald">Contact</p>
-            <h2 className="section-title-beanie text-3xl md:text-4xl mb-6 section-title-accent">
-              Get in touch
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 type-subtitle-serif">
-              Got a project? Send me a message.
+            <div className="process-grid mt-6 sm:mt-8">
+              {processSteps.map((step, i) => (
+                <div key={step.title} className="minimal-card p-4">
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Step {i + 1}</p>
+                  <h3 className="text-sm font-semibold mb-1">{step.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="section-pad-tight">
+          <div className="container">
+            <SectionHeader label="Portfolio" title="My work" />
+
+            {featuredCaseStudies.length > 0 && (
+              <div className="featured-grid mb-6 sm:mb-8">
+                {featuredCaseStudies.map((project) => (
+                  <article key={`feature-${project._id}`} className="minimal-card p-4">
+                    <h3 className="text-sm font-semibold mb-2">{project.name}</h3>
+                    <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
+                    <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Outcome</p>
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished experience aligned to business goals."}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            <div className="tab-row mb-5">
+              {subBrands.map((brand) => {
+                const Icon = brand.icon;
+                const count = projectsByBrand[brand.id].length;
+                return (
+                  <button
+                    key={brand.id}
+                    type="button"
+                    onClick={() => setActiveBrand(brand.id)}
+                    className={`tab-btn ${activeBrand === brand.id ? "is-active" : ""}`}
+                  >
+                    <Icon size={13} />
+                    {brand.label}
+                    <span className="tab-count">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {projectsByBrand[activeBrand].length > 0 ? (
+              <div className="projects-grid">
+                {projectsByBrand[activeBrand].map((project, i) => {
+                  const isMarketing = project.subBrand === "gmmarketing";
+                  const isDesign = project.subBrand === "gmdesign";
+                  const projectKey = getProjectKey(project);
+                  return (
+                    <article key={projectKey} className="minimal-card overflow-hidden">
+                      <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-800">
+                        {isMarketing ? (
+                          <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
+                        ) : !failedImages.has(projectKey) && project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.name}
+                            className={`w-full h-full ${isDesign ? "object-contain p-2 bg-gray-50 dark:bg-slate-900" : "object-cover"}`}
+                            onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
+                          />
+                        ) : (
+                          <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
+                            <span className="font-display text-xl font-bold">{getProjectPlaceholder(project.name)}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3 sm:p-4">
+                        {isDesign && project.techStack && project.techStack.length >= 2 && (
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            <span className="text-[10px] px-1.5 py-0.5 border border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-300">{project.techStack[0]}</span>
+                            <span className="text-[10px] px-1.5 py-0.5 border border-purple-200 dark:border-purple-800/50 text-purple-700 dark:text-purple-300">{project.techStack[1]}</span>
+                          </div>
+                        )}
+                        <h3 className="text-sm font-semibold mb-1">{project.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
+                        {project.subBrand === "gmcode" ? (
+                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
+                            View project →
+                          </a>
+                        ) : (
+                          <button type="button" onClick={() => setPreviewImage(isMarketing ? project.url : project.image)} className="text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-medium">
+                            View project →
+                          </button>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="minimal-card p-6 text-center text-sm text-gray-500">Nothing here yet.</p>
+            )}
+
+            <Dialog open={!!previewImage} onOpenChange={(open) => { if (!open) setPreviewImage(null); }}>
+              <DialogContent className="max-w-4xl w-[95vw] bg-black border-0 rounded-none p-0">
+                <DialogTitle className="sr-only">Project preview</DialogTitle>
+                {previewImage &&
+                  (previewImage.endsWith(".mp4") ? (
+                    <video src={previewImage} controls autoPlay className="w-full max-h-[85vh]" />
+                  ) : (
+                    <img src={previewImage} alt="Project preview" className="w-full max-h-[85vh] object-contain" />
+                  ))}
+              </DialogContent>
+            </Dialog>
+          </div>
+        </section>
+
+        <section id="pricing" className="section-pad-tight section-muted">
+          <div className="container">
+            <SectionHeader label="Pricing" title="Starting prices (KES)" />
+            <div className="pricing-list">
+              {pricingRows.map((row) => {
+                const Icon = row.icon;
+                return (
+                  <div key={row.service} className="minimal-card pricing-row">
+                    <div className="icon-chip shrink-0"><Icon size={15} /></div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                        <h3 className="text-sm font-semibold">{row.service}</h3>
+                        <span className="text-[10px] px-1.5 py-0.5 border border-gray-200 dark:border-slate-700 text-gray-500">{row.model}</span>
+                      </div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{row.range}</p>
+                    </div>
+                    <p className="text-sm font-semibold shrink-0">{row.starting}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-xs text-gray-400 mt-3 text-center sm:text-left">
+              Final price depends on scope. <button type="button" onClick={() => scrollToSection("contact")} className="text-blue-600 dark:text-blue-400 underline">Contact me</button> for a quote.
             </p>
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-            {/* Contact info */}
-            <div>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0">
-                    <Mail size={16} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Email</div>
-                    <a href="mailto:wrootmike@gmail.com" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                      wrootmike@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0">
-                    <Phone size={16} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Phone</div>
-                    <a href="tel:+254792618156" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                      +254 792 618 156
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-none bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0">
-                    <MapPin size={16} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="type-label text-gray-400 dark:text-gray-500 mb-0.5">Location</div>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">Nairobi, Kenya &middot; Remote</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-700/50">
-                <div className="type-label text-gray-400 dark:text-gray-500 mb-3">Social</div>
-                <div className="flex gap-3">
-                  <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#EA4335] transition">
-                    <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" className="w-5 h-5" />
-                  </a>
-                  <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#25D366] transition">
-                    <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" className="w-5 h-5" />
-                  </a>
-                  <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] transition">
-                    <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" className="w-5 h-5" />
-                  </a>
-                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-[#0A66C2] flex items-center justify-center hover:bg-[#084e96] transition" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                  </a>
-                  <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#181717] transition">
-                    <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" className="w-5 h-5" />
-                  </a>
-                </div>
+        {testimonials.length > 0 && (
+          <section id="reviews" className="section-pad-tight overflow-x-clip">
+            <div className="container mb-4">
+              <SectionHeader label="Reviews" title={`Client feedback (${testimonials.length})`} />
+            </div>
+            <div className="marquee-container">
+              <div className="marquee-track">
+                {[...testimonials, ...testimonials].map((t, i) => {
+                  const avatarKey = `${t._id ?? t.name}-${i}`;
+                  return (
+                    <article key={avatarKey} className="minimal-card marquee-card">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">&ldquo;{t.text}&rdquo;</p>
+                      <div className="flex items-center gap-2">
+                        {!failedAvatars.has(avatarKey) && t.avatar ? (
+                          <img
+                            src={t.avatar}
+                            alt={t.name}
+                            loading="lazy"
+                            className="w-7 h-7 rounded-full object-cover bg-gray-200 dark:bg-slate-700"
+                            onError={() => setFailedAvatars((prev) => new Set(prev).add(avatarKey))}
+                          />
+                        ) : (
+                          <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">{t.name.charAt(0)}</div>
+                        )}
+                        <div className="min-w-0">
+                          <p className="text-xs font-medium truncate">{t.name}</p>
+                          <p className="text-[10px] text-gray-400 truncate">{t.role}</p>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             </div>
+          </section>
+        )}
 
-            {/* Tabbed forms */}
-            <div>
-              <div className="bg-white dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 overflow-hidden">
-                <div className="flex border-b border-gray-200 dark:border-slate-700/50">
-                  <button onClick={() => setFormTab("service")} className={`flex-1 py-3.5 px-4 text-sm font-medium transition ${formTab === "service" ? "bg-blue-600 text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-700/30"}`}>
-                    Request a service
-                  </button>
-                  <button onClick={() => setFormTab("feedback")} className={`flex-1 py-3.5 px-4 text-sm font-medium transition ${formTab === "feedback" ? "bg-blue-600 text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-700/30"}`}>
-                    Leave a review
-                  </button>
+        <section id="contact" className="section-pad-tight section-muted">
+          <div className="container">
+            <SectionHeader label="Contact" title="Get in touch" />
+            <div className="contact-grid">
+              <div className="stack gap-4">
+                {contactItems.map((item) => (
+                  <div key={item.label} className="flex items-start gap-3">
+                    <div className="icon-chip shrink-0">
+                      {item.label === "Email" && <Mail size={15} />}
+                      {item.label === "Phone" && <Phone size={15} />}
+                      {item.label === "Location" && <MapPin size={15} />}
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-wide text-gray-400 mb-0.5">{item.label}</p>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm break-all hover:text-blue-600 dark:hover:text-blue-400">{item.value}</a>
+                      ) : (
+                        <p className="text-sm">{item.value}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div className="flex flex-wrap gap-2">
+                  {socialLinks.map((s) => (
+                    <a key={s.alt} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.alt} className={`social-chip ${s.className}`}>
+                      {s.icon ? <img src={s.icon} alt="" className="w-4 h-4" /> : (
+                        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+                      )}
+                    </a>
+                  ))}
                 </div>
-                <div className="p-1">
-                  {formTab === "service" ? <ServiceRequestForm /> : <FeedbackForm />}
+              </div>
+
+              <div className="minimal-card overflow-hidden">
+                <div className="flex border-b border-gray-200 dark:border-slate-700">
+                  <button type="button" onClick={() => setFormTab("service")} className={`form-tab ${formTab === "service" ? "is-active" : ""}`}>Request service</button>
+                  <button type="button" onClick={() => setFormTab("feedback")} className={`form-tab ${formTab === "feedback" ? "is-active" : ""}`}>Leave review</button>
                 </div>
+                {formTab === "service" ? <ServiceRequestForm /> : <FeedbackForm />}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-100 dark:border-slate-800/50 type-footer">
-        <div className="container">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 text-sm text-gray-400 dark:text-gray-500">
-              <div className="flex items-center gap-2">
-                <img src="/brand1.png" alt="GMLink" className="h-9 w-auto" />
-                <span className="flex items-center gap-1">
-                  <span className="w-1 h-1 rounded-full bg-blue-500" />
-                  <span className="w-1 h-1 rounded-full bg-purple-500" />
-                  <span className="w-1 h-1 rounded-full bg-amber-500" />
-                </span>
-              </div>
-              &copy; 2026 GMLink. All rights reserved.
-            </div>
-            <div className="flex gap-6 text-sm text-gray-400 dark:text-gray-500">
-              <a href="mailto:wrootmike@gmail.com" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Email</a>
-              <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="hover:text-green-500 dark:hover:text-green-400 transition">WhatsApp</a>
-              <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 dark:hover:text-pink-400 transition">Instagram</a>
-              <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition">LinkedIn</a>
-              <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 dark:hover:text-blue-400 transition">GitHub</a>
-            </div>
+      <footer className="site-footer">
+        <div className="container footer-inner">
+          <p>&copy; 2026 GMLink. All rights reserved.</p>
+          <div className="footer-links">
+            {footerLinks.map((link) => (
+              <a key={link.label} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </footer>

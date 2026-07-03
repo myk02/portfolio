@@ -41,7 +41,7 @@ export default function ServiceRequestForm() {
 
   if (submitted) {
     return (
-      <div className="p-8">
+      <div className="p-5 sm:p-6">
         <div className="p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-none text-sm">
           Thank you. I got your request and will reply within 24 hours.
         </div>
@@ -50,14 +50,14 @@ export default function ServiceRequestForm() {
   }
 
   return (
-    <div className="p-8 form-shell">
-      <h3 className="text-2xl font-bold mb-6 type-form-title section-title-accent">Tell me about your project</h3>
+    <div className="p-5 sm:p-6 form-shell">
+      <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-5 type-form-title section-title-accent">Your project</h3>
       {error && (
-        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
           {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="Full Name"
