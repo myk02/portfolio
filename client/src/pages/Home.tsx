@@ -52,6 +52,74 @@ function TagList({ items, variant = "neutral" }: { items: string[]; variant?: "n
   );
 }
 
+function ProjectThumbnail({
+  project,
+  failed,
+  onError,
+  placeholderIndex,
+}: {
+  project: { name: string; url: string; image: string; subBrand: string };
+  failed: boolean;
+  onError: () => void;
+  placeholderIndex: number;
+}) {
+  const isMarketing = project.subBrand === "gmmarketing";
+  const isDesign = project.subBrand === "gmdesign";
+
+  if (isMarketing) {
+    return (
+      <div className="project-thumb">
+        <video
+          src={project.url}
+          muted
+          autoPlay
+          loop
+          playsInline
+          preload="metadata"
+          className="project-thumb-media"
+        />
+      </div>
+    );
+  }
+
+  if (!failed && project.image) {
+    return (
+      <div className="project-thumb">
+        <img
+          src={project.image}
+          alt={project.name}
+          className={`project-thumb-media ${isDesign ? "is-design" : "is-code"}`}
+          onError={onError}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    );
+  }
+
+  const placeholderColors = [
+    "from-blue-400 to-blue-600",
+    "from-purple-400 to-purple-600",
+    "from-emerald-400 to-emerald-600",
+    "from-rose-400 to-rose-600",
+    "from-amber-400 to-amber-600",
+    "from-cyan-400 to-cyan-600",
+  ];
+
+  return (
+    <div className={`project-thumb flex items-center justify-center bg-gradient-to-br ${placeholderColors[placeholderIndex % placeholderColors.length]} text-white`}>
+      <span className="font-display text-xl font-bold">
+        {project.name
+          .split(/[\s-]+/)
+          .slice(0, 2)
+          .map((w) => w[0])
+          .join("")
+          .toUpperCase() || project.name.slice(0, 2).toUpperCase()}
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -81,21 +149,6 @@ export default function Home() {
 
   const getProjectKey = (project: { _id?: string; name: string; image: string; url: string }) =>
     project._id ?? `${project.name}-${project.image || project.url}`;
-
-  const placeholderColors = [
-    "from-blue-400 to-blue-600",
-    "from-purple-400 to-purple-600",
-    "from-emerald-400 to-emerald-600",
-    "from-rose-400 to-rose-600",
-    "from-amber-400 to-amber-600",
-    "from-cyan-400 to-cyan-600",
-  ];
-
-  const getProjectPlaceholder = (name: string) => {
-    const words = name.split(/[\s-]+/);
-    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
-    return name.slice(0, 2).toUpperCase();
-  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -270,17 +323,28 @@ export default function Home() {
 
             {featuredCaseStudies.length > 0 && (
               <div className="featured-grid mb-6 sm:mb-8">
-                {featuredCaseStudies.map((project) => (
-                  <article key={`feature-${project._id}`} className="minimal-card p-4">
-                    <h3 className="text-sm font-semibold mb-2">{project.name}</h3>
-                    <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
-                    <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Outcome</p>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                      {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished experience aligned to business goals."}
-                    </p>
-                  </article>
-                ))}
+                {featuredCaseStudies.map((project, i) => {
+                  const projectKey = getProjectKey(project);
+                  return (
+                    <article key={`feature-${project._id}`} className="minimal-card overflow-hidden">
+                      <ProjectThumbnail
+                        project={project}
+                        failed={failedImages.has(projectKey)}
+                        onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
+                        placeholderIndex={i}
+                      />
+                      <div className="p-4">
+                        <h3 className="text-sm font-semibold mb-2">{project.name}</h3>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Challenge</p>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-2">{project.description}</p>
+                        <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Outcome</p>
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                          {caseStudyOutcomes[project.subBrand] ?? "Delivered a polished experience aligned to business goals."}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
             )}
 
@@ -306,27 +370,17 @@ export default function Home() {
             {projectsByBrand[activeBrand].length > 0 ? (
               <div className="projects-grid">
                 {projectsByBrand[activeBrand].map((project, i) => {
-                  const isMarketing = project.subBrand === "gmmarketing";
                   const isDesign = project.subBrand === "gmdesign";
+                  const isMarketing = project.subBrand === "gmmarketing";
                   const projectKey = getProjectKey(project);
                   return (
                     <article key={projectKey} className="minimal-card overflow-hidden">
-                      <div className="aspect-[4/3] bg-gray-100 dark:bg-slate-800">
-                        {isMarketing ? (
-                          <video src={project.url} muted autoPlay loop playsInline className="w-full h-full object-cover" />
-                        ) : !failedImages.has(projectKey) && project.image ? (
-                          <img
-                            src={project.image}
-                            alt={project.name}
-                            className={`w-full h-full ${isDesign ? "object-contain p-2 bg-gray-50 dark:bg-slate-900" : "object-cover"}`}
-                            onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
-                          />
-                        ) : (
-                          <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${placeholderColors[i % placeholderColors.length]} text-white`}>
-                            <span className="font-display text-xl font-bold">{getProjectPlaceholder(project.name)}</span>
-                          </div>
-                        )}
-                      </div>
+                      <ProjectThumbnail
+                        project={project}
+                        failed={failedImages.has(projectKey)}
+                        onError={() => setFailedImages((prev) => new Set(prev).add(projectKey))}
+                        placeholderIndex={i}
+                      />
                       <div className="p-3 sm:p-4">
                         {isDesign && project.techStack && project.techStack.length >= 2 && (
                           <div className="flex flex-wrap gap-1 mb-2">
