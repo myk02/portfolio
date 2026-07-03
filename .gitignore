@@ -100,8 +100,7 @@ jspm_packages/
 tmp/
 temp/
 
-# Convex auto-generated files
-convex/_generated/
+
 
 # Database
 *.db
