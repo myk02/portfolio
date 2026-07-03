@@ -460,8 +460,8 @@ export default function Home() {
                   <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] transition">
                     <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" className="w-5 h-5" />
                   </a>
-                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#0A66C2] transition">
-                    <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn" className="w-5 h-5" />
+                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-[#0A66C2] flex items-center justify-center hover:bg-[#084e96] transition">
+                    <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn" className="w-5 h-5" />
                   </a>
                   <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#181717] transition">
                     <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" className="w-5 h-5" />
