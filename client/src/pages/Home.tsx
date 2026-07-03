@@ -451,25 +451,20 @@ export default function Home() {
               <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-700/50">
                 <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider font-medium mb-3">Social</div>
                 <div className="flex gap-3">
-                  <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 transition group">
-                    <img src="https://cdn.simpleicons.org/gmail/64748b" alt="Email" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/gmail/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <a href="mailto:wrootmike@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#EA4335] transition">
+                    <img src="https://cdn.simpleicons.org/gmail/EA4335" alt="Email" className="w-5 h-5" />
                   </a>
-                  <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-green-600 dark:hover:bg-green-600 transition group">
-                    <img src="https://cdn.simpleicons.org/whatsapp/64748b" alt="WhatsApp" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <a href="https://wa.me/254792618156" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#25D366] transition">
+                    <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" className="w-5 h-5" />
                   </a>
-                  <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-500 hover:to-orange-400 dark:hover:from-purple-600 dark:hover:via-pink-500 dark:hover:to-orange-400 transition group">
-                    <img src="https://cdn.simpleicons.org/instagram/64748b" alt="Instagram" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <a href="https://www.instagram.com/myk.ih_1/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] transition">
+                    <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" className="w-5 h-5" />
                   </a>
-                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 transition group">
-                    <img src="https://cdn.simpleicons.org/linkedin/64748b" alt="LinkedIn" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <a href="https://linkedin.com/in/mike-waitindi-654bb2344" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#0A66C2] transition">
+                    <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn" className="w-5 h-5" />
                   </a>
-                  <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-800 flex items-center justify-center hover:bg-gray-900 dark:hover:bg-gray-900 transition group">
-                    <img src="https://cdn.simpleicons.org/github/64748b" alt="GitHub" className="w-4 h-4 group-hover:opacity-0 transition-opacity" />
-                    <img src="https://cdn.simpleicons.org/github/ffffff" alt="" className="w-4 h-4 absolute opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <a href="https://github.com/garymike07" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-none bg-gray-100 dark:bg-slate-700 flex items-center justify-center hover:bg-[#181717] transition">
+                    <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" className="w-5 h-5" />
                   </a>
                 </div>
               </div>
