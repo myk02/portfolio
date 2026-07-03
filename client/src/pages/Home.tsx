@@ -17,6 +17,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const [failedAvatars, setFailedAvatars] = useState<Set<string>>(new Set());
   const [formTab, setFormTab] = useState<"service" | "feedback">("service");
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const seed = useMutation(api.seed.seed);
@@ -113,6 +114,7 @@ export default function Home() {
     [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   const allProjects = useQuery(api.projects.list, {}) ?? [];
+  const testimonials = useQuery(api.testimonials.listApproved) ?? [];
   const allProjectsSorted = sortByOrder(allProjects);
   const featuredCaseStudies = allProjectsSorted.slice(0, 3);
   const caseStudyOutcomes: Record<string, string> = {
@@ -626,6 +628,59 @@ export default function Home() {
       </section>
 
       <div className="section-divider mx-auto max-w-6xl" />
+
+      {testimonials.length > 0 && (
+        <section id="testimonials" className="py-24 md:py-32 overflow-hidden reveal-on-scroll">
+          <div className="container mb-12">
+            <div className="max-w-xl">
+              <p className="section-kicker section-kicker-purple">Social proof</p>
+              <h2 className="section-title-display text-3xl md:text-4xl mb-6 tracking-tight section-title-accent">
+                Client feedback
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 type-subtitle-hand">
+                Trust built through delivering results.
+              </p>
+            </div>
+          </div>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {[...testimonials, ...testimonials].map((testimonial, i) => {
+                const avatarKey = `${testimonial._id ?? testimonial.name}-${i}`;
+                return (
+                  <div
+                    key={avatarKey}
+                    className="min-w-[240px] max-w-[240px] p-5 bg-white/90 dark:bg-slate-800/90 rounded-none border border-gray-200 dark:border-slate-700/50 shrink-0"
+                  >
+                    <p className="type-body text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+                      &ldquo;{testimonial.text}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-2.5">
+                      {!failedAvatars.has(avatarKey) && testimonial.avatar ? (
+                        <img
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          className="w-7 h-7 rounded-full object-cover shrink-0"
+                          onError={() => setFailedAvatars((prev) => new Set(prev).add(avatarKey))}
+                        />
+                      ) : (
+                        <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                          {testimonial.name.charAt(0)}
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="font-medium text-sm text-gray-900 dark:text-white truncate">{testimonial.name}</div>
+                        <div className="text-xs text-gray-400 dark:text-gray-500 truncate">{testimonial.role}</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {testimonials.length > 0 && <div className="section-divider mx-auto max-w-6xl" />}
 
       {/* Contact */}
       <section id="contact" className="py-24 md:py-32 bg-gray-50/95 dark:bg-[#0d1421]/95 backdrop-blur-sm">

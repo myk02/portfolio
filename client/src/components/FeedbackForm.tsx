@@ -11,24 +11,35 @@ export default function FeedbackForm() {
   const [rating, setRating] = useState(5);
   const [hovered, setHovered] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const submitTestimonial = useMutation(api.testimonials.create);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !text.trim()) return;
-    await submitTestimonial({
-      name: name.trim(),
-      role: role.trim() || "Client",
-      text: text.trim(),
-      rating,
-      isApproved: false,
-    });
-    setName("");
-    setRole("");
-    setText("");
-    setRating(5);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+
+    setSubmitting(true);
+    setError("");
+    try {
+      await submitTestimonial({
+        name: name.trim(),
+        role: role.trim() || "Client",
+        text: text.trim(),
+        rating,
+        isApproved: false,
+      });
+      setName("");
+      setRole("");
+      setText("");
+      setRating(5);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      setError("Something went wrong sending your review. Please try again or email me directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -41,6 +52,12 @@ export default function FeedbackForm() {
       {submitted && (
         <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-none text-sm">
           Thank you. Your review was sent and will show up after I approve it.
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
+          {error}
         </div>
       )}
 
@@ -95,9 +112,10 @@ export default function FeedbackForm() {
 
         <Button
           type="submit"
+          disabled={submitting}
           className="w-full btn-gradient font-semibold py-2.5 rounded-none"
         >
-          Submit Feedback
+          {submitting ? "Sending..." : "Submit Feedback"}
         </Button>
       </form>
     </div>

@@ -1,13 +1,42 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 export default function ServiceRequestForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const submitRequest = useMutation(api.serviceRequests.create);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    if (!name.trim() || !email.trim() || !projectType || !message.trim()) return;
+
+    setSubmitting(true);
+    setError("");
+    try {
+      await submitRequest({
+        name: name.trim(),
+        email: email.trim(),
+        projectType,
+        message: message.trim(),
+      });
+      setName("");
+      setEmail("");
+      setProjectType("");
+      setMessage("");
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      setError("Something went wrong sending your request. Please try again or email me directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -23,10 +52,34 @@ export default function ServiceRequestForm() {
   return (
     <div className="p-8 form-shell">
       <h3 className="text-2xl font-bold mb-6 type-form-title section-title-accent">Tell me about your project</h3>
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
+          {error}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-5">
-        <input type="text" placeholder="Full Name" required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm" />
-        <input type="email" placeholder="Email Address" required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm" />
-        <select required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm">
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+        />
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+        />
+        <select
+          value={projectType}
+          onChange={(e) => setProjectType(e.target.value)}
+          required
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+        >
           <option value="">Select Project Type</option>
           <option>Software Development</option>
           <option>IT Support & Infrastructure</option>
@@ -35,8 +88,21 @@ export default function ServiceRequestForm() {
           <option>Consultation</option>
           <option>Other</option>
         </select>
-        <textarea placeholder="What do you need, and when do you need it by?" rows={4} required className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm resize-none" />
-        <Button type="submit" className="w-full btn-gradient font-semibold py-2.5 rounded-none">Send Request</Button>
+        <textarea
+          placeholder="What do you need, and when do you need it by?"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows={4}
+          required
+          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm resize-none"
+        />
+        <Button
+          type="submit"
+          disabled={submitting}
+          className="w-full btn-gradient font-semibold py-2.5 rounded-none"
+        >
+          {submitting ? "Sending..." : "Send Request"}
+        </Button>
       </form>
     </div>
   );

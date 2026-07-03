@@ -24,4 +24,12 @@ export default defineSchema({
     rating: v.number(),
     isApproved: v.boolean(),
   }).index("by_approved", ["isApproved"]),
+
+  serviceRequests: defineTable({
+    name: v.string(),
+    email: v.string(),
+    projectType: v.string(),
+    message: v.string(),
+    createdAt: v.number(),
+  }),
 });
