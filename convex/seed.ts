@@ -163,6 +163,7 @@ export const seed = mutation({
       { name: "GiGi Energy Drink - Product Website", description: "A product site for a Nairobi-made energy drink. Bold colours and simple messaging to match the brand.", techStack: ["React", "E-commerce", "Product"], url: "https://drink-sand.vercel.app/", image: "/thumbnails/gigi-energy.png", subBrand: "gmcode" as const, order: 5 },
       { name: "PureMatch254 - Matchmaking Platform", description: "A dating platform for people in Kenya looking for serious relationships. Profiles, matching, messaging, and an admin area for the team.", techStack: ["React", "Full-stack", "Social"], url: "https://www.purematch254.com/", image: "/thumbnails/purematch254.png", subBrand: "gmcode" as const, order: 6 },
       { name: "KenyaTrace - Tourism Explorer", description: "A site to help people discover places to visit in Kenya. Covers attractions, routes, and travel info across the country.", techStack: ["React", "Tourism", "Full-stack"], url: "https://kenya-tourism-app-xi.vercel.app/welcome", image: "/thumbnails/kenya-tourism.png", subBrand: "gmcode" as const, order: 7 },
+      { name: "GM Voice - AI Voice Agents", description: "AI voice agents for customer support across healthcare, e-commerce, real estate, and finance. Deploy voice-to-voice AI agents in minutes.", techStack: ["React", "AI", "Voice"], url: "https://ai-lemon-eight.vercel.app/", image: "/thumbnails/gm-voice.png", subBrand: "gmcode" as const, order: 8 },
     ];
 
     const marketingProjects = [
