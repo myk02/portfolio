@@ -68,7 +68,7 @@ export const aboutStats = [
 ];
 
 export const aboutParagraphs = [
-  "I am a graphic designer and full-stack web developer with close to four years of hands-on experience across IT support, product design, and software delivery. My work combines strong visual communication with practical engineering so brands get websites and digital tools that both look sharp and perform well.",
+  "I am a web developer with close to four years of hands-on experience across IT support, product design, and software delivery. My work combines strong visual communication with practical engineering so brands get websites and digital tools that both look sharp and perform well.",
   "On the development side, I build responsive frontends and scalable backends using React, Next.js, TypeScript, Node.js, Express, SQL, PostgreSQL, Supabase, and REST APIs. On the design side, I use Figma, Adobe Creative Suite, Canva, and CapCut Pro to shape identities, interfaces, and campaign assets that feel consistent across every touchpoint.",
   "Bachelor of Information Technology, South Eastern Kenya University (SEKU), Kitui. I speak English and Kiswahili fluently.",
 ];

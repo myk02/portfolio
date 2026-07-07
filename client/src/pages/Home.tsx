@@ -256,14 +256,14 @@ export default function Home() {
           <div className="container">
             <div className="hero-grid">
               <div className="hero-copy reveal-on-scroll" data-reveal-index="0">
-                <p className="eyebrow">Graphic Designer & Full-Stack Web Developer · Nairobi</p>
+                <p className="eyebrow">Web Developer · Nairobi</p>
                 <h1 className="hero-title">
                   <span className="font-script text-blue-600 dark:text-blue-400">Create.</span>
                   <span className="font-hand">Elevate.</span>
                   <span className="font-display font-bold">Convert.</span>
                 </h1>
                 <p className="lead type-subtitle-serif">
-                  Nairobi-based graphic designer and full-stack web developer for service businesses, startups, and growing brands. I handle brand direction, user-focused interfaces, and launch-ready web experiences from frontend to backend.
+                  Web developer for service businesses, startups, and growing brands. I handle brand direction, user-focused interfaces, and launch-ready web experiences from frontend to backend.
                 </p>
                 <p className="sublead type-subtitle-hand">Available for freelance, contract, and full-time opportunities.</p>
 
