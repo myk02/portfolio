@@ -43,26 +43,26 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="p-5 sm:p-6 form-shell">
-      <h3 className="text-lg sm:text-xl font-bold mb-2 type-form-title section-title-accent">Leave a review</h3>
-      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm type-subtitle-hand">
+    <div className="p-4 form-shell">
+      <h3 className="text-base font-bold mb-2 type-form-title section-title-accent">Leave a review</h3>
+      <p className="text-gray-600 dark:text-gray-400 mb-3 text-xs type-subtitle-hand">
         Honest feedback is always welcome.
       </p>
 
       {submitted && (
-        <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-none text-sm">
+        <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-sm">
           Thank you. Your review was sent and will show up after I approve it.
         </div>
       )}
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
+        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg text-sm">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex gap-2">
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <div className="flex gap-1.5">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
               key={star}
@@ -73,7 +73,7 @@ export default function FeedbackForm() {
               className="p-0.5 transition"
             >
               <Star
-                size={28}
+                size={22}
                 className={
                   star <= (hovered || rating)
                     ? "fill-yellow-400 text-yellow-400"
@@ -90,7 +90,7 @@ export default function FeedbackForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm"
         />
 
         <input
@@ -98,7 +98,7 @@ export default function FeedbackForm() {
           placeholder="Your Role / Company (optional)"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm"
         />
 
         <textarea
@@ -106,14 +106,14 @@ export default function FeedbackForm() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
-          rows={4}
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm resize-none"
+          rows={3}
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm resize-none"
         />
 
         <Button
           type="submit"
           disabled={submitting}
-          className="w-full btn-gradient font-semibold py-2.5 rounded-none"
+          className="w-full btn-gradient font-semibold py-2"
         >
           {submitting ? "Sending..." : "Submit Feedback"}
         </Button>

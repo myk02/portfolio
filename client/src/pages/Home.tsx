@@ -4,7 +4,6 @@ import {
   aboutParagraphs,
   aboutStats,
   contactItems,
-  devToolkit,
   footerLinks,
   heroStats,
   NAV_ITEMS,
@@ -15,7 +14,6 @@ import {
   socialLinks,
   subBrands,
   supplementaryServices,
-  toolkit,
 } from "@/data/siteContent";
 import { ArrowRight, Mail, MapPin, Menu, Moon, Phone, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -40,23 +38,6 @@ function SectionHeader({
     <div className="section-intro mb-5 sm:mb-6">
       <p className={labelClassName}>{label}</p>
       <h2 className={headingClassName}>{title}</h2>
-    </div>
-  );
-}
-
-function TagList({ items, variant = "neutral" }: { items: string[]; variant?: "neutral" | "accent" }) {
-  const classes =
-    variant === "accent"
-      ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/50"
-      : "bg-white/80 dark:bg-slate-800/70 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-slate-700/50";
-
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {items.map((item) => (
-        <span key={item} className={`text-[11px] sm:text-xs px-2 py-1 border font-medium ${classes}`}>
-          {item}
-        </span>
-      ))}
     </div>
   );
 }
@@ -139,13 +120,19 @@ export default function Home() {
   const [activeBrand, setActiveBrand] = useState<"gmcode" | "gmdesign" | "gmmarketing">("gmdesign");
   const seed = useMutation(api.seed.seed);
 
-  useEffect(() => { seed(); }, [seed]);
-
   const sortByOrder = <T extends { order?: number }>(items: T[]) =>
     [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   const allProjects = useQuery(api.projects.list, {}) ?? [];
   const testimonials = useQuery(api.testimonials.listApproved) ?? [];
+
+  // Seed the database only when it is empty, so we don't trigger a write on
+  // every page load/refresh.
+  useEffect(() => {
+    if (allProjects.length === 0 && testimonials.length === 0) {
+      seed();
+    }
+  }, [seed, allProjects.length, testimonials.length]);
   const projectsByBrand = {
     gmcode: sortByOrder(allProjects.filter((p) => p.subBrand === "gmcode")),
     gmdesign: sortByOrder(allProjects.filter((p) => p.subBrand === "gmdesign")),
@@ -231,7 +218,7 @@ export default function Home() {
                 {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
               </button>
             )}
-            <Button type="button" onClick={() => scrollToSection("contact")} className="hidden md:inline-flex btn-gradient rounded-none px-3 py-1.5 text-xs sm:text-sm">
+            <Button type="button" onClick={() => scrollToSection("contact")} className="hidden md:inline-flex btn-gradient rounded-lg px-3 py-1.5 text-xs sm:text-sm">
               Contact
             </Button>
             <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)} className="icon-btn xl:hidden" aria-label="Menu">
@@ -256,27 +243,22 @@ export default function Home() {
           <div className="container">
             <div className="hero-grid">
               <div className="hero-copy reveal-on-scroll" data-reveal-index="0">
-                <p className="eyebrow">Web Developer · Nairobi</p>
+                <p className="eyebrow">Developer, Designer & Marketer · Nairobi</p>
                 <h1 className="hero-title">
-                  <span className="font-script text-blue-600 dark:text-blue-400">Create.</span>
-                  <span className="font-hand">Elevate.</span>
-                  <span className="font-display font-bold">Convert.</span>
+                  <span className="text-foreground">Create.</span>
+                  <span className="text-foreground">Elevate.</span>
+                  <span className="text-primary">Convert.</span>
                 </h1>
                 <p className="lead type-subtitle-serif">
-                  Web developer for service businesses, startups, and growing brands. I handle brand direction, user-focused interfaces, and launch-ready web experiences from frontend to backend.
+                  Developer, designer, and marketer for service businesses, startups, and growing brands. I deliver brand direction, user-focused interfaces, and launch-ready digital experiences across websites and applications.
                 </p>
                 <p className="sublead type-subtitle-hand">Available for freelance, contract, and full-time opportunities.</p>
 
-                <div className="stack gap-3">
-                  <TagList items={toolkit} />
-                  <TagList items={devToolkit} variant="accent" />
-                </div>
-
                 <div className="hero-actions">
-                  <Button type="button" onClick={() => scrollToSection("work")} className="btn-gradient rounded-none">
+                  <Button type="button" onClick={() => scrollToSection("work")} className="btn-gradient rounded-lg">
                     View work <ArrowRight size={15} />
                   </Button>
-                  <Button type="button" onClick={() => scrollToSection("contact")} variant="outline" className="rounded-none border">
+                  <Button type="button" onClick={() => scrollToSection("contact")} variant="outline" className="rounded-lg border">
                     Get in touch
                   </Button>
                 </div>
@@ -332,8 +314,7 @@ export default function Home() {
             <div className="skills-grid">
               {skillGroups.map((group) => (
                 <div key={group.title} className="minimal-card p-4 reveal-on-scroll">
-                  <h3 className="text-sm font-semibold mb-2 text-gray-800 dark:text-gray-200 section-title-display">{group.title}</h3>
-                  <TagList items={group.skills} />
+                  <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 section-title-display">{group.title}</h3>
                 </div>
               ))}
             </div>
@@ -352,15 +333,14 @@ export default function Home() {
               {[...services, ...supplementaryServices].map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article key={service.title} className="minimal-card p-4 reveal-on-scroll">
-                    <div className="flex gap-3">
-                      <div className="icon-chip shrink-0"><Icon size={16} /></div>
-                      <div className="min-w-0">
-                        <h3 className="text-sm font-semibold mb-1 section-title-display">{service.title}</h3>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed type-subtitle-hand">{service.desc}</p>
-                      </div>
+                <article key={service.title} className="minimal-card p-4 reveal-on-scroll">
+                  <div className="flex gap-3 items-center">
+                    <div className="icon-chip shrink-0"><Icon size={16} /></div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-semibold section-title-display">{service.title}</h3>
                     </div>
-                  </article>
+                  </div>
+                </article>
                 );
               })}
             </div>
@@ -447,7 +427,7 @@ export default function Home() {
             )}
 
             <Dialog open={!!previewImage} onOpenChange={(open) => { if (!open) setPreviewImage(null); }}>
-              <DialogContent className="max-w-4xl w-[95vw] bg-black border-0 rounded-none p-0">
+              <DialogContent className="max-w-4xl w-[95vw] bg-black border-0 rounded-lg p-0">
                 <DialogTitle className="sr-only">Project preview</DialogTitle>
                 {previewImage &&
                   (previewImage.endsWith(".mp4") ? (
@@ -474,14 +454,13 @@ export default function Home() {
                 return (
                   <div key={row.service} className="minimal-card pricing-row reveal-on-scroll">
                     <div className="icon-chip shrink-0"><Icon size={15} /></div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                        <h3 className="text-sm font-semibold section-title-display">{row.service}</h3>
-                        <span className="text-[10px] px-1.5 py-0.5 border border-gray-200 dark:border-slate-700 text-gray-500">{row.model}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="text-sm font-semibold section-title-display">{row.service}</h3>
+                          <span className="text-[10px] px-1.5 py-0.5 border border-gray-200 dark:border-slate-700 text-gray-500">{row.model}</span>
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 type-subtitle-display">{row.range}</p>
-                    </div>
-                    <p className="text-sm font-semibold shrink-0 section-title-display">{row.starting}</p>
+                      <p className="text-sm font-semibold shrink-0 section-title-display">{row.starting}</p>
                   </div>
                 );
               })}

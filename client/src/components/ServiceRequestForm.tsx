@@ -42,7 +42,7 @@ export default function ServiceRequestForm() {
   if (submitted) {
     return (
       <div className="p-5 sm:p-6">
-        <div className="p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-none text-sm">
+        <div className="p-4 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-sm">
           Thank you. I got your request and will reply within 24 hours.
         </div>
       </div>
@@ -50,21 +50,21 @@ export default function ServiceRequestForm() {
   }
 
   return (
-    <div className="p-5 sm:p-6 form-shell">
-      <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-5 type-form-title section-title-accent">Your project</h3>
+    <div className="p-4 form-shell">
+      <h3 className="text-base font-bold mb-3 type-form-title section-title-accent">Your project</h3>
       {error && (
-        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-none text-sm">
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg text-sm">
           {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <input
           type="text"
           placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm"
         />
         <input
           type="email"
@@ -72,13 +72,13 @@ export default function ServiceRequestForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm"
         />
         <select
           value={projectType}
           onChange={(e) => setProjectType(e.target.value)}
           required
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm"
         >
           <option value="">Select Project Type</option>
           <option>Software Development</option>
@@ -92,14 +92,14 @@ export default function ServiceRequestForm() {
           placeholder="What do you need, and when do you need it by?"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          rows={4}
+          rows={3}
           required
-          className="w-full px-4 py-2.5 rounded-none form-field focus:outline-none transition text-sm resize-none"
+          className="w-full px-3 py-2 form-field focus:outline-none transition text-sm resize-none"
         />
         <Button
           type="submit"
           disabled={submitting}
-          className="w-full btn-gradient font-semibold py-2.5 rounded-none"
+          className="w-full btn-gradient font-semibold py-2"
         >
           {submitting ? "Sending..." : "Send Request"}
         </Button>

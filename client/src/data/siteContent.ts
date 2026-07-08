@@ -64,12 +64,11 @@ export const aboutStats = [
   { label: "Years experience", value: "4+" },
   { label: "Design projects", value: "15+" },
   { label: "Live websites", value: "7+" },
-  { label: "Tools & skills", value: "40+" },
 ];
 
 export const aboutParagraphs = [
-  "On the development side, I build responsive frontends and scalable backends using React, Next.js, TypeScript, Node.js, Express, SQL, PostgreSQL, Supabase, and REST APIs. On the design side, I use Figma, Adobe Creative Suite, Canva, and CapCut Pro to shape identities, interfaces, and campaign assets that feel consistent across every touchpoint.",
-  "Bachelor of Information Technology, South Eastern Kenya University (SEKU), Kitui. I speak English and Kiswahili fluently.",
+  "I'm a developer, designer, and marketer who helps service businesses, startups, and growing brands turn ideas into clear, usable, and launch-ready digital experiences. Whether it's a marketing site, a custom application, or a full brand refresh, I care about work that feels consistent, performs well, and genuinely serves the people using it.",
+  "I hold a Bachelor of Information Technology and work fluently in English and Kiswahili, which lets me collaborate comfortably with both local and international teams.",
 ];
 
 export const skillGroups = [
@@ -78,7 +77,7 @@ export const skillGroups = [
     skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
   },
   {
-    title: "Full-Stack Web Development",
+    title: "Full-Stack Development",
     skills: ["React", "Next.js", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
   },
   {
@@ -86,8 +85,8 @@ export const skillGroups = [
     skills: ["Azure", "Git", "GitHub", "Vercel", "Postman", "Ubuntu Linux", "macOS", "Figma Handoffs", "AI Workflow Tools"],
   },
   {
-    title: "Web Management & Analytics",
-    skills: ["Uptime Monitoring", "Site Speed", "On-page SEO", "GA4", "Scheduled Updates", "Hosting Support"],
+    title: "Marketing & Analytics",
+    skills: ["On-page SEO", "GA4", "Social Media Strategy", "Content Planning", "Brand Campaigns", "Uptime Monitoring", "Site Speed", "Hosting Support"],
   },
   {
     title: "IT Support & Infrastructure",
@@ -103,7 +102,7 @@ export type ServiceItem = { icon: LucideIcon; title: string; desc: string };
 
 export const services: ServiceItem[] = [
   { icon: Palette, title: "Brand & Graphic Design", desc: "Logos, brand colours, social posts, email graphics, presentations, and print work. I use Figma, Adobe Creative Suite, and Canva." },
-  { icon: Code, title: "Full-Stack Web Development", desc: "I design and build fast, responsive websites and custom web apps with React, Next.js, TypeScript, Node.js, APIs, and databases. From landing pages to full-stack platforms, I handle both frontend and backend delivery." },
+  { icon: Code, title: "Full-Stack Development", desc: "I design and build fast, responsive websites and custom web apps with React, Next.js, TypeScript, Node.js, APIs, and databases. From landing pages to full-stack platforms, I handle both frontend and backend delivery." },
   { icon: Video, title: "Motion & Social Video", desc: "Short videos, GIFs, and simple motion graphics for social media. I use CapCut Pro, Canva, and Adobe tools." },
   { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
   { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
@@ -124,7 +123,7 @@ export const processSteps = [
 
 export const pricingRows = [
   { service: "Brand & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 to 100,000", model: "Per project", icon: Palette },
-  { service: "Full-Stack Web Development", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
+  { service: "Full-Stack Development", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
   { service: "Motion & Social Video", starting: "KSh 15,000", range: "KSh 15,000 to 60,000", model: "Per project", icon: Video },
   { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
   { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
