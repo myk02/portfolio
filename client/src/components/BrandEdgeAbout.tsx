@@ -10,7 +10,7 @@ export default function BrandEdgeAbout() {
           About Mike
         </div>
 
-        <div className="grid grid-cols-12 gap-8 lg:gap-12 mt-6">
+        <div className="grid grid-cols-12 gap-4 lg:gap-8 mt-3">
           <div className="col-span-12 lg:col-span-3">
             <div className="aspect-square overflow-hidden border border-border">
               <img
@@ -22,16 +22,16 @@ export default function BrandEdgeAbout() {
           </div>
 
           <div className="col-span-12 lg:col-span-6">
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
-              Developer, designer.
-              <span className="italic font-light text-muted-foreground block text-sm"> Building brands that work.</span>
+            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}>
+              Designer, developer &amp; automation.
+              <span className="italic font-light text-muted-foreground block text-sm"> Building brands, apps &amp; workflows that work.</span>
             </h2>
-            <div className="mt-6 space-y-3 text-[13px] text-muted-foreground leading-relaxed max-w-xl">
+            <div className="mt-4 space-y-2 text-[13px] text-muted-foreground leading-relaxed max-w-xl">
               {aboutParagraphs.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2 mt-6">
+            <div className="flex flex-wrap gap-2 mt-4">
               {socialLinks.map((s) => (
                 <a
                   key={s.alt}
@@ -51,10 +51,10 @@ export default function BrandEdgeAbout() {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-3 space-y-5">
+          <div className="col-span-12 lg:col-span-3 space-y-4">
             {aboutStats.map((stat) => (
               <div key={stat.label} className="border-l-2 border-accent pl-4">
-                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)" }}>
+                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
                   {stat.value}
                 </div>
                 <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
@@ -77,11 +77,11 @@ export default function BrandEdgeAbout() {
           </div>
         </div>
 
-        <div className="mt-16 lg:mt-20">
-          <h3 className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-6">
+        <div className="mt-12 lg:mt-16">
+          <h3 className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-4">
             Skills &amp; Tools
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {skillGroups.map((group) => (
               <div key={group.title} className="border border-border p-4">
                 <h4 className="font-display font-bold text-sm text-foreground mb-2">

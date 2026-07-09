@@ -1,0 +1,822 @@
+{
+  "name": "social media automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM",
+          "mode": "list",
+          "cachedResultName": "article",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        -140
+      ],
+      "id": "c33a7771-bd15-4ea8-8d66-7e36ed082ea"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-3-27b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        60
+      ],
+      "id": "bae0f5e0-484b-4565-8688-7dd93e90b881",
+      "name": "OpenRouter Chat Model"
+    },
+    {
+      "parameters": {
+        "jsCode": "const articles = items;\nconst latestArticle = articles[articles.length - 1];\n\nreturn [\n  {\n    json: {\n      latest_link: latestArticle.json[\"media post links\"]\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1220,
+        -140
+      ],
+      "id": "ad10605a-c475-493e-904e-635ed6aea023",
+      "name": "Latest Updated Row"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.text;\n\n// Extract JSON from Markdown-style ```json ... ```\nconst match = raw.match(/```json\\s*([\\s\\S]*?)```/);\n\nif (!match) {\n  throw new Error(\"No valid JSON block found.\");\n}\n\ntry {\n  const parsed = JSON.parse(match[1]);\n\n  const title = parsed.title?.trim() || \"📌 AI News Update\";\n  const summary = parsed.summary;\n  const source = parsed.source?.trim();\n  const hashtags = parsed.hashtags || [];\n  const imageUrl = parsed.image_url?.trim?.() || \"\";\n  const fbCaption = parsed.fb_caption?.trim?.() || \"\";\n\n  // Split summary into bullet points\n  const points = typeof summary === \"string\"\n    ? summary.split(/\\\\n|\\n/).filter(line => line.trim())\n    : summary;\n\n  // Build LinkedIn/X-style post\n  let formatted = `✅ ${title}\\n\\n`;\n  points.forEach((point, i) => {\n    const cleanPoint = point.replace(/^🔹\\s*\\d+\\.\\s*/, \"\").trim();\n    formatted += `🔹 ${i + 1}. ${cleanPoint}\\n\\n`;\n  });\n\n  if (source) {\n    formatted += `🔗 Source: ${source}\\n\\n`;\n  }\n\n  if (hashtags.length > 0) {\n    formatted += `${hashtags.join(\" \")}`;\n  }\n\n  return [\n    {\n      json: {\n        linkedin: formatted.trim(),\n        facebook: fbCaption,\n        imageUrl,\n        title,\n        source,\n        hashtags\n      }\n    }\n  ];\n\n} catch (err) {\n  throw new Error(\"Failed to parse JSON: \" + err.message);\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -760,
+        -140
+      ],
+      "id": "e4409a67-09d3-4e7d-aa16-af7e611c4ba2",
+      "name": "Formatted for Post"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert social media content summarizer. Given an article and image_url: {{ $json.latest_link }}, extract and return the following in clear, high-quality **English** only — structured in JSON.\n\n**Part 1 – Main Post (for LinkedIn/X):**\n1. \"title\" — A concise, eye-catching headline of the article.\n2. \"summary\" — A string containing **10 bullet points**, each formatted like:\n   🔹 1. Summary point...\n   🔹 2. Next point...\n   (Use `\\n` between points. Do NOT use Markdown or emojis other than \"🔹\")\n3. \"source\" — Direct article URL.\n4. \"hashtags\" — Array of 8–10 relevant, English-only hashtags (e.g., \"#AI\", \"#Technology\", \"#Innovation\").\n5. \"image_url\" — Add image given URL if found in the article, otherwise leave it empty.\n\n**Part 2 – Small Facebook Caption:**\n6. \"fb_caption\" — A **2–3 line version** of the summary written casually and engagingly for Facebook, followed by 3–5 hashtags and the source URL. (Keep friendly tone, emojis optional)\n\n**Return the response in the following JSON format:**\n```json\n{\n  \"title\": \"<headline>\",\n  \"summary\": \"🔹 1. Point one...\\n🔹 2. Point two...\\n...\",\n  \"source\": \"{{ $json.latest_link }}\",\n  \"hashtags\": [\"#AI\", \"#Tech\", \"#Innovation\", \"...\"],\n  \"image_url\": \"<given image url if found or leave empty>\",\n  \"fb_caption\": \"Quick summary in 2–3 lines...\\n#AI #News #Tech\\nSource: {{ $json.latest_link }}\"\n}\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -1040,
+        -140
+      ],
+      "id": "6e90b258-9693-4998-8a2c-78ed5c6ffcbd",
+      "name": "Free LLM Models"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "885c1e9e-1755-408e-9c25-c623cd8cb944",
+              "name": "Data",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "ae2b5570-987b-4e38-b5cb-0cd32cc58ca2",
+              "name": "number",
+              "value": "917507274712",
+              "type": "string"
+            },
+            {
+              "id": "3428afee-184c-4ad4-a820-402dc61c9809",
+              "name": "image_url",
+              "value": "={{ $json.imageUrl }}",
+              "type": "string"
+            },
+            {
+              "id": "0dde05dc-e0bc-4ee4-af11-c5a72b124044",
+              "name": "caption",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "6710c524-66d7-45bc-8d01-bb473a292cb4",
+              "name": "Source",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            },
+            {
+              "id": "ad4f0896-5bbc-4377-8ca2-192cbd1787bc",
+              "name": "node",
+              "value": "23891714273783599",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -460,
+        -140
+      ],
+      "id": "a3d3b3ef-0211-4800-afd0-42d034635688",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        580,
+        0
+      ],
+      "id": "e4bcef9b-0676-4c1f-acde-86ef78d8d6c6",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM",
+          "mode": "list",
+          "cachedResultName": "article",
+          "cachedResultUrl": "[https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit?usp=drivesdk](https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit?usp=drivesdk)"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "[https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit#gid=0](https://docs.google.com/spreadsheets/d/1rtJNbF9I1Bopb6QT-6ISKQMj6dz_ok-UinYmoj9xxSM/edit#gid=0)"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "media post links": "={{ $('Latest Updated Row').item.json.latest_link }}",
+            "facebook": "=successful",
+            "linkedin": "=successful",
+            "whatsapp": "=successful",
+            "instagram": "successful",
+            "X": "successful"
+          },
+          "matchingColumns": [
+            "media post links"
+          ],
+          "schema": [
+            {
+              "id": "media post links",
+              "displayName": "media post links",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "X",
+              "displayName": "X",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        760,
+        40
+      ],
+      "id": "8e255a7d-493f-41fa-b3bb-22bbf2691450",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.imageUrl }}?w=600",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -460,
+        -300
+      ],
+      "id": "0eeedca6-c3fa-4e8c-8fc4-9909de655ce4",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.image_url }}?w=600",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -300,
+        -140
+      ],
+      "id": "0f13ba5f-c5e5-4091-ba78-2457b1c23548",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=[https://graph.facebook.com/v18.0/17841475470967680/media](https://graph.facebook.com/v18.0/17841475470967680/media)\n",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"image_url\": \"{{ $json.image_url }}\",\n  \"caption\": \"{{ $json.caption }}\\n\\n{{ $json.hashtags }}\\n\\n{{ $json.Source }}\",\n  \"access_token\": \"{{ $json[\"page token\"] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -120,
+        180
+      ],
+      "id": "daf8247e-407d-4dc1-b21e-2a1894af2149",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "885c1e9e-1755-408e-9c25-c623cd8cb944",
+              "name": "Data",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "ae2b5570-987b-4e38-b5cb-0cd32cc58ca2",
+              "name": "number",
+              "value": "917507274712",
+              "type": "string"
+            },
+            {
+              "id": "3428afee-184c-4ad4-a820-402dc61c9809",
+              "name": "image_url",
+              "value": "={{ $json.imageUrl }}",
+              "type": "string"
+            },
+            {
+              "id": "0dde05dc-e0bc-4ee4-af11-c5a72b124044",
+              "name": "caption",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "6710c524-66d7-45bc-8d01-bb473a292cb4",
+              "name": "Source",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            },
+            {
+              "id": "ad4f0896-5bbc-4377-8ca2-192cbd1787bc",
+              "name": "node",
+              "value": "23891714273783599",
+              "type": "string"
+            },
+            {
+              "id": "5f684931-6493-44d1-a815-c39a81ff1119",
+              "name": "page token",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "c209f4c1-09af-4d4f-9b80-c6511c0acba9",
+              "name": "hashtags",
+              "value": "={{ $json.hashtags[0] }}{{ $json.hashtags[1] }}{{ $json.hashtags[3] }}{{ $json.hashtags[9] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -460,
+        40
+      ],
+      "id": "7acf5fe5-d8f8-4f7a-af9c-3b3f266b8ddd",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "885c1e9e-1755-408e-9c25-c623cd8cb944",
+              "name": "Data",
+              "value": "={{ $json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "ae2b5570-987b-4e38-b5cb-0cd32cc58ca2",
+              "name": "number",
+              "value": "917507274712",
+              "type": "string"
+            },
+            {
+              "id": "3428afee-184c-4ad4-a820-402dc61c9809",
+              "name": "image_url",
+              "value": "={{ $json.imageUrl }}",
+              "type": "string"
+            },
+            {
+              "id": "0dde05dc-e0bc-4ee4-af11-c5a72b124044",
+              "name": "caption",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "6710c524-66d7-45bc-8d01-bb473a292cb4",
+              "name": "Source",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            },
+            {
+              "id": "ad4f0896-5bbc-4377-8ca2-192cbd1787bc",
+              "name": "node",
+              "value": "23891714273783599",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -440,
+        380
+      ],
+      "id": "a3e6ccf7-e9b1-492b-a7f3-8b329fe7824b",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[https://graph.facebook.com/v18.0/17841475470967680/media_publish](https://graph.facebook.com/v18.0/17841475470967680/media_publish)",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"creation_id\": \"{{ $json.id }}\",\n  \"access_token\": \"{{ $('Edit Fields').item.json[\"page token\"] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        60,
+        180
+      ],
+      "id": "9286820d-10c9-4783-8a53-cfac2deec68e",
+      "name": "Instagram Post"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=[https://graph.facebook.com/v22.0/639094172630819/photos](https://graph.facebook.com/v22.0/639094172630819/photos)",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $('Formatted for Post').item.json.imageUrl }}\",\n  \"caption\": \"{{ $('Formatted for Post').item.json.title }}\\n\\n{{ $('Formatted for Post').item.json.hashtags[0] }}{{ $('Formatted for Post').item.json.hashtags[1] }}{{ $('Formatted for Post').item.json.hashtags[6] }}\\n\\n{{ $('Formatted for Post').item.json.source }}\",\n  \"access_token\": \"{{ $json[\"page token\"] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -120,
+        40
+      ],
+      "id": "b91cf05e-12f6-41ef-8b23-182d29aae16c",
+      "name": "FaceBook Post"
+    },
+    {
+      "parameters": {
+        "person": "7D8QmfV_fA",
+        "text": "={{ $json.linkedin }}",
+        "shareMediaCategory": "IMAGE",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -300
+      ],
+      "id": "b32546af-a150-4e94-92aa-810fa332a923",
+      "name": "Linkedin Post",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "748401145014211",
+        "recipientPhoneNumber": "={{ $json.number }}",
+        "messageType": "image",
+        "mediaPath": "useMedian8n",
+        "additionalFields": {
+          "mediaCaption": "={{ $json.Data }}"
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -140
+      ],
+      "id": "cea5266f-6015-4578-8320-99210bb83ad2",
+      "name": "whatsapp send message",
+      "webhookId": "ee7fb2e9-4465-4121-8ee4-d5353b6ce647"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.Source }}?w=600",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1360,
+        520
+      ],
+      "id": "2d4424ca-aa88-4005-9771-8997d694cef2",
+      "name": "HTTP Request5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[https://upload.twitter.com/1.1/media/upload.json](https://upload.twitter.com/1.1/media/upload.json)",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "twitterOAuth1Api",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "media",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1100,
+        520
+      ],
+      "id": "5f6f68ae-d6aa-4323-bc75-12c2c17c37ec",
+      "name": "HTTP Request4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "[https://api.twitter.com/2/tweets](https://api.twitter.com/2/tweets)",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "twitterOAuth1Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": \"{{ $json.caption }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -120,
+        380
+      ],
+      "id": "7037799d-ba25-4c2f-be1e-c2eca9f5879c",
+      "name": "twitter post"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Latest Updated Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Free LLM Models",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Latest Updated Row": {
+      "main": [
+        [
+          {
+            "node": "Free LLM Models",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatted for Post": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Free LLM Models": {
+      "main": [
+        [
+          {
+            "node": "Formatted for Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Linkedin Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "whatsapp send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Instagram Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "FaceBook Post",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "twitter post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Instagram Post": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "FaceBook Post": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Linkedin Post": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "whatsapp send message": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "HTTP Request5": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "twitter post": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "61d1bce9-4a5b-4dde-9fd5-32ed21a2f9b6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8d272e63a0732d3b7b8633ac0e0e497ab4fb360035a31a8013a95d35e68b0556"
+  },
+  "id": "NU7t18BMz5JyrrTT",
+  "tags": []
+}

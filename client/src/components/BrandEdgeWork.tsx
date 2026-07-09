@@ -10,29 +10,33 @@ interface Project {
   subBrand: string;
   techStack?: string[];
   year?: string;
+  workflowJson?: string;
 }
 
 interface BrandEdgeWorkProps {
   projects: Project[];
   onPreview: (url: string) => void;
+  onViewJson?: (workflowJson: string) => void;
 }
 
 const projectAccents: Record<string, string> = {
   gmcode: "#e8ff47",
   gmdesign: "#ff6b35",
   gmmarketing: "#c4a882",
+  gmautomation: "#00b4d8",
 };
 
 const brandLabels: Record<string, string> = {
   gmcode: "Development",
   gmdesign: "Design",
   gmmarketing: "Marketing",
+  gmautomation: "Automation",
 };
 
-const brandOrder = ["gmdesign", "gmmarketing", "gmcode"] as const;
+const brandOrder = ["gmdesign", "gmautomation", "gmcode", "gmmarketing"] as const;
 type BrandId = (typeof brandOrder)[number];
 
-function ProjectCard({ project, onPreview }: { project: Project; onPreview: (url: string) => void }) {
+function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {
   const accent = projectAccents[project.subBrand] ?? "#e8ff47";
   const isMarketing = project.subBrand === "gmmarketing";
   const year = project.year ?? "2025";
@@ -51,6 +55,15 @@ function ProjectCard({ project, onPreview }: { project: Project; onPreview: (url
               playsInline
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
+          ) : project.subBrand === "gmautomation" ? (
+            <div className="w-full h-full bg-muted/30 flex items-center justify-center">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-contain p-1 transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
           ) : (
             <img
               src={project.image}
@@ -82,21 +95,31 @@ function ProjectCard({ project, onPreview }: { project: Project; onPreview: (url
             ))}
           </div>
         )}
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
-          onClick={(e) => e.stopPropagation()}
-        >
-          Visit site →
-        </a>
+        {project.subBrand === "gmautomation" && project.workflowJson ? (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onViewJson?.(project.workflowJson!); }}
+            className="inline-block mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
+          >
+            View JSON →
+          </button>
+        ) : (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Visit site →
+          </a>
+        )}
       </div>
     </div>
   );
 }
 
-export default function BrandEdgeWork({ projects, onPreview }: BrandEdgeWorkProps) {
+export default function BrandEdgeWork({ projects, onPreview, onViewJson }: BrandEdgeWorkProps) {
   const [activeBrand, setActiveBrand] = useState<BrandId | "all">("all");
 
   const filteredProjects = activeBrand === "all" ? projects : projects.filter((p) => p.subBrand === activeBrand);
@@ -105,21 +128,21 @@ export default function BrandEdgeWork({ projects, onPreview }: BrandEdgeWorkProp
 
   return (
     <section id="work" className="section-pad bg-secondary overflow-hidden">
-      <div className="container mb-8">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+      <div className="container mb-6">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3">
           <div>
             <div className="section-label">
               <span className="section-label-line" />
               Portfolio
             </div>
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}>
               My work.
               <span className="italic font-light text-muted-foreground block text-sm"> {projects.length} projects and counting.</span>
             </h2>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mt-6">
+        <div className="flex flex-wrap gap-2 mt-4">
           <button
             type="button"
             onClick={() => setActiveBrand("all")}
@@ -156,7 +179,7 @@ export default function BrandEdgeWork({ projects, onPreview }: BrandEdgeWorkProp
         <div className="marquee-container">
           <div className="marquee-track">
             {[...filteredProjects, ...filteredProjects].map((project, i) => (
-              <ProjectCard key={`${project._id ?? project.name}-${i}`} project={project} onPreview={onPreview} />
+              <ProjectCard key={`${project._id ?? project.name}-${i}`} project={project} onPreview={onPreview} onViewJson={onViewJson} />
             ))}
           </div>
         </div>

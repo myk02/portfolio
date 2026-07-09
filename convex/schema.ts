@@ -11,9 +11,11 @@ export default defineSchema({
     subBrand: v.union(
       v.literal("gmcode"),
       v.literal("gmdesign"),
-      v.literal("gmmarketing")
+      v.literal("gmmarketing"),
+      v.literal("gmautomation")
     ),
     order: v.number(),
+    workflowJson: v.optional(v.string()),
   }).index("by_subBrand", ["subBrand"]),
 
   testimonials: defineTable({

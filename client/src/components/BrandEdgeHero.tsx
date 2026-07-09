@@ -37,16 +37,16 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen bg-primary flex items-center overflow-hidden"
+      className="relative min-h-[60vh] bg-primary flex items-center overflow-hidden"
     >
       <div className="grid-overlay" />
 
       <div className="container relative z-10 w-full">
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-0">
-          <div className="flex-1 max-w-[680px] py-20 lg:py-0">
-            <div className="section-label text-accent mb-6">
+          <div className="flex-1 max-w-[680px] py-16 lg:py-0">
+            <div className="section-label text-accent mb-4">
               <span className="section-label-line" />
-              Developer &amp; Designer — Nairobi
+              AI workflows, design, dev &amp; marketing — Nairobi
             </div>
 
             <h1 className="heading-serif text-secondary" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}>
@@ -79,9 +79,9 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-secondary/60 font-sans text-sm leading-relaxed max-w-lg mt-6"
+              className="text-secondary/60 font-sans text-sm leading-relaxed max-w-lg mt-4"
             >
-              Developer, designer, and marketer for service businesses, startups, and growing brands. I deliver brand direction, user-focused interfaces, and launch-ready digital experiences.
+              Designer, full-stack developer, and AI workflow specialist for service businesses, startups, and growing brands. I deliver brand direction, user-focused interfaces, AI automation, and launch-ready digital experiences.
             </motion.p>
 
             <motion.div
@@ -89,7 +89,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-3 mt-8"
+              className="flex flex-col sm:flex-row gap-2 mt-6"
             >
               <button
                 type="button"

@@ -86,7 +86,7 @@ export default function BrandEdgeContact() {
 
   if (submitted) {
     return (
-      <section id="contact" className="section-pad" style={{ background: "#e8ff47" }}>
+      <section id="contact" className="section-pad bg-secondary bg-[url(/contact-bg.svg)]">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
             <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-primary/50 mb-4">
@@ -105,7 +105,7 @@ export default function BrandEdgeContact() {
   }
 
   return (
-    <section id="contact" className="section-pad" style={{ background: "#e8ff47" }}>
+    <section id="contact" className="section-pad bg-secondary bg-[url(/contact-bg.svg)]">
       <div className="container">
         <div className="max-w-3xl mx-auto">
           <div className="section-label text-primary/50">
@@ -113,13 +113,13 @@ export default function BrandEdgeContact() {
             Get in Touch
           </div>
 
-          <h2 className="heading-serif font-bold text-primary mt-4" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+          <h2 className="heading-serif font-bold text-primary mt-3" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
             Let&apos;s build something
-            <span className="italic font-light block text-sm"> worth talking about.</span>
+            <span className="italic font-light block text-xs"> worth talking about.</span>
           </h2>
 
-          <div className="mt-10">
-            <div className="flex items-center gap-3 mb-2">
+          <div className="mt-6">
+            <div className="flex items-center gap-3 mb-1.5">
               {formSteps.map((_, i) => (
                 <div
                   key={i}
@@ -131,7 +131,7 @@ export default function BrandEdgeContact() {
               </span>
             </div>
 
-            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-8">
+            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-6">
               {formSteps[step].subtitle}
             </div>
           </div>
@@ -154,8 +154,8 @@ export default function BrandEdgeContact() {
                 transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
               >
                 {step === 0 && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input
                         type="text"
                         placeholder="Your Name"
@@ -201,7 +201,7 @@ export default function BrandEdgeContact() {
                 )}
 
                 {step === 2 && (
-                  <div className="space-y-8">
+                  <div className="space-y-6">
                     <div>
                       <div className="font-display font-bold text-primary" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
                         {budgetLabels[budget]}
@@ -263,7 +263,7 @@ export default function BrandEdgeContact() {
             </AnimatePresence>
           </div>
 
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-primary/20">
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-primary/20">
             <button
               type="button"
               onClick={handleBack}

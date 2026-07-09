@@ -1,5 +1,6 @@
 import {
   BarChart3,
+  Bot,
   Code,
   Headphones,
   Layers,
@@ -56,18 +57,19 @@ export const devToolkit = [
 
 export const heroStats = [
   { label: "Years experience", value: "4+" },
-  { label: "Design projects", value: "15+" },
+  { label: "Projects delivered", value: "30+" },
   { label: "Live websites", value: "7+" },
 ];
 
 export const aboutStats = [
   { label: "Years experience", value: "4+" },
   { label: "Design projects", value: "15+" },
-  { label: "Live websites", value: "7+" },
+  { label: "Websites & apps", value: "7+" },
+  { label: "Automation workflows", value: "8+" },
 ];
 
 export const aboutParagraphs = [
-  "I'm a developer, designer, and marketer who helps service businesses, startups, and growing brands turn ideas into clear, usable, and launch-ready digital experiences. Whether it's a marketing site, a custom application, or a full brand refresh, I care about work that feels consistent, performs well, and genuinely serves the people using it.",
+  "I'm a designer, full-stack developer, and AI workflow specialist who helps service businesses, startups, and growing brands turn ideas into clear, usable, and launch-ready digital experiences. Whether it's a brand identity, a custom web application, or an n8n-powered automation, I care about work that feels consistent, performs well, and genuinely serves the people using it.",
   "I hold a Bachelor of Information Technology and work fluently in English and Kiswahili, which lets me collaborate comfortably with both local and international teams.",
 ];
 
@@ -96,6 +98,10 @@ export const skillGroups = [
     title: "Languages",
     skills: ["English (Fluent)", "Kiswahili (Fluent)"],
   },
+  {
+    title: "AI & Automation",
+    skills: ["n8n", "OpenAI API", "Webhooks", "Lead Enrichment", "Social Scheduling", "Invoice Processing", "Ticket Classification", "Dashboard Reporting", "Data Pipelines"],
+  },
 ];
 
 export type ServiceItem = { icon: LucideIcon; title: string; desc: string };
@@ -107,6 +113,7 @@ export const services: ServiceItem[] = [
   { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
   { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
   { icon: Printer, title: "Print & Event Materials", desc: "Brochures, banners, merch, and event materials that match the rest of your brand." },
+  { icon: Bot, title: "AI Workflow & Automation", desc: "Custom n8n workflows for lead enrichment, social scheduling, invoice processing, ticket classification, and reporting. I connect your tools so your team does less manual work." },
 ];
 
 export const supplementaryServices: ServiceItem[] = [
@@ -128,6 +135,7 @@ export const pricingRows = [
   { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
   { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
   { service: "Print & Event Materials", starting: "KSh 15,000", range: "KSh 15,000 to 80,000", model: "Per project", icon: Printer },
+  { service: "AI Workflow & Automation", starting: "KSh 20,000", range: "KSh 20,000 to 120,000", model: "Per project", icon: Bot },
 ];
 
 export const caseStudyOutcomes: Record<string, string> = {
@@ -140,6 +148,7 @@ export const subBrands = [
   { id: "gmdesign" as const, label: "GMDesign", icon: Palette },
   { id: "gmmarketing" as const, label: "GM Marketing", icon: Video },
   { id: "gmcode" as const, label: "GMCode", icon: Code },
+  { id: "gmautomation" as const, label: "GM Automation", icon: BarChart3 },
 ];
 
 export const contactItems = [

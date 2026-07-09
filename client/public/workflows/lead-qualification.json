@@ -1,0 +1,806 @@
+{
+  "name": "AI Lead Qualification System",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Let’s see if we can help you scale your business 🚀",
+        "formDescription": "This takes 60 seconds. If we’re a good fit, we’ll show you exactly how we can help.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "What’s your name?",
+              "fieldName": "full_name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What’s your email?",
+              "fieldType": "email",
+              "fieldName": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What best describes your business?",
+              "fieldType": "dropdown",
+              "fieldName": "business_type",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Coaching / Consulting"
+                  },
+                  {
+                    "option": "E-commerce"
+                  },
+                  {
+                    "option": "Agency"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "What is your current monthly revenue?",
+              "fieldType": "dropdown",
+              "fieldName": "monthly_revenue",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "$0 – $5k"
+                  },
+                  {
+                    "option": "$5k – $20k"
+                  },
+                  {
+                    "option": "$20k – $50k"
+                  },
+                  {
+                    "option": "$50k+"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "What is your biggest bottleneck right now?",
+              "fieldType": "textarea",
+              "fieldName": "biggest_challenge",
+              "placeholder": "e.g. generating leads, managing clients, manual admin work"
+            },
+            {
+              "fieldLabel": "What are you trying to achieve in the next 3 months?",
+              "fieldType": "textarea",
+              "fieldName": "goal"
+            },
+            {
+              "fieldLabel": "Are you open to investing in automation if it saves you time and increases revenue?",
+              "fieldType": "dropdown",
+              "fieldName": "budget",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes, absolutely"
+                  },
+                  {
+                    "option": "Maybe, depends on ROI"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "How soon are you looking to implement a solution?",
+              "fieldType": "radio",
+              "fieldName": "urgency",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "ASAP"
+                  },
+                  {
+                    "option": "Within 1 month"
+                  },
+                  {
+                    "option": "Just exploring"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -560,
+        16
+      ],
+      "id": "9edea01f-5dcf-4291-b9cd-41022d065230",
+      "name": "On form submission",
+      "webhookId": "YOUR_FORM_WEBHOOK_ID"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are a sales qualification assistant.\n\nEvaluate this lead based on:\n- revenue\n- urgency\n- budget\n- clarity of problem\n\nReturn ONLY valid JSON in this exact format:\n\n{\n  \"lead_score\": 0,\n  \"qualification\": \"Hot\",\n  \"ai_summary\": \"short summary\",\n  \"recommended_action\": \"next step\"\n}\n\nRules:\n- lead_score must be an integer from 1 to 10\n- qualification must be one of: Hot, Warm, Cold\n- do not include markdown\n- do not wrap the response in ```json\n\nLead:\nName: {{$json.full_name}}\nBusiness: {{$json.business_type}}\nRevenue: {{$json.monthly_revenue}}\nChallenge: {{$json.biggest_challenge}}\nGoal: {{$json.goal}}\nBudget: {{$json.budget}}\nUrgency: {{$json.urgency}}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        16
+      ],
+      "id": "598d49a5-ebb7-4dec-9171-590ec843048e",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL",
+          "name": "YOUR_OPENAI_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "49e71bc3-2dc7-4317-9d91-fc36ca62cf0b",
+              "leftValue": "={{$json.status}}",
+              "rightValue": "🔥 Priority",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "c3598dab-b570-4f46-96e4-144487e3de35",
+              "leftValue": "={{$json.urgency}}",
+              "rightValue": "ASAP",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        128,
+        16
+      ],
+      "id": "ae6f0e65-d3af-4c95-a7c7-6ef11379752d",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Get AI response safely\nconst raw = $input.first().json.output?.[0]?.content?.[0]?.text || '';\n\n// 2. Clean possible markdown wrappers\nconst cleaned = raw\n  .replace(/^```json\\s*/i, '')\n  .replace(/^```\\s*/i, '')\n  .replace(/\\s*```$/i, '')\n  .trim();\n\n// 3. Parse AI output safely\nlet parsed;\n\ntry {\n  parsed = JSON.parse(cleaned);\n} catch (error) {\n  parsed = {\n    lead_score: null,\n    qualification: 'Cold',\n    ai_summary: cleaned || 'Unable to parse AI response.',\n    recommended_action: 'Manual review required.'\n  };\n}\n\n// 4. Get original form data\nconst formData = $('On form submission').first().json;\n\n// 5. Normalize lead score\nlet score = Number(parsed.lead_score);\nif (Number.isNaN(score)) score = 0;\nparsed.lead_score = score;\n\n// 6. STATUS LOGIC (priority routing)\nif (parsed.qualification === 'Hot' && formData.urgency === 'ASAP') {\n  parsed.status = '🔥 Priority';\n} else if (parsed.qualification === 'Hot') {\n  parsed.status = '🟠 High Intent';\n} else if (parsed.qualification === 'Warm') {\n  parsed.status = '🟡 Nurture';\n} else {\n  parsed.status = '🔵 Low Priority';\n}\n\n// 7. VALUE TAGGING (business value)\nif (score >= 8) {\n  parsed.tag = '💰 High Value';\n} else if (score >= 5) {\n  parsed.tag = '⚖️ Medium Value';\n} else {\n  parsed.tag = '🧊 Low Value';\n}\n\n// 8. REVENUE CLASSIFICATION (extra intelligence)\nconst revenue = formData.monthly_revenue || '';\n\nif (revenue.includes('50k') || revenue.includes('100k')) {\n  parsed.revenue_tier = 'High Revenue';\n} else if (revenue.includes('10k')) {\n  parsed.revenue_tier = 'Mid Revenue';\n} else {\n  parsed.revenue_tier = 'Low Revenue';\n}\n\n// 9. URGENCY NORMALIZATION (clean values)\nparsed.urgency_level = formData.urgency === 'ASAP' ? 'High' : 'Normal';\n\n// 10. FINAL MERGE\nreturn [\n  {\n    json: {\n      ...formData,\n      ...parsed\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        16
+      ],
+      "id": "206c92d8-acd6-469f-8e8e-3de6aaa81460",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET",
+          "mode": "list",
+          "cachedResultName": "YOUR_GOOGLE_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_TAB",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "full_name": "={{$json.full_name}}",
+            "email": "={{$json.email}}",
+            "business_type": "={{$json.business_type}}",
+            "monthly_revenue": "={{$json.monthly_revenue}}",
+            "biggest_challenge": "={{$json.biggest_challenge}}",
+            "goal": "={{$json.goal}}",
+            "budget": "={{$json.budget}}",
+            "urgency": "={{$json.urgency}}",
+            "ai_summary": "={{$json.ai_summary}}",
+            "qualification": "={{$json.qualification}}",
+            "lead_score": "={{$json.lead_score}}",
+            "recommended_action": "={{$json.recommended_action}}",
+            "submittedAt": "={{$json.submittedAt || $now}}",
+            "status": "={{$json.status}}",
+            "tag": "={{$json.tag}}",
+            "revenue_tier": "={{$json.revenue_tier}}",
+            "urgency_level": "={{$json.urgency_level}}",
+            "processedAt": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "full_name",
+              "displayName": "full_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "business_type",
+              "displayName": "business_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "monthly_revenue",
+              "displayName": "monthly_revenue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "biggest_challenge",
+              "displayName": "biggest_challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "goal",
+              "displayName": "goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "budget",
+              "displayName": "budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "urgency",
+              "displayName": "urgency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_summary",
+              "displayName": "ai_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tag",
+              "displayName": "tag",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "revenue_tier",
+              "displayName": "revenue_tier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "urgency_level",
+              "displayName": "urgency_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "processedAt",
+              "displayName": "processedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        -368
+      ],
+      "id": "f23ff60b-0c5c-4b3e-8266-51fc711add48",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL",
+          "name": "YOUR_GOOGLE_SHEETS_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "your@email.com",
+        "subject": "=🔥 New Hot Lead: {{$json.full_name}}",
+        "message": "=🔥 NEW HOT LEAD  Name: {{$json.full_name}} Email: {{$json.email}}  Business Type: {{$json.business_type}} Revenue: {{$json.monthly_revenue}}  Biggest Challenge: {{$json.biggest_challenge}}  Goal: {{$json.goal}}  Lead Score: {{$json.lead_score}} Qualification: {{$json.qualification}}  Recommended Action: {{$json.recommended_action}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        -400
+      ],
+      "id": "ce081add-7ee0-4851-8f39-7ebe4159c422",
+      "name": "Send a message",
+      "webhookId": "YOUR_GMAIL_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL",
+          "name": "YOUR_GMAIL_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET",
+          "mode": "list",
+          "cachedResultName": "YOUR_GOOGLE_SHEET",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_TAB",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "full_name": "={{$json.full_name}}",
+            "email": "={{$json.email}}",
+            "business_type": "={{$json.business_type}}",
+            "biggest_challenge": "={{$json.biggest_challenge}}",
+            "goal": "={{$json.goal}}",
+            "budget": "={{$json.budget}}",
+            "urgency": "={{$json.urgency}}",
+            "ai_summary": "={{$json.ai_summary}}",
+            "qualification": "={{$json.qualification}}",
+            "lead_score": "={{$json.lead_score}}",
+            "recommended_action": "={{$json.recommended_action}}",
+            "submittedAt": "={{$json.submittedAt || $now}}",
+            "status": "={{$json.status}}",
+            "monthly_revenue": "={{$json.monthly_revenue}}",
+            "tag": "={{$json.tag}}",
+            "revenue_tier": "={{$json.revenue_tier}}",
+            "urgency_level": "={{$json.urgency_level}}",
+            "processedAt": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "full_name",
+              "displayName": "full_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "business_type",
+              "displayName": "business_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "monthly_revenue",
+              "displayName": "monthly_revenue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "biggest_challenge",
+              "displayName": "biggest_challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "goal",
+              "displayName": "goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "budget",
+              "displayName": "budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "urgency",
+              "displayName": "urgency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_summary",
+              "displayName": "ai_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "qualification",
+              "displayName": "qualification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tag",
+              "displayName": "tag",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "revenue_tier",
+              "displayName": "revenue_tier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "urgency_level",
+              "displayName": "urgency_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "processedAt",
+              "displayName": "processedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        336,
+        32
+      ],
+      "id": "ca4a733c-d132-46ec-a8b1-b6083b93bbfd",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL",
+          "name": "YOUR_GOOGLE_SHEETS_CREDENTIAL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "YOUR_SLACK_CHANNEL",
+          "mode": "list",
+          "cachedResultName": "YOUR_SLACK_CHANNEL"
+        },
+        "text": "=🔥 *New Priority Lead*\n\n👤 *Name:* {{$json.full_name}}\n📧 *Email:* {{$json.email}}\n🏢 *Business:* {{$json.business_type}}\n\n💰 *Revenue:* {{$json.monthly_revenue}}\n📊 *Score:* {{$json.lead_score}}\n\n🏷 *Tag:* {{$json.tag}}\n📈 *Revenue Tier:* {{$json.revenue_tier}}\n⚡ *Urgency:* {{$json.urgency_level}}\n\n🧠 *Summary:*\n{{$json.ai_summary}}\n\n🎯 *Recommended Action:*\n{{$json.recommended_action}}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        432,
+        -384
+      ],
+      "id": "4a0718e3-9607-4379-8826-717c42365eb5",
+      "name": "Send a message1",
+      "webhookId": "YOUR_SLACK_WEBHOOK_ID",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "YOUR_SLACK_CREDENTIAL",
+          "name": "YOUR_SLACK_CREDENTIAL"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "00000000-0000-0000-0000-000000000000",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "id": "AI_LEAD_QUALIFICATION_TEMPLATE",
+  "tags": []
+}

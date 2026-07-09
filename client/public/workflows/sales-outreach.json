@@ -1,0 +1,547 @@
+{
+  "name": "Sales Lead Gen Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "68de8ad0-dc2c-4d92-8ea5-44ce99f5fd2c",
+      "name": "Daily Lead Generation",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -2704,
+        -2528
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "targetIndustry",
+              "value": "<__PLACEHOLDER_VALUE__e.g., Technology, Healthcare, Finance__>",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "targetRole",
+              "value": "<__PLACEHOLDER_VALUE__e.g., VP of Sales, Marketing Director, CTO__>",
+              "type": "string"
+            },
+            {
+              "id": "3",
+              "name": "targetLocation",
+              "value": "<__PLACEHOLDER_VALUE__e.g., San Francisco, New York, Remote__>",
+              "type": "string"
+            },
+            {
+              "id": "4",
+              "name": "companySize",
+              "value": "<__PLACEHOLDER_VALUE__e.g., 50-200 employees, 200-1000 employees__>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e33a4752-1306-4053-9ae1-fb5224e1f3c9",
+      "name": "Define Search Criteria",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2480,
+        -2528
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an expert lead generation specialist. Your task is to find and qualify potential leads based on the following criteria:\n\nIndustry: {{ $json.targetIndustry }}\nTarget Role: {{ $json.targetRole }}\nLocation: {{ $json.targetLocation }}\nCompany Size: {{ $json.companySize }}\n\nUse the available tools to:\n1. Search for companies and professionals matching these criteria using Perplexity Search\n2. Extract detailed LinkedIn profiles using LinkedIn Scraper (Phantombuster)\n3. Make additional API calls if needed using HTTP Request\n4. Store qualified leads in the data table using Store Lead\n\nFor each lead, gather: name, company, title, email (if available), LinkedIn URL, industry, location, and relevant notes.\nFocus on quality over quantity - only include leads that closely match the criteria.\nProvide a summary of your findings and suggest next steps for outreach.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a professional lead generation agent with access to web search, LinkedIn scraping, HTTP requests, and data storage tools. Always verify information accuracy and prioritize high-quality leads.",
+          "maxIterations": 15,
+          "returnIntermediateSteps": true
+        }
+      },
+      "id": "0ccb13b4-4163-48e8-9a3b-cb294e50f0c3",
+      "name": "Lead Generation Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2000,
+        -2528
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "1cffc9c8-a14c-42c5-9684-dabcd0a63f5e",
+      "name": "OpenAI GPT-5",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -2256,
+        -2304
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "5AsvwjEKuSilOHTn",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "search",
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('searchQuery', 'The search query to find leads and company information') }}",
+        "simplify": true,
+        "options": {
+          "maxResults": 10
+        },
+        "requestOptions": {}
+      },
+      "id": "6271032f-01a6-4220-b3b1-58f17cbd1cd7",
+      "name": "Perplexity Search",
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 2,
+      "position": [
+        -2128,
+        -2304
+      ]
+    },
+    {
+      "parameters": {
+        "agentId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('agentId', 'The Phantombuster agent ID to launch for LinkedIn scraping') }}",
+        "additionalFields": {}
+      },
+      "id": "ed9c1de9-115b-44c1-9bdc-e10e22d4c2c9",
+      "name": "LinkedIn Scraper",
+      "type": "n8n-nodes-base.phantombusterTool",
+      "typeVersion": 1,
+      "position": [
+        -2000,
+        -2304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('method', 'HTTP method (GET, POST, etc.)') }}",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('url', 'The API endpoint URL') }}",
+        "options": {},
+        "optimizeResponse": true
+      },
+      "id": "4e8b3c4f-da3c-48b8-85fa-4dbb1e9fb1f9",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        -1872,
+        -2304
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": "{{ /*n8n-auto-generated-fromAI-override*/ $fromAI('leadData', 'Lead information to store (name, company, title, email, LinkedIn URL, etc.)') }}",
+        "options": {}
+      },
+      "id": "07bd763c-8555-4ffb-ae4d-3b7f7260ba9c",
+      "name": "Store Lead",
+      "type": "n8n-nodes-base.dataTableTool",
+      "typeVersion": 1.1,
+      "position": [
+        -1744,
+        -2304
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{{ { \"leads\": [{ \"name\": \"John Doe\", \"company\": \"Acme Corp\", \"title\": \"VP of Sales\", \"email\": \"john@acme.com\", \"linkedinUrl\": \"https://linkedin.com/in/johndoe\", \"industry\": \"Technology\", \"location\": \"San Francisco, CA\", \"notes\": \"Potential high-value lead\" }], \"summary\": \"Found 5 qualified leads in the technology sector\", \"nextSteps\": \"Follow up with personalized outreach\" } }}"
+      },
+      "id": "927bebee-17e2-4484-a4d5-c0802d57b527",
+      "name": "Lead Data Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1616,
+        -2304
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date": "={{ $now.toISO() }}",
+            "targetIndustry": "={{ $(\"Define Search Criteria\").item.json.targetIndustry }}",
+            "targetRole": "={{ $(\"Define Search Criteria\").item.json.targetRole }}",
+            "totalEmailsSent": "={{ $json.totalEmailsSent }}",
+            "status": "={{ $json.status }}",
+            "completedAt": "={{ $json.completedAt }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "29907a1f-99a7-4307-a4c1-318c258e597a",
+      "name": "Store Lead Summary",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -608,
+        -2432
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const leads = $input.item.json.output.leads || [];\nreturn leads.map(lead => ({ json: lead }));"
+      },
+      "id": "f4831950-630d-459a-a67d-28052c1edeba",
+      "name": "Extract Leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1408,
+        -2528
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "status",
+              "value": "completed",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "totalEmailsSent",
+              "value": "={{ $(\"Extract Leads\").all().length }}",
+              "type": "number"
+            },
+            {
+              "id": "3",
+              "name": "completedAt",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f836f5b5-6d0d-4c26-be94-eba2aa52eecc",
+      "name": "All Emails Sent",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -896,
+        -2432
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a personalized outbound email to {{ $json.name }} who is {{ $json.title }} at {{ $json.company }}.\n\nLead Details:\n- Name: {{ $json.name }}\n- Company: {{ $json.company }}\n- Title: {{ $json.title }}\n- Industry: {{ $json.industry }}\n- Location: {{ $json.location }}\n- LinkedIn: {{ $json.linkedinUrl }}\n- Notes: {{ $json.notes }}\n\nTarget Criteria:\n- Industry: {{ $(\"Define Search Criteria\").item.json.targetIndustry }}\n- Role: {{ $(\"Define Search Criteria\").item.json.targetRole }}\n\nCreate a professional, personalized email that:\n1. References their specific role and company\n2. Demonstrates knowledge of their industry\n3. Offers clear value proposition\n4. Includes a soft call-to-action\n5. Keeps it concise (under 150 words)\n\nReturn ONLY the email body text, no subject line.",
+        "options": {
+          "systemMessage": "You are an expert sales copywriter specializing in personalized B2B outreach. Write compelling, authentic emails that feel personal and valuable, not salesy or generic.",
+          "maxIterations": 5,
+          "returnIntermediateSteps": false
+        }
+      },
+      "id": "e985e0e5-e958-43b6-b9ef-e29ece75fa17",
+      "name": "Compose Personalized Email",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -960,
+        -2832
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "12fb8e50-fa92-491e-a48e-9a7bdb22acc1",
+      "name": "Email Composer Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -880,
+        -2608
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "5AsvwjEKuSilOHTn",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $(\"Extract Leads\").item.json.email }}",
+        "subject": "={{ $(\"Define Search Criteria\").item.json.targetRole }} opportunity at {{ $(\"Extract Leads\").item.json.company }}",
+        "emailType": "text",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "<__PLACEHOLDER_VALUE__Your name or company name__>"
+        }
+      },
+      "id": "6666a2cf-1ca1-40ae-b2e6-1e697c34cdab",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -608,
+        -2736
+      ],
+      "webhookId": "26d8a276-8bbb-4b3c-ac18-fd2a2c4768e7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9lBbVnKDI7DrCyYj",
+          "name": "Main Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fc393630-f120-4f69-9240-fc4238c67ebc",
+      "name": "Loop Through Leads",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -1184,
+        -2528
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily Lead Generation": {
+      "main": [
+        [
+          {
+            "node": "Define Search Criteria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define Search Criteria": {
+      "main": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Generation Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI GPT-5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Perplexity Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn Scraper": {
+      "ai_tool": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Data Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Lead Generation Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Leads": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "All Emails Sent": {
+      "main": [
+        [
+          {
+            "node": "Store Lead Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Personalized Email": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Composer Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Compose Personalized Email",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Loop Through Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Through Leads": {
+      "main": [
+        [
+          {
+            "node": "All Emails Sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Compose Personalized Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "edef1b4d-8d83-406d-878d-78383c09b5c1",
+  "meta": {
+    "instanceId": "7e1d6661c4c10bc7e723636b58e4de20efce8fb708aac9bab6bdd91dcae8f07d"
+  },
+  "id": "2UanX1qXnmrSXQ0X",
+  "tags": []
+}
