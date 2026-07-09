@@ -71,7 +71,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
           <button
             type="button"
             onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex font-mono text-[11px] tracking-[0.15em] uppercase bg-primary text-accent hover:bg-accent hover:text-primary px-4 py-2 transition-colors"
+            className="hidden md:inline-flex font-mono text-[11px] tracking-[0.15em] uppercase bg-accent text-accent-foreground hover:bg-primary hover:text-accent px-4 py-2 transition-colors"
           >
             Get in touch →
           </button>

@@ -86,7 +86,7 @@ function ProjectCard({ project, onPreview }: { project: Project; onPreview: (url
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-accent hover:text-foreground transition-colors"
+          className="inline-block mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
           onClick={(e) => e.stopPropagation()}
         >
           Visit site →
