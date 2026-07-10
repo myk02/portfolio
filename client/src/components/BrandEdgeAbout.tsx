@@ -11,7 +11,7 @@ export default function BrandEdgeAbout() {
         </div>
 
         <div className="grid grid-cols-12 gap-4 lg:gap-8 mt-3">
-          <div className="col-span-12 lg:col-span-3">
+          <div className="col-span-12 lg:col-span-2">
             <div className="aspect-square overflow-hidden border border-border">
               <img
                 src="/mike.png"
