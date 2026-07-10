@@ -108,7 +108,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
             </motion.div>
           </div>
 
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[45%] h-[70vh]">
+          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[30%] h-[50vh]">
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
               <Cube3D mouseX={mouseX} mouseY={mouseY} />
             </Canvas>

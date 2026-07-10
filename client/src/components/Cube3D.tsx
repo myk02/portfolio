@@ -14,10 +14,10 @@ export default function Cube3D({ mouseX, mouseY }: Cube3DProps) {
 
   const edgesMaterial = useMemo(() => new LineBasicMaterial({ color: "#0a0a0a" }), []);
 
-  const outerGeo = useMemo(() => new BoxGeometry(3.2, 3.2, 3.2), []);
+  const outerGeo = useMemo(() => new BoxGeometry(2.2, 2.2, 2.2), []);
 
   const edgesGeo = useMemo(() => {
-    const geo = new BoxGeometry(3.2, 3.2, 3.2);
+    const geo = new BoxGeometry(2.2, 2.2, 2.2);
     return new EdgesGeometry(geo);
   }, []);
 
