@@ -11,8 +11,8 @@ export default function BrandEdgeAbout() {
         </div>
 
         <div className="grid grid-cols-12 gap-4 lg:gap-8 mt-3">
-          <div className="col-span-12 lg:col-span-2">
-            <div className="aspect-square overflow-hidden border border-border">
+          <div className="col-span-4 lg:col-span-2">
+            <div className="aspect-square overflow-hidden border-2 border-border/40 [clip-path:circle(50%)]">
               <img
                 src="/mike.png"
                 alt="Mike Waitindi"
