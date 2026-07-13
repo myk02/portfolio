@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Minus, Plus, Menu, X, Sun, Moon } from "lucide-react";
+import { useFontSize } from "@/contexts/FontSizeContext";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface BrandEdgeHeaderProps {
@@ -9,6 +10,7 @@ interface BrandEdgeHeaderProps {
 
 export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { scale, increase, decrease, reset } = useFontSize();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -55,7 +57,38 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-0.5">
+          {/* Font size controls */}
+          <div className="hidden md:flex items-center gap-0.5 mr-1 border-r border-border pr-1.5">
+            <button
+              type="button"
+              onClick={decrease}
+              disabled={scale <= 0.75}
+              className="font-mono text-muted-foreground hover:text-foreground transition-colors p-1 disabled:opacity-30 disabled:pointer-events-none"
+              aria-label="Decrease font size"
+            >
+              <Minus size={12} />
+            </button>
+            <button
+              type="button"
+              onClick={reset}
+              className="font-mono text-[9px] tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors px-1"
+              aria-label="Reset font size"
+              title="Reset font size"
+            >
+              {Math.round(scale * 100)}%
+            </button>
+            <button
+              type="button"
+              onClick={increase}
+              disabled={scale >= 1.5}
+              className="font-mono text-muted-foreground hover:text-foreground transition-colors p-1 disabled:opacity-30 disabled:pointer-events-none"
+              aria-label="Increase font size"
+            >
+              <Plus size={12} />
+            </button>
+          </div>
+
           {toggleTheme && (
             <button
               type="button"
