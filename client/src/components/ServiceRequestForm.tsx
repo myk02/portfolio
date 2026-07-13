@@ -99,7 +99,7 @@ export default function ServiceRequestForm() {
         <Button
           type="submit"
           disabled={submitting}
-          className="w-full btn-gradient font-semibold py-2"
+          className="w-full btn-gradient font-semibold"
         >
           {submitting ? "Sending..." : "Send Request"}
         </Button>

@@ -4,7 +4,7 @@ import type { ServiceItem } from "./siteContent";
 export const capabilities = services.map((s, i) => {
   const tags: Record<string, string[]> = {
     "Brand & Graphic Design": ["Logo Design", "Brand Guidelines", "Typography", "Print Design"],
-    "Full-Stack Development": ["React", "Next.js", "TypeScript", "Node.js", "Tailwind CSS"],
+    "Development": ["React", "Next.js", "TypeScript", "Node.js", "Tailwind CSS"],
     "Motion & Social Video": ["CapCut Pro", "Canva", "Motion Graphics", "Social Content"],
     "UX/UI Design": ["Figma", "Wireframing", "Prototyping", "User Research"],
     "SEO & Web Analytics": ["On-page SEO", "GA4", "Content Strategy", "Site Speed"],
@@ -48,7 +48,7 @@ export const pressAwards: { publication: string; award: string }[] = [];
 
 export const projectTypes = [
   "Brand & Graphic Design",
-  "Full-Stack Development",
+  "Development",
   "AI Workflow & Automation",
   "Motion & Social Video",
   "UX/UI Design",

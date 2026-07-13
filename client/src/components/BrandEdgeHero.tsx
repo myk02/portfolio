@@ -1,7 +1,5 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import Cube3D from "./Cube3D";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -15,41 +13,25 @@ const heroWords = [
 
 export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    const x = (e.clientX / window.innerWidth) * 2 - 1;
-    const y = -(e.clientY / window.innerHeight) * 2 + 1;
-    setMouseX(x);
-    setMouseY(y);
-  }, []);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!prefersReduced) {
-      window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    }
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [handleMouseMove]);
 
   return (
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-[60vh] bg-primary flex items-center overflow-hidden"
+      className="relative min-h-[50vh] bg-primary flex items-center overflow-hidden"
     >
       <div className="grid-overlay" />
 
       <div className="container relative z-10 w-full">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-0">
-          <div className="flex-1 max-w-[680px] py-16 lg:py-0">
-            <div className="section-label text-accent mb-4">
+        <div className="max-w-lg mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-0">
+          <div className="flex-1 py-8 lg:py-0">
+            <div className="section-label text-accent mb-2">
               <span className="section-label-line" />
-              AI workflows, design, dev &amp; marketing — Nairobi
+              AI workflows | design | dev | marketing — Nairobi
             </div>
 
-            <h1 className="heading-serif text-secondary" style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}>
+            <h1 className="heading-serif text-secondary" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
               {heroWords.map((word, i) => (
                 <motion.span
                   key={word.text}
@@ -79,9 +61,9 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-secondary/60 font-sans text-sm leading-relaxed max-w-lg mt-4"
+              className="text-secondary/60 font-sans text-xs leading-relaxed max-w-lg mt-3"
             >
-              Designer, full-stack developer, and AI workflow specialist for service businesses, startups, and growing brands. I deliver brand direction, user-focused interfaces, AI automation, and launch-ready digital experiences.
+              Developer, designer & Automation Specialist. Brand direction, web apps, AI automation, and launch-ready digital experiences.
             </motion.p>
 
             <motion.div
@@ -89,7 +71,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-2 mt-6"
+              className="flex flex-col sm:flex-row gap-2 mt-4"
             >
               <button
                 type="button"
@@ -108,12 +90,17 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
             </motion.div>
           </div>
 
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[30%] h-[50vh]">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-              <Cube3D mouseX={mouseX} mouseY={mouseY} />
-            </Canvas>
+          <div className="flex-shrink-0 self-center lg:self-auto lg:absolute lg:right-[8%] lg:top-1/2 lg:-translate-y-1/2">
+            <div className="w-[70px] sm:w-[90px] lg:w-[140px] aspect-square overflow-hidden [clip-path:circle(50%)]">
+              <img
+                src="/mike.png"
+                alt="Mike Waitindi"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
+      </div>
       </div>
 
       <motion.div
@@ -121,7 +108,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-6 lg:left-10"
+        className="absolute bottom-4 left-4 lg:left-6"
       >
         <div className="scroll-indicator">
           <span className="font-mono text-[10px] tracking-[0.4em] text-secondary/50">SCROLL</span>

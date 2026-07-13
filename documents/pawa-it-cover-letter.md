@@ -2,7 +2,7 @@
 
 **Mike Waitindi**  
 Nairobi, Kenya  
-wrootmike@gmail.com · +254 792 618 156  
+mikegary201@gmail.com · 0792618156  
 [Portfolio](https://portfolio-swart-pi-ztql47m43v.vercel.app) · [LinkedIn](https://linkedin.com/in/mike-waitindi-654bb2344)
 
 ---

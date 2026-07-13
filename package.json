@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
-    "seed": "convex run seed"
+    "seed": "convex run seed:seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

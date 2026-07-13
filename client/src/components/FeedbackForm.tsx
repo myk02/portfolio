@@ -113,7 +113,7 @@ export default function FeedbackForm() {
         <Button
           type="submit"
           disabled={submitting}
-          className="w-full btn-gradient font-semibold py-2"
+          className="w-full btn-gradient font-semibold"
         >
           {submitting ? "Sending..." : "Submit Feedback"}
         </Button>

@@ -48,33 +48,6 @@ const designProjects = [
     order: 12,
   },
   {
-    name: "CLE: ATP Webinar Flyer",
-    description: "Flyer for a Council of Legal Education webinar with date, time, QR code, and contact details.",
-    techStack: ["CLE", "Print"],
-    url: "#",
-    image: "/thumbnails/6.png",
-    subBrand: "gmdesign" as const,
-    order: 13,
-  },
-  {
-    name: "CLE: Labour Day Social Post",
-    description: "Labour Day post for CLE social channels using the organisation colours and logo.",
-    techStack: ["CLE", "Social post"],
-    url: "#",
-    image: "/thumbnails/7.png",
-    subBrand: "gmdesign" as const,
-    order: 14,
-  },
-  {
-    name: "CLE: Newsletter Cover",
-    description: "Front cover for the CLE monthly newsletter with issue date, feature list, and QR code.",
-    techStack: ["CLE", "Print"],
-    url: "#",
-    image: "/thumbnails/8.png",
-    subBrand: "gmdesign" as const,
-    order: 15,
-  },
-  {
     name: "Graza: Packaging",
     description: "Olive oil squeeze bottles with a bold green and yellow label system.",
     techStack: ["Graza", "Packaging"],
@@ -156,14 +129,10 @@ export const seed = mutation({
     const validDesignImages = new Set(designProjects.map((p) => p.image));
 
     const codeProjects = [
-      { name: "LegalFlow - Practice Management", description: "A platform for Kenyan law firms to handle intake, cases, documents, billing, and client messages in one place.", techStack: ["React", "Full-stack", "Legal Tech"], url: "https://law-five-eta.vercel.app/", image: "/thumbnails/legalflow.png", subBrand: "gmcode" as const, order: 1 },
+      { name: "LegalFlow - Practice Management", description: "A platform for Kenyan law firms to handle intake, cases, documents, billing, and client messages in one place.", techStack: ["React", "Development", "Legal Tech"], url: "https://law-five-eta.vercel.app/", image: "/thumbnails/legalflow.png", subBrand: "gmcode" as const, order: 1 },
       { name: "CodeMaster - Coding Learning Platform", description: "A coding learning site with 11 courses and 368+ lessons in JavaScript, Python, and AI. Students work through lessons and challenges in a built-in editor.", techStack: ["React", "Education", "Interactive"], url: "https://codemaster-ten.vercel.app/", image: "/thumbnails/codemaster.png", subBrand: "gmcode" as const, order: 2 },
-      { name: "CarSoko - Car Rental Platform", description: "A car rental site for Nairobi with a large vehicle list. Users can browse by type, brand, and location and book online.", techStack: ["React", "E-commerce", "Full-stack"], url: "https://car-nu-ten.vercel.app/", image: "/thumbnails/carsoko.png", subBrand: "gmcode" as const, order: 3 },
-      { name: "Nora Designs - Architecture Portfolio", description: "A portfolio site for an architecture studio in Nairobi. Built around large photos of residential, commercial, and interior projects.", techStack: ["React", "Portfolio", "Design"], url: "https://design-sigma-beryl.vercel.app/", image: "/thumbnails/nora-designs.png", subBrand: "gmcode" as const, order: 4 },
       { name: "GiGi Energy Drink - Product Website", description: "A product site for a Nairobi-made energy drink. Bold colours and simple messaging to match the brand.", techStack: ["React", "E-commerce", "Product"], url: "https://drink-sand.vercel.app/", image: "/thumbnails/gigi-energy.png", subBrand: "gmcode" as const, order: 5 },
-      { name: "PureMatch254 - Matchmaking Platform", description: "A dating platform for people in Kenya looking for serious relationships. Profiles, matching, messaging, and an admin area for the team.", techStack: ["React", "Full-stack", "Social"], url: "https://www.purematch254.com/", image: "/thumbnails/purematch254.png", subBrand: "gmcode" as const, order: 6 },
-      { name: "KenyaTrace - Tourism Explorer", description: "A site to help people discover places to visit in Kenya. Covers attractions, routes, and travel info across the country.", techStack: ["React", "Tourism", "Full-stack"], url: "https://kenya-tourism-app-xi.vercel.app/welcome", image: "/thumbnails/kenya-tourism.png", subBrand: "gmcode" as const, order: 7 },
-      { name: "GM Voice - AI Voice Agents", description: "AI voice agents for customer support across healthcare, e-commerce, real estate, and finance. Deploy voice-to-voice AI agents in minutes.", techStack: ["React", "AI", "Voice"], url: "https://ai-lemon-eight.vercel.app/", image: "/thumbnails/gm-voice.png", subBrand: "gmcode" as const, order: 8 },
+      { name: "KenyaTrace - Tourism Explorer", description: "A site to help people discover places to visit in Kenya. Covers attractions, routes, and travel info across the country.", techStack: ["React", "Tourism", "Development"], url: "https://kenya-tourism-app-xi.vercel.app/welcome", image: "/thumbnails/kenya-tourism.png", subBrand: "gmcode" as const, order: 7 },
     ];
 
     const marketingProjects = [
@@ -179,10 +148,6 @@ export const seed = mutation({
       { name: "Social Media Content Scheduling Engine", description: "Multi-client social media scheduler that pulls approved content from Notion, optimizes captions via AI for LinkedIn and Twitter, auto-publishes, and updates status with live post URLs.", techStack: ["n8n", "OpenAI", "Notion", "LinkedIn", "Twitter"], url: "https://n8nlab.io/blog/n8n-agency-social-media-scheduling-workflow", image: "/thumbnails/gmautomation/social-media-scheduler.png", subBrand: "gmautomation" as const, order: 26, workflowJson: "/workflows/social-media-scheduler.json" },
       { name: "SEO Keyword Research & Content Brief Automation", description: "Automated SEO keyword and SERP analysis using DataForSEO. Tracks search volume, CPC, competition, and ranking data. Auto-creates Google Sheets with keyword metrics and competitor insights.", techStack: ["n8n", "DataForSEO", "Google Sheets", "SEO Analytics"], url: "https://n8n.io/workflows/10137-automate-seo-keyword-and-serp-analysis-with-dataforseo-and-google-sheets", image: "/thumbnails/gmautomation/seo-research.png", subBrand: "gmautomation" as const, order: 27, workflowJson: "/workflows/seo-research.json" },
       { name: "AI Lead Qualification & Scoring System", description: "AI-powered lead qualification that captures inbound leads, scores and enriches them with OpenAI, routes priority leads to Slack and Gmail, and logs all submissions to Google Sheets.", techStack: ["n8n", "OpenAI", "Slack", "Gmail", "Google Sheets"], url: "https://github.com/matolengwe96/ai-lead-qualification-n8n", image: "/thumbnails/gmautomation/lead-qualification.png", subBrand: "gmautomation" as const, order: 28, workflowJson: "/workflows/lead-qualification.json" },
-      { name: "Automated Personalized Sales Outreach", description: "Personalized cold email outreach with AI. Fetches unengaged leads from NocoDB, personalizes email templates with lead name and company via Groq/OpenAI, and schedules follow-ups automatically.", techStack: ["n8n", "Groq/OpenAI", "NocoDB", "SMTP", "Email Outreach"], url: "https://n8n.io/workflows/9114-automated-personalized-email-outreach-with-ai-database-tracking-and-scheduling/", image: "/thumbnails/gmautomation/sales-outreach.png", subBrand: "gmautomation" as const, order: 29, workflowJson: "/workflows/sales-outreach.json" },
-      { name: "AI Ticket Classification & Intelligent Routing", description: "Classifies support tickets by category and urgency using OpenRouter AI. Routes high-confidence tickets to the right team (Billing, Technical, Sales, General) and flags medium/low confidence for human review.", techStack: ["n8n", "OpenRouter AI", "Webhook", "Ticket Management"], url: "https://n8n.io/workflows/15949-route-customer-support-requests-to-ai-specialists-with-openrouter/", image: "/thumbnails/gmautomation/ticket-classification.png", subBrand: "gmautomation" as const, order: 30, workflowJson: "/workflows/ticket-classification.json" },
-      { name: "Invoice Processing & Data Extraction", description: "Custom QuickBooks invoice PDF generation and email delivery. Generates branded multi-page PDF invoices from QuickBooks data, handles line-item merging, and routes finalized invoices through your email provider.", techStack: ["n8n", "QuickBooks", "PDF Generation", "Email"], url: "https://aitoolly.com/n8n/workflow/custom-branded-quickbooks-invoices-to-pdf-email", image: "/thumbnails/gmautomation/invoice-processing.png", subBrand: "gmautomation" as const, order: 31, workflowJson: "/workflows/invoice-processing.json" },
-      { name: "Automated Reporting & Dashboard Insights", description: "Production-ready dashboard automation that collects data from multiple sources (GitHub, HTTP endpoints), transforms it with custom functions, and generates real-time metric tracking with error handling.", techStack: ["n8n", "GitHub API", "HTTP", "Data Analytics"], url: "https://www.aiautomationgenerator.com/templates/dashboard", image: "/thumbnails/gmautomation/reporting.png", subBrand: "gmautomation" as const, order: 32, workflowJson: "/workflows/dashboard-reporting.json" },
     ];
 
     const projects = [...codeProjects, ...marketingProjects];
@@ -229,9 +194,20 @@ export const seed = mutation({
       "Elva - Drink Packaging Line",
       "Qantra - Brand System Board",
       "Voront Glass - Brand Mockups",
+      "CarSoko - Car Rental Platform",
+      "Nora Designs - Architecture Portfolio",
+      "PureMatch254 - Matchmaking Platform",
+      "GM Voice - AI Voice Agents",
+      "CLE: ATP Webinar Flyer",
+      "CLE: Labour Day Social Post",
+      "CLE: Newsletter Cover",
+      "Automated Personalized Sales Outreach",
+      "AI Ticket Classification & Intelligent Routing",
+      "Invoice Processing & Data Extraction",
+      "Automated Reporting & Dashboard Insights",
     ];
     for (const project of refreshed) {
-      if (project.subBrand === "gmdesign" && obsoleteNames.includes(project.name)) {
+      if (obsoleteNames.includes(project.name)) {
         await ctx.db.delete(project._id);
       }
     }
@@ -266,10 +242,6 @@ export const seedAutomation = mutation({
       { name: "Social Media Content Scheduling Engine", description: "Multi-client social media scheduler that pulls approved content from Notion, optimizes captions via AI for LinkedIn and Twitter, auto-publishes, and updates status with live post URLs.", techStack: ["n8n", "OpenAI", "Notion", "LinkedIn", "Twitter"], url: "https://n8nlab.io/blog/n8n-agency-social-media-scheduling-workflow", image: "/thumbnails/gmautomation/social-media-scheduler.png", subBrand: "gmautomation" as const, order: 26, workflowJson: "/workflows/social-media-scheduler.json" },
       { name: "SEO Keyword Research & Content Brief Automation", description: "Automated SEO keyword and SERP analysis using DataForSEO. Tracks search volume, CPC, competition, and ranking data. Auto-creates Google Sheets with keyword metrics and competitor insights.", techStack: ["n8n", "DataForSEO", "Google Sheets", "SEO Analytics"], url: "https://n8n.io/workflows/10137-automate-seo-keyword-and-serp-analysis-with-dataforseo-and-google-sheets", image: "/thumbnails/gmautomation/seo-research.png", subBrand: "gmautomation" as const, order: 27, workflowJson: "/workflows/seo-research.json" },
       { name: "AI Lead Qualification & Scoring System", description: "AI-powered lead qualification that captures inbound leads, scores and enriches them with OpenAI, routes priority leads to Slack and Gmail, and logs all submissions to Google Sheets.", techStack: ["n8n", "OpenAI", "Slack", "Gmail", "Google Sheets"], url: "https://github.com/matolengwe96/ai-lead-qualification-n8n", image: "/thumbnails/gmautomation/lead-qualification.png", subBrand: "gmautomation" as const, order: 28, workflowJson: "/workflows/lead-qualification.json" },
-      { name: "Automated Personalized Sales Outreach", description: "Personalized cold email outreach with AI. Fetches unengaged leads from NocoDB, personalizes email templates with lead name and company via Groq/OpenAI, and schedules follow-ups automatically.", techStack: ["n8n", "Groq/OpenAI", "NocoDB", "SMTP", "Email Outreach"], url: "https://n8n.io/workflows/9114-automated-personalized-email-outreach-with-ai-database-tracking-and-scheduling/", image: "/thumbnails/gmautomation/sales-outreach.png", subBrand: "gmautomation" as const, order: 29, workflowJson: "/workflows/sales-outreach.json" },
-      { name: "AI Ticket Classification & Intelligent Routing", description: "Classifies support tickets by category and urgency using OpenRouter AI. Routes high-confidence tickets to the right team and flags medium/low confidence for human review.", techStack: ["n8n", "OpenRouter AI", "Webhook", "Ticket Management"], url: "https://n8n.io/workflows/15949-route-customer-support-requests-to-ai-specialists-with-openrouter/", image: "/thumbnails/gmautomation/ticket-classification.png", subBrand: "gmautomation" as const, order: 30, workflowJson: "/workflows/ticket-classification.json" },
-      { name: "Invoice Processing & Data Extraction", description: "Custom QuickBooks invoice PDF generation and email delivery. Generates branded multi-page PDF invoices from QuickBooks data, handles line-item merging, and routes finalized invoices through your email provider.", techStack: ["n8n", "QuickBooks", "PDF Generation", "Email"], url: "https://aitoolly.com/n8n/workflow/custom-branded-quickbooks-invoices-to-pdf-email", image: "/thumbnails/gmautomation/invoice-processing.png", subBrand: "gmautomation" as const, order: 31, workflowJson: "/workflows/invoice-processing.json" },
-      { name: "Automated Reporting & Dashboard Insights", description: "Production-ready dashboard automation that collects data from multiple sources (GitHub, HTTP endpoints), transforms it with custom functions, and generates real-time metric tracking with error handling.", techStack: ["n8n", "GitHub API", "HTTP", "Data Analytics"], url: "https://www.aiautomationgenerator.com/templates/dashboard", image: "/thumbnails/gmautomation/reporting.png", subBrand: "gmautomation" as const, order: 32, workflowJson: "/workflows/dashboard-reporting.json" },
     ];
 
     for (const project of automationProjects) {

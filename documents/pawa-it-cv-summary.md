@@ -61,8 +61,8 @@ Bachelor of Information Technology — South Eastern Kenya University (SEKU), Ki
 - Portfolio: [portfolio-swart-pi-ztql47m43v.vercel.app](https://portfolio-swart-pi-ztql47m43v.vercel.app)
 - LinkedIn: [linkedin.com/in/mike-waitindi-654bb2344](https://linkedin.com/in/mike-waitindi-654bb2344)
 - GitHub: [github.com/garymike07](https://github.com/garymike07)
-- Email: wrootmike@gmail.com
-- Phone: +254 792 618 156
+- Email: mikegary201@gmail.com
+- Phone: 0792618156
 
 ---
 

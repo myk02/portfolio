@@ -5,13 +5,14 @@ export default function BrandEdgeAbout() {
   return (
     <section id="about" className="section-pad bg-secondary border-t border-border">
       <div className="container">
+        <div className="max-w-lg mx-auto">
         <div className="section-label">
           <span className="section-label-line" />
           About Mike
         </div>
 
         <div className="grid grid-cols-12 gap-4 lg:gap-8 mt-3">
-          <div className="col-span-4 lg:col-span-2">
+          <div className="col-span-3 lg:col-span-1">
             <div className="aspect-square overflow-hidden border-2 border-border/40 [clip-path:circle(50%)]">
               <img
                 src="/mike.png"
@@ -22,16 +23,16 @@ export default function BrandEdgeAbout() {
           </div>
 
           <div className="col-span-12 lg:col-span-6">
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)" }}>
-              Designer, developer &amp; automation.
-              <span className="italic font-light text-muted-foreground block text-sm"> Building brands, apps &amp; workflows that work.</span>
+            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
+              Developer, designer &amp; automation.
+              <span className="italic font-light text-muted-foreground block text-[11px]"> Building brands, apps &amp; workflows that work.</span>
             </h2>
-            <div className="mt-4 space-y-2 text-[13px] text-muted-foreground leading-relaxed max-w-xl">
+            <div className="mt-3 space-y-1.5 text-[12px] text-muted-foreground leading-relaxed max-w-xl">
               {aboutParagraphs.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-1.5 mt-3">
               {socialLinks.map((s) => (
                 <a
                   key={s.alt}
@@ -39,7 +40,7 @@ export default function BrandEdgeAbout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.alt}
-                  className="w-9 h-9 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                  className="w-8 h-8 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
                 >
                   {s.icon ? (
                     <img src={s.icon} alt="" className="w-4 h-4" />
@@ -51,13 +52,13 @@ export default function BrandEdgeAbout() {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-3 space-y-4">
+          <div className="col-span-12 lg:col-span-3 space-y-3">
             {aboutStats.map((stat) => (
               <div key={stat.label} className="border-l-2 border-accent pl-4">
-                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
+                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(0.85rem, 1.8vw, 1.2rem)" }}>
                   {stat.value}
                 </div>
-                <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
+                <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
                   {stat.label}
                 </div>
               </div>
@@ -67,42 +68,36 @@ export default function BrandEdgeAbout() {
                 <div key={item.label}>
                   <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{item.label}</span>
                   {item.href ? (
-                    <a href={item.href} className="block text-sm text-foreground hover:text-accent transition-colors">{item.value}</a>
+                    <a href={item.href} className="block text-xs text-foreground hover:text-accent transition-colors">{item.value}</a>
                   ) : (
-                    <p className="text-sm text-foreground">{item.value}</p>
+                    <p className="text-xs text-foreground">{item.value}</p>
                   )}
                 </div>
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="mt-12 lg:mt-16">
-          <h3 className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-4">
+        </div>          <div className="mt-8 lg:mt-12">
+          <h3 className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">
             Skills &amp; Tools
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5">
             {skillGroups.map((group) => (
-              <div key={group.title} className="border border-border p-4">
-                <h4 className="font-display font-bold text-sm text-foreground mb-2">
+              <div key={group.title} className="border border-border p-2">
+                <h4 className="font-display font-bold text-[10px] text-foreground mb-1">
                   {group.title}
                 </h4>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.skills.slice(0, 5).map((skill) => (
-                    <span key={skill} className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-0.5 border border-border text-muted-foreground">
+                <div className="flex flex-wrap gap-1">
+                  {group.skills.map((skill) => (
+                    <span key={skill} className="font-mono text-[8px] tracking-[0.1em] uppercase px-1.5 py-[1px] border border-border text-muted-foreground">
                       {skill}
                     </span>
                   ))}
-                  {group.skills.length > 5 && (
-                    <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-2 py-0.5 text-muted-foreground">
-                      +{group.skills.length - 5}
-                    </span>
-                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

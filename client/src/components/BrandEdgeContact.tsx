@@ -88,14 +88,14 @@ export default function BrandEdgeContact() {
     return (
       <section id="contact" className="section-pad bg-secondary bg-[url(/contact-bg.svg)]">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-primary/50 mb-4">
+          <div className="max-w-lg mx-auto text-center">
+            <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-primary/50 mb-2">
               Message Received
             </div>
-            <h2 className="heading-serif font-bold text-primary" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+            <h2 className="heading-serif font-bold text-primary" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)" }}>
               I&apos;ll be in touch within 24 hours.
             </h2>
-            <p className="font-mono text-[11px] tracking-[0.15em] text-primary/60 mt-6">
+            <p className="font-mono text-[9px] tracking-[0.15em] text-primary/60 mt-3">
               Thanks, {name.split(" ")[0]}! I&apos;ll review your message and reach out to schedule a call.
             </p>
           </div>
@@ -107,42 +107,42 @@ export default function BrandEdgeContact() {
   return (
     <section id="contact" className="section-pad bg-secondary bg-[url(/contact-bg.svg)]">
       <div className="container">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-lg mx-auto">
           <div className="section-label text-primary/50">
             <span className="section-label-line !bg-primary/50" />
             Get in Touch
           </div>
 
-          <h2 className="heading-serif font-bold text-primary mt-3" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+          <h2 className="heading-serif font-bold text-primary mt-2" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)" }}>
             Let&apos;s build something
-            <span className="italic font-light block text-xs"> worth talking about.</span>
+            <span className="italic font-light block text-[10px]"> worth talking about.</span>
           </h2>
 
-          <div className="mt-6">
-            <div className="flex items-center gap-3 mb-1.5">
+          <div className="mt-3">
+            <div className="flex items-center gap-1.5 mb-1">
               {formSteps.map((_, i) => (
                 <div
                   key={i}
                   className={`h-0.5 flex-1 transition-colors duration-300 ${i <= step ? "bg-primary" : "bg-primary/20"}`}
                 />
               ))}
-              <span className="font-mono text-[11px] tracking-[0.15em] text-primary/60 shrink-0 ml-2">
+              <span className="font-mono text-[9px] tracking-[0.15em] text-primary/60 shrink-0 ml-1">
                 {step + 1} / 4
               </span>
             </div>
 
-            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-6">
+            <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-primary/40 mb-3">
               {formSteps[step].subtitle}
             </div>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-primary text-accent font-mono text-xs">
+            <div className="mb-2 p-1.5 bg-primary text-accent font-mono text-[9px]">
               {error}
             </div>
           )}
 
-          <div className="min-h-[280px] relative overflow-hidden">
+          <div className="min-h-[160px] relative overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={step}
@@ -154,21 +154,21 @@ export default function BrandEdgeContact() {
                 transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
               >
                 {step === 0 && (
-                    <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       <input
                         type="text"
                         placeholder="Your Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-2 font-display text-foreground text-[clamp(1.2rem,3vw,1.8rem)] font-light placeholder:text-primary/30 outline-none transition-colors"
+                        className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-1 font-display text-foreground text-sm font-light placeholder:text-primary/30 outline-none transition-colors"
                       />
                       <input
                         type="text"
                         placeholder="Company (optional)"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-2 font-display text-foreground text-[clamp(1.2rem,3vw,1.8rem)] font-light placeholder:text-primary/30 outline-none transition-colors"
+                        className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-1 font-display text-foreground text-sm font-light placeholder:text-primary/30 outline-none transition-colors"
                       />
                     </div>
                     <input
@@ -176,20 +176,20 @@ export default function BrandEdgeContact() {
                       placeholder="Email Address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-2 font-display text-foreground text-[clamp(1.2rem,3vw,1.8rem)] font-light placeholder:text-primary/30 outline-none transition-colors"
+                      className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-1 font-display text-foreground text-sm font-light placeholder:text-primary/30 outline-none transition-colors"
                     />
                   </div>
                 )}
 
                 {step === 1 && (
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-1.5">
                     {projectTypes.map((type) => (
                       <button
                         key={type}
                         type="button"
                         onClick={() => setProjectType(type)}
-                        className={`font-mono text-[11px] tracking-[0.15em] uppercase px-5 py-3 border border-primary/20 transition-colors ${
-                          projectType === type
+className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
+                           projectType === type
                             ? "bg-primary text-accent border-primary"
                             : "text-primary/60 hover:border-primary/50"
                         }`}
@@ -201,9 +201,9 @@ export default function BrandEdgeContact() {
                 )}
 
                 {step === 2 && (
-                  <div className="space-y-6">
+                  <div className="space-y-3">
                     <div>
-                      <div className="font-display font-bold text-primary" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
+                      <div className="font-display font-bold text-primary" style={{ fontSize: "clamp(1rem, 2.5vw, 1.5rem)" }}>
                         {budgetLabels[budget]}
                       </div>
                       <input
@@ -213,26 +213,26 @@ export default function BrandEdgeContact() {
                         step={1}
                         value={budget}
                         onChange={(e) => setBudget(Number(e.target.value))}
-                        className="w-full mt-4 accent-primary h-1 appearance-none bg-primary/20 rounded-none outline-none"
+                        className="w-full mt-2 accent-primary h-1 appearance-none bg-primary/20 rounded-none outline-none"
                         style={{ height: "2px" }}
                       />
-                      <div className="flex justify-between mt-1">
-                        <span className="font-mono text-[10px] text-primary/40">KSh 10k</span>
-                        <span className="font-mono text-[10px] text-primary/40">KSh 500k+</span>
+                      <div className="flex justify-between mt-0.5">
+                        <span className="font-mono text-[8px] text-primary/40">KSh 10k</span>
+                        <span className="font-mono text-[8px] text-primary/40">KSh 500k+</span>
                       </div>
                     </div>
                     <div>
-                      <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-3">
+                      <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-primary/40 mb-1.5">
                         Timeline
                       </div>
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-wrap gap-1.5">
                         {timelineOptions.map((opt) => (
                           <button
                             key={opt.value}
                             type="button"
                             onClick={() => setTimeline(opt.label)}
-                            className={`font-mono text-[11px] tracking-[0.15em] uppercase px-5 py-3 border border-primary/20 transition-colors ${
-                              timeline === opt.label
+className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
+                               timeline === opt.label
                                 ? "bg-primary text-accent border-primary"
                                 : "text-primary/60 hover:border-primary/50"
                             }`}
@@ -251,10 +251,10 @@ export default function BrandEdgeContact() {
                       placeholder="Tell me about your project, goals, and timeline..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      rows={5}
-                      className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-2 font-display text-foreground text-[clamp(1rem,2.5vw,1.4rem)] font-light placeholder:text-primary/30 outline-none transition-colors resize-none"
+                      rows={2}
+                      className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-1 font-display text-foreground text-sm font-light placeholder:text-primary/30 outline-none transition-colors resize-none"
                     />
-                    <div className="font-mono text-[11px] tracking-[0.15em] text-primary/40 mt-2">
+                    <div className="font-mono text-[9px] tracking-[0.15em] text-primary/40 mt-1">
                       {message.length} characters {message.length < 10 ? "(min 10)" : ""}
                     </div>
                   </div>
@@ -263,11 +263,11 @@ export default function BrandEdgeContact() {
             </AnimatePresence>
           </div>
 
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-primary/20">
+          <div className="flex items-center justify-between mt-3 pt-2 border-t border-primary/20">
             <button
               type="button"
               onClick={handleBack}
-              className={`font-mono text-[11px] tracking-[0.15em] uppercase transition-colors ${
+              className={`font-mono text-[9px] tracking-[0.15em] uppercase transition-colors ${
                 step === 0 ? "text-primary/20 cursor-default" : "text-primary/60 hover:text-primary"
               }`}
               disabled={step === 0}
@@ -279,26 +279,26 @@ export default function BrandEdgeContact() {
                 type="button"
                 onClick={handleNext}
                 disabled={!canContinue()}
-                className={`font-mono text-[11px] tracking-[0.15em] uppercase px-5 py-3 transition-colors ${
-                  canContinue()
-                    ? "bg-primary text-accent hover:bg-primary/90"
-                    : "bg-primary/20 text-primary/40 cursor-default"
-                }`}
-              >
-                Continue →
+className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
+                   canContinue()
+                     ? "bg-primary text-accent hover:bg-primary/90"
+                     : "bg-primary/20 text-primary/40 cursor-default"
+                 }`}
+               >
+                 Continue →
               </button>
             ) : (
               <button
                 type="button"
                 onClick={handleSubmit}
                 disabled={!canContinue() || submitting}
-                className={`font-mono text-[11px] tracking-[0.15em] uppercase px-5 py-3 transition-colors ${
-                  canContinue() && !submitting
-                    ? "bg-primary text-accent hover:bg-primary/90"
-                    : "bg-primary/20 text-primary/40 cursor-default"
-                }`}
+className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
+                   canContinue() && !submitting
+                     ? "bg-primary text-accent hover:bg-primary/90"
+                     : "bg-primary/20 text-primary/40 cursor-default"
+                 }`}
               >
-                {submitting ? "Sending..." : "Send Message →"}
+                {submitting ? "Sending..." : "Send →"}
               </button>
             )}
           </div>

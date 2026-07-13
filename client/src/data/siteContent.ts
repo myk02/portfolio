@@ -69,8 +69,8 @@ export const aboutStats = [
 ];
 
 export const aboutParagraphs = [
-  "I'm a designer, full-stack developer, and AI workflow specialist who helps service businesses, startups, and growing brands turn ideas into clear, usable, and launch-ready digital experiences. Whether it's a brand identity, a custom web application, or an n8n-powered automation, I care about work that feels consistent, performs well, and genuinely serves the people using it.",
-  "I hold a Bachelor of Information Technology and work fluently in English and Kiswahili, which lets me collaborate comfortably with both local and international teams.",
+  "Developer, designer & Automation Specialist. I help businesses launch brands, web apps, and n8n automations.",
+  "BSc in Information Technology. Fluent in English & Kiswahili.",
 ];
 
 export const skillGroups = [
@@ -79,7 +79,7 @@ export const skillGroups = [
     skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
   },
   {
-    title: "Full-Stack Development",
+    title: "Development",
     skills: ["React", "Next.js", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
   },
   {
@@ -108,7 +108,7 @@ export type ServiceItem = { icon: LucideIcon; title: string; desc: string };
 
 export const services: ServiceItem[] = [
   { icon: Palette, title: "Brand & Graphic Design", desc: "Logos, brand colours, social posts, email graphics, presentations, and print work. I use Figma, Adobe Creative Suite, and Canva." },
-  { icon: Code, title: "Full-Stack Development", desc: "I design and build fast, responsive websites and custom web apps with React, Next.js, TypeScript, Node.js, APIs, and databases. From landing pages to full-stack platforms, I handle both frontend and backend delivery." },
+  { icon: Code, title: "Development", desc: "I design and build fast, responsive websites and custom web apps with React, Next.js, TypeScript, Node.js, APIs, and databases. From landing pages to full-stack platforms, I handle both frontend and backend delivery." },
   { icon: Video, title: "Motion & Social Video", desc: "Short videos, GIFs, and simple motion graphics for social media. I use CapCut Pro, Canva, and Adobe tools." },
   { icon: Layers, title: "UX/UI Design", desc: "I plan and design website and app screens so they are easy to use and work well on phones and computers." },
   { icon: BarChart3, title: "SEO & Web Analytics", desc: "I set up pages with proper titles, alt text, and structure. I also use GA4 to see what is working and what needs to change." },
@@ -130,7 +130,7 @@ export const processSteps = [
 
 export const pricingRows = [
   { service: "Brand & Graphic Design", starting: "KSh 20,000", range: "KSh 20,000 to 100,000", model: "Per project", icon: Palette },
-  { service: "Full-Stack Development", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
+  { service: "Development", starting: "KSh 30,000", range: "KSh 30,000 to 150,000", model: "Per project", icon: Code },
   { service: "Motion & Social Video", starting: "KSh 15,000", range: "KSh 15,000 to 60,000", model: "Per project", icon: Video },
   { service: "UX/UI Design", starting: "KSh 25,000", range: "KSh 25,000 to 120,000", model: "Per project", icon: Layers },
   { service: "SEO & Web Analytics", starting: "KSh 10,000", range: "KSh 10,000 to 50,000", model: "Monthly retainer", icon: BarChart3 },
@@ -152,23 +152,19 @@ export const subBrands = [
 ];
 
 export const contactItems = [
-  { label: "Email", value: "wrootmike@gmail.com", href: "mailto:wrootmike@gmail.com" },
-  { label: "Phone", value: "+254 792 618 156", href: "tel:+254792618156" },
+  { label: "Email", value: "mikegary201@gmail.com", href: "mailto:mikegary201@gmail.com" },
+  { label: "Phone", value: "0792618156", href: "tel:0792618156" },
   { label: "Location", value: "Nairobi, Kenya · Remote", href: undefined },
 ];
 
 export const socialLinks = [
-  { href: "mailto:wrootmike@gmail.com", icon: "https://cdn.simpleicons.org/gmail/EA4335", alt: "Email", className: "bg-gray-100 dark:bg-slate-700" },
+  { href: "mailto:mikegary201@gmail.com", icon: "https://cdn.simpleicons.org/gmail/EA4335", alt: "Email", className: "bg-gray-100 dark:bg-slate-700" },
   { href: "https://wa.me/254792618156", icon: "https://cdn.simpleicons.org/whatsapp/25D366", alt: "WhatsApp", className: "bg-gray-100 dark:bg-slate-700" },
-  { href: "https://www.instagram.com/myk.ih_1/", icon: "https://cdn.simpleicons.org/instagram/E4405F", alt: "Instagram", className: "bg-gray-100 dark:bg-slate-700" },
   { href: "https://linkedin.com/in/mike-waitindi-654bb2344", icon: null, alt: "LinkedIn", className: "bg-[#0A66C2]" },
-  { href: "https://github.com/garymike07", icon: "https://cdn.simpleicons.org/github/181717", alt: "GitHub", className: "bg-gray-100 dark:bg-slate-700" },
 ];
 
 export const footerLinks = [
-  { href: "mailto:wrootmike@gmail.com", label: "Email" },
+  { href: "mailto:mikegary201@gmail.com", label: "Email" },
   { href: "https://wa.me/254792618156", label: "WhatsApp" },
-  { href: "https://www.instagram.com/myk.ih_1/", label: "Instagram" },
   { href: "https://linkedin.com/in/mike-waitindi-654bb2344", label: "LinkedIn" },
-  { href: "https://github.com/garymike07", label: "GitHub" },
 ];
