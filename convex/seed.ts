@@ -129,8 +129,6 @@ export const seed = mutation({
     const validDesignImages = new Set(designProjects.map((p) => p.image));
 
     const codeProjects = [
-      { name: "LegalFlow - Practice Management", description: "A platform for Kenyan law firms to handle intake, cases, documents, billing, and client messages in one place.", techStack: ["React", "Development", "Legal Tech"], url: "https://law-five-eta.vercel.app/", image: "/thumbnails/legalflow.png", subBrand: "gmcode" as const, order: 1 },
-      { name: "CodeMaster - Coding Learning Platform", description: "A coding learning site with 11 courses and 368+ lessons in JavaScript, Python, and AI. Students work through lessons and challenges in a built-in editor.", techStack: ["React", "Education", "Interactive"], url: "https://codemaster-ten.vercel.app/", image: "/thumbnails/codemaster.png", subBrand: "gmcode" as const, order: 2 },
       { name: "GiGi Energy Drink - Product Website", description: "A product site for a Nairobi-made energy drink. Bold colours and simple messaging to match the brand.", techStack: ["React", "E-commerce", "Product"], url: "https://drink-sand.vercel.app/", image: "/thumbnails/gigi-energy.png", subBrand: "gmcode" as const, order: 5 },
       { name: "KenyaTrace - Tourism Explorer", description: "A site to help people discover places to visit in Kenya. Covers attractions, routes, and travel info across the country.", techStack: ["React", "Tourism", "Development"], url: "https://kenyatrace.vercel.app", image: "/thumbnails/kenya-tourism.png", subBrand: "gmcode" as const, order: 7 },
     ];
@@ -206,6 +204,8 @@ export const seed = mutation({
       "Qantra - Brand System Board",
       "Voront Glass - Brand Mockups",
       "CarSoko - Car Rental Platform",
+      "CodeMaster - Coding Learning Platform",
+      "LegalFlow - Practice Management",
       "Nora Designs - Architecture Portfolio",
       "PureMatch254 - Matchmaking Platform",
       "GM Voice - AI Voice Agents",
