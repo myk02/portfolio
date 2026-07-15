@@ -104,15 +104,13 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
             View JSON →
           </button>
         ) : project.subBrand === "gmdesign" ? null : project.subBrand === "gmmarketing" ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onPreview(project.url); }}
             className="inline-block mt-0.5 font-mono text-[9px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
-            onClick={(e) => e.stopPropagation()}
           >
             View →
-          </a>
+          </button>
         ) : (
           <a
             href={project.url}
