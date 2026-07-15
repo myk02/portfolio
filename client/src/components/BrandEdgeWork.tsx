@@ -39,8 +39,15 @@ type BrandId = (typeof brandOrder)[number];
 function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {
   const accent = projectAccents[project.subBrand] ?? "#e8ff47";
   const isMarketing = project.subBrand === "gmmarketing";
+  const isAutomation = project.subBrand === "gmautomation";
+  const isDevelopment = project.subBrand === "gmcode";
   const year = project.year ?? "2025";
-  const isCode = project.subBrand === "gmcode";
+  // Only Development projects expose an external site link.
+  // Design / Marketing: no card link. Automation: View JSON only.
+  const hasVisitSite =
+    isDevelopment &&
+    typeof project.url === "string" &&
+    /^https?:\/\//i.test(project.url);
 
   return (
     <div className="w-full border-[1.5px] border-border bg-secondary">
@@ -55,7 +62,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
               playsInline
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-          ) : project.subBrand === "gmautomation" ? (
+          ) : isAutomation ? (
             <div className="w-full h-full bg-muted/30 flex items-center justify-center">
               <img
                 src={project.image}
@@ -95,7 +102,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
             ))}
           </div>
         )}
-        {project.subBrand === "gmautomation" && project.workflowJson ? (
+        {isAutomation && project.workflowJson ? (
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onViewJson?.(project.workflowJson!); }}
@@ -103,7 +110,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
           >
             View JSON →
           </button>
-        ) : project.subBrand === "gmcode" ? (
+        ) : hasVisitSite ? (
           <a
             href={project.url}
             target="_blank"
