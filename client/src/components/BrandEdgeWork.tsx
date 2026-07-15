@@ -73,23 +73,23 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
             />
           )}
         </div>
-        <span className="absolute top-1 right-1 tag-pill bg-secondary/90 text-foreground text-[8px]">
+        <span className="absolute top-1 right-1 tag-pill bg-secondary/90 text-foreground text-[9px]">
           {year}
         </span>
       </div>
       <div className="p-1.5 relative">
         <span className="absolute top-1.5 right-1.5 w-1 h-1" style={{ background: accent }} />
-        <span className="tag-pill text-[8px] text-muted-foreground mb-0.5 inline-block">
+        <span className="tag-pill text-[9px] text-muted-foreground mb-0.5 inline-block">
           {brandLabels[project.subBrand] ?? project.subBrand}
         </span>
-        <h3 className="font-display font-bold text-[10px] tracking-tight text-foreground mt-0.5">{project.name}</h3>
+        <h3 className="font-display font-bold text-[11px] tracking-tight text-foreground mt-0.5">{project.name}</h3>
         {project.description && (
-          <p className="text-[8px] text-muted-foreground mt-0.5 leading-snug">{project.description}</p>
+          <p className="text-[9px] text-muted-foreground mt-0.5 leading-snug">{project.description}</p>
         )}
         {project.techStack && project.techStack.length > 0 && (
           <div className="flex flex-wrap gap-0.5 mt-0.5">
             {project.techStack.map((tech) => (
-              <span key={tech} className="font-mono text-[8px] tracking-[0.1em] uppercase px-1 py-[1px] border border-border">
+              <span key={tech} className="font-mono text-[9px] tracking-[0.1em] uppercase px-1 py-[1px] border border-border">
                 {tech}
               </span>
             ))}
@@ -99,7 +99,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); onViewJson?.(project.workflowJson!); }}
-            className="inline-block mt-0.5 font-mono text-[8px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
+            className="inline-block mt-0.5 font-mono text-[9px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
           >
             View JSON →
           </button>
@@ -108,7 +108,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-0.5 font-mono text-[8px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
+            className="inline-block mt-0.5 font-mono text-[9px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             Visit site →
@@ -136,9 +136,9 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
               <span className="section-label-line" />
               Portfolio
             </div>
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)" }}>
+            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)" }}>
               My work.
-              <span className="italic font-light text-muted-foreground block text-[11px]"> {projects.length} projects and counting.</span>
+              <span className="italic font-light text-muted-foreground block text-[12px]"> {projects.length} projects and counting.</span>
             </h2>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
           <button
             type="button"
             onClick={() => setActiveBrand("all")}
-            className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
+            className={`font-mono text-[10px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
               activeBrand === "all"
                 ? "bg-primary text-accent border-primary"
                 : "text-muted-foreground border-border hover:border-foreground"
@@ -163,7 +163,7 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
                 key={brand}
                 type="button"
                 onClick={() => setActiveBrand(brand)}
-                className={`font-mono text-[9px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
+                className={`font-mono text-[10px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
                   activeBrand === brand
                     ? "bg-primary text-accent border-primary"
                     : "text-muted-foreground border-border hover:border-foreground"

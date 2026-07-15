@@ -61,7 +61,7 @@ export default function Home() {
                 <span className="section-label-line" />
                 Client Feedback
               </div>
-              <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1rem, 2.5vw, 1.4rem)" }}>
+              <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}>
                 What people say.
               </h2>
             </div>
@@ -74,19 +74,19 @@ export default function Home() {
                       key={key}
                       className="flex-shrink-0 w-[120px] lg:w-[150px] border border-border p-1.5"
                     >
-                      <p className="text-[10px] text-muted-foreground leading-relaxed line-clamp-2">
+                      <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
                         &ldquo;{t.text}&rdquo;
                       </p>
                       <div className="flex items-center gap-1 mt-1.5">
-                        <div className="w-4 h-4 bg-primary text-secondary flex items-center justify-center font-mono text-[7px] font-bold shrink-0">
+                        <div className="w-4 h-4 bg-primary text-secondary flex items-center justify-center font-mono text-[8px] font-bold shrink-0">
                           {t.name.charAt(0)}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-mono text-[8px] tracking-[0.1em] uppercase text-foreground truncate">
+                          <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-foreground truncate">
                             {t.name}
                           </p>
                           {t.role && (
-                            <p className="font-mono text-[7px] tracking-[0.1em] uppercase text-muted-foreground truncate">
+                            <p className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground truncate">
                               {t.role}
                             </p>
                           )}

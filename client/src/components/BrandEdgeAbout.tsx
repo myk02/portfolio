@@ -23,11 +23,11 @@ export default function BrandEdgeAbout() {
           </div>
 
           <div className="col-span-12 lg:col-span-6">
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1rem, 2vw, 1.4rem)" }}>
+            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}>
               Developer, designer &amp; automation.
-              <span className="italic font-light text-muted-foreground block text-[11px]"> Building brands, apps &amp; workflows that work.</span>
+              <span className="italic font-light text-muted-foreground block text-[12px]"> Building brands, apps &amp; workflows that work.</span>
             </h2>
-            <div className="mt-3 space-y-1.5 text-[12px] text-muted-foreground leading-relaxed max-w-xl">
+            <div className="mt-3 space-y-1.5 text-[13px] text-muted-foreground leading-relaxed max-w-xl">
               {aboutParagraphs.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
@@ -55,10 +55,10 @@ export default function BrandEdgeAbout() {
           <div className="col-span-12 lg:col-span-3 space-y-3">
             {aboutStats.map((stat) => (
               <div key={stat.label} className="border-l-2 border-accent pl-4">
-                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(0.85rem, 1.8vw, 1.2rem)" }}>
+                <div className="font-display font-bold text-foreground" style={{ fontSize: "clamp(0.9rem, 1.8vw, 1.3rem)" }}>
                   {stat.value}
                 </div>
-                <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
+                <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mt-0.5">
                   {stat.label}
                 </div>
               </div>
@@ -66,29 +66,29 @@ export default function BrandEdgeAbout() {
             <div className="border-l-2 border-accent pl-4 pt-2 space-y-1.5">
               {contactItems.map((item) => (
                 <div key={item.label}>
-                  <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground">{item.label}</span>
+                  <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-muted-foreground">{item.label}</span>
                   {item.href ? (
-                    <a href={item.href} className="block text-xs text-foreground hover:text-accent transition-colors">{item.value}</a>
+                    <a href={item.href} className="block text-sm text-foreground hover:text-accent transition-colors">{item.value}</a>
                   ) : (
-                    <p className="text-xs text-foreground">{item.value}</p>
+                    <p className="text-sm text-foreground">{item.value}</p>
                   )}
                 </div>
               ))}
             </div>
           </div>
         </div>          <div className="mt-8 lg:mt-12">
-          <h3 className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-2">
+          <h3 className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-2">
             Skills &amp; Tools
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5">
             {skillGroups.map((group) => (
               <div key={group.title} className="border border-border p-2">
-                <h4 className="font-display font-bold text-[10px] text-foreground mb-1">
+                <h4 className="font-display font-bold text-[11px] text-foreground mb-1">
                   {group.title}
                 </h4>
                 <div className="flex flex-wrap gap-1">
                   {group.skills.map((skill) => (
-                    <span key={skill} className="font-mono text-[8px] tracking-[0.1em] uppercase px-1.5 py-[1px] border border-border text-muted-foreground">
+                    <span key={skill} className="font-mono text-[9px] tracking-[0.1em] uppercase px-1.5 py-[1px] border border-border text-muted-foreground">
                       {skill}
                     </span>
                   ))}
