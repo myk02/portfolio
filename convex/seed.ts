@@ -150,16 +150,27 @@ export const seed = mutation({
       { name: "AI Lead Qualification & Scoring System", description: "AI-powered lead qualification that captures inbound leads, scores and enriches them with OpenAI, routes priority leads to Slack and Gmail, and logs all submissions to Google Sheets.", techStack: ["n8n", "OpenAI", "Slack", "Gmail", "Google Sheets"], url: "https://github.com/matolengwe96/ai-lead-qualification-n8n", image: "/thumbnails/gmautomation/lead-qualification.png", subBrand: "gmautomation" as const, order: 28, workflowJson: "/workflows/lead-qualification.json" },
     ];
 
+    const existingByName: Record<string, (typeof existing)[number]> = {};
+    for (const p of existing) {
+      existingByName[p.name] = p;
+    }
+
     const projects = [...codeProjects, ...marketingProjects];
 
     for (const project of projects) {
-      if (!existingSet.has(project.name)) {
+      const match = existingByName[project.name];
+      if (match) {
+        await ctx.db.patch(match._id, project);
+      } else {
         await ctx.db.insert("projects", project);
       }
     }
 
     for (const project of automationProjects) {
-      if (!existingSet.has(project.name)) {
+      const match = existingByName[project.name];
+      if (match) {
+        await ctx.db.patch(match._id, project);
+      } else {
         await ctx.db.insert("projects", project);
       }
     }
