@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as cleanupGmdesign from "../cleanupGmdesign.js";
 import type * as projects from "../projects.js";
 import type * as seed from "../seed.js";
 import type * as serviceRequests from "../serviceRequests.js";
@@ -21,6 +22,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  cleanupGmdesign: typeof cleanupGmdesign;
   projects: typeof projects;
   seed: typeof seed;
   serviceRequests: typeof serviceRequests;
