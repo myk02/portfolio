@@ -25,7 +25,7 @@ const brandLabels: Record<string, string> = {
   gmautomation: "Automation",
 };
 
-const brandOrder = ["gmautomation", "gmcode", "gmmarketing"] as const;
+const brandOrder = ["gmcode", "gmmarketing", "gmautomation"] as const;
 type BrandId = (typeof brandOrder)[number];
 
 function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {
@@ -133,9 +133,9 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
 }
 
 export default function BrandEdgeWork({ projects, onPreview, onViewJson }: BrandEdgeWorkProps) {
-  const [activeBrand, setActiveBrand] = useState<BrandId | "all">("all");
+  const [activeBrand, setActiveBrand] = useState<BrandId>("gmcode");
 
-  const filteredProjects = activeBrand === "all" ? projects : projects.filter((p) => p.subBrand === activeBrand);
+  const filteredProjects = projects.filter((p) => p.subBrand === activeBrand);
 
   return (
     <section id="work" className="section-pad bg-secondary">
@@ -151,17 +151,6 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
           </div>
 
           <div className="flex flex-wrap gap-2 mb-8">
-            <button
-              type="button"
-              onClick={() => setActiveBrand("all")}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
-                activeBrand === "all"
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground border border-border"
-              }`}
-            >
-              All ({projects.length})
-            </button>
             {brandOrder.map((brand) => {
               const count = projects.filter((p) => p.subBrand === brand).length;
               if (count === 0) return null;
