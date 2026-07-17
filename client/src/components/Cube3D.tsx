@@ -10,7 +10,7 @@ interface Cube3DProps {
 
 export default function Cube3D({ mouseX, mouseY }: Cube3DProps) {
   const groupRef = useRef<Group>(null);
-  const texture = useTexture("/mike.png");
+  const texture = useTexture("/miki.png");
 
   const edgesMaterial = useMemo(() => new LineBasicMaterial({ color: "#0a0a0a" }), []);
 
