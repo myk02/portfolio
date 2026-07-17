@@ -80,7 +80,7 @@ export const skillGroups = [
   },
   {
     title: "Development",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
+    skills: ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
   },
   {
     title: "Cloud & Developer Tools",
@@ -140,12 +140,10 @@ export const pricingRows = [
 
 export const caseStudyOutcomes: Record<string, string> = {
   gmcode: "Built for measurable growth and smoother customer journeys.",
-  gmdesign: "Crafted to strengthen brand recall across print and digital touchpoints.",
   gmmarketing: "Designed to increase engagement with short-form storytelling.",
 };
 
 export const subBrands = [
-  { id: "gmdesign" as const, label: "GMDesign", icon: Palette },
   { id: "gmmarketing" as const, label: "GM Marketing", icon: Video },
   { id: "gmcode" as const, label: "GMCode", icon: Code },
   { id: "gmautomation" as const, label: "GM Automation", icon: BarChart3 },

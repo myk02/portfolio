@@ -1,51 +1,11 @@
 import { mutation } from "./_generated/server";
 import { AVATAR_BY_NAME, TESTIMONIAL_SEEDS } from "./testimonialData";
 
-const designProjects = [
-  {
-    name: "GiGi Energy: Product Campaign",
-    description: "Product photo layout built around the can, fruit, and brand colours.",
-    techStack: ["GiGi Energy", "Social post"],
-    url: "#",
-    image: "/thumbnails/2.png",
-    subBrand: "gmdesign" as const,
-    order: 9,
-  },
-  {
-    name: "KenyaTrace: Merch T-Shirt",
-    description: "Logo applied to merchandise for the KenyaTrace tourism brand.",
-    techStack: ["KenyaTrace", "Print"],
-    url: "#",
-    image: "/thumbnails/3.png",
-    subBrand: "gmdesign" as const,
-    order: 10,
-  },
-  {
-    name: "GiGi Energy: Pineapple Coconut Line",
-    description: "A second flavour line with yellow and brown tones and tropical visuals.",
-    techStack: ["GiGi Energy", "Packaging"],
-    url: "#",
-    image: "/thumbnails/5.png",
-    subBrand: "gmdesign" as const,
-    order: 12,
-  },
-  {
-    name: "Elva: Drink Line",
-    description: "Premium drink bottles in black, blue, and purple for three formulas.",
-    techStack: ["Elva", "Packaging"],
-    url: "#",
-    image: "/thumbnails/gmdesign/elva-drink-packaging-line.png",
-    subBrand: "gmdesign" as const,
-    order: 21,
-  },
-];
-
 export const seed = mutation({
   handler: async (ctx) => {
     const existing = await ctx.db.query("projects").collect();
     const existingNames = existing.map((p) => p.name);
     const existingSet = new Set(existingNames);
-    const validDesignImages = new Set(designProjects.map((p) => p.image));
 
     const codeProjects = [
       { name: "GiGi Energy Drink - Product Website", description: "A product site for a Nairobi-made energy drink. Bold colours and simple messaging to match the brand.", techStack: ["React", "E-commerce", "Product"], url: "https://gigiflavours.vercel.app/", image: "/thumbnails/gigi-energy.png", subBrand: "gmcode" as const, order: 5 },
@@ -90,22 +50,6 @@ export const seed = mutation({
         await ctx.db.patch(match._id, project);
       } else {
         await ctx.db.insert("projects", project);
-      }
-    }
-
-    for (const design of designProjects) {
-      const match = existing.find((p) => p.image === design.image);
-      if (match) {
-        await ctx.db.patch(match._id, design);
-      } else if (!existingSet.has(design.name)) {
-        await ctx.db.insert("projects", design);
-      }
-    }
-
-    const gmdesign = existing.filter((p) => p.subBrand === "gmdesign");
-    for (const project of gmdesign) {
-      if (!validDesignImages.has(project.image)) {
-        await ctx.db.delete(project._id);
       }
     }
 

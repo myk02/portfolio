@@ -21,19 +21,17 @@ interface BrandEdgeWorkProps {
 
 const projectAccents: Record<string, string> = {
   gmcode: "#e8ff47",
-  gmdesign: "#ff6b35",
   gmmarketing: "#c4a882",
   gmautomation: "#00b4d8",
 };
 
 const brandLabels: Record<string, string> = {
   gmcode: "Development",
-  gmdesign: "Design",
   gmmarketing: "Marketing",
   gmautomation: "Automation",
 };
 
-const brandOrder = ["gmdesign", "gmautomation", "gmcode", "gmmarketing"] as const;
+const brandOrder = ["gmautomation", "gmcode", "gmmarketing"] as const;
 type BrandId = (typeof brandOrder)[number];
 
 function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {

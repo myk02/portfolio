@@ -7,7 +7,7 @@ export const list = query({
     if (args.subBrand) {
       return await ctx.db
         .query("projects")
-        .withIndex("by_subBrand", (q) => q.eq("subBrand", args.subBrand as "gmcode" | "gmdesign" | "gmmarketing" | "gmautomation"))
+        .withIndex("by_subBrand", (q) => q.eq("subBrand", args.subBrand as "gmcode" | "gmmarketing" | "gmautomation"))
         .order("asc")
         .collect();
     }
@@ -24,7 +24,6 @@ export const create = mutation({
     image: v.string(),
     subBrand: v.union(
       v.literal("gmcode"),
-      v.literal("gmdesign"),
       v.literal("gmmarketing"),
       v.literal("gmautomation")
     ),

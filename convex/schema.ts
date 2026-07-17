@@ -10,7 +10,6 @@ export default defineSchema({
     image: v.string(),
     subBrand: v.union(
       v.literal("gmcode"),
-      v.literal("gmdesign"),
       v.literal("gmmarketing"),
       v.literal("gmautomation")
     ),
