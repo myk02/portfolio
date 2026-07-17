@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Project {
   _id?: string;
@@ -19,12 +19,6 @@ interface BrandEdgeWorkProps {
   onViewJson?: (workflowJson: string) => void;
 }
 
-const projectAccents: Record<string, string> = {
-  gmcode: "#e8ff47",
-  gmmarketing: "#c4a882",
-  gmautomation: "#00b4d8",
-};
-
 const brandLabels: Record<string, string> = {
   gmcode: "Development",
   gmmarketing: "Marketing",
@@ -35,92 +29,106 @@ const brandOrder = ["gmautomation", "gmcode", "gmmarketing"] as const;
 type BrandId = (typeof brandOrder)[number];
 
 function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {
-  const accent = projectAccents[project.subBrand] ?? "#e8ff47";
   const isMarketing = project.subBrand === "gmmarketing";
   const isAutomation = project.subBrand === "gmautomation";
   const isDevelopment = project.subBrand === "gmcode";
-  const year = project.year ?? "2025";
-  // Only Development projects expose an external site link.
-  // Design / Marketing: no card link. Automation: View JSON only.
   const hasVisitSite =
     isDevelopment &&
     typeof project.url === "string" &&
     /^https?:\/\//i.test(project.url);
 
   return (
-    <div className="w-full border-[1.5px] border-border bg-secondary">
-      <div className="relative aspect-[2/1] overflow-hidden group">
-        <div className="cursor-pointer" onClick={() => onPreview(isMarketing ? project.url : project.image)}>
-          {isMarketing ? (
-            <video
-              src={project.url}
-              muted
-              autoPlay
-              loop
-              playsInline
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          ) : isAutomation ? (
-            <div className="w-full h-full bg-muted/30 flex items-center justify-center">
-              <img
-                src={project.image}
-                alt={project.name}
-                className="w-full h-full object-contain p-1 transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-          ) : (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="group cursor-pointer"
+      onClick={() => onPreview(isMarketing ? project.url : project.image)}
+    >
+      <div className="aspect-[4/3] overflow-hidden bg-muted mb-3">
+        {isMarketing ? (
+          <video
+            src={project.url}
+            muted
+            autoPlay
+            loop
+            playsInline
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : isAutomation ? (
+          <div className="w-full h-full flex items-center justify-center p-4">
             <img
               src={project.image}
               alt={project.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
+          </div>
+        ) : (
+          <img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
+      </div>
+      
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">
+            {brandLabels[project.subBrand] ?? project.subBrand}
+          </span>
+          {project.year && (
+            <span className="text-xs text-muted-foreground">· {project.year}</span>
           )}
         </div>
-        <span className="absolute top-1 right-1 tag-pill bg-secondary/90 text-foreground text-[11px]">
-          {year}
-        </span>
-      </div>
-      <div className="p-1.5 relative">
-        <span className="absolute top-1.5 right-1.5 w-1 h-1" style={{ background: accent }} />
-        <span className="tag-pill text-[11px] text-muted-foreground mb-0.5 inline-block">
-          {brandLabels[project.subBrand] ?? project.subBrand}
-        </span>
-        <h3 className="font-display font-bold text-[13px] tracking-tight text-foreground mt-0.5">{project.name}</h3>
+        
+        <h3 className="font-display font-bold text-lg text-foreground group-hover:text-accent transition-colors">
+          {project.name}
+        </h3>
+        
         {project.description && (
-          <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">{project.description}</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {project.description}
+          </p>
         )}
+        
         {project.techStack && project.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-0.5 mt-0.5">
+          <div className="flex flex-wrap gap-1.5 pt-1">
             {project.techStack.map((tech) => (
-              <span key={tech} className="font-mono text-[11px] tracking-[0.1em] uppercase px-1 py-[1px] border border-border">
+              <span key={tech} className="tag-pill text-xs">
                 {tech}
               </span>
             ))}
           </div>
         )}
-        {isAutomation && project.workflowJson ? (
-          <button
-            type="button"
-            onClick={(e) => { e.stopPropagation(); onViewJson?.(project.workflowJson!); }}
-            className="inline-block mt-0.5 font-mono text-[11px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
-          >
-            View JSON →
-          </button>
-        ) : hasVisitSite ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-0.5 font-mono text-[11px] tracking-[0.15em] uppercase text-foreground hover:text-accent transition-colors"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Visit site →
-          </a>
-        ) : null}
+        
+        <div className="pt-2">
+          {isAutomation && project.workflowJson ? (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onViewJson?.(project.workflowJson!); }}
+              className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+            >
+              View workflow →
+            </button>
+          ) : hasVisitSite ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-foreground hover:text-accent transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Visit site →
+            </a>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -129,74 +137,78 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
 
   const filteredProjects = activeBrand === "all" ? projects : projects.filter((p) => p.subBrand === activeBrand);
 
-  const hasProjects = filteredProjects.length > 0;
-
   return (
-    <section id="work" className="section-pad bg-secondary overflow-hidden">
-      <div className="container mb-4">
-        <div className="max-w-lg mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-2">
-          <div>
-            <div className="section-label">
-              <span className="section-label-line" />
-              Portfolio
-            </div>
-            <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)" }}>
-              My work.
-              <span className="italic font-light text-muted-foreground block text-[12px]"> {projects.length} projects and counting.</span>
+    <section id="work" className="section-pad bg-secondary">
+      <div className="container">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
+              Selected work
             </h2>
+            <p className="text-muted-foreground text-base max-w-lg">
+              A collection of projects across development, marketing, and automation.
+            </p>
           </div>
-        </div>
 
-        <div className="flex flex-wrap gap-1.5 mt-3">
-          <button
-            type="button"
-            onClick={() => setActiveBrand("all")}
-            className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
-              activeBrand === "all"
-                ? "bg-primary text-accent border-primary"
-                : "text-muted-foreground border-border hover:border-foreground"
-            }`}
-          >
-            All ({projects.length})
-          </button>
-          {brandOrder.map((brand) => {
-            const count = projects.filter((p) => p.subBrand === brand).length;
-            if (count === 0) return null;
-            return (
-              <button
-                key={brand}
-                type="button"
-                onClick={() => setActiveBrand(brand)}
-                className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 border transition-colors ${
-                  activeBrand === brand
-                    ? "bg-primary text-accent border-primary"
-                    : "text-muted-foreground border-border hover:border-foreground"
-                }`}
-              >
-                {brandLabels[brand]} ({count})
-              </button>
-            );
-          })}
+          <div className="flex flex-wrap gap-2 mb-8">
+            <button
+              type="button"
+              onClick={() => setActiveBrand("all")}
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
+                activeBrand === "all"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground border border-border"
+              }`}
+            >
+              All ({projects.length})
+            </button>
+            {brandOrder.map((brand) => {
+              const count = projects.filter((p) => p.subBrand === brand).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={brand}
+                  type="button"
+                  onClick={() => setActiveBrand(brand)}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                    activeBrand === brand
+                      ? "bg-foreground text-background"
+                      : "text-muted-foreground hover:text-foreground border border-border"
+                  }`}
+                >
+                  {brandLabels[brand]} ({count})
+                </button>
+              );
+            })}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeBrand}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project._id ?? project.name}
+                  project={project}
+                  onPreview={onPreview}
+                  onViewJson={onViewJson}
+                />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {filteredProjects.length === 0 && (
+            <p className="text-muted-foreground text-center py-12">
+              No projects in this category yet.
+            </p>
+          )}
         </div>
       </div>
-      </div>
-
-      {hasProjects ? (
-        <div className="container">
-          <div className="max-w-lg mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project._id ?? project.name} project={project} onPreview={onPreview} onViewJson={onViewJson} />
-            ))}
-          </div>
-        </div>
-        </div>
-      ) : (
-        <div className="container">
-          <p className="text-muted-foreground font-mono text-[12px] tracking-wider uppercase">No projects yet.</p>
-        </div>
-      )}
     </section>
   );
 }

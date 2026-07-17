@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Minus, Plus, Menu, X, Sun, Moon } from "lucide-react";
-import { useFontSize } from "@/contexts/FontSizeContext";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface BrandEdgeHeaderProps {
@@ -10,7 +9,6 @@ interface BrandEdgeHeaderProps {
 
 export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const { theme, toggleTheme } = useTheme();
-  const { scale, increase, decrease, reset } = useFontSize();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,91 +26,66 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const navLinks = [
     { id: "work", label: "Work" },
     { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 h-14 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-secondary/90 backdrop-blur-md border-b border-border"
-          : "bg-transparent border-b border-transparent"
+          : "bg-transparent"
       }`}
     >
-      <div className="container h-full flex items-center justify-between">
-        <button type="button" onClick={() => handleNav("home")} className="flex items-center gap-2">
-          <img src="/brand1.png" alt="GMLink" className="w-9 h-9 object-contain" />
-          <span className="font-display font-bold text-[1.15rem] tracking-tight text-foreground">GMLink</span>
+      <div className="container h-16 flex items-center justify-between">
+        <button 
+          type="button" 
+          onClick={() => handleNav("home")} 
+          className="font-display font-bold text-xl tracking-tight text-foreground hover:text-accent transition-colors"
+        >
+          Mike Waitindi
         </button>
 
-        <nav className="hidden xl:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <button
               key={link.id}
               type="button"
               onClick={() => handleNav(link.id)}
-              className="font-mono text-[13px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </button>
           ))}
         </nav>
 
-        <div className="flex items-center gap-0.5">
-          {/* Font size controls */}
-          <div className="hidden md:flex items-center gap-0.5 mr-1 border-r border-border pr-1.5">
-            <button
-              type="button"
-              onClick={decrease}
-              disabled={scale <= 0.75}
-              className="font-mono text-muted-foreground hover:text-foreground transition-colors p-1 disabled:opacity-30 disabled:pointer-events-none"
-              aria-label="Decrease font size"
-            >
-              <Minus size={12} />
-            </button>
-            <button
-              type="button"
-              onClick={reset}
-              className="font-mono text-[12px] tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors px-1"
-              aria-label="Reset font size"
-              title="Reset font size"
-            >
-              {Math.round(scale * 100)}%
-            </button>
-            <button
-              type="button"
-              onClick={increase}
-              disabled={scale >= 1.5}
-              className="font-mono text-muted-foreground hover:text-foreground transition-colors p-1 disabled:opacity-30 disabled:pointer-events-none"
-              aria-label="Increase font size"
-            >
-              <Plus size={12} />
-            </button>
-          </div>
-
+        <div className="flex items-center gap-3">
           {toggleTheme && (
             <button
               type="button"
               onClick={toggleTheme}
-              className="font-mono text-[12px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors p-1.5"
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           )}
+          
           <button
             type="button"
             onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex font-mono text-[12px] tracking-[0.15em] uppercase bg-accent text-accent-foreground hover:bg-primary hover:text-accent px-2 py-1 transition-colors"
+            className="hidden md:inline-flex btn-accent text-sm"
           >
-            Get in touch →
+            Get in touch
           </button>
+          
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="xl:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label="Menu"
           >
-            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
@@ -120,36 +93,31 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.nav
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-secondary flex flex-col items-center justify-center gap-6"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-secondary border-b border-border overflow-hidden"
           >
-            {navLinks.map((link, i) => (
-              <motion.button
-                key={link.id}
+            <div className="container py-4 space-y-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  type="button"
+                  onClick={() => handleNav(link.id)}
+                  className="block w-full text-left text-lg font-medium text-foreground hover:text-accent transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
                 type="button"
-                onClick={() => handleNav(link.id)}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-bold text-4xl text-foreground hover:text-accent transition-colors"
+                onClick={() => handleNav("contact")}
+                className="btn-accent w-full text-center"
               >
-                {link.label}
-              </motion.button>
-            ))}
-            <motion.button
-              type="button"
-              onClick={() => handleNav("contact")}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-[12px] tracking-[0.15em] uppercase bg-primary text-accent hover:bg-accent hover:text-primary px-3 py-1.5 transition-colors mt-3"
-            >
-              Get in touch →
-            </motion.button>
+                Get in touch
+              </button>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>

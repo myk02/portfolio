@@ -54,47 +54,46 @@ export default function Home() {
 
         <BrandEdgeAbout />
 
-          {allTestimonials.length > 0 && (
-          <section id="reviews" className="section-pad bg-secondary border-t border-border overflow-hidden">
-            <div className="container mb-4">
-              <div className="section-label">
-                <span className="section-label-line" />
-                Client Feedback
-              </div>
-              <h2 className="heading-serif font-bold text-foreground" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}>
-                What people say.
-              </h2>
-            </div>
-            <div className="marquee-container">
-              <div className="marquee-track">
-                {[...allTestimonials, ...allTestimonials, ...allTestimonials].map((t, i) => {
-                  const key = `${t._id ?? t.name}-${i}`;
-                  return (
+        {allTestimonials.length > 0 && (
+          <section id="reviews" className="section-pad bg-secondary border-t border-border">
+            <div className="container">
+              <div className="max-w-4xl mx-auto">
+                <div className="mb-8">
+                  <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
+                    Testimonials
+                  </h2>
+                  <p className="text-muted-foreground text-base">
+                    What clients say about working with me.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {allTestimonials.slice(0, 4).map((t) => (
                     <div
-                      key={key}
-                      className="flex-shrink-0 w-[120px] lg:w-[150px] border border-border p-1.5"
+                      key={t._id ?? t.name}
+                      className="border border-border p-6"
                     >
-                      <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
+                      <p className="text-muted-foreground leading-relaxed mb-4">
                         &ldquo;{t.text}&rdquo;
                       </p>
-                      <div className="flex items-center gap-1 mt-1.5">
-                        <div className="w-4 h-4 bg-primary text-secondary flex items-center justify-center font-mono text-[8px] font-bold shrink-0">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-foreground text-background flex items-center justify-center font-medium text-sm shrink-0">
                           {t.name.charAt(0)}
                         </div>
-                        <div className="min-w-0">
-                          <p className="font-mono text-[9px] tracking-[0.1em] uppercase text-foreground truncate">
+                        <div>
+                          <p className="font-medium text-foreground text-sm">
                             {t.name}
                           </p>
                           {t.role && (
-                            <p className="font-mono text-[8px] tracking-[0.1em] uppercase text-muted-foreground truncate">
+                            <p className="text-xs text-muted-foreground">
                               {t.role}
                             </p>
                           )}
                         </div>
                       </div>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
             </div>
           </section>
@@ -119,7 +118,7 @@ export default function Home() {
 
       <Dialog open={!!jsonWorkflowPath} onOpenChange={(open) => { if (!open) setJsonWorkflowPath(null); }}>
         <DialogContent className="max-w-4xl w-[95vw] bg-primary border-0 max-h-[90vh] overflow-hidden flex flex-col">
-          <DialogTitle className="font-mono text-xs tracking-wider uppercase text-accent">Workflow JSON</DialogTitle>
+          <DialogTitle className="font-medium text-sm text-accent">Workflow JSON</DialogTitle>
           {jsonWorkflowPath && <JsonViewer path={jsonWorkflowPath} />}
         </DialogContent>
       </Dialog>
