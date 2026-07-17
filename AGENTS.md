@@ -10,7 +10,7 @@ only variable names. Real values live in a local, gitignored
 
 - **GitHub repo:** `myk02/portfolio`
 - **Convex deployment:** `https://pastel-grouse-884.convex.cloud`
-- **Vercel account(s) available:** Full, Full2
+- **Vercel project:** `portfolio` (https://portfolio-delta-bay-50.vercel.app)
 
 ## Environment variables this project references
 
