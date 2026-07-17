@@ -20,7 +20,7 @@ export default function BrandEdgeCapabilities() {
               <span className="italic font-light text-muted-foreground block text-[11px]"> One focus — results.</span>
             </h2>
           </div>
-          <p className="text-[11px] text-muted-foreground max-w-[200px] leading-relaxed lg:text-right">
+          <p className="text-[12px] text-muted-foreground max-w-[200px] leading-relaxed lg:text-right">
             I don&apos;t do everything. I do six things well — and I&apos;m invested in every single one.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function BrandEdgeCapabilities() {
                   className="w-full flex items-center justify-between py-2 lg:py-2.5 group"
                 >
                   <div className="flex items-center gap-2 lg:gap-4">
-                    <span className="font-mono text-[10px] tracking-wider text-muted-foreground w-5 shrink-0">
+                    <span className="font-mono text-[11px] tracking-wider text-muted-foreground w-5 shrink-0">
                       {cap.number}
                     </span>
                     <h3 className="font-display font-bold text-left tracking-tight text-foreground group-hover:text-accent transition-colors"
@@ -62,14 +62,14 @@ export default function BrandEdgeCapabilities() {
                       className="overflow-hidden"
                     >
                       <div className="pb-2 lg:pb-3 pl-7 lg:pl-8 pr-6">
-                        <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 max-w-2xl">
+                        <p className="text-[12px] text-muted-foreground leading-relaxed mb-2 max-w-2xl">
                           {cap.description}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {cap.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="font-mono text-[9px] tracking-[0.15em] uppercase px-1.5 py-0.5 border border-border"
+                              className="font-mono text-[10px] tracking-[0.15em] uppercase px-1.5 py-0.5 border border-border"
                             >
                               {tag}
                             </span>
@@ -86,7 +86,7 @@ export default function BrandEdgeCapabilities() {
 
         <div className="flex items-center gap-1.5 mt-3">
           <span className="w-3 h-[1.5px] bg-accent" />
-          <span className="font-mono text-[10px] text-muted-foreground italic">
+          <span className="font-mono text-[11px] text-muted-foreground italic">
             Every service available as a standalone project or part of a full engagement.
           </span>
         </div>

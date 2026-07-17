@@ -15,7 +15,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
       <div className="container h-12 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img src="/brand1.png" alt="GMLink" className="w-5 h-5 object-contain" />
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
             &copy; {year} Mike Waitindi
           </span>
         </div>
@@ -26,7 +26,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               key={link.id}
               type="button"
               onClick={() => onNavClick(link.id)}
-              className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+              className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </button>
@@ -34,7 +34,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
             mikegary201@gmail.com
           </span>
         </div>

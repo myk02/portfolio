@@ -29,16 +29,16 @@ function ProcessStep({
             <h3 className="font-display font-bold text-secondary" style={{ fontSize: "clamp(1rem, 1.8vw, 1.3rem)" }}>
               {step.title}
             </h3>
-            <span className="font-mono text-[11px] tracking-wider text-secondary/30">{step.duration}</span>
+            <span className="font-mono text-[12px] tracking-wider text-secondary/30">{step.duration}</span>
         </div>
         <div className="col-span-5 lg:col-span-5">
-          <p className="text-secondary/60 leading-relaxed text-sm">{step.description}</p>
+          <p className="text-secondary/60 leading-relaxed text-[15px]">{step.description}</p>
         </div>
         <div className="col-span-3 lg:col-span-3">
-          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-secondary/40">Deliverables</span>
+          <span className="font-mono text-[12px] tracking-[0.2em] uppercase text-secondary/40">Deliverables</span>
           <ul className="mt-2 space-y-1.5">
             {step.deliverables.map((d) => (
-              <li key={d} className="flex items-center gap-2 text-sm text-secondary/50">
+              <li key={d} className="flex items-center gap-2 text-[15px] text-secondary/50">
                 <span className="w-1.5 h-1.5 bg-accent shrink-0" />
                 {d}
               </li>
@@ -75,7 +75,7 @@ export default function BrandEdgeProcess() {
               <span className="italic font-light text-accent block text-sm"> No fluff.</span>
             </h2>
           </div>
-          <p className="text-sm text-secondary/50 max-w-xs leading-relaxed lg:text-right">
+          <p className="text-[15px] text-secondary/50 max-w-xs leading-relaxed lg:text-right">
             A straightforward process that moves your project from idea to launch with no wasted time.
           </p>
         </div>

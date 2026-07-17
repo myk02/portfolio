@@ -50,7 +50,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               key={link.id}
               type="button"
               onClick={() => handleNav(link.id)}
-              className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+              className="font-mono text-[12px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </button>
@@ -72,7 +72,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
             <button
               type="button"
               onClick={reset}
-              className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors px-1"
+              className="font-mono text-[11px] tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors px-1"
               aria-label="Reset font size"
               title="Reset font size"
             >
@@ -93,7 +93,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
             <button
               type="button"
               onClick={toggleTheme}
-              className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors p-1.5"
+              className="font-mono text-[11px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors p-1.5"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
@@ -102,7 +102,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
           <button
             type="button"
             onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex font-mono text-[10px] tracking-[0.15em] uppercase bg-accent text-accent-foreground hover:bg-primary hover:text-accent px-2 py-1 transition-colors"
+            className="hidden md:inline-flex font-mono text-[11px] tracking-[0.15em] uppercase bg-accent text-accent-foreground hover:bg-primary hover:text-accent px-2 py-1 transition-colors"
           >
             Get in touch →
           </button>
@@ -146,7 +146,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-[10px] tracking-[0.15em] uppercase bg-primary text-accent hover:bg-accent hover:text-primary px-3 py-1.5 transition-colors mt-3"
+              className="font-mono text-[11px] tracking-[0.15em] uppercase bg-primary text-accent hover:bg-accent hover:text-primary px-3 py-1.5 transition-colors mt-3"
             >
               Get in touch →
             </motion.button>

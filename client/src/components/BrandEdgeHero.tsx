@@ -61,7 +61,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-secondary/60 font-sans text-sm leading-relaxed max-w-lg mt-3"
+              className="text-secondary/60 font-sans text-[15px] leading-relaxed max-w-lg mt-3"
             >
               Developer, designer & Automation Specialist. Brand direction, web apps, AI automation, and launch-ready digital experiences.
             </motion.p>
@@ -111,7 +111,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
         className="absolute bottom-4 left-4 lg:left-6"
       >
         <div className="scroll-indicator">
-          <span className="font-mono text-[11px] tracking-[0.4em] text-secondary/50">SCROLL</span>
+          <span className="font-mono text-[12px] tracking-[0.4em] text-secondary/50">SCROLL</span>
           <div className="scroll-line">
             <div className="scroll-line-fill" />
           </div>
