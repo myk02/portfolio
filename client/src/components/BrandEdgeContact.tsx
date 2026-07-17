@@ -89,13 +89,13 @@ export default function BrandEdgeContact() {
       <section id="contact" className="section-pad bg-secondary bg-[url(/contact-bg.svg)]">
         <div className="container">
           <div className="max-w-lg mx-auto text-center">
-            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-primary/50 mb-2">
+            <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-primary/50 mb-2">
               Message Received
             </div>
             <h2 className="heading-serif font-bold text-primary" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}>
               I&apos;ll be in touch within 24 hours.
             </h2>
-            <p className="font-mono text-[10px] tracking-[0.15em] text-primary/60 mt-3">
+            <p className="font-mono text-[12px] tracking-[0.15em] text-primary/60 mt-3">
               Thanks, {name.split(" ")[0]}! I&apos;ll review your message and reach out to schedule a call.
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function BrandEdgeContact() {
 
           <h2 className="heading-serif font-bold text-primary mt-2" style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}>
             Let&apos;s build something
-            <span className="italic font-light block text-[11px]"> worth talking about.</span>
+            <span className="italic font-light block text-[13px]"> worth talking about.</span>
           </h2>
 
           <div className="mt-3">
@@ -126,18 +126,18 @@ export default function BrandEdgeContact() {
                   className={`h-0.5 flex-1 transition-colors duration-300 ${i <= step ? "bg-primary" : "bg-primary/20"}`}
                 />
               ))}
-              <span className="font-mono text-[11px] tracking-[0.15em] text-primary/60 shrink-0 ml-1">
+              <span className="font-mono text-[12px] tracking-[0.15em] text-primary/60 shrink-0 ml-1">
                 {step + 1} / 4
               </span>
             </div>
 
-            <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-3">
+            <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-primary/40 mb-3">
               {formSteps[step].subtitle}
             </div>
           </div>
 
           {error && (
-            <div className="mb-2 p-1.5 bg-primary text-accent font-mono text-[11px]">
+            <div className="mb-2 p-1.5 bg-primary text-accent font-mono text-[12px]">
               {error}
             </div>
           )}
@@ -188,7 +188,7 @@ export default function BrandEdgeContact() {
                         key={type}
                         type="button"
                         onClick={() => setProjectType(type)}
-className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
+className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
                            projectType === type
                             ? "bg-primary text-accent border-primary"
                             : "text-primary/60 hover:border-primary/50"
@@ -217,12 +217,12 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border b
                         style={{ height: "2px" }}
                       />
                       <div className="flex justify-between mt-0.5">
-                        <span className="font-mono text-[11px] text-primary/40">KSh 10k</span>
-                        <span className="font-mono text-[11px] text-primary/40">KSh 500k+</span>
+                        <span className="font-mono text-[12px] text-primary/40">KSh 10k</span>
+                        <span className="font-mono text-[12px] text-primary/40">KSh 500k+</span>
                       </div>
                     </div>
                     <div>
-                      <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-primary/40 mb-1.5">
+                      <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-primary/40 mb-1.5">
                         Timeline
                       </div>
                       <div className="flex flex-wrap gap-1.5">
@@ -231,7 +231,7 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border b
                             key={opt.value}
                             type="button"
                             onClick={() => setTimeline(opt.label)}
-className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
+className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 border border-primary/20 transition-colors ${
                                timeline === opt.label
                                 ? "bg-primary text-accent border-primary"
                                 : "text-primary/60 hover:border-primary/50"
@@ -254,7 +254,7 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border b
                       rows={2}
                       className="w-full bg-transparent border-b-[1.5px] border-primary/20 focus:border-primary py-1 font-display text-foreground text-base font-light placeholder:text-primary/30 outline-none transition-colors resize-none"
                     />
-                    <div className="font-mono text-[11px] tracking-[0.15em] text-primary/40 mt-1">
+                    <div className="font-mono text-[12px] tracking-[0.15em] text-primary/40 mt-1">
                       {message.length} characters {message.length < 10 ? "(min 10)" : ""}
                     </div>
                   </div>
@@ -267,7 +267,7 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border b
             <button
               type="button"
               onClick={handleBack}
-              className={`font-mono text-[11px] tracking-[0.15em] uppercase transition-colors ${
+              className={`font-mono text-[12px] tracking-[0.15em] uppercase transition-colors ${
                 step === 0 ? "text-primary/20 cursor-default" : "text-primary/60 hover:text-primary"
               }`}
               disabled={step === 0}
@@ -279,7 +279,7 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 border b
                 type="button"
                 onClick={handleNext}
                 disabled={!canContinue()}
-className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
+className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
                    canContinue()
                      ? "bg-primary text-accent hover:bg-primary/90"
                      : "bg-primary/20 text-primary/40 cursor-default"
@@ -292,7 +292,7 @@ className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 transiti
                 type="button"
                 onClick={handleSubmit}
                 disabled={!canContinue() || submitting}
-className={`font-mono text-[11px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
+className={`font-mono text-[12px] tracking-[0.15em] uppercase px-2 py-1 transition-colors ${
                    canContinue() && !submitting
                      ? "bg-primary text-accent hover:bg-primary/90"
                      : "bg-primary/20 text-primary/40 cursor-default"

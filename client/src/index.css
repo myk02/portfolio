@@ -232,7 +232,7 @@
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted-foreground);
@@ -272,10 +272,10 @@
   background: var(--accent);
   color: var(--accent-foreground);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   transition: all 0.2s ease;
 }
 
@@ -288,10 +288,10 @@
   background: transparent;
   color: var(--foreground);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border: 1.5px solid var(--border);
   transition: all 0.2s ease;
 }
@@ -304,10 +304,10 @@
 
 .tag-pill {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 0.25rem 0.55rem;
+  padding: 0.3rem 0.6rem;
   border: 1px solid var(--border);
 }
 
@@ -336,10 +336,10 @@
   color: var(--accent-foreground);
   border: none;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.8rem;
 }
 
 .btn-gradient:hover {
