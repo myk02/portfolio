@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { projectMeta } from "@/data/siteContent";
 
 interface Project {
   _id?: string;
@@ -36,6 +37,11 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
     typeof project.url === "string" &&
     /^https?:\/\//i.test(project.url);
 
+  const meta = projectMeta[project.name] ?? {};
+  const year = meta.year ?? project.year;
+  const isConceptual =
+    meta.conceptual ?? /conceptual case study/i.test(project.description ?? "");
+
   return (
     <motion.div
       layout
@@ -46,7 +52,7 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
       className="group cursor-pointer"
       onClick={() => onPreview(isMarketing ? project.url : project.image)}
     >
-      <div className="aspect-[4/3] overflow-hidden bg-muted mb-3">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted mb-3">
         {isMarketing ? (
           <video
             src={project.url}
@@ -73,6 +79,18 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
             loading="lazy"
           />
         )}
+        <div className="absolute top-2 left-2 flex flex-wrap gap-1.5">
+          {year && (
+            <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-background/85 backdrop-blur border border-border text-foreground">
+              {year}
+            </span>
+          )}
+          {isConceptual && (
+            <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-accent text-accent-foreground">
+              Conceptual
+            </span>
+          )}
+        </div>
       </div>
       
       <div className="space-y-2">
@@ -135,7 +153,7 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
   return (
     <section id="work" className="section-pad bg-secondary border-t border-border">
       <div className="container">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
               My work

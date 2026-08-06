@@ -31,7 +31,7 @@ export default function UXProcessSection() {
   return (
     <section id="process" className="section-pad bg-primary border-t border-border">
       <div className="container">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="mb-10">
             <span className="section-label text-secondary/70">
               <span className="section-label-line" />
@@ -43,7 +43,7 @@ export default function UXProcessSection() {
             >
               My Design Process
             </h2>
-            <p className="text-secondary/90 text-base max-w-lg leading-relaxed">
+            <p className="text-secondary text-base max-w-lg leading-relaxed">
               A research-driven, four-phase approach that moves from user insight to validated product.
             </p>
           </div>
@@ -66,14 +66,14 @@ export default function UXProcessSection() {
                     {step.title}
                   </h3>
                 </div>
-                <p className="text-secondary/90 text-sm leading-relaxed mb-4">
+                <p className="text-secondary text-sm leading-relaxed mb-4">
                   {step.desc}
                 </p>
                 <ul className="space-y-1.5">
                   {step.deliverables.map((d) => (
                     <li
                       key={d}
-                      className="flex items-center gap-2 text-sm text-secondary/85"
+                      className="flex items-center gap-2 text-sm text-secondary"
                     >
                       <span className="w-1.5 h-1.5 bg-accent shrink-0" />
                       {d}

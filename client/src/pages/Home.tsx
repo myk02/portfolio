@@ -62,7 +62,7 @@ export default function Home() {
         {featuredTestimonials.length > 0 && (
           <section id="reviews" className="section-pad bg-secondary border-t border-border">
             <div className="container">
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
                   <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
                     Testimonials
@@ -72,7 +72,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
                   {featuredTestimonials.map((t) => (
                     <div
                       key={t._id ?? t.name}

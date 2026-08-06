@@ -94,7 +94,7 @@ export default function BrandEdgeContact() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
+                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/55 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
                   placeholder="Your name"
                 />
               </div>
@@ -108,7 +108,7 @@ export default function BrandEdgeContact() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
+                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/55 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
                   placeholder="your@email.com"
                 />
               </div>
@@ -124,7 +124,7 @@ export default function BrandEdgeContact() {
                 onChange={(e) => setMessage(e.target.value)}
                 required
                 rows={4}
-                className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40 resize-none"
+                className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/55 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40 resize-none"
                 placeholder="Tell me about your project, goals, and timeline..."
               />
             </div>

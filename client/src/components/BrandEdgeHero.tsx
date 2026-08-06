@@ -16,7 +16,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
       className="relative min-h-[60vh] bg-secondary flex items-center overflow-hidden"
     >
       <div className="container relative z-10 w-full">
-        <div className="max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] items-center gap-10 lg:gap-16 max-w-6xl mx-auto">
           <div className="py-12 lg:py-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -107,6 +107,24 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               </div>
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:flex justify-center py-12"
+          >
+            <div className="relative">
+              <div className="absolute -top-3 -right-3 w-full h-full border border-accent" aria-hidden="true" />
+              <img
+                src="/miki.png"
+                alt="Mike Waitindi — portrait"
+                className="relative w-full max-w-sm h-auto object-cover border border-border"
+              />
+              <div className="absolute -bottom-3 -left-3 w-full h-full bg-foreground/5 border border-border" aria-hidden="true" />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -30,8 +30,8 @@ function getInitialScale(): number {
 }
 
 function applyScale(scale: number) {
-  const pct = Math.round(scale * 100);
-  document.documentElement.style.fontSize = `${pct}%`;
+  const px = Math.round(15 * scale * 100) / 100;
+  document.documentElement.style.fontSize = `${px}px`;
 }
 
 export function FontSizeProvider({ children }: { children: React.ReactNode }) {

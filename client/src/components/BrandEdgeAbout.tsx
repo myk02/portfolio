@@ -5,7 +5,7 @@ export default function BrandEdgeAbout() {
   return (
     <section id="about" className="section-pad bg-secondary border-t border-border">
       <div className="container">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <div>
               <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
@@ -54,7 +54,7 @@ export default function BrandEdgeAbout() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="font-display font-bold text-3xl text-foreground">
+                    <div className="font-display font-black text-4xl text-foreground tracking-tight">
                       {stat.value}
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">

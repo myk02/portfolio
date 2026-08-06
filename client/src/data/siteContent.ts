@@ -146,6 +146,14 @@ export const caseStudyOutcomes: Record<string, string> = {
   gmmarketing: "Designed to increase engagement with short-form storytelling.",
 };
 
+export const projectMeta: Record<string, { year?: string; conceptual?: boolean }> = {
+  "GiGi Energy Drink": { year: "2025" },
+  "KenyaTrace": { year: "2024" },
+  "Mobile Banking App Redesign": { year: "2025", conceptual: true },
+  "Complex Dashboard UI System": { year: "2025", conceptual: true },
+  "Design System Creation": { year: "2025", conceptual: true },
+};
+
 export const subBrands = [
   { id: "gmmarketing" as const, label: "GM Marketing", icon: Video },
   { id: "gmcode" as const, label: "GMCode", icon: Code },
