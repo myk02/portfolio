@@ -26,7 +26,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
             >
               <span className="section-label">
                 <span className="section-label-line" />
-                Design & Development
+                UI/UX Design | Product Strategy | Visual Thinking — Nairobi
               </span>
             </motion.div>
 
@@ -48,8 +48,10 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="text-muted-foreground text-lg leading-relaxed max-w-xl mt-4"
             >
-              Developer, designer, and automation specialist building brands, 
-              web apps, and AI workflows from Nairobi.
+              <span className="font-display font-semibold text-foreground block text-xl mb-1">
+                UI/UX Designer &amp; Product Strategist
+              </span>
+              Designing intuitive, engaging digital experiences for mobile, web, and app environments.
             </motion.p>
 
             <motion.div

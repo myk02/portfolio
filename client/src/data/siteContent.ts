@@ -65,42 +65,43 @@ export const aboutStats = [
   { label: "Years experience", value: "4+" },
   { label: "Design projects", value: "15+" },
   { label: "Websites & apps", value: "7+" },
-  { label: "Automation workflows", value: "8+" },
+  { label: "Products shipped", value: "8+" },
 ];
 
+export const aboutTitle = "Visual Thinker & UX Strategist";
+export const aboutSubtitle = "Shaping digital experiences that feel personal and intuitive.";
+
 export const aboutParagraphs = [
-  "Developer, designer & Automation Specialist. I help businesses launch brands, web apps, and n8n automations.",
-  "BSc in Information Technology. Fluent in English & Kiswahili.",
+  "As a UI/UX Designer, I thrive in fast-paced environments where I can act as an internal consultant. I specialize in translating complex business requirements into elegant, user-centric solutions. I excel at collaborating across business, technology, and creative teams to build consensus and deliver products that solve real-world UX challenges.",
 ];
 
 export const skillGroups = [
   {
-    title: "Design & Brand",
-    skills: ["Figma", "Adobe Creative Suite", "Canva", "CapCut Pro", "Brand Guidelines", "Typography", "Print Design", "Motion Graphics"],
+    title: "Core UX/UI Toolkit",
+    skills: [
+      "Figma (Wireframes, Prototypes, Design Systems)",
+      "FigJam & Miro (Workshops, Journey Mapping)",
+      "Adobe Creative Cloud (Visual Design, Branding)",
+      "Sketch (Interface Design, Handoff)",
+    ],
   },
   {
-    title: "Development",
-    skills: ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "Node.js", "Express", "HTML/CSS", "Tailwind CSS", "Python", "PHP", "SQL", "PostgreSQL", "Supabase", "Convex", "REST APIs", "Responsive Design", "Accessible Design"],
+    title: "UX Methodologies",
+    skills: [
+      "User Research & Surveys",
+      "Wireframing & Prototyping",
+      "Information Architecture",
+      "Usability Testing",
+      "Stakeholder Management",
+    ],
   },
   {
-    title: "Cloud & Developer Tools",
-    skills: ["Azure", "Git", "GitHub", "Vercel", "Postman", "Ubuntu Linux", "macOS", "Figma Handoffs", "AI Workflow Tools"],
-  },
-  {
-    title: "Marketing & Analytics",
-    skills: ["On-page SEO", "GA4", "Social Media Strategy", "Content Planning", "Brand Campaigns", "Uptime Monitoring", "Site Speed", "Hosting Support"],
-  },
-  {
-    title: "IT Support & Infrastructure",
-    skills: ["Jira", "Active Directory", "Microsoft 365", "ERP Systems", "LAN/WAN", "DNS", "DHCP", "Wi-Fi", "Security Patching", "Backup & Restore", "Training & Documentation"],
+    title: "Technical Collaboration",
+    skills: ["React", "Next.js", "HTML/CSS", "Tailwind CSS"],
   },
   {
     title: "Languages",
     skills: ["English (Fluent)", "Kiswahili (Fluent)"],
-  },
-  {
-    title: "AI & Automation",
-    skills: ["n8n", "OpenAI API", "Webhooks", "Lead Enrichment", "Social Scheduling", "Invoice Processing", "Ticket Classification", "Dashboard Reporting", "Data Pipelines"],
   },
 ];
 

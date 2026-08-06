@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { aboutParagraphs, aboutStats, socialLinks, contactItems, skillGroups } from "@/data/siteContent";
+import { aboutTitle, aboutSubtitle, aboutParagraphs, aboutStats, socialLinks, contactItems, skillGroups } from "@/data/siteContent";
 
 export default function BrandEdgeAbout() {
   return (
@@ -8,9 +8,15 @@ export default function BrandEdgeAbout() {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <div>
-              <h2 className="heading-serif font-bold text-foreground mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
+              <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
                 About
               </h2>
+              <p className="font-display font-semibold text-xl text-foreground mb-1">
+                {aboutTitle}
+              </p>
+              <p className="text-muted-foreground text-sm mb-5 italic">
+                {aboutSubtitle}
+              </p>
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 {aboutParagraphs.map((p) => (

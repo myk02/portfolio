@@ -4,15 +4,17 @@ import { api } from "../../../convex/_generated/api";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
 import BrandEdgeHero from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
+import UXProcessSection from "@/components/UXProcessSection";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import JsonViewer from "@/components/JsonViewer";
 
+const FEATURED_TESTIMONIALS = ["Nancy Akinyi", "Brian Omondi", "Gladys Jeruto"];
+
 export default function Home() {
   const seed = useMutation(api.seed.seed);
-  const seedAutomation = useMutation(api.seed.seedAutomation);
   const allProjects = useQuery(api.projects.list, {}) ?? [];
   const allTestimonials = useQuery(api.testimonials.listApproved) ?? [];
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -22,11 +24,12 @@ export default function Home() {
     if (allProjects.length === 0 && allTestimonials.length === 0) {
       seed();
     }
-    const hasAutomation = allProjects.some((p) => p.subBrand === "gmautomation");
-    if (allProjects.length > 0 && !hasAutomation) {
-      seedAutomation();
-    }
-  }, [seed, seedAutomation, allProjects.length, allTestimonials.length, allProjects]);
+  }, [seed, allProjects.length, allTestimonials.length]);
+
+  const featuredTestimonials = useMemo(
+    () => allTestimonials.filter((t) => FEATURED_TESTIMONIALS.includes(t.name)),
+    [allTestimonials],
+  );
 
   const sortedProjects = useMemo(
     () => [...allProjects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
@@ -52,9 +55,11 @@ export default function Home() {
           onViewJson={(path) => setJsonWorkflowPath(path)}
         />
 
+        <UXProcessSection />
+
         <BrandEdgeAbout />
 
-        {allTestimonials.length > 0 && (
+        {featuredTestimonials.length > 0 && (
           <section id="reviews" className="section-pad bg-secondary border-t border-border">
             <div className="container">
               <div className="max-w-4xl mx-auto">
@@ -68,7 +73,7 @@ export default function Home() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {allTestimonials.slice(0, 4).map((t) => (
+                  {featuredTestimonials.map((t) => (
                     <div
                       key={t._id ?? t.name}
                       className="border border-border p-6"

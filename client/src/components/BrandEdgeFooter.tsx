@@ -19,7 +19,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                 Mike Waitindi
               </button>
               <p className="text-sm text-muted-foreground mt-1">
-                Developer, designer, and automation specialist
+                UI/UX Designer & Product Strategist
               </p>
             </div>
 

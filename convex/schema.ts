@@ -11,7 +11,9 @@ export default defineSchema({
     subBrand: v.union(
       v.literal("gmcode"),
       v.literal("gmmarketing"),
-      v.literal("gmautomation")
+      v.literal("gmautomation"),
+      v.literal("gmdesign"),
+      v.literal("gmux")
     ),
     order: v.number(),
     workflowJson: v.optional(v.string()),

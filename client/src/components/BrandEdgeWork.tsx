@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Project {
@@ -23,17 +22,17 @@ const brandLabels: Record<string, string> = {
   gmcode: "Development",
   gmmarketing: "Marketing",
   gmautomation: "Automation",
+  gmdesign: "Product Design",
+  gmux: "UX Research & Design",
 };
-
-const brandOrder = ["gmcode", "gmmarketing", "gmautomation"] as const;
-type BrandId = (typeof brandOrder)[number];
 
 function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onPreview: (url: string) => void; onViewJson?: (workflowJson: string) => void }) {
   const isMarketing = project.subBrand === "gmmarketing";
   const isAutomation = project.subBrand === "gmautomation";
-  const isDevelopment = project.subBrand === "gmcode";
   const hasVisitSite =
-    isDevelopment &&
+    (project.subBrand === "gmcode" ||
+      project.subBrand === "gmdesign" ||
+      project.subBrand === "gmux") &&
     typeof project.url === "string" &&
     /^https?:\/\//i.test(project.url);
 
@@ -133,54 +132,28 @@ function ProjectCard({ project, onPreview, onViewJson }: { project: Project; onP
 }
 
 export default function BrandEdgeWork({ projects, onPreview, onViewJson }: BrandEdgeWorkProps) {
-  const [activeBrand, setActiveBrand] = useState<BrandId>("gmcode");
-
-  const filteredProjects = projects.filter((p) => p.subBrand === activeBrand);
-
   return (
-    <section id="work" className="section-pad bg-secondary">
+    <section id="work" className="section-pad bg-secondary border-t border-border">
       <div className="container">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
-              Selected work
+              My work
             </h2>
             <p className="text-muted-foreground text-base max-w-lg">
-              A collection of projects across development, marketing, and automation.
+              Featured UX &amp; Product Design projects.
             </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {brandOrder.map((brand) => {
-              const count = projects.filter((p) => p.subBrand === brand).length;
-              if (count === 0) return null;
-              return (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={() => setActiveBrand(brand)}
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
-                    activeBrand === brand
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:text-foreground border border-border"
-                  }`}
-                >
-                  {brandLabels[brand]} ({count})
-                </button>
-              );
-            })}
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeBrand}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {filteredProjects.map((project) => (
+              {projects.map((project) => (
                 <ProjectCard
                   key={project._id ?? project.name}
                   project={project}
@@ -191,9 +164,9 @@ export default function BrandEdgeWork({ projects, onPreview, onViewJson }: Brand
             </motion.div>
           </AnimatePresence>
 
-          {filteredProjects.length === 0 && (
+          {projects.length === 0 && (
             <p className="text-muted-foreground text-center py-12">
-              No projects in this category yet.
+              No projects yet.
             </p>
           )}
         </div>
