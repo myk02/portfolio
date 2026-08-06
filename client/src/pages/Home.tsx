@@ -72,16 +72,16 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                   {featuredTestimonials.map((t) => (
                     <div
                       key={t._id ?? t.name}
-                      className="border border-border p-6"
+                      className="border border-border p-6 flex flex-col"
                     >
-                      <p className="text-muted-foreground leading-relaxed mb-4">
+                      <p className="text-muted-foreground leading-relaxed mb-4 flex-grow">
                         &ldquo;{t.text}&rdquo;
                       </p>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 mt-auto">
                         <div className="w-10 h-10 bg-foreground text-background flex items-center justify-center font-medium text-sm shrink-0">
                           {t.name.charAt(0)}
                         </div>

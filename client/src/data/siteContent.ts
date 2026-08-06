@@ -73,6 +73,7 @@ export const aboutSubtitle = "Shaping digital experiences that feel personal and
 
 export const aboutParagraphs = [
   "As a UI/UX Designer, I thrive in fast-paced environments where I can act as an internal consultant. I specialize in translating complex business requirements into elegant, user-centric solutions. I excel at collaborating across business, technology, and creative teams to build consensus and deliver products that solve real-world UX challenges.",
+  "I'm comfortable scoping, estimating, and prioritizing work in fast-paced environments — breaking ambiguous briefs into clear deliverables, setting realistic timelines, and shipping on schedule without sacrificing quality.",
 ];
 
 export const skillGroups = [
@@ -89,6 +90,7 @@ export const skillGroups = [
     title: "UX Methodologies",
     skills: [
       "User Research & Surveys",
+      "Competitive Analysis & Market Research",
       "Wireframing & Prototyping",
       "Information Architecture",
       "Usability Testing",

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { Download } from "lucide-react";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -75,6 +76,14 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               >
                 Get in touch
               </button>
+              <a
+                href="/CV.pdf"
+                download
+                className="btn-ghost inline-flex items-center justify-center gap-2"
+              >
+                <Download size={15} />
+                Download CV
+              </a>
             </motion.div>
 
             <motion.div

@@ -94,7 +94,7 @@ export default function BrandEdgeContact() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full bg-transparent border-b border-border focus:border-foreground py-2 text-foreground placeholder:text-muted-foreground outline-none transition-colors"
+                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
                   placeholder="Your name"
                 />
               </div>
@@ -108,7 +108,7 @@ export default function BrandEdgeContact() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-transparent border-b border-border focus:border-foreground py-2 text-foreground placeholder:text-muted-foreground outline-none transition-colors"
+                  className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40"
                   placeholder="your@email.com"
                 />
               </div>
@@ -124,7 +124,7 @@ export default function BrandEdgeContact() {
                 onChange={(e) => setMessage(e.target.value)}
                 required
                 rows={4}
-                className="w-full bg-transparent border-b border-border focus:border-foreground py-2 text-foreground placeholder:text-muted-foreground outline-none transition-colors resize-none"
+                className="w-full bg-card border border-border px-4 py-3 text-foreground placeholder:text-foreground/45 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40 resize-none"
                 placeholder="Tell me about your project, goals, and timeline..."
               />
             </div>
@@ -136,7 +136,7 @@ export default function BrandEdgeContact() {
             <button
               type="submit"
               disabled={!name.trim() || !email.trim() || !message.trim() || submitting}
-              className="btn-accent disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-accent inline-flex items-center justify-center gap-2 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? "Sending..." : "Send message"}
             </button>

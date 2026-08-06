@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Download } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface BrandEdgeHeaderProps {
@@ -57,6 +57,14 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               {link.label}
             </button>
           ))}
+          <a
+            href="/CV.pdf"
+            download
+            className="hidden lg:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-accent transition-colors"
+          >
+            <Download size={14} />
+            Download CV
+          </a>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -117,6 +125,13 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               >
                 Get in touch
               </button>
+              <a
+                href="/CV.pdf"
+                download
+                className="btn-ghost w-full text-center block"
+              >
+                Download CV
+              </a>
             </div>
           </motion.nav>
         )}

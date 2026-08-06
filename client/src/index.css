@@ -277,17 +277,18 @@
   font-weight: 500;
   letter-spacing: 0.02em;
   padding: 0.6rem 1.2rem;
+  border: 1px solid var(--foreground);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   transition: all 0.2s ease;
 }
 
 .btn-accent:hover {
   background: var(--accent);
-  color: var(--foreground);
-}
-
-.btn-accent:hover {
-  background: var(--primary);
-  color: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--foreground);
 }
 
 .btn-ghost {
@@ -299,6 +300,10 @@
   letter-spacing: 0.02em;
   padding: 0.6rem 1.2rem;
   border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   transition: all 0.2s ease;
 }
 
@@ -306,12 +311,6 @@
   background: var(--foreground);
   color: var(--background);
   border-color: var(--foreground);
-}
-
-.btn-ghost:hover {
-  background: var(--primary);
-  color: var(--accent);
-  border-color: var(--primary);
 }
 
 .tag-pill {
