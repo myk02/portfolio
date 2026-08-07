@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
-
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+import { Reveal } from "@/components/Reveal";
 
 function DiscoverArtifact() {
   const notes = [
@@ -160,26 +158,29 @@ export default function UXProcessSection() {
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10 sm:mb-12">
-            <span className="section-label text-secondary/70">
-              <span className="section-label-line" />
-              How I work
-            </span>
-            <h2 className="heading-section text-secondary mb-3">My Design Process</h2>
-            <p className="text-secondary text-base max-w-lg leading-relaxed opacity-80">
-              A research-driven, four-phase approach that moves from user insight to validated product.
-            </p>
+            <Reveal>
+              <span className="section-label text-secondary/70">
+                <span className="section-label-line" />
+                How I work
+              </span>
+              <h2 className="heading-section text-secondary mb-3">My Design Process</h2>
+              <p className="text-secondary text-base max-w-lg leading-relaxed opacity-80">
+                A research-driven, four-phase approach that moves from user insight to validated product.
+              </p>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {phases.map((phase, i) => (
-              <motion.div
+              <Reveal
                 key={phase.number}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.12, ease: EASE }}
-                className="group border border-secondary/25 p-4 sm:p-5 flex flex-col hover:border-secondary/60 transition-colors"
+                delay={i}
+                className="group border border-secondary/25 p-4 sm:p-5 flex flex-col relative overflow-hidden hover:border-secondary/60 transition-colors"
               >
+                <span
+                  aria-hidden
+                  className="absolute bottom-0 left-0 w-full h-[3px] bg-accent origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                />
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-mono text-xs tracking-widest text-accent">{phase.number}</span>
                   <h3 className="font-display font-bold text-xl text-secondary group-hover:text-accent transition-colors">
@@ -188,20 +189,14 @@ export default function UXProcessSection() {
                 </div>
                 {phase.artifact}
                 <p className="text-secondary text-sm leading-relaxed mt-3 opacity-80">{phase.def}</p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 text-center text-secondary/70 text-sm"
-          >
+          <Reveal className="mt-8 text-center text-secondary/70 text-sm">
             This is the same Discover → Define → Design → Validate process I run on every
             project, end to end.
-          </motion.p>
+          </Reveal>
         </div>
       </div>
     </section>

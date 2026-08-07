@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Ruler, Boxes, Code2 } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 const cards = [
   {
@@ -25,7 +25,7 @@ export default function DesignPlaybook() {
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-14 items-start">
-            <div>
+            <Reveal>
               <span className="section-label">
                 <span className="section-label-line" />
                 Design Playbook
@@ -35,16 +35,13 @@ export default function DesignPlaybook() {
                 Reusable UI guidelines, component libraries, and developer-ready handoff —
                 so quality survives at scale.
               </p>
-            </div>
+            </Reveal>
 
             <div className="space-y-4">
               {cards.map((card, i) => (
-                <motion.div
+                <Reveal
                   key={card.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  delay={i}
                   className="group flex gap-4 border border-border bg-card p-5 transition-all duration-300 hover:border-foreground/40 hover:-translate-y-0.5"
                 >
                   <div className="shrink-0 w-10 h-10 flex items-center justify-center border border-border bg-secondary text-foreground transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
@@ -54,7 +51,7 @@ export default function DesignPlaybook() {
                     <h3 className="font-display font-bold text-lg text-foreground mb-1">{card.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                   </div>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
           </div>

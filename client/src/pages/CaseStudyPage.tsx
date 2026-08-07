@@ -6,7 +6,10 @@ import { caseStudies, type CaseSection } from "@/data/caseStudies";
 import NotFound from "@/pages/NotFound";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
+import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
 import BankingArt from "@/components/art/BankingArt";
+import MiniBankingScreens from "@/components/art/MiniBankingScreens";
 import DashboardArt from "@/components/art/DashboardArt";
 import DesignSystemArt from "@/components/art/DesignSystemArt";
 import { goHomeToSection } from "@/lib/navigation";
@@ -25,7 +28,11 @@ function Kicker({ children }: { children: React.ReactNode }) {
 function SectionHeader({ index, title }: { index: string; title: string }) {
   return (
     <div className="flex items-baseline gap-3 mb-5">
-      <span className="font-mono text-xs tracking-widest text-muted-foreground">{index}</span>
+      <Reveal delay={0} scale className="shrink-0">
+        <span className="inline-block w-10 h-10 rounded-soft-sm bg-foreground text-background font-mono text-xs tracking-widest flex items-center justify-center">
+          {index}
+        </span>
+      </Reveal>
       <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground tracking-tight">
         {title}
       </h2>
@@ -45,7 +52,7 @@ function SectionBlock({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-border pt-10 mt-10 first:border-t-0 first:mt-0 first:pt-0">
+    <Reveal as="section" delay={0} className="border-t border-border pt-10 mt-10 first:border-t-0 first:mt-0 first:pt-0">
       <SectionHeader index={index} title={title} />
       {section.lead && (
         <p className="text-foreground font-medium text-lg leading-relaxed mb-4">{section.lead}</p>
@@ -101,7 +108,7 @@ function SectionBlock({
       )}
 
       {children}
-    </section>
+    </Reveal>
   );
 }
 
@@ -133,10 +140,12 @@ function GreyscaleFrame({ label, isHiFi = false }: { label: string; isHiFi?: boo
 
 function WireframeStrip({ labels }: { labels: string[] }) {
   return (
-    <div className="flex justify-center gap-4 sm:gap-6 my-8 flex-wrap">
-      {labels.map((l, i) => (
-        <GreyscaleFrame key={l} label={`${i + 1} · ${l}`} />
-      ))}
+    <div className="device-frame my-8">
+      <div className="flex justify-center gap-4 sm:gap-6 flex-wrap">
+        {labels.map((l, i) => (
+          <GreyscaleFrame key={l} label={`${i + 1} · ${l}`} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -169,17 +178,40 @@ function FlowDiagram({ steps, title, accent }: { steps: string[]; title: string;
 
 function BeforeAfterFlows() {
   return (
-    <div className="grid md:grid-cols-2 gap-4 my-8">
-      <FlowDiagram
-        title="Before · 8 steps"
-        steps={["Open", "Details", "Documents", "Verification", "Address", "PIN", "Agreements", "Done"]}
-        accent={false}
-      />
-      <FlowDiagram
-        title="After · 4 steps"
-        steps={["Phone", "ID", "PIN", "Photo → Done"]}
-        accent
-      />
+    <div className="my-8 space-y-4">
+      <div className="grid md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+        <div className="relative">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-rose-400/60 text-rose-500 font-mono text-[11px] tracking-widest uppercase mb-3">
+            <X size={11} strokeWidth={3} />
+            Before · 8 steps
+          </span>
+          <FlowDiagram
+            steps={["Open", "Details", "Documents", "Verification", "Address", "PIN", "Agreements", "Done"]}
+            title="Friction hidden in plain sight"
+            accent={false}
+          />
+        </div>
+        <div className="hidden md:flex items-center justify-center">
+          <span className="font-mono text-xs text-muted-foreground" aria-hidden>
+            → 2×
+          </span>
+        </div>
+        <div>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent text-accent-foreground font-mono text-[11px] tracking-widest uppercase mb-3">
+            <Check size={11} strokeWidth={3} />
+            After · 4 steps
+          </span>
+          <FlowDiagram
+            steps={["Phone", "ID", "PIN", "Photo → Done"]}
+            title="Progressive KYC, zero unnecessary friction"
+            accent
+          />
+        </div>
+      </div>
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Before: 8 sequential steps, 5 of them pure data-entry. After: 4 steps — data the bank
+        already holds (phone) and data only the customer can provide (ID, PIN, photo).
+      </p>
     </div>
   );
 }
@@ -193,33 +225,54 @@ function AtAGlance({ study }: { study: (typeof caseStudies)[number] }) {
     { label: "Outcome", value: study.outcomes[0] ? `${study.outcomes[0].value} ${study.outcomes[0].metric.toLowerCase()}` : "—" },
   ];
   return (
-    <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-auto border border-border bg-card">
-      <p className="px-5 pt-5 pb-3 text-xs font-mono uppercase tracking-widest text-muted-foreground border-b border-border">
-        At a glance
-      </p>
-      <dl className="px-5 py-4 space-y-4">
-        {rows.map((r) => (
-          <div key={r.label}>
-            <dt className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
-              {r.label}
-            </dt>
-            <dd className="text-sm text-foreground leading-snug">{r.value}</dd>
-          </div>
-        ))}
-      </dl>
-      {study.liveUrl && (
-        <div className="px-5 pb-5">
-          <a
-            href={study.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary w-full text-sm justify-center"
-          >
-            Visit live site →
-          </a>
+    <>
+      <div className="lg:hidden mb-8">
+        <p className="mb-3 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          At a glance
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {rows.map((r) => (
+            <span
+              key={r.label}
+              className="inline-flex items-center gap-1.5 border border-border bg-card px-3 py-1.5 text-xs text-foreground rounded-full"
+            >
+              <span className="font-mono uppercase tracking-wider text-muted-foreground text-[10px]">
+                {r.label}
+              </span>
+              {r.value}
+            </span>
+          ))}
         </div>
-      )}
-    </aside>
+      </div>
+
+      <aside className="hidden lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-auto lg:block border border-border bg-card">
+        <p className="px-5 pt-5 pb-3 text-xs font-mono uppercase tracking-widest text-muted-foreground border-b border-border">
+          At a glance
+        </p>
+        <dl className="px-5 py-4 space-y-4">
+          {rows.map((r) => (
+            <div key={r.label}>
+              <dt className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
+                {r.label}
+              </dt>
+              <dd className="text-sm text-foreground leading-snug">{r.value}</dd>
+            </div>
+          ))}
+        </dl>
+        {study.liveUrl && (
+          <div className="px-5 pb-5">
+            <a
+              href={study.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full text-sm justify-center"
+            >
+              Visit live site →
+            </a>
+          </div>
+        )}
+      </aside>
+    </>
   );
 }
 
@@ -251,6 +304,13 @@ function HeroArt({ study }: { study: (typeof caseStudies)[number] }) {
 }
 
 function DesignGallery({ study }: { study: (typeof caseStudies)[number] }) {
+  if (study.slug === "mobile-banking-redesign") {
+    return (
+      <div className="my-8 rounded-soft-sm border border-border bg-card p-4 sm:p-6">
+        <MiniBankingScreens />
+      </div>
+    );
+  }
   if (study.image) {
     return (
       <div className="rounded-soft-sm border border-border bg-card p-3 my-8">
@@ -389,11 +449,16 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               >
                 <div className="grid sm:grid-cols-3 gap-4 my-6">
                   {study.outcomes.map((o) => (
-                    <div key={o.metric} className="border border-border bg-card p-4">
+                    <div
+                      key={o.metric}
+                      className="border border-accent/50 bg-card p-4 shadow-[0_0_28px_rgba(232,255,71,0.08)]"
+                    >
                       <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-1.5">
                         {o.metric}
                       </p>
-                      <p className="font-display font-bold text-2xl text-foreground">{o.value}</p>
+                      <p className="font-display font-bold text-2xl text-foreground">
+                        <CountUp value={o.value} />
+                      </p>
                       <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{o.note}</p>
                     </div>
                   ))}

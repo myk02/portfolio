@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
@@ -52,17 +52,14 @@ export default function BrandEdgeContact() {
     return (
       <section id="contact" className="section-pad bg-secondary border-t border-border">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center py-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="heading-section text-foreground mb-4">
-                Message sent
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8">
-                Thanks, {name.split(" ")[0]}! I'll get back to you within 24 hours.
+          <div className="max-w-2xl mx-auto">
+            <div className="border border-border bg-card p-8 sm:p-10 text-center">
+              <div className="w-14 h-14 mx-auto flex items-center justify-center bg-accent text-accent-foreground mb-5">
+                <CheckCircle2 size={28} />
+              </div>
+              <h2 className="heading-section text-foreground mb-3">Message received</h2>
+              <p className="text-muted-foreground text-lg">
+                Thanks, {name.split(" ")[0]}! I reply within 24 hours.
               </p>
               <button
                 type="button"
@@ -72,11 +69,11 @@ export default function BrandEdgeContact() {
                   setEmail("");
                   setMessage("");
                 }}
-                className="btn btn-ghost"
+                className="btn btn-ghost mt-6"
               >
                 Send another message
               </button>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -96,7 +93,7 @@ export default function BrandEdgeContact() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-6">
+          <form onSubmit={handleSubmit} noValidate className="space-y-6 border border-border bg-card p-6 sm:p-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -160,7 +157,7 @@ export default function BrandEdgeContact() {
             </button>
           </form>
 
-          <div className="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p className="text-sm text-muted-foreground">
               Prefer email?{" "}
               <a

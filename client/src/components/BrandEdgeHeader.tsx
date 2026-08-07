@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Download } from "lucide-react";
 import { useRoute } from "wouter";
@@ -14,6 +14,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const [isHome] = useRoute("/");
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -39,6 +40,36 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [isHome]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const menu = menuRef.current;
+    if (!menu) return;
+    const focusables = () =>
+      Array.from(
+        menu.querySelectorAll<HTMLElement>(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+    const items = focusables();
+    items[0]?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const list = focusables();
+      if (list.length === 0) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    menu.addEventListener("keydown", onKeyDown);
+    return () => menu.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
 
   const handleNav = (id: string) => {
     if (isHome) {
@@ -130,6 +161,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.nav
+            ref={menuRef}
             id="mobile-nav"
             aria-label="Mobile"
             initial={{ opacity: 0, height: 0 }}
