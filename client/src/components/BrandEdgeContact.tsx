@@ -159,6 +159,24 @@ export default function BrandEdgeContact() {
               {submitting ? "Sending..." : "Send message"}
             </button>
           </form>
+
+          <div className="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              Prefer email?{" "}
+              <a
+                href="mailto:mikegary201@gmail.com"
+                className="text-foreground font-medium hover:underline underline-offset-4"
+              >
+                mikegary201@gmail.com
+              </a>
+            </p>
+            <a
+              href="mailto:mikegary201@gmail.com?subject=UI%2FUX%20Designer%20%E2%80%94%20Portfolio%20discussion"
+              className="btn btn-secondary text-sm"
+            >
+              Book a 15-min chat
+            </a>
+          </div>
         </div>
       </div>
     </section>

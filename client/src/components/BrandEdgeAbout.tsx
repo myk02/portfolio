@@ -1,27 +1,48 @@
 import { motion } from "framer-motion";
-import { aboutTitle, aboutSubtitle, aboutParagraphs, aboutStats, socialLinks, contactItems, skillGroups } from "@/data/siteContent";
+import { Camera } from "lucide-react";
+import { aboutStats, socialLinks, contactItems, skillGroups } from "@/data/siteContent";
 
 export default function BrandEdgeAbout() {
   return (
     <section id="about" className="section-pad bg-secondary border-t border-border">
       <div className="container">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16">
             <div>
-              <h2 className="heading-section text-foreground mb-2">
-                About
-              </h2>
-              <p className="font-display font-semibold text-xl text-foreground mb-1">
-                {aboutTitle}
-              </p>
-              <p className="text-muted-foreground text-sm mb-5 italic">
-                {aboutSubtitle}
-              </p>
-              
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                {aboutParagraphs.map((p) => (
-                  <p key={p.slice(0, 24)} className="text-base">{p}</p>
-                ))}
+              <h2 className="heading-section text-foreground mb-2">About</h2>
+
+              <div className="flex items-start gap-5 mt-6">
+                <div
+                  className="shrink-0 w-28 h-36 rounded-soft overflow-hidden border border-dashed border-foreground/30 bg-card flex flex-col items-center justify-center gap-2 text-center"
+                  role="img"
+                  aria-label="Portrait placeholder — replace with a real photo"
+                >
+                  <Camera size={22} className="text-muted-foreground" />
+                  <span className="text-[11px] text-muted-foreground px-2 leading-snug">
+                    Your photo here
+                  </span>
+                </div>
+                <div className="space-y-4 text-muted-foreground leading-relaxed text-base">
+                  <p>
+                    I'm Mike, a UI/UX designer based in Nairobi. I believe banking apps should
+                    feel personal — designed for how a 23-year-old with an irregular income
+                    actually saves, borrows, and sends money.
+                  </p>
+                  <p>
+                    I work the full arc: research, flows, wireframes, prototypes, testing —
+                    and I speak the languages of both design and engineering (React, Next.js,
+                    Tailwind).
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 p-4 sm:p-5 border-l-2 border-accent bg-card">
+                <p className="text-sm text-foreground leading-relaxed">
+                  <span className="font-display font-bold">Why I care:</span> young Kenyans are
+                  entering the financial system right now, and the apps they get first will shape
+                  how they save, borrow, and plan for years. I want to design the ones that feel
+                  like they were made for them.
+                </p>
               </div>
 
               <div className="flex gap-4 mt-8">
@@ -57,9 +78,7 @@ export default function BrandEdgeAbout() {
                     <div className="font-display font-black text-4xl text-foreground tracking-tight">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-muted-foreground mt-1">
-                      {stat.label}
-                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -67,20 +86,17 @@ export default function BrandEdgeAbout() {
               <div className="border-t border-border pt-6">
                 <h3 className="font-medium text-foreground mb-4">Skills & Tools</h3>
                 <div className="space-y-4">
-                  {skillGroups.slice(0, 4).map((group) => (
+                  {skillGroups.map((group) => (
                     <div key={group.title}>
                       <h4 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
                         {group.title}
                       </h4>
                       <div className="flex flex-wrap gap-1.5">
-                        {group.skills.slice(0, 6).map((skill) => (
+                        {group.skills.map((skill) => (
                           <span key={skill} className="tag-pill text-xs">
                             {skill}
                           </span>
                         ))}
-                        {group.skills.length > 6 && (
-                          <span className="tag-pill text-xs">+{group.skills.length - 6}</span>
-                        )}
                       </div>
                     </div>
                   ))}
@@ -94,7 +110,9 @@ export default function BrandEdgeAbout() {
                     <div key={item.label} className="flex items-center gap-3">
                       <span className="text-sm text-muted-foreground w-20">{item.label}</span>
                       {item.href ? (
-                        <a href={item.href} className="text-sm text-foreground hover:underline underline-offset-4">{item.value}</a>
+                        <a href={item.href} className="text-sm text-foreground hover:underline underline-offset-4">
+                          {item.value}
+                        </a>
                       ) : (
                         <p className="text-sm text-foreground">{item.value}</p>
                       )}

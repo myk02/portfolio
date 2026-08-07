@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Download } from "lucide-react";
+import { useRoute } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
+import { goHomeToSection } from "@/lib/navigation";
 
 interface BrandEdgeHeaderProps {
-  onNavClick: (id: string) => void;
+  onNavClick?: (id: string) => void;
 }
 
 export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const [isHome] = useRoute("/");
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -33,13 +36,22 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
     };
   }, []);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [isHome]);
+
   const handleNav = (id: string) => {
-    onNavClick(id);
+    if (isHome) {
+      onNavClick?.(id);
+    } else {
+      goHomeToSection(id);
+    }
     setIsMenuOpen(false);
   };
 
   const navLinks = [
     { id: "work", label: "Work" },
+    { id: "process", label: "Process" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];
@@ -144,11 +156,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               >
                 Get in touch
               </button>
-              <a
-                href="/CV.pdf"
-                download
-                className="btn btn-secondary w-full text-center"
-              >
+              <a href="/CV.pdf" download className="btn btn-secondary w-full text-center">
                 Download CV
               </a>
             </div>

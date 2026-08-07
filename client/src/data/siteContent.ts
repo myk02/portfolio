@@ -57,14 +57,15 @@ export const devToolkit = [
 export const heroStats = [
   { label: "Years experience", value: "4+" },
   { label: "Projects delivered", value: "30+" },
-  { label: "Live websites", value: "7+" },
+  { label: "Live websites & apps", value: "7+" },
+  { label: "Deep case studies", value: "3" },
 ];
 
 export const aboutStats = [
   { label: "Years experience", value: "4+" },
-  { label: "Design projects", value: "15+" },
-  { label: "Websites & apps", value: "7+" },
-  { label: "Products shipped", value: "8+" },
+  { label: "Projects delivered", value: "30+" },
+  { label: "Live websites & apps", value: "7+" },
+  { label: "Deep case studies", value: "3" },
 ];
 
 export const aboutTitle = "Visual Thinker & UX Strategist";
