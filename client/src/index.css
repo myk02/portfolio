@@ -121,7 +121,7 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
-    font-size: 13px;
+    font-size: 12px;
   }
   body {
     overflow-x: clip;
