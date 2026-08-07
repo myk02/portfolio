@@ -12,25 +12,17 @@ import { projectMeta } from "@/data/siteContent";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import JsonViewer from "@/components/JsonViewer";
 
-const FEATURED_TESTIMONIALS = ["Nancy Akinyi", "Brian Omondi", "Gladys Jeruto"];
-
 export default function Home() {
   const seed = useMutation(api.seed.seed);
   const allProjects = useQuery(api.projects.list, {}) ?? [];
-  const allTestimonials = useQuery(api.testimonials.listApproved) ?? [];
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [jsonWorkflowPath, setJsonWorkflowPath] = useState<string | null>(null);
 
   useEffect(() => {
-    if (allProjects.length === 0 && allTestimonials.length === 0) {
+    if (allProjects.length === 0) {
       seed();
     }
-  }, [seed, allProjects.length, allTestimonials.length]);
-
-  const featuredTestimonials = useMemo(
-    () => allTestimonials.filter((t) => FEATURED_TESTIMONIALS.includes(t.name)),
-    [allTestimonials],
-  );
+  }, [seed, allProjects.length]);
 
   const sortedProjects = useMemo(() => {
     const rank = (p: { name: string; order?: number }) =>
@@ -63,51 +55,6 @@ export default function Home() {
         <UXProcessSection />
 
         <BrandEdgeAbout />
-
-        {featuredTestimonials.length > 0 && (
-          <section id="reviews" className="section-pad bg-secondary border-t border-border">
-            <div className="container">
-              <div className="max-w-5xl mx-auto">
-                <div className="mb-8">
-                  <h2 className="heading-section text-foreground mb-2">
-                    Testimonials
-                  </h2>
-                  <p className="text-muted-foreground text-base">
-                    What clients say about working with me.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-                  {featuredTestimonials.map((t) => (
-                    <div
-                      key={t._id ?? t.name}
-                      className="border border-border bg-card p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_10px_30px_-12px_rgba(10,10,10,0.25)]"
-                    >
-                      <p className="text-muted-foreground leading-relaxed mb-4 flex-grow">
-                        &ldquo;{t.text}&rdquo;
-                      </p>
-                      <div className="flex items-center gap-3 mt-auto">
-                        <div className="w-10 h-10 bg-foreground text-background flex items-center justify-center font-medium text-sm shrink-0">
-                          {t.name.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="font-medium text-foreground text-sm">
-                            {t.name}
-                          </p>
-                          {t.role && (
-                            <p className="text-xs text-muted-foreground">
-                              {t.role}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
 
         <BrandEdgeContact />
       </main>
