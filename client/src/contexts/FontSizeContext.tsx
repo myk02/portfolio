@@ -29,7 +29,7 @@ function getInitialScale(): number {
   return 1;
 }
 
-const BASE_FONT_SIZE = 12;
+const BASE_FONT_SIZE = 11;
 
 function applyScale(scale: number) {
   const px = Math.round(BASE_FONT_SIZE * scale * 100) / 100;
