@@ -47,9 +47,8 @@ export default function BrandEdgeAbout() {
             <div className="space-y-4 text-muted-foreground leading-relaxed text-base pt-1">
               <Reveal delay={2}>
                 <p>
-                  I'm Mike, a UI/UX designer based in Nairobi. I believe banking apps should
-                  feel personal — designed for how a 23-year-old with an irregular income
-                  actually saves, borrows, and sends money.
+                  I'm Mike, a UI/UX designer based in Nairobi. Everything I make works toward
+                  one goal: help young customers feel understood — in banking especially.
                 </p>
               </Reveal>
               <Reveal delay={3}>
@@ -57,6 +56,12 @@ export default function BrandEdgeAbout() {
                   I work the full arc: research, flows, wireframes, prototypes, testing —
                   and I speak the languages of both design and engineering (React, Next.js,
                   Tailwind).
+                </p>
+              </Reveal>
+              <Reveal delay={3}>
+                <p className="text-sm">
+                  When I'm not designing: photography, five-a-side football, and hunting for
+                  the best samosa in Nairobi.
                 </p>
               </Reveal>
             </div>

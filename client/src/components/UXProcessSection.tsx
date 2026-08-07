@@ -165,7 +165,7 @@ export default function UXProcessSection() {
               </span>
               <h2 className="heading-section text-secondary mb-3">My Design Process</h2>
               <p className="text-secondary text-base max-w-lg leading-relaxed opacity-80">
-                A research-driven, four-phase approach that moves from user insight to validated product.
+                Four phases, one goal — make young customers feel understood.
               </p>
             </Reveal>
           </div>

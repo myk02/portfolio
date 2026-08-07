@@ -55,6 +55,26 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               </span>
             </div>
 
+            <p className="text-[1.25rem] text-foreground mb-2 flex items-center gap-2 hero-kicker">
+              Hi, I'm Mike.
+              <svg
+                width="26"
+                height="14"
+                viewBox="0 0 26 14"
+                fill="none"
+                aria-hidden
+                className="shrink-0"
+              >
+                <path
+                  d="M1 8 C4 3, 7 3, 10 8 S 16 13, 19 8 S 24 2, 25 5"
+                  stroke="var(--accent)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+              </svg>
+            </p>
+
             <h1
               className="heading-serif font-semibold text-foreground"
               style={{ fontSize: "clamp(2.25rem, 7vw, 3.25rem)", lineHeight: 1.05 }}

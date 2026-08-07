@@ -186,16 +186,21 @@ const screens = [
   },
 ];
 
-export default function MiniBankingScreens() {
+export default function MiniBankingScreens({ compact = false }: { compact?: boolean }) {
+  const shown = compact ? screens.slice(1, 3) : screens;
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 my-8">
-      {screens.map((s) => (
+    <div
+      className={`${compact ? "flex justify-center gap-3 my-0" : "grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 my-8"}`}
+    >
+      {shown.map((s) => (
         <div key={s.name} className="flex flex-col items-center gap-2.5">
           <Frame>{s.el}</Frame>
-          <div className="text-center">
-            <p className="text-[11px] font-mono uppercase tracking-widest text-foreground">{s.name}</p>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-1 max-w-[200px]">{s.note}</p>
-          </div>
+          {!compact && (
+            <div className="text-center">
+              <p className="text-[11px] font-mono uppercase tracking-widest text-foreground">{s.name}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1 max-w-[200px]">{s.note}</p>
+            </div>
+          )}
         </div>
       ))}
     </div>

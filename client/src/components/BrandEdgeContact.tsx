@@ -58,8 +58,11 @@ export default function BrandEdgeContact() {
                 <CheckCircle2 size={28} />
               </div>
               <h2 className="heading-section text-foreground mb-3">Message received</h2>
-              <p className="text-muted-foreground text-lg">
-                Thanks, {name.split(" ")[0]}! I reply within 24 hours.
+              <p className="font-display font-semibold text-xl text-foreground">
+                Asante! Thank you! Merci! Grazie!
+              </p>
+              <p className="text-muted-foreground text-base mt-2">
+                Thanks, {name.split(" ")[0]} — I reply within 24 hours.
               </p>
               <button
                 type="button"

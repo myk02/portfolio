@@ -523,6 +523,13 @@
 }
 
 /* scroll-reveal system — one observer, GPU-only transitions */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
