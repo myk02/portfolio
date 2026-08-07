@@ -8,8 +8,10 @@ import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
 import { consumePendingSection } from "@/lib/navigation";
+import { useReveal } from "@/hooks/useReveal";
 
 export default function Home() {
+  useReveal();
   const scrollToSection = useCallback((id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);

@@ -13,6 +13,7 @@ import MiniBankingScreens from "@/components/art/MiniBankingScreens";
 import DashboardArt from "@/components/art/DashboardArt";
 import DesignSystemArt from "@/components/art/DesignSystemArt";
 import { goHomeToSection } from "@/lib/navigation";
+import { useReveal } from "@/hooks/useReveal";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -326,6 +327,7 @@ function DesignGallery({ study }: { study: (typeof caseStudies)[number] }) {
 }
 
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
+  useReveal();
   const index = useMemo(
     () => caseStudies.findIndex((s) => s.slug === params.slug),
     [params.slug],
