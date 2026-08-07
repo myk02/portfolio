@@ -18,6 +18,21 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768) setIsMenuOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
   const handleNav = (id: string) => {
     onNavClick(id);
     setIsMenuOpen(false);
@@ -38,15 +53,15 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
       }`}
     >
       <div className="container h-16 flex items-center justify-between">
-        <button 
-          type="button" 
-          onClick={() => handleNav("home")} 
-          className="font-display font-bold text-xl tracking-tight text-foreground hover:text-accent transition-colors"
+        <button
+          type="button"
+          onClick={() => handleNav("home")}
+          className="font-display font-bold text-xl tracking-tight text-foreground hover:opacity-70 transition-opacity"
         >
           Mike Waitindi
         </button>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6 xl:gap-8" aria-label="Primary">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -60,7 +75,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
           <a
             href="/CV.pdf"
             download
-            className="hidden lg:inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
           >
             <Download size={14} />
             Download CV
@@ -73,25 +88,27 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               type="button"
               onClick={toggleTheme}
               className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Toggle theme"
+              aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
             >
               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           )}
-          
+
           <button
             type="button"
             onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex btn-accent text-sm"
+            className="hidden md:inline-flex btn btn-primary text-sm"
           >
             Get in touch
           </button>
-          
+
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -101,6 +118,8 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.nav
+            id="mobile-nav"
+            aria-label="Mobile"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -113,7 +132,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
                   key={link.id}
                   type="button"
                   onClick={() => handleNav(link.id)}
-                  className="block w-full text-left text-lg font-medium text-foreground hover:text-accent transition-colors"
+                  className="block w-full text-left text-lg font-medium text-foreground hover:opacity-70 transition-opacity"
                 >
                   {link.label}
                 </button>
@@ -121,14 +140,14 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               <button
                 type="button"
                 onClick={() => handleNav("contact")}
-                className="btn-accent w-full text-center"
+                className="btn btn-primary w-full text-center"
               >
                 Get in touch
               </button>
               <a
                 href="/CV.pdf"
                 download
-                className="btn-ghost w-full text-center block"
+                className="btn btn-secondary w-full text-center"
               >
                 Download CV
               </a>

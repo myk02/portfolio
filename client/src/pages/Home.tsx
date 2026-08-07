@@ -8,6 +8,7 @@ import UXProcessSection from "@/components/UXProcessSection";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
+import { projectMeta } from "@/data/siteContent";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import JsonViewer from "@/components/JsonViewer";
 
@@ -31,10 +32,14 @@ export default function Home() {
     [allTestimonials],
   );
 
-  const sortedProjects = useMemo(
-    () => [...allProjects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
-    [allProjects],
-  );
+  const sortedProjects = useMemo(() => {
+    const rank = (p: { name: string; order?: number }) =>
+      projectMeta[p.name]?.live ? 0 : 1;
+    return [...allProjects].sort(
+      (a, b) =>
+        rank(a) - rank(b) || (a.order ?? 99) - (b.order ?? 99),
+    );
+  }, [allProjects]);
 
   const scrollToSection = useCallback((id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -64,7 +69,7 @@ export default function Home() {
             <div className="container">
               <div className="max-w-5xl mx-auto">
                 <div className="mb-8">
-                  <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
+                  <h2 className="heading-section text-foreground mb-2">
                     Testimonials
                   </h2>
                   <p className="text-muted-foreground text-base">
@@ -72,11 +77,11 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                   {featuredTestimonials.map((t) => (
                     <div
                       key={t._id ?? t.name}
-                      className="border border-border p-6 flex flex-col"
+                      className="border border-border bg-card p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_10px_30px_-12px_rgba(10,10,10,0.25)]"
                     >
                       <p className="text-muted-foreground leading-relaxed mb-4 flex-grow">
                         &ldquo;{t.text}&rdquo;

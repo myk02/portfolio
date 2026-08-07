@@ -32,14 +32,13 @@ export default function UXProcessSection() {
     <section id="process" className="section-pad bg-primary border-t border-border">
       <div className="container">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-10">
+          <div className="mb-8 sm:mb-10">
             <span className="section-label text-secondary/70">
               <span className="section-label-line" />
               How I work
             </span>
             <h2
-              className="heading-serif font-bold text-secondary mb-2"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}
+              className="heading-section text-secondary mb-2"
             >
               My Design Process
             </h2>
@@ -48,7 +47,7 @@ export default function UXProcessSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {processSteps.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -56,7 +55,7 @@ export default function UXProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="border border-secondary/25 p-6 group hover:border-secondary/50 transition-colors"
+                className="border border-secondary/25 p-5 sm:p-6 group hover:border-secondary/50 transition-colors"
               >
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-mono text-xs tracking-widest text-accent">

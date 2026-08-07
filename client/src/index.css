@@ -66,10 +66,10 @@
   --secondary: #f2ede6;
   --secondary-foreground: #0a0a0a;
   --muted: rgba(242, 237, 230, 0.8);
-  --muted-foreground: #888580;
+  --muted-foreground: #63625c;
   --accent: #e8ff47;
   --accent-foreground: #0a0a0a;
-  --destructive: #ef4444;
+  --destructive: #c81e1e;
   --destructive-foreground: #f2ede6;
   --border: rgba(10, 10, 10, 0.12);
   --input: rgba(10, 10, 10, 0.12);
@@ -133,6 +133,13 @@
   body {
     @apply bg-secondary text-foreground font-sans antialiased;
   }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -177,22 +184,16 @@
 }
 
 .section-pad {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+  padding-top: clamp(2.75rem, 6vw, 5.5rem);
+  padding-bottom: clamp(2.75rem, 6vw, 5.5rem);
 }
 
-@media (min-width: 640px) {
-  .section-pad {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-pad {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+.heading-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
 .noise-overlay {
@@ -260,48 +261,115 @@
   border-color: var(--border);
 }
 
-.btn-accent {
-  background: var(--foreground);
-  color: var(--background);
+.btn {
   font-family: var(--font-accent);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  padding: 0.6rem 1.2rem;
-  border: 1px solid var(--foreground);
+  padding: 0.625rem 1.25rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease,
+    opacity 0.2s ease;
 }
 
-.btn-accent:hover {
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: var(--foreground);
+  color: var(--background);
+  border: 1px solid var(--foreground);
+}
+
+.btn-primary:hover {
   background: var(--accent);
   color: var(--accent-foreground);
   border-color: var(--foreground);
 }
 
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--foreground);
+  border: 1.5px solid var(--foreground);
+}
+
+.btn-secondary:hover {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--foreground);
+  border: none;
+  padding: 0.5rem 0.75rem;
+}
+
+.btn-ghost:hover {
+  color: var(--accent);
+}
+
+.btn-ghost:active {
+  transform: translateY(1px);
+}
+
+/* Legacy aliases — new code should use .btn-primary / .btn-secondary / .btn-ghost */
+.btn-accent,
+.btn-gradient {
   font-family: var(--font-accent);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  padding: 0.6rem 1.2rem;
-  border: 1px solid var(--border);
+  padding: 0.625rem 1.25rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.btn-ghost:hover {
   background: var(--foreground);
   color: var(--background);
+  border: 1px solid var(--foreground);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.btn-accent:hover,
+.btn-gradient:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
   border-color: var(--foreground);
+}
+
+.btn-accent:active,
+.btn-gradient:active {
+  transform: translateY(1px);
+}
+
+.btn-accent:disabled,
+.btn-gradient:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .tag-pill {
@@ -332,22 +400,6 @@
 
 .dark .form-field {
   border-color: rgba(242, 237, 230, 0.12);
-}
-
-.btn-gradient {
-  background: var(--foreground);
-  color: var(--background);
-  border: none;
-  font-family: var(--font-accent);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 0.6rem 1.2rem;
-}
-
-.btn-gradient:hover {
-  background: var(--primary);
-  color: var(--accent);
 }
 
 .section-title-accent {

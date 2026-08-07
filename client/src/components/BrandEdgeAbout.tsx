@@ -8,7 +8,7 @@ export default function BrandEdgeAbout() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <div>
-              <h2 className="heading-serif font-bold text-foreground mb-2" style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}>
+              <h2 className="heading-section text-foreground mb-2">
                 About
               </h2>
               <p className="font-display font-semibold text-xl text-foreground mb-1">
@@ -94,7 +94,7 @@ export default function BrandEdgeAbout() {
                     <div key={item.label} className="flex items-center gap-3">
                       <span className="text-sm text-muted-foreground w-20">{item.label}</span>
                       {item.href ? (
-                        <a href={item.href} className="text-sm text-foreground hover:text-accent transition-colors">{item.value}</a>
+                        <a href={item.href} className="text-sm text-foreground hover:underline underline-offset-4">{item.value}</a>
                       ) : (
                         <p className="text-sm text-foreground">{item.value}</p>
                       )}

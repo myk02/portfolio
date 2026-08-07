@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
+import HeroVisual from "@/components/HeroVisual";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -60,26 +61,26 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-3 mt-8"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 mt-8"
             >
               <button
                 type="button"
                 onClick={() => onCtaClick("work")}
-                className="btn-accent"
+                className="btn btn-primary"
               >
                 View work
               </button>
               <button
                 type="button"
                 onClick={() => onCtaClick("contact")}
-                className="btn-ghost"
+                className="btn btn-secondary"
               >
                 Get in touch
               </button>
               <a
                 href="/CV.pdf"
                 download
-                className="btn-ghost inline-flex items-center justify-center gap-2"
+                className="btn btn-secondary"
               >
                 <Download size={15} />
                 Download CV
@@ -91,7 +92,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex gap-8 mt-12 pt-8 border-t border-border"
+              className="grid grid-cols-2 gap-x-6 gap-y-6 mt-12 pt-8 border-t border-border sm:grid-cols-3"
             >
               <div>
                 <div className="font-display font-bold text-2xl text-foreground">4+</div>
@@ -113,17 +114,9 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden lg:flex justify-center py-12"
+            className="flex justify-center lg:justify-end pb-12 lg:py-20"
           >
-            <div className="relative">
-              <div className="absolute -top-3 -right-3 w-full h-full border border-accent" aria-hidden="true" />
-              <img
-                src="/miki.png"
-                alt="Mike Waitindi — portrait"
-                className="relative w-full max-w-sm h-auto object-cover border border-border"
-              />
-              <div className="absolute -bottom-3 -left-3 w-full h-full bg-foreground/5 border border-border" aria-hidden="true" />
-            </div>
+            <HeroVisual />
           </motion.div>
         </div>
       </div>
