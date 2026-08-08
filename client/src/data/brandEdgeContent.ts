@@ -33,7 +33,7 @@ export const processSteps = siteProcessSteps.map((s, i) => ({
 }));
 
 export const brandStats = [
-  { value: "4+", label: "Years experience" },
+  { value: "5", label: "Case studies" },
   { value: "15+", label: "Design projects" },
   { value: "7+", label: "Live websites" },
 ];

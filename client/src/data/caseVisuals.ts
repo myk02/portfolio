@@ -20,24 +20,62 @@ export interface MetricRow {
   result: string;
 }
 
+export interface PrototypeLink {
+  /** internal = in-site interactive prototype, external = real live product */
+  kind: "internal" | "external";
+  href: string;
+  label: string;
+}
+
+export interface MetricCardData {
+  label: string;
+  value: string;
+  baseline?: string;
+  result?: string;
+  tone?: "positive" | "negative" | "neutral";
+  direction?: "up" | "down" | "flat";
+  note?: string;
+}
+
+/** A real screenshot of a shipped screen (captured from the live product) — one design, three viewports. */
+export interface Shot {
+  name: string;
+  alt: string;
+  caption: string;
+  mobile: string;
+  tablet: string;
+  desktop: string;
+}
+
 export interface StudyVisuals {
-  readTime: string;
-  prototypeUrl?: string;
-  prototypeLabel?: string;
+  prototype: PrototypeLink;
   personas?: Persona[];
   empathyMap?: { says: string[]; does: string[]; thinks: string[]; feels: string[] };
   sketches: SketchItem[];
   brandEvolution?: { title: string; items: { label: string; state: string; swatches: string[] }[] };
   validate: { before: { label: string; note: string }; after: { label: string; note: string } };
   metrics: MetricRow[];
+  metricCards: MetricCardData[];
   roadmap: string[];
+  /** hero image (live products only) — one design, three viewports */
+  hero?: {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+    alt: string;
+    caption: string;
+  };
+  /** distinct hi-fi screens for the UI chapter — never reuses the hero image */
+  screens?: Shot[];
 }
 
 export const caseVisuals: Record<string, StudyVisuals> = {
   "mobile-banking-redesign": {
-    readTime: "8",
-    prototypeUrl: "https://www.figma.com/proto/placeholder/youth-banking-redesign",
-    prototypeLabel: "View prototype ↗",
+    prototype: {
+      kind: "internal",
+      href: "/work/mobile-banking-redesign/prototype",
+      label: "Open prototype →",
+    },
     personas: [
       {
         initials: "A",
@@ -122,12 +160,92 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       { metric: "Goal visibility", baseline: "3 taps", target: "0 taps", result: "always on home" },
       { metric: "SUS score", baseline: "68", target: "84", result: "+16 pts, 5 tests" },
     ],
+    metricCards: [
+      {
+        label: "Onboarding",
+        value: "8 → 4 steps",
+        baseline: "8 steps",
+        result: "4 steps",
+        direction: "down",
+        tone: "positive",
+        note: "Document verification deferred out of activation",
+      },
+      {
+        label: "Goal visibility",
+        value: "3 taps → 0",
+        baseline: "3 taps",
+        result: "0 taps",
+        direction: "down",
+        tone: "positive",
+        note: "Goal ring lives on the home screen",
+      },
+      {
+        label: "Est. abandonment",
+        value: "~50% lower",
+        baseline: "hypothesis",
+        result: "5 moderated tests",
+        direction: "down",
+        tone: "positive",
+        note: "Design hypothesis — validated in testing, not production",
+      },
+    ],
     roadmap: ["Round-up defaults", "USSD parity", "Group savings"],
   },
   kenyatrace: {
-    readTime: "6",
-    prototypeUrl: "https://kenyatrace.vercel.app",
-    prototypeLabel: "View live ↗",
+    prototype: {
+      kind: "external",
+      href: "https://kenyatrace.vercel.app",
+      label: "View live product ↗",
+    },
+    hero: {
+      mobile: "/shots/kenyatrace/home-mobile.jpg",
+      tablet: "/shots/kenyatrace/home-tablet.jpg",
+      desktop: "/shots/kenyatrace/home-desktop.jpg",
+      alt: "KenyaTrace home page on desktop — county-led destination browsing",
+      caption: "Shipped home screen — kenyatrace.vercel.app",
+    },
+    screens: [
+      {
+        name: "Home",
+        alt: "KenyaTrace mobile home screen",
+        caption: "Home — county browse, list-first, fast on 3G.",
+        mobile: "/shots/kenyatrace/home-mobile.jpg",
+        tablet: "/shots/kenyatrace/home-tablet.jpg",
+        desktop: "/shots/kenyatrace/home-desktop.jpg",
+      },
+      {
+        name: "Discover",
+        alt: "KenyaTrace discover screen listing destinations",
+        caption: "Discover — three predictable levels, progressive loading.",
+        mobile: "/shots/kenyatrace/discover-mobile.jpg",
+        tablet: "/shots/kenyatrace/discover-tablet.jpg",
+        desktop: "/shots/kenyatrace/discover-desktop.jpg",
+      },
+      {
+        name: "Plan",
+        alt: "KenyaTrace route planner screen",
+        caption: "Plan — inline add-stop, the fix from test round 1.",
+        mobile: "/shots/kenyatrace/plan-mobile.jpg",
+        tablet: "/shots/kenyatrace/plan-tablet.jpg",
+        desktop: "/shots/kenyatrace/plan-desktop.jpg",
+      },
+      {
+        name: "Trips",
+        alt: "KenyaTrace saved trips and itineraries",
+        caption: "Trips — one shareable link replaces the PDF chain.",
+        mobile: "/shots/kenyatrace/trips-mobile.jpg",
+        tablet: "/shots/kenyatrace/trips-tablet.jpg",
+        desktop: "/shots/kenyatrace/trips-desktop.jpg",
+      },
+      {
+        name: "Stays",
+        alt: "KenyaTrace stays listing",
+        caption: "Stays — the same card grammar, different content type.",
+        mobile: "/shots/kenyatrace/stays-mobile.jpg",
+        tablet: "/shots/kenyatrace/stays-tablet.jpg",
+        desktop: "/shots/kenyatrace/stays-desktop.jpg",
+      },
+    ],
     personas: [
       {
         initials: "B",
@@ -183,12 +301,84 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       { metric: "Itinerary share", baseline: "PDF + WhatsApp chain", target: "1 link", result: "shareable plan" },
       { metric: "Mobile parity", baseline: "—", target: "100%", result: "all tasks on 360px" },
     ],
+    metricCards: [
+      {
+        label: "Route planning",
+        value: "6 → 3 interactions",
+        baseline: "6 interactions",
+        result: "3 interactions",
+        direction: "down",
+        tone: "positive",
+        note: "Inline add-stop, measured in moderated tests",
+      },
+      {
+        label: "Itinerary sharing",
+        value: "PDF chain → 1 link",
+        baseline: "PDF + WhatsApp",
+        result: "1 link",
+        direction: "down",
+        tone: "positive",
+        note: "One URL carries the whole multi-stop plan",
+      },
+      {
+        label: "Mobile parity",
+        value: "100%",
+        baseline: "partial",
+        result: "every task at 360px",
+        direction: "up",
+        tone: "positive",
+        note: "Planning works on the phones people actually use",
+      },
+    ],
     roadmap: ["Trip templates", "Offline itineraries", "Group planning"],
   },
   "gigi-energy": {
-    readTime: "5",
-    prototypeUrl: "https://gigiflavours.vercel.app/",
-    prototypeLabel: "View live ↗",
+    prototype: {
+      kind: "external",
+      href: "https://gigiflavours.vercel.app/",
+      label: "View live product ↗",
+    },
+    hero: {
+      mobile: "/shots/gigi-energy/home-mobile.jpg",
+      tablet: "/shots/gigi-energy/home-tablet.jpg",
+      desktop: "/shots/gigi-energy/home-desktop.jpg",
+      alt: "GiGi Energy storefront on desktop",
+      caption: "Shipped storefront — gigiflavours.vercel.app",
+    },
+    screens: [
+      {
+        name: "Storefront",
+        alt: "GiGi Energy mobile storefront",
+        caption: "Storefront — bold display type carries the hierarchy.",
+        mobile: "/shots/gigi-energy/home-mobile.jpg",
+        tablet: "/shots/gigi-energy/home-tablet.jpg",
+        desktop: "/shots/gigi-energy/home-desktop.jpg",
+      },
+      {
+        name: "Flavours",
+        alt: "GiGi Energy flavours listing on mobile",
+        caption: "Flavours — one accent per can, all text at AA contrast.",
+        mobile: "/shots/gigi-energy/flavours-mobile.jpg",
+        tablet: "/shots/gigi-energy/flavours-tablet.jpg",
+        desktop: "/shots/gigi-energy/flavours-desktop.jpg",
+      },
+      {
+        name: "Buy section",
+        alt: "GiGi Energy purchase section on mobile",
+        caption: "Buy — delivery estimate and payment trust at the final tap.",
+        mobile: "/shots/gigi-energy/home-scroll-mobile.jpg",
+        tablet: "/shots/gigi-energy/home-scroll-tablet.jpg",
+        desktop: "/shots/gigi-energy/home-scroll-desktop.jpg",
+      },
+      {
+        name: "Events",
+        alt: "GiGi Energy events page on mobile",
+        caption: "Events — the loud brand voice with legible containers.",
+        mobile: "/shots/gigi-energy/events-mobile.jpg",
+        tablet: "/shots/gigi-energy/events-tablet.jpg",
+        desktop: "/shots/gigi-energy/events-desktop.jpg",
+      },
+    ],
     sketches: [
       { label: "Fluorescent checkout — concept A", state: "rejected", layout: "cart" },
       { label: "Can-approach palette — concept B", state: "won", layout: "swatch" },
@@ -215,12 +405,43 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       { metric: "Contrast", baseline: "2.1:1", target: "≥ 4.5:1", result: "AA on all text" },
       { metric: "Payment order", baseline: "Card first", target: "M-Pesa first", result: "majority pattern" },
     ],
+    metricCards: [
+      {
+        label: "Checkout",
+        value: "4 → 3 steps",
+        baseline: "4 steps",
+        result: "3 steps",
+        direction: "down",
+        tone: "positive",
+        note: "Address and delivery merged into one continuous form",
+      },
+      {
+        label: "Text contrast",
+        value: "2.1:1 → ≥4.5:1",
+        baseline: "2.1:1",
+        result: "AA on all text",
+        direction: "up",
+        tone: "positive",
+        note: "Brand palette intact, moved onto dark containers",
+      },
+      {
+        label: "Payment order",
+        value: "M-Pesa first",
+        baseline: "card first",
+        result: "matches ~80% of shoppers",
+        direction: "flat",
+        tone: "positive",
+        note: "Payment order follows purchase behaviour, not processing preference",
+      },
+    ],
     roadmap: ["Promo-code engine", "Stock alerts", "Loyalty points"],
   },
   "dashboard-ui-system": {
-    readTime: "6",
-    prototypeUrl: "https://www.figma.com/proto/placeholder/dashboard-ui-system",
-    prototypeLabel: "View prototype ↗",
+    prototype: {
+      kind: "internal",
+      href: "/work/dashboard-ui-system/prototype",
+      label: "Open prototype →",
+    },
     sketches: [
       { label: "Card-only dashboard — concept A", state: "rejected", layout: "grid" },
       { label: "Table-first — spreadsheet risk", state: "rejected", layout: "table" },
@@ -238,12 +459,43 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       { metric: "Handoff", baseline: "screenshots", target: "100% spec'd", result: "states + edge cases" },
       { metric: "Table density", baseline: "1×", target: "2×", result: "rows per viewport" },
     ],
+    metricCards: [
+      {
+        label: "Task scan",
+        value: "≤ 2 seconds",
+        baseline: "3s+",
+        result: "≤ 2s",
+        direction: "down",
+        tone: "positive",
+        note: "Exception state visible without reading (heuristic baseline)",
+      },
+      {
+        label: "Handoff",
+        value: "100% spec'd",
+        baseline: "screenshots",
+        result: "annotated specs",
+        direction: "up",
+        tone: "positive",
+        note: "Spacing, states and edge cases annotated per component",
+      },
+      {
+        label: "Table density",
+        value: "2× rows",
+        baseline: "1×",
+        result: "2×",
+        direction: "up",
+        tone: "positive",
+        note: "Rows per viewport vs. typical card-first dashboards",
+      },
+    ],
     roadmap: ["Pagination variants", "Chart drill-down", "Dark/light sync"],
   },
   "design-system-creation": {
-    readTime: "5",
-    prototypeUrl: "https://www.figma.com/proto/placeholder/design-system",
-    prototypeLabel: "View prototype ↗",
+    prototype: {
+      kind: "internal",
+      href: "/work/design-system-creation/prototype",
+      label: "Open prototype →",
+    },
     sketches: [
       { label: "Component-first — adopted then abandoned", state: "rejected", layout: "grid" },
       { label: "Token-first — concept A", state: "won", layout: "tokens" },
@@ -260,6 +512,35 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       { metric: "Button styles", baseline: "17", target: "3", result: "all states specified" },
       { metric: "Type scale", baseline: "6 steps", target: "7 steps", result: "defined roles" },
       { metric: "Components", baseline: "5", target: "10 core", result: "states + usage rules" },
+    ],
+    metricCards: [
+      {
+        label: "Button styles",
+        value: "17 → 3",
+        baseline: "17 styles",
+        result: "3 + states",
+        direction: "down",
+        tone: "positive",
+        note: "Primary, secondary, ghost — every state specified",
+      },
+      {
+        label: "Type scale",
+        value: "6 → 7 steps",
+        baseline: "6 competing scales",
+        result: "7 defined steps",
+        direction: "up",
+        tone: "positive",
+        note: "Display to caption, each with a written role",
+      },
+      {
+        label: "Core components",
+        value: "10 documented",
+        baseline: "5 ad-hoc",
+        result: "10 core",
+        direction: "up",
+        tone: "positive",
+        note: "Each with states, edge cases and 'when not to use'",
+      },
     ],
     roadmap: ["Focus-ring tokens", "Nested-table guidance", "Filled icon set"],
   },

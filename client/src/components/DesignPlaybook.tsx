@@ -4,18 +4,18 @@ import { Reveal } from "@/components/Reveal";
 const cards = [
   {
     icon: Ruler,
-    title: "UI Guidelines & Standards",
-    desc: "Tokens, spacing, type scale, and interaction rules — so every screen ships on the same standard, no matter who builds it.",
+    title: "UI Guidelines",
+    desc: "Tokens · spacing · type · states",
   },
   {
     icon: Boxes,
     title: "Design Systems",
-    desc: "Component libraries that scale across products, with every state specified and documented for reuse.",
+    desc: "Components · variants · docs",
   },
   {
     icon: Code2,
     title: "Developer Handoff",
-    desc: "Annotated specs, edge cases, and feasibility trade-offs — discussed with engineers, not thrown over the wall.",
+    desc: "Specs · edge cases · build-ready",
   },
 ];
 
@@ -30,11 +30,7 @@ export default function DesignPlaybook() {
                 <span className="section-label-line" />
                 Design Playbook
               </span>
-              <h2 className="heading-section text-foreground mb-3">I set the standard, then keep it.</h2>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                Reusable UI guidelines, component libraries, and developer-ready handoff —
-                so quality survives at scale.
-              </p>
+              <h2 className="heading-section text-foreground mb-3">I set the standard.</h2>
             </Reveal>
 
             <div className="space-y-4">
@@ -49,7 +45,7 @@ export default function DesignPlaybook() {
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-lg text-foreground mb-1">{card.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                    <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{card.desc}</p>
                   </div>
                 </Reveal>
               ))}

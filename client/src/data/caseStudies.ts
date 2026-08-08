@@ -34,6 +34,8 @@ export interface CaseStudy {
   liveUrlLabel?: string;
   art: "banking" | "dashboard" | "design-system";
   image?: string;
+  tileLine: string;
+  tileBadge: string;
   heroCaption: string;
   problem: { lead: string; paragraphs: string[] };
   research: CaseSection;
@@ -62,6 +64,8 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Figma", "FigJam", "Maze", "Miro"],
     status: "Conceptual study · 2025",
     art: "banking",
+    tileLine: "Onboarding 8 → 4. Savings-first home.",
+    tileBadge: "6 weeks · 8 → 4 steps",
     heroCaption:
       "A conceptual study of youth financial services — similar in direction to the youth-banking products major Kenyan banks are building. Not affiliated with any bank.",
     problem: {
@@ -173,6 +177,8 @@ export const caseStudies: CaseStudy[] = [
     liveUrlLabel: "kenyatrace.vercel.app",
     art: "design-system",
     image: "/thumbnails/kenya-tourism.png",
+    tileLine: "Route planner. List-first on 3G.",
+    tileBadge: "Live · 6 → 3 taps",
     heroCaption: "Live product — screens shown are from the shipped platform.",
     problem: {
       lead: "Planning a trip across Kenya means juggling ten county sites that don't talk to each other.",
@@ -259,6 +265,8 @@ export const caseStudies: CaseStudy[] = [
     liveUrlLabel: "gigiflavours.vercel.app",
     art: "dashboard",
     image: "/thumbnails/gigi-energy.png",
+    tileLine: "Checkout rebuilt. M-Pesa first.",
+    tileBadge: "Live · 4 → 3 steps",
     heroCaption: "Live product — the shipped storefront.",
     problem: {
       lead: "A loud brand and a quiet leak: shoppers added cans to cart, then vanished.",
@@ -329,6 +337,8 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Figma", "Tokens Studio"],
     status: "Conceptual study · 2025",
     art: "dashboard",
+    tileLine: "Ops dashboards. Dense data, clear hierarchy.",
+    tileBadge: "4 weeks · spec handoff",
     heroCaption:
       "Conceptual study — dark operational UI with the brand's lime accent. Composed as a handoff-ready screen.",
     problem: {
@@ -404,6 +414,8 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Figma", "Tokens Studio"],
     status: "Conceptual study · 2025",
     art: "design-system",
+    tileLine: "Tokens first. 17 buttons → 3.",
+    tileBadge: "3 weeks · unified system",
     heroCaption:
       "Conceptual study — the style-guide cover: type scale, color tokens, buttons, form states, icons, spacing.",
     problem: {

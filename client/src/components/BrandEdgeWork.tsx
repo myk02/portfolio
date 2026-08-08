@@ -10,34 +10,41 @@ function Artwork({ study }: { study: CaseStudy }) {
   if (study.image) {
     return (
       <img
-        src={study.image}
+        src={study.image.replace(/\.[a-z]+$/i, "-640.webp")}
         srcSet={`${study.image.replace(/\.[a-z]+$/i, "")}-640.webp 640w, ${study.image.replace(/\.[a-z]+$/i, "")}-1200.webp 1200w`}
         sizes="(min-width: 768px) 50vw, 100vw"
         alt={`${study.name} — product screenshot`}
         width={1200}
         height={750}
-        className="w-full h-full object-cover object-top transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+        className="w-full h-full object-cover object-top tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
         loading="lazy"
         decoding="async"
+        onError={(e) => {
+          const img = e.currentTarget;
+          if (!img.dataset.fallback) {
+            img.dataset.fallback = "1";
+            img.src = study.image!;
+          }
+        }}
       />
     );
   }
   switch (study.art) {
     case "banking":
       return (
-        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] transition-transform duration-[600ms] ease-out group-hover:scale-[1.03] p-3 sm:p-4">
+        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03] p-3 sm:p-4">
           <BankingArt className="max-w-full" />
         </div>
       );
     case "dashboard":
       return (
-        <div className="w-full h-full flex items-center justify-center bg-[#141310] p-2.5 sm:p-3.5 transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
+        <div className="w-full h-full flex items-center justify-center bg-[#141310] p-2.5 sm:p-3.5 tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
           <DashboardArt />
         </div>
       );
     case "design-system":
       return (
-        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] p-2.5 sm:p-3.5 transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
+        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] p-2.5 sm:p-3.5 tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
           <DesignSystemArt />
         </div>
       );
@@ -56,16 +63,12 @@ function TileBody({ study }: { study: CaseStudy }) {
           className="mt-0.5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1"
         />
       </div>
-      <p className="text-sm text-muted-foreground leading-relaxed">{study.tagline}</p>
-      <div className="flex flex-wrap gap-1.5 pt-1">
-        {study.methods.slice(0, 3).map((m) => (
-          <span key={m} className="tag-pill text-xs">
-            {m}
-          </span>
-        ))}
-      </div>
+      <p className="text-sm text-muted-foreground leading-snug">{study.tileLine}</p>
+      <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent/20 text-foreground border border-accent/40">
+        {study.tileBadge}
+      </span>
       <div className="pt-1 text-sm font-medium text-foreground transition-transform duration-300 group-hover:translate-x-1">
-        Read case study →
+        View case →
       </div>
     </div>
   );
@@ -136,9 +139,8 @@ export default function BrandEdgeWork() {
               Selected work
             </span>
             <h2 className="heading-section text-foreground mb-3">Case studies</h2>
-            <p className="text-muted-foreground text-base max-w-xl leading-relaxed">
-              Two live products and three conceptual studies — each documented end to end:
-              problem, research, decisions, artifacts, and what I'd change.
+            <p className="text-muted-foreground text-sm max-w-md">
+              Five studies. Watch how each was made.
             </p>
           </Reveal>
 

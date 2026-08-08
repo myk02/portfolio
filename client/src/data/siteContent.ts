@@ -55,17 +55,17 @@ export const devToolkit = [
 ];
 
 export const heroStats = [
-  { label: "Years experience", value: "4+" },
+  { label: "Case studies", value: "5" },
   { label: "Projects delivered", value: "30+" },
-  { label: "Live websites & apps", value: "7+" },
-  { label: "Deep case studies", value: "3" },
+  { label: "Live products shipped", value: "7+" },
+  { label: "Design tools", value: "Figma" },
 ];
 
 export const aboutStats = [
-  { label: "Years experience", value: "4+" },
+  { label: "Case studies", value: "5" },
   { label: "Projects delivered", value: "30+" },
-  { label: "Live websites & apps", value: "7+" },
-  { label: "Deep case studies", value: "3" },
+  { label: "Live products shipped", value: "7+" },
+  { label: "Design tools", value: "Figma" },
 ];
 
 export const aboutTitle = "Visual Thinker & UX Strategist";

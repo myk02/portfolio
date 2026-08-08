@@ -1,95 +1,135 @@
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Download, Mail, Linkedin } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface BrandEdgeFooterProps {
   onNavClick: (id: string) => void;
 }
 
+const TOOLS = ["Figma", "FigJam", "Miro", "Adobe CC", "Maze"];
+const PROCESS = ["Discover", "Define", "Design", "Validate"];
+
 export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
   const year = new Date().getFullYear();
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <footer className="bg-secondary border-t border-border">
-      <div className="container py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <footer className="bg-primary border-t border-border text-primary-foreground">
+      <div className="container py-12 lg:py-14">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-10 lg:gap-12">
+            {/* brand */}
             <div>
               <button
                 type="button"
                 onClick={() => onNavClick("home")}
-                className="font-display font-bold text-lg text-foreground hover:text-accent transition-colors"
+                className="font-display font-bold text-2xl text-primary-foreground hover:text-accent transition-colors"
               >
                 Mike Waitindi
               </button>
-              <p className="text-sm text-muted-foreground mt-1">
-                UI/UX Designer — Nairobi, Kenya
+              <p className="text-sm text-primary-foreground/70 mt-2 max-w-xs leading-relaxed">
+                UI/UX designer · digital products &amp; consumer apps.
               </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {TOOLS.map((t) => (
+                  <span
+                    key={t}
+                    className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider border border-primary-foreground/20 text-primary-foreground/80"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <nav className="flex items-center gap-6">
-              <button
-                type="button"
-                onClick={() => onNavClick("work")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Work
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavClick("about")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                About
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavClick("contact")}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Contact
-              </button>
-            </nav>
+            {/* nav */}
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
+                Navigate
+              </p>
+              <nav className="flex flex-col gap-2.5">
+                {[
+                  { id: "work", label: "Case studies" },
+                  { id: "process", label: "Process" },
+                  { id: "about", label: "About" },
+                  { id: "contact", label: "Contact" },
+                ].map((link) => (
+                  <button
+                    key={link.id}
+                    type="button"
+                    onClick={() => onNavClick(link.id)}
+                    className="text-sm text-left text-primary-foreground/75 hover:text-accent transition-colors w-fit"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+                <a
+                  href="/CV.pdf"
+                  download
+                  className="inline-flex items-center gap-1.5 text-sm text-primary-foreground/75 hover:text-accent transition-colors w-fit mt-1"
+                >
+                  <Download size={13} />
+                  Download CV
+                </a>
+              </nav>
+            </div>
+
+            {/* process + contact */}
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
+                Design process
+              </p>
+              <div className="flex flex-wrap gap-1.5 mb-6">
+                {PROCESS.map((p, i) => (
+                  <span key={p} className="flex items-center gap-1.5 text-xs text-primary-foreground/75">
+                    {i > 0 && <span className="text-accent">→</span>}
+                    {p}
+                  </span>
+                ))}
+              </div>
+              <div className="space-y-2">
+                <a
+                  href="mailto:mikegary201@gmail.com"
+                  className="flex items-center gap-2 text-sm text-primary-foreground/75 hover:text-accent transition-colors"
+                >
+                  <Mail size={14} />
+                  mikegary201@gmail.com
+                </a>
+                <a
+                  href="https://linkedin.com/in/mike-waitindi-654bb2344"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-primary-foreground/75 hover:text-accent transition-colors"
+                >
+                  <Linkedin size={14} />
+                  LinkedIn
+                </a>
+                <a
+                  href="https://wa.me/254792618156"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary-foreground/75 hover:text-accent transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <p className="text-xs text-muted-foreground">
-              © {year} Mike Waitindi · Designed &amp; built by Mike Waitindi
+          <div className="mt-12 pt-6 border-t border-primary-foreground/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="text-xs text-primary-foreground/50">
+              © {year} Mike Waitindi · Designed &amp; built in Figma + React
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="mailto:mikegary201@gmail.com"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            {toggleTheme && (
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="inline-flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-accent transition-colors w-fit"
+                aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
               >
-                mikegary201@gmail.com
-              </a>
-              <a
-                href="https://linkedin.com/in/mike-waitindi-654bb2344"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://wa.me/254792618156"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                WhatsApp
-              </a>
-              {toggleTheme && (
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-                >
-                  {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-                </button>
-              )}
-            </div>
+                {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+                {theme === "dark" ? "Light mode" : "Dark mode"}
+              </button>
+            )}
           </div>
         </div>
       </div>

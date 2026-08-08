@@ -1,11 +1,36 @@
+import { useRef, useState } from "react";
+import { Check } from "lucide-react";
+import { useInView, prefersReducedMotion } from "@/hooks/useInView";
+
+const REDUCED = prefersReducedMotion();
+
 export default function DirectionPair() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState<"idle" | "struck" | "won">(REDUCED ? "won" : "idle");
+  const played = useRef(REDUCED);
+
+  useInView(wrapRef, (inView) => {
+    if (!inView || played.current) return;
+    played.current = true;
+    if (REDUCED) {
+      setPhase("won");
+      return;
+    }
+    window.setTimeout(() => setPhase("struck"), 350);
+    window.setTimeout(() => setPhase("won"), 650);
+  });
+
   return (
-    <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-      <figure className="flex flex-col items-center gap-2.5">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-rose-400/60 text-rose-400 font-mono text-[10px] tracking-widest uppercase">
+    <div ref={wrapRef} className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+      <figure
+        className={`flex flex-col items-center gap-2.5 transition-[transform,opacity,filter] duration-300 ease-out ${
+          phase === "won" ? "opacity-55 blur-[1px] translate-y-2" : ""
+        }`}
+      >
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-rose-400/60 text-rose-400 font-mono text-[10px] tracking-widest uppercase">
           Direction A ✗
         </span>
-        <div className="w-[190px] sm:w-[250px] rounded-3xl border border-foreground/25 bg-[#141310] p-2.5 shadow-[0_16px_40px_rgba(20,19,16,0.12)]">
+        <div className="relative w-[190px] sm:w-[250px] rounded-3xl border border-foreground/25 bg-[#141310] p-2.5 shadow-[0_16px_40px_rgba(20,19,16,0.12)]">
           <div className="relative overflow-hidden rounded-[18px] bg-[#1b222c] aspect-[9/17]">
             <span aria-hidden className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-white/25" />
             <div className="pt-7 px-3 pb-3 flex flex-col gap-2">
@@ -16,19 +41,28 @@ export default function DirectionPair() {
               <div className="h-6 rounded bg-white/25" />
               <div className="h-6 rounded bg-white/10" />
             </div>
+            <span
+              aria-hidden
+              className={`absolute left-0 right-0 top-1/2 h-[3px] bg-rose-400 origin-left transition-transform duration-300 ease-out ${
+                phase === "idle" ? "scale-x-0" : "scale-x-100"
+              }`}
+            />
           </div>
         </div>
         <figcaption className="text-center text-[11px] text-muted-foreground leading-snug max-w-[210px]">
-          Dark “premium fintech” — balance felt heavier; users said it was “for people who
-          already have money.”
+          Dark fintech — felt heavy
         </figcaption>
       </figure>
 
-      <figure className="flex flex-col items-center gap-2.5">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-accent text-accent-foreground font-mono text-[10px] tracking-widest uppercase">
+      <figure
+        className={`flex flex-col items-center gap-2.5 transition-transform duration-300 ease-out ${
+          phase === "won" ? "-translate-y-2" : ""
+        }`}
+      >
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-accent text-accent-foreground font-mono text-[10px] tracking-widest uppercase">
           Direction B ✓
         </span>
-        <div className="w-[190px] sm:w-[250px] rounded-3xl border border-foreground/50 bg-card p-2.5 shadow-[0_16px_40px_rgba(20,19,16,0.12)]">
+        <div className="relative w-[190px] sm:w-[250px] rounded-3xl border border-foreground/50 bg-card p-2.5 shadow-[0_16px_40px_rgba(20,19,16,0.12)]">
           <div className="relative overflow-hidden rounded-[18px] bg-[#f4efe7] aspect-[9/17]">
             <span aria-hidden className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-[#141310]/25" />
             <div className="pt-6 px-3 pb-3 flex flex-col gap-2">
@@ -58,11 +92,18 @@ export default function DirectionPair() {
                 <span className="text-[7px] font-bold text-[#f4efe7]">Saving goal</span>
               </div>
             </div>
+            <span
+              aria-hidden
+              className={`absolute top-2 right-2 w-6 h-6 rounded-full bg-accent grid place-items-center transition-transform duration-[250ms] ease-out ${
+                phase === "won" ? "scale-100" : "scale-0"
+              }`}
+            >
+              <Check size={14} strokeWidth={3} className="text-accent-foreground" />
+            </span>
           </div>
         </div>
         <figcaption className="text-center text-[11px] text-muted-foreground leading-snug max-w-[210px]">
-          Calm, savings-first — goal progress, quick-save, then balance. The app leads with
-          what the user wants.
+          Savings-first — won
         </figcaption>
       </figure>
     </div>

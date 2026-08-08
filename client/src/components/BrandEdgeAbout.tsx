@@ -44,37 +44,26 @@ export default function BrandEdgeAbout() {
             <Reveal delay={1} scale>
               <Monogram />
             </Reveal>
-            <div className="space-y-4 text-muted-foreground leading-relaxed text-base pt-1">
+            <div className="pt-1 space-y-3">
               <Reveal delay={2}>
-                <p>
-                  I'm Mike, a UI/UX designer based in Nairobi. Everything I make works toward
-                  one goal: help young customers feel understood — in banking especially.
+                <p className="text-foreground font-display font-bold text-xl leading-snug">
+                  I design digital products end to end.
                 </p>
               </Reveal>
               <Reveal delay={3}>
-                <p>
-                  I work the full arc: research, flows, wireframes, prototypes, testing —
-                  and I speak the languages of both design and engineering (React, Next.js,
-                  Tailwind).
+                <p className="text-sm text-muted-foreground">
+                  Flows · IA · Figma systems · usability testing
                 </p>
               </Reveal>
               <Reveal delay={3}>
-                <p className="text-sm">
-                  When I'm not designing: photography, five-a-side football, and hunting for
-                  the best samosa in Nairobi.
-                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Photography", "Five-a-side", "Samosas"].map((c) => (
+                    <span key={c} className="tag-pill text-xs">{c}</span>
+                  ))}
+                </div>
               </Reveal>
             </div>
           </div>
-
-          <Reveal delay={2} className="mt-6 p-4 sm:p-5 border-l-2 border-accent bg-card">
-            <p className="text-sm text-foreground leading-relaxed">
-              <span className="font-display font-bold">Why I care:</span> young Kenyans are
-              entering the financial system right now, and the apps they get first will shape
-              how they save, borrow, and plan for years. I want to design the ones that feel
-              like they were made for them.
-            </p>
-          </Reveal>
 
           <Reveal delay={3} className="flex gap-4 mt-8">
             {socialLinks.map((s) => (

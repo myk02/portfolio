@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import { useLocation } from "wouter";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
 import BrandEdgeHero, { SkillMarquee } from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
@@ -12,19 +13,27 @@ import { useReveal } from "@/hooks/useReveal";
 
 export default function Home() {
   useReveal();
+  const [location] = useLocation();
+
   const scrollToSection = useCallback((id: string) => {
+    if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  /* Always start at hero on fresh load; only scroll to section when navigating from another page */
   useEffect(() => {
+    window.scrollTo(0, 0);
     const pending = consumePendingSection();
-    if (pending) {
+    if (pending && pending !== "home") {
       const t = window.setTimeout(() => {
         document.getElementById(pending)?.scrollIntoView({ behavior: "smooth" });
-      }, 120);
+      }, 200);
       return () => window.clearTimeout(t);
     }
-  }, []);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-secondary">

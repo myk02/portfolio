@@ -91,7 +91,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-secondary/90 backdrop-blur-md border-b border-border"
+          ? "bg-secondary/95 backdrop-blur-md border-b border-border shadow-[0_4px_24px_-8px_rgba(10,10,10,0.08)]"
           : "bg-transparent"
       }`}
     >
@@ -99,9 +99,14 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
         <button
           type="button"
           onClick={() => handleNav("home")}
-          className="font-display font-bold text-xl tracking-tight text-foreground hover:opacity-70 transition-opacity"
+          className="flex items-center gap-2.5 group"
         >
-          Mike Waitindi
+          <span className="w-8 h-8 grid place-items-center bg-foreground text-background font-display font-black text-sm group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+            MW
+          </span>
+          <span className="font-display font-bold text-lg tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
+            Mike Waitindi
+          </span>
         </button>
 
         <nav className="hidden md:flex items-center gap-6 xl:gap-8" aria-label="Primary">
@@ -110,7 +115,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               key={link.id}
               type="button"
               onClick={() => handleNav(link.id)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
             >
               {link.label}
             </button>
@@ -118,14 +123,14 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
           <a
             href="/CV.pdf"
             download
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             <Download size={14} />
-            Download CV
+            CV
           </a>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {toggleTheme && (
             <button
               type="button"

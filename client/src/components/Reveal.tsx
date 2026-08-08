@@ -19,7 +19,7 @@ export function Reveal({
       id={id}
       data-reveal
       className={`${scale ? "reveal-scale" : ""} ${className}`}
-      style={{ ["--i" as string]: delay }}
+      style={{ ["--i" as string]: Math.min(delay, 4) }}
       {...rest}
     >
       {children}
