@@ -2,53 +2,103 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
-import BankingArt from "@/components/art/BankingArt";
-import DashboardArt from "@/components/art/DashboardArt";
-import DesignSystemArt from "@/components/art/DesignSystemArt";
+import {
+  PhoneMockup,
+  TabletMockup,
+  DesktopMockup,
+  type DeviceContent,
+} from "@/components/artifacts/DeviceMockups";
+import { BankingScreen } from "@/components/art/BankingResponsive";
+import {
+  DashboardScreen,
+  DesignSystemScreen,
+} from "@/components/art/ResponsiveConceptArt";
+import { KenyaTraceScreen } from "@/components/art/KenyaTraceResponsive";
+import { GigiScreen } from "@/components/art/GigiResponsive";
+
+interface TileTrioProps {
+  phone: DeviceContent;
+  tablet: DeviceContent;
+  desktop: DeviceContent;
+  bg?: string;
+}
+
+function TileTrio({ phone, tablet, desktop, bg = "#f4efe7" }: TileTrioProps) {
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center gap-[2%] px-[3%] py-[5%] tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+      style={{ background: bg }}
+    >
+      <PhoneMockup
+        content={phone}
+        className="w-full"
+        // slightly larger phone frame for better legibility in tiles
+        figureClassName="w-[26%]"
+      />
+      <TabletMockup
+        content={tablet}
+        className="w-full"
+        // slightly larger tablet frame to match phone sizing
+        figureClassName="w-[30%]"
+      />
+      <DesktopMockup
+        content={desktop}
+        className="w-full"
+        figureClassName="w-[44%]"
+      />
+    </div>
+  );
+}
+
+const TILE_ART = {
+  banking: {
+    bg: "#f4efe7",
+    trio: () => ({
+      phone: { node: <BankingScreen variant="mobile" screen="home" /> },
+      tablet: { node: <BankingScreen variant="tablet" screen="home" /> },
+      desktop: { node: <BankingScreen variant="desktop" screen="home" /> },
+    }),
+  },
+  dashboard: {
+    bg: "#141310",
+    trio: () => ({
+      phone: { node: <DashboardScreen variant="mobile" /> },
+      tablet: { node: <DashboardScreen variant="tablet" /> },
+      desktop: { node: <DashboardScreen variant="desktop" /> },
+    }),
+  },
+  "design-system": {
+    bg: "#f4efe7",
+    trio: () => ({
+      phone: { node: <DesignSystemScreen variant="mobile" /> },
+      tablet: { node: <DesignSystemScreen variant="tablet" /> },
+      desktop: { node: <DesignSystemScreen variant="desktop" /> },
+    }),
+  },
+  kenyatrace: {
+    bg: "#efe9dd",
+    trio: () => ({
+      phone: { node: <KenyaTraceScreen variant="mobile" screen="home" /> },
+      tablet: { node: <KenyaTraceScreen variant="tablet" screen="home" /> },
+      desktop: { node: <KenyaTraceScreen variant="desktop" screen="home" /> },
+    }),
+  },
+  gigi: {
+    bg: "#141310",
+    trio: () => ({
+      phone: { node: <GigiScreen variant="mobile" screen="storefront" /> },
+      tablet: { node: <GigiScreen variant="tablet" screen="storefront" /> },
+      desktop: { node: <GigiScreen variant="desktop" screen="storefront" /> },
+    }),
+  },
+} as const;
 
 function Artwork({ study }: { study: CaseStudy }) {
-  if (study.image) {
-    return (
-      <img
-        src={study.image.replace(/\.[a-z]+$/i, "-640.webp")}
-        srcSet={`${study.image.replace(/\.[a-z]+$/i, "")}-640.webp 640w, ${study.image.replace(/\.[a-z]+$/i, "")}-1200.webp 1200w`}
-        sizes="(min-width: 768px) 50vw, 100vw"
-        alt={`${study.name} — product screenshot`}
-        width={1200}
-        height={750}
-        className="w-full h-full object-cover object-top tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-        loading="lazy"
-        decoding="async"
-        onError={(e) => {
-          const img = e.currentTarget;
-          if (!img.dataset.fallback) {
-            img.dataset.fallback = "1";
-            img.src = study.image!;
-          }
-        }}
-      />
-    );
-  }
-  switch (study.art) {
-    case "banking":
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03] p-3 sm:p-4">
-          <BankingArt className="max-w-full" />
-        </div>
-      );
-    case "dashboard":
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-[#141310] p-2.5 sm:p-3.5 tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
-          <DashboardArt />
-        </div>
-      );
-    case "design-system":
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-[#f4efe7] p-2.5 sm:p-3.5 tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]">
-          <DesignSystemArt />
-        </div>
-      );
-  }
+  const art = TILE_ART[study.art];
+  const { phone, tablet, desktop } = art.trio();
+  return (
+    <TileTrio bg={art.bg} phone={phone} tablet={tablet} desktop={desktop} />
+  );
 }
 
 function TileBody({ study }: { study: CaseStudy }) {
@@ -63,7 +113,9 @@ function TileBody({ study }: { study: CaseStudy }) {
           className="mt-0.5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1"
         />
       </div>
-      <p className="text-sm text-muted-foreground leading-snug">{study.tileLine}</p>
+      <p className="text-sm text-muted-foreground leading-snug">
+        {study.tileLine}
+      </p>
       <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent/20 text-foreground border border-accent/40">
         {study.tileBadge}
       </span>
@@ -79,7 +131,9 @@ function Badges({ study }: { study: CaseStudy }) {
     <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-[1]">
       <span
         className={`px-2 py-1 text-[11px] font-mono tracking-widest uppercase transition-transform duration-300 group-hover:-translate-y-0.5 ${
-          study.kind === "LIVE PRODUCT" ? "bg-foreground text-background" : "bg-accent text-accent-foreground"
+          study.kind === "LIVE PRODUCT"
+            ? "bg-foreground text-background"
+            : "bg-accent text-accent-foreground"
         }`}
       >
         {study.kind}
@@ -130,7 +184,10 @@ function GridCard({ study, i }: { study: CaseStudy; i: number }) {
 export default function BrandEdgeWork() {
   const [featured, ...rest] = caseStudies;
   return (
-    <section id="work" className="section-pad bg-secondary border-t border-border">
+    <section
+      id="work"
+      className="section-pad bg-secondary border-t border-border"
+    >
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <Reveal as="div" className="mb-10">
@@ -138,7 +195,9 @@ export default function BrandEdgeWork() {
               <span className="section-label-line" />
               Selected work
             </span>
-            <h2 className="heading-section text-foreground mb-3">Case studies</h2>
+            <h2 className="heading-section text-foreground mb-3">
+              Case studies
+            </h2>
             <p className="text-muted-foreground text-sm max-w-md">
               Five studies. Watch how each was made.
             </p>
