@@ -32,7 +32,7 @@ export interface CaseStudy {
   status: string;
   liveUrl?: string;
   liveUrlLabel?: string;
-  art: "banking" | "dashboard" | "design-system";
+  art: "banking" | "dashboard" | "design-system" | "kenyatrace" | "gigi";
   image?: string;
   tileLine: string;
   tileBadge: string;
@@ -175,7 +175,7 @@ export const caseStudies: CaseStudy[] = [
     status: "Live product · 2024",
     liveUrl: "https://kenyatrace.vercel.app",
     liveUrlLabel: "kenyatrace.vercel.app",
-    art: "design-system",
+    art: "kenyatrace",
     image: "/thumbnails/kenya-tourism.png",
     tileLine: "Route planner. List-first on 3G.",
     tileBadge: "Live · 6 → 3 taps",
@@ -263,7 +263,7 @@ export const caseStudies: CaseStudy[] = [
     status: "Live product · 2025",
     liveUrl: "https://gigiflavours.vercel.app/",
     liveUrlLabel: "gigiflavours.vercel.app",
-    art: "dashboard",
+    art: "gigi",
     image: "/thumbnails/gigi-energy.png",
     tileLine: "Checkout rebuilt. M-Pesa first.",
     tileBadge: "Live · 4 → 3 steps",

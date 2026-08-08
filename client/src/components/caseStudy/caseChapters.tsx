@@ -23,6 +23,10 @@ import { DeviceShots, HeroDeviceShowcase } from "@/components/artifacts/Screens"
 import { DesktopMockup } from "@/components/artifacts/DeviceMockups";
 import PersonaCard from "@/components/artifacts/PersonaCard";
 import BankingArt from "@/components/art/BankingArt";
+import {
+  BankingDeviceShowcase,
+  BankingShots,
+} from "@/components/art/BankingResponsive";
 import DashboardArt from "@/components/art/DashboardArt";
 import DesignSystemArt from "@/components/art/DesignSystemArt";
 
@@ -131,6 +135,24 @@ function ValidateBlock({ slug, visuals }: { slug: string; visuals: StudyVisuals 
 /* UI chapter: live products shown as phone + tablet + desktop device mockups;
    packaged CSS/SVG artifacts for conceptual studies */
 function UiBlock({ slug, visuals }: { slug: string; visuals: StudyVisuals }) {
+  if (slug === "mobile-banking-redesign") {
+    return (
+      <div className="space-y-4">
+        <BankingDeviceShowcase
+          screen="home"
+          title="Concept hi-fi — the design in mobile, tablet and desktop"
+        />
+        <BankingShots />
+        <figure className="border border-border bg-card p-4 sm:p-5">
+          <figcaption className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
+            Direction test — which home won
+          </figcaption>
+          <DirectionPair />
+        </figure>
+      </div>
+    );
+  }
+
   if (slug === "kenyatrace" || slug === "gigi-energy") {
     return (
       <div className="space-y-4">
@@ -165,15 +187,6 @@ function UiBlock({ slug, visuals }: { slug: string; visuals: StudyVisuals }) {
       </figure>
       {slug === "dashboard-ui-system" && <StatesMatrix />}
       {slug === "design-system-creation" && <ButtonAudit />}
-      {slug === "gigi-energy" ? null : null}
-      {slug === "mobile-banking-redesign" && (
-        <figure className="border border-border bg-card p-4 sm:p-5">
-          <figcaption className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
-            Direction test — which home won
-          </figcaption>
-          <DirectionPair />
-        </figure>
-      )}
     </div>
   );
 }

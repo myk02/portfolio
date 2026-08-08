@@ -9,9 +9,15 @@ import SiteHead from "@/components/SiteHead";
 import DesignJourney from "@/components/DesignJourney";
 import { HeroDeviceShowcase } from "@/components/artifacts/Screens";
 import { DesktopMockup } from "@/components/artifacts/DeviceMockups";
+import { DeviceShowcaseFigure } from "@/components/artifacts/DeviceShowcaseFigure";
 import BankingArt from "@/components/art/BankingArt";
-import DashboardArt from "@/components/art/DashboardArt";
-import DesignSystemArt from "@/components/art/DesignSystemArt";
+import { BankingDeviceShowcase } from "@/components/art/BankingResponsive";
+import { KenyaTraceShowcase } from "@/components/art/KenyaTraceResponsive";
+import { GigiShowcase } from "@/components/art/GigiResponsive";
+import {
+  DashboardScreen,
+  DesignSystemScreen,
+} from "@/components/art/ResponsiveConceptArt";
 
 interface LayoutProps {
   study: CaseStudy;
@@ -126,8 +132,43 @@ export default function CaseStudyLayout({
 
           {/* HERO DEVICES — the design shown inside mobile, tablet and desktop mockups */}
           <div className="mt-10 sm:mt-12">
-            {visuals.hero ? (
+            {study.slug === "mobile-banking-redesign" ? (
+              <BankingDeviceShowcase
+                screen="home"
+                title="Concept hi-fi — one design, three viewports"
+              />
+            ) : study.slug === "kenyatrace" ? (
+              <KenyaTraceShowcase
+                screen="home"
+                title="Concept hi-fi — one design, three viewports"
+                live
+              />
+            ) : study.slug === "gigi-energy" ? (
+              <GigiShowcase
+                screen="storefront"
+                title="Concept hi-fi — one design, three viewports"
+                live
+              />
+            ) : visuals.hero ? (
               <HeroDeviceShowcase hero={visuals.hero} live />
+            ) : study.slug === "dashboard-ui-system" ? (
+              <DeviceShowcaseFigure
+                title="Concept hi-fi — one design, three viewports"
+                meta="mobile · tablet · desktop"
+                note="A dense analytics product can still breathe at every size."
+                phone={<DashboardScreen variant="mobile" />}
+                tablet={<DashboardScreen variant="tablet" />}
+                desktop={<DashboardScreen variant="desktop" />}
+              />
+            ) : study.slug === "design-system-creation" ? (
+              <DeviceShowcaseFigure
+                title="Concept hi-fi — one design, three viewports"
+                meta="mobile · tablet · desktop"
+                note="Components that stay honest from phone to desktop."
+                phone={<DesignSystemScreen variant="mobile" />}
+                tablet={<DesignSystemScreen variant="tablet" />}
+                desktop={<DesignSystemScreen variant="desktop" />}
+              />
             ) : (
               <figure className="border border-border bg-card p-4 sm:p-6">
                 <figcaption className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
@@ -135,14 +176,7 @@ export default function CaseStudyLayout({
                 </figcaption>
                 <DesktopMockup
                   content={{
-                    node:
-                      study.slug === "dashboard-ui-system" ? (
-                        <DashboardArt />
-                      ) : study.slug === "design-system-creation" ? (
-                        <DesignSystemArt />
-                      ) : (
-                        <BankingArt />
-                      ),
+                    node: <BankingArt />,
                   }}
                   showStand
                   aspect="aspect-auto"
