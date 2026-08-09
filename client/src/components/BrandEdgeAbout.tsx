@@ -13,21 +13,20 @@ const contactIcons: Record<string, React.ReactNode> = {
   Location: <MapPin size={18} />,
 };
 
-function Monogram() {
+function Portrait() {
   return (
     <div className="shrink-0">
       <div
-        className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-soft overflow-hidden border border-foreground/25 bg-[#f4efe7] flex items-center justify-center"
+        className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-soft overflow-hidden border border-foreground/25 bg-[#f4efe7]"
         role="img"
-        aria-label="Monogram MW"
+        aria-label="Portrait of Mike Waitindi"
       >
-        <span
-          aria-hidden
-          className="absolute -bottom-4 -right-4 w-20 h-20 bg-accent rotate-45"
+        <img
+          src="/profile.png"
+          alt="Portrait of Mike Waitindi"
+          loading="lazy"
+          className="w-full h-full object-cover"
         />
-        <span className="font-display font-black text-6xl sm:text-7xl text-foreground tracking-tight">
-          MW
-        </span>
       </div>
     </div>
   );
@@ -47,7 +46,7 @@ export default function BrandEdgeAbout() {
 
           <div className="flex flex-col sm:flex-row items-start gap-6 mt-6">
             <Reveal delay={1} scale>
-              <Monogram />
+              <Portrait />
             </Reveal>
             <div className="pt-1 space-y-3">
               <Reveal delay={2}>
