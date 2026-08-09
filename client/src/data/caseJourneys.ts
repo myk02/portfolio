@@ -6,6 +6,12 @@
  * product (product renders, live screenshots) plus a one-line note. Stages
  * without a real image fall back to the inline concept art rendered by
  * DesignJourney.
+ *
+ * PLACEHOLDER SLOTS — how to add real assets later:
+ * To mark a stage as "real asset goes here", give it a `placeholder` label
+ * (e.g. "paper sketch", "wireframes", "final screens"). DesignJourney then
+ * renders the code art with a clearly-marked dashed slot and a badge. When
+ * you drop in the real asset, add the `image` entry and delete `placeholder`.
  */
 
 export interface JourneyImage {
@@ -22,6 +28,11 @@ export interface JourneyStageData {
   image?: JourneyImage;
   /** research source the step is grounded in */
   source?: string;
+  /**
+   * Marks this stage as a real-asset slot: renders the code art behind a
+   * dashed placeholder badge. Remove once `image` is provided.
+   */
+  placeholder?: string;
 }
 
 export const caseJourneys: Record<string, JourneyStageData[]> = {
@@ -30,7 +41,7 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
       kicker: "01 Brief",
       caption: "Brief",
       image: {
-        src: "/refs/kenya-hero.png",
+        src: "/refs/kenya-hero.webp",
         alt: "The live KenyaTrace hero image",
         fit: "cover",
       },
@@ -82,7 +93,7 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
       kicker: "01 Brief",
       caption: "Brief",
       image: {
-        src: "/refs/gigi-can.png",
+        src: "/refs/gigi-can.webp",
         alt: "The real GiGi Energy can — scraped from the live storefront",
         fit: "contain",
       },

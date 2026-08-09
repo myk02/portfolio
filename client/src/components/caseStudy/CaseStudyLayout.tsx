@@ -216,9 +216,14 @@ export default function CaseStudyLayout({
                 <p className="text-[11px] font-mono uppercase tracking-widest text-accent mb-2">
                   {c.kicker}
                 </p>
-                <h2 className="font-display font-bold text-foreground tracking-tight text-3xl sm:text-4xl mb-6">
+                <h2 className="font-display font-bold text-foreground tracking-tight text-3xl sm:text-4xl mb-4">
                   {c.title}
                 </h2>
+                {c.lead && (
+                  <p className="text-base sm:text-lg text-foreground leading-relaxed mb-6 max-w-2xl">
+                    {c.lead}
+                  </p>
+                )}
                 {c.body}
               </section>
             ))}

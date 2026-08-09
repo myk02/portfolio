@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Download } from "lucide-react";
+import { ArrowDown, Diamond, Download } from "lucide-react";
 import {
   PhoneMockup,
   TabletMockup,
@@ -212,7 +212,7 @@ export function SkillMarquee() {
               <span className="text-sm font-medium tracking-wide opacity-90">
                 {skill}
               </span>
-              <span className="text-[#e8ff47] text-xs">◆</span>
+              <Diamond size={11} className="text-accent shrink-0" fill="currentColor" strokeWidth={0} />
             </span>
           ))}
         </div>

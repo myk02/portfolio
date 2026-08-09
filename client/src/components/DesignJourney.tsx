@@ -5,6 +5,7 @@ import {
   EyeOff,
   ExternalLink,
   Image as ImageIcon,
+  Slash,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { caseJourneys } from "@/data/caseJourneys";
@@ -112,6 +113,20 @@ function ConceptCard({ chip, won }: { chip: string; won: boolean }) {
         {chip}
       </span>
     </div>
+  );
+}
+
+/** Marks a stage that wants a real asset dropped in — code art stays visible behind it. */
+function PlaceholderSlot({ label }: { label: string }) {
+  return (
+    <>
+      <span className="pointer-events-none absolute inset-0 z-[1] border border-dashed border-foreground/30" />
+      <span className="pointer-events-none absolute inset-[5px] z-[1] border border-dashed border-foreground/15" />
+      <span className="absolute top-1.5 right-1.5 z-[2] inline-flex items-center gap-1 px-1.5 py-0.5 text-[8px] font-mono uppercase tracking-wider bg-card border border-dashed border-foreground/50 text-muted-foreground">
+        <Slash size={8} aria-hidden />
+        Real {label} slot
+      </span>
+    </>
   );
 }
 
@@ -262,7 +277,7 @@ function stagesFor(slug: string): JourneyStage[] {
   function BankingHifiArt() {
     return (
       <div className="w-full h-full">
-        <BankingScreen variant="desktop" screen="home" />
+        <BankingScreen variant="mobile" screen="goals" />
       </div>
     );
   }
@@ -538,7 +553,7 @@ function stagesFor(slug: string): JourneyStage[] {
   function DashHifiArt() {
     return (
       <div className="w-full h-full">
-        <DashboardScreen variant="desktop" />
+        <DashboardScreen variant="mobile" />
       </div>
     );
   }
@@ -615,7 +630,7 @@ function stagesFor(slug: string): JourneyStage[] {
   function DsHifiArt() {
     return (
       <div className="w-full h-full">
-        <DesignSystemScreen variant="desktop" />
+        <DesignSystemScreen variant="mobile" />
       </div>
     );
   }
@@ -1107,6 +1122,9 @@ export default function DesignJourney({ slug }: { slug: string }) {
                   />
                 ) : (
                   s.art
+                )}
+                {s.data?.placeholder && !s.data?.image && (
+                  <PlaceholderSlot label={s.data.placeholder} />
                 )}
                 {s.data?.image && (
                   <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 text-[8px] font-mono uppercase tracking-wider bg-foreground text-background">

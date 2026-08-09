@@ -22,7 +22,7 @@ function Portrait() {
         aria-label="Portrait of Mike Waitindi"
       >
         <img
-          src="/profile.png"
+          src="/profile.webp"
           alt="Portrait of Mike Waitindi"
           loading="lazy"
           className="w-full h-full object-cover"

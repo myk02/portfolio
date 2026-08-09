@@ -1,5 +1,6 @@
 const ink = "#141310";
 const muted = "#8a867e";
+import { Delete } from "lucide-react";
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
@@ -149,7 +150,7 @@ function ScreenTransfer() {
             <span className="text-[8px] font-bold" style={{ color: ink }}>0</span>
           </div>
           <div className="rounded-[4px] py-1.5 flex items-center justify-center">
-            <span className="text-[8px]" style={{ color: muted }}>⌫</span>
+            <Delete size={8} strokeWidth={2.2} style={{ color: muted }} />
           </div>
         </div>
         <div className="mt-2 rounded-[5px] bg-[#e8ff47] py-1.5 text-center">

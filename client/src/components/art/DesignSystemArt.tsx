@@ -2,6 +2,16 @@ const ink = "#141310";
 const cream = "#f4efe7";
 const lime = "#e8ff47";
 const muted = "#8a867e";
+import {
+  ArrowUpRight,
+  CircleDot,
+  Hexagon,
+  LayoutGrid,
+  Mail,
+  Menu,
+  Settings2,
+  Sparkles,
+} from "lucide-react";
 
 const typeScale = [
   ["Display", "44", "font-black"],
@@ -18,7 +28,16 @@ const chips = [
   ["Muted", "#8a867e", "#f4efe7"],
 ];
 
-const icons = ["◪", "✦", "⬢", "↗", "⚲", "✉", "≡", "◉"];
+const icons = [
+  LayoutGrid,
+  Sparkles,
+  Hexagon,
+  ArrowUpRight,
+  Settings2,
+  Mail,
+  Menu,
+  CircleDot,
+];
 
 export default function DesignSystemArt({ className = "" }: { className?: string }) {
   return (
@@ -116,9 +135,9 @@ export default function DesignSystemArt({ className = "" }: { className?: string
 
         <div className="mt-2.5 border-t pt-2 flex items-center justify-between" style={{ borderColor: "rgba(20,19,16,0.12)" }}>
           <div className="flex items-center gap-1.5">
-            {icons.map((g) => (
-              <span key={g} className="w-4 h-4 rounded-[4px] border border-black/10 flex items-center justify-center text-[8px]" style={{ background: "rgba(20,19,16,0.05)", color: ink }}>
-                {g}
+            {icons.map((Icon, i) => (
+              <span key={i} className="w-4 h-4 rounded-[4px] border border-black/10 flex items-center justify-center" style={{ background: "rgba(20,19,16,0.05)", color: ink }}>
+                <Icon size={9} strokeWidth={2} />
               </span>
             ))}
           </div>

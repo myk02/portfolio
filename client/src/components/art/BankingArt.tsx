@@ -1,7 +1,18 @@
 import { motion } from "framer-motion";
+import {
+  ArrowDownLeft,
+  ArrowUpRight,
+  MoreHorizontal,
+  ScanLine,
+  Send,
+  Smartphone,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 
 const ink = "#141310";
 const muted = "#8a867e";
+const lime = "#e8ff47";
 
 function PhoneFrame({
   children,
@@ -94,10 +105,7 @@ function DashboardScreen() {
         <div className="rounded-[8px] bg-[#141310] p-2.5">
           <div className="flex items-center justify-between">
             <p className="text-[7.5px] text-[#f4efe7]/60 font-medium">TOTAL BALANCE</p>
-            <svg width="8" height="6" viewBox="0 0 8 6" fill="none" stroke="#e8ff47" strokeWidth="0.9">
-              <path d="M.8 5.2 3 2.8l1.4 1.4L7.2.8" />
-              <path d="M5.4.8H7.2v1.8" />
-            </svg>
+            <TrendingUp size={8} strokeWidth={2.4} style={{ color: lime }} />
           </div>
           <p className="text-[16px] font-bold tracking-tight text-[#f4efe7] mt-0.5">
             KSh 24,580
@@ -142,17 +150,17 @@ function DashboardScreen() {
       <div className="px-3 mt-2">
         <div className="grid grid-cols-4 gap-1">
           {[
-            ["Tuma", "➜"],
-            ["Lipa", "▣"],
-            ["Airtime", "⌁"],
-            ["More", "⋯"],
-          ].map(([label, glyph]) => (
+            { label: "Tuma", Icon: Send },
+            { label: "Lipa", Icon: ScanLine },
+            { label: "Airtime", Icon: Smartphone },
+            { label: "More", Icon: MoreHorizontal },
+          ].map(({ label, Icon }) => (
             <div key={label} className="flex flex-col items-center gap-0.5">
               <div
-                className="w-6 h-6 rounded-[6px] flex items-center justify-center text-[8px] font-bold"
+                className="w-6 h-6 rounded-[6px] flex items-center justify-center"
                 style={{ background: "rgba(20,19,16,0.07)", color: ink }}
               >
-                {glyph}
+                <Icon size={11} strokeWidth={2.2} />
               </div>
               <span className="text-[6.5px] font-semibold" style={{ color: ink }}>
                 {label}
@@ -173,8 +181,12 @@ function DashboardScreen() {
             ["Round-up save", "Auto · Goals", "+KSh 45", true],
           ].map(([title, sub, amount, pos]) => (
             <div key={title as string} className="flex items-center gap-1.5">
-              <div className="w-4 h-4 rounded-[4px] flex items-center justify-center text-[6px] bg-[#141310]/[0.07]" style={{ color: ink }}>
-                {pos ? "↗" : "↙"}
+              <div className="w-4 h-4 rounded-[4px] flex items-center justify-center bg-[#141310]/[0.07]" style={{ color: ink }}>
+                {pos ? (
+                  <ArrowUpRight size={7} strokeWidth={2.4} />
+                ) : (
+                  <ArrowDownLeft size={7} strokeWidth={2.4} />
+                )}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-[7.5px] font-semibold truncate" style={{ color: ink }}>{title}</p>

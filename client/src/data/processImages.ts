@@ -1,13 +1,5 @@
 /** Maps case study slugs + journey stage keys → screenshot folder names under /process/ */
 
-export type JourneyStageKey =
-  | "brief"
-  | "research"
-  | "sketches"
-  | "wireframes"
-  | "hifi"
-  | "ship";
-
 export type ProcessPhaseKey = "discover" | "define" | "design" | "validate";
 
 export function processImagePath(
@@ -15,40 +7,8 @@ export function processImagePath(
   stage: string,
   viewport: "mobile" | "desktop",
 ): string {
-  return `/process/${slug}/${stage}-${viewport}.png`;
+  return `/process/${slug}/${stage}-${viewport}.webp`;
 }
-
-/** Mapping for case studies with captured journey screenshots
- *  Only includes case studies that have dedicated process images captured.
- *  dashboard-ui-system and design-system-creation use inline art components,
- *  not process images, so they are not included here.
- */
-export const journeyStageImages: Record<string, Partial<Record<JourneyStageKey, string>>> = {
-  "mobile-banking-redesign": {
-    brief: "brief",
-    research: "research",
-    sketches: "wireframes",
-    wireframes: "wireframes",
-    hifi: "hifi",
-    ship: "ship",
-  },
-  kenyatrace: {
-    brief: "brief",
-    research: "research",
-    sketches: "wireframes",
-    wireframes: "wireframes",
-    hifi: "hifi",
-    ship: "ship",
-  },
-  "gigi-energy": {
-    brief: "brief",
-    research: "research",
-    sketches: "wireframes",
-    wireframes: "wireframes",
-    hifi: "hifi",
-    ship: "ship",
-  },
-};
 
 /** Lifecycle phases for the homepage "How I work" section
  *  Uses "home" folder with reused screenshots from specific phases

@@ -58,8 +58,8 @@ export function ProcessShot({
   const base = `/process/${slug}/${stage}`;
   return (
     <DevicePairImage
-      mobile={`${base}-mobile.png`}
-      desktop={`${base}-desktop.png`}
+      mobile={`${base}-mobile.webp`}
+      desktop={`${base}-desktop.webp`}
       alt={alt ?? stage}
       tall
     />

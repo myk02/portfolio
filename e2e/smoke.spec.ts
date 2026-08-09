@@ -66,8 +66,12 @@ test.describe("case study pages", () => {
     page,
   }) => {
     await page.goto("/work/kenyatrace");
-    const live = page.getByRole("link", { name: /View live product/ });
+    // Hero CTA — the ship-stage CTA repeats the same href at the end of the study
+    const live = page.getByRole("link", { name: /View live product/ }).first();
     await expect(live).toHaveAttribute("href", "https://kenyatrace.vercel.app");
+    await expect(
+      page.locator("#chapter-ship").getByRole("link", { name: /View live product/ })
+    ).toHaveAttribute("href", "https://kenyatrace.vercel.app");
   });
 
   test("case study renders chapter content and at-a-glance rail", async ({

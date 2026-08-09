@@ -1,5 +1,20 @@
 import { DeviceShowcase } from "@/components/artifacts/DeviceMockups";
 import { FitCanvas } from "@/components/art/FitCanvas";
+import {
+  ArrowDownLeft,
+  ArrowUpRight,
+  CreditCard,
+  Delete,
+  Home,
+  MoreHorizontal,
+  ScanLine,
+  Search,
+  Send,
+  Smartphone,
+  Target,
+  TrendingUp,
+  Wallet,
+} from "lucide-react";
 
 const ink = "#141310";
 const cream = "#f4efe7";
@@ -115,11 +130,11 @@ const D: Record<BankingVariant, DSet> = {
 };
 
 const NAV = [
-  { key: "home", label: "Home", ico: "⌂" },
-  { key: "money", label: "Money", ico: "≡" },
-  { key: "goals", label: "Goals", ico: "◎" },
-  { key: "cards", label: "Cards", ico: "▢" },
-  { key: "more", label: "More", ico: "⋯" },
+  { key: "home", label: "Home", Icon: Home },
+  { key: "money", label: "Money", Icon: Wallet },
+  { key: "goals", label: "Goals", Icon: Target },
+  { key: "cards", label: "Cards", Icon: CreditCard },
+  { key: "more", label: "More", Icon: MoreHorizontal },
 ];
 
 const NAV_ACTIVE: Record<BankingScreenName, string> = {
@@ -180,12 +195,12 @@ function BottomNav({ v, active }: { v: BankingVariant; active: string }) {
             key={n.key}
             className={`flex flex-col items-center py-2 ${active === n.key ? "" : "opacity-40"}`}
           >
-            <span
+            <n.Icon
               className="leading-none"
-              style={{ fontSize: d.navIco, color: ink }}
-            >
-              {n.ico}
-            </span>
+              size={d.navIco}
+              strokeWidth={2.2}
+              style={{ color: ink }}
+            />
             <span
               className="mt-1 font-semibold"
               style={{ fontSize: d.navTxt, color: ink }}
@@ -229,9 +244,12 @@ function Sidebar({ v, active }: { v: BankingVariant; active: string }) {
               }`}
               style={on ? { color: cream } : { color: ink }}
             >
-              <span style={{ fontSize: d.navIco }} className="leading-none">
-                {n.ico}
-              </span>
+              <n.Icon
+                size={d.navIco}
+                strokeWidth={2.2}
+                className="leading-none"
+                style={on ? { color: cream } : { color: ink }}
+              />
               <span className="font-semibold" style={{ fontSize: d.navTxt }}>
                 {n.label}
               </span>
@@ -272,7 +290,7 @@ function Topbar({ v }: { v: BankingVariant }) {
           className="flex items-center gap-1 px-2 py-1 rounded-soft-sm"
           style={{ background: "rgba(20,19,16,0.06)" }}
         >
-          <span style={{ fontSize: d.small, color: muted }}>⌕</span>
+          <Search size={d.small + 1} strokeWidth={2.4} style={{ color: muted }} />
           <span style={{ fontSize: d.small, color: muted }}>Search</span>
         </span>
         <span
@@ -382,7 +400,9 @@ function HomeContent({ v }: { v: BankingVariant }) {
           >
             Total balance
           </p>
-          <span style={{ fontSize: d.small, color: lime }}>↗</span>
+          <span style={{ fontSize: d.small, color: lime }}>
+            <TrendingUp size={d.small + 1} strokeWidth={2.4} />
+          </span>
         </div>
         <p
           className="font-black tracking-tight leading-tight mt-1"
@@ -426,23 +446,22 @@ function HomeContent({ v }: { v: BankingVariant }) {
 
       <div className="grid grid-cols-4 gap-2 shrink-0">
         {[
-          ["Tuma", "➜"],
-          ["Lipa", "▣"],
-          ["Airtime", "⌁"],
-          ["More", "⋯"],
-        ].map(([label, glyph]) => (
+          { label: "Tuma", Icon: Send },
+          { label: "Lipa", Icon: ScanLine },
+          { label: "Airtime", Icon: Smartphone },
+          { label: "More", Icon: MoreHorizontal },
+        ].map(({ label, Icon }) => (
           <div key={label} className="flex flex-col items-center gap-1">
             <div
-              className="rounded-[14px] grid place-items-center font-bold"
+              className="rounded-[14px] grid place-items-center"
               style={{
                 width: d.tile,
                 height: d.tile,
                 background: "rgba(20,19,16,0.07)",
                 color: ink,
-                fontSize: d.tileIco,
               }}
             >
-              {glyph}
+              <Icon size={d.tileIco} strokeWidth={2.1} />
             </div>
             <span
               className="font-semibold"
@@ -471,10 +490,13 @@ function HomeContent({ v }: { v: BankingVariant }) {
                   height: d.rowIco,
                   background: "rgba(20,19,16,0.07)",
                   color: ink,
-                  fontSize: d.rowIco * 0.45,
                 }}
               >
-                {pos ? "↗" : "↙"}
+                {pos ? (
+                  <ArrowUpRight size={d.rowIco * 0.5} strokeWidth={2.2} />
+                ) : (
+                  <ArrowDownLeft size={d.rowIco * 0.5} strokeWidth={2.2} />
+                )}
               </div>
               <div className="min-w-0 flex-1">
                 <p
@@ -687,16 +709,19 @@ function TransferContent({ v }: { v: BankingVariant }) {
               className="rounded-[12px] text-center font-bold grid place-items-center"
               style={
                 n === ""
-                  ? { height: d.kbdH, fontSize: d.kbd }
+                  ? { height: d.kbdH }
                   : {
                       height: d.kbdH,
-                      fontSize: d.kbd,
                       background: "rgba(20,19,16,0.06)",
                       color: ink,
                     }
               }
             >
-              {n}
+              {n === "⌫" ? (
+                <Delete size={d.kbd * 0.85} strokeWidth={2.2} />
+              ) : (
+                <span style={{ fontSize: d.kbd }}>{n}</span>
+              )}
             </div>
           )
         )}

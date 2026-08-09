@@ -37,7 +37,7 @@ export interface CaseStudy {
   tileLine: string;
   tileBadge: string;
   heroCaption: string;
-  problem: { lead: string; paragraphs: string[] };
+  problem: { lead: string; paragraphs?: string[] };
   research: CaseSection;
   designThinking: CaseSection;
   ia: CaseSection;
@@ -74,9 +74,6 @@ export const caseStudies: CaseStudy[] = [
     heroCaption: "Conceptual study — not affiliated with any bank.",
     problem: {
       lead: "Young customers with irregular income don't trust or use their banking app.",
-      paragraphs: [
-        "Onboarding dies at documents; the app feels like it's watching you.",
-      ],
     },
     research: {
       lead: "8 interviews · 47-survey · 6-app audit.",
@@ -110,9 +107,6 @@ export const caseStudies: CaseStudy[] = [
     },
     designThinking: {
       lead: "Two directions killed before any visual polish.",
-      paragraphs: [
-        "Dark fintech and one-screen dashboards failed. Chosen: calm, savings-first, progressive KYC (8 → 4).",
-      ],
       bullets: [
         {
           label: "Kept",
@@ -152,9 +146,6 @@ export const caseStudies: CaseStudy[] = [
     },
     testing: {
       lead: "Five moderated tests in Maze — one iteration pass.",
-      paragraphs: [
-        "Round 1: goal ring read as a spinner. Round 2, with '%': 100% pass.",
-      ],
       callouts: [
         {
           quote:
@@ -216,7 +207,6 @@ export const caseStudies: CaseStudy[] = [
     heroCaption: "Live product — screens shown are from the shipped platform.",
     problem: {
       lead: "Planning a Kenya trip means juggling ten county sites that don't talk to each other.",
-      paragraphs: ["Travelers fall back to WhatsApp groups and printed PDFs."],
     },
     research: {
       lead: "12 interviews · 34-survey · competitive audit.",
@@ -244,9 +234,6 @@ export const caseStudies: CaseStudy[] = [
     },
     designThinking: {
       lead: "Map-first was the obvious answer. Research said list-first.",
-      paragraphs: [
-        "Map loads timed out on 3G. Chosen: list-first browse + route builder.",
-      ],
       bullets: [
         {
           label: "Kept",
@@ -269,15 +256,9 @@ export const caseStudies: CaseStudy[] = [
     },
     design: {
       lead: "Mobile-first, editorial photography, one accent.",
-      paragraphs: [
-        "Photography leads; interface steps back — tested at 360px.",
-      ],
     },
     testing: {
       lead: "Five tests on the route builder — one fatal flaw found.",
-      paragraphs: [
-        "Adding a stop left the route. Inline fix: 6 interactions → 3.",
-      ],
     },
     outcomes: [
       {
@@ -332,7 +313,6 @@ export const caseStudies: CaseStudy[] = [
     heroCaption: "Live product — the shipped storefront.",
     problem: {
       lead: "A loud brand and a quiet leak — shoppers added cans, then vanished.",
-      paragraphs: ["GA4: add-to-cart → checkout fell 52%."],
     },
     research: {
       lead: "GA4 review · five-store audit.",
@@ -347,7 +327,6 @@ export const caseStudies: CaseStudy[] = [
     },
     designThinking: {
       lead: "Keep the energy, fix the legibility.",
-      paragraphs: ["The brand IS the product — remap colors onto AA surfaces."],
       bullets: [
         {
           label: "Palette",
@@ -370,13 +349,9 @@ export const caseStudies: CaseStudy[] = [
     },
     design: {
       lead: "Bold type as the interface; color as the flavor system.",
-      paragraphs: ["Touch targets, labels, errors rebuilt to WCAG AA."],
     },
     testing: {
       lead: "Usability pass, five mobile users.",
-      paragraphs: [
-        "Merged step read as one form; promo row added where users expected it.",
-      ],
     },
     outcomes: [
       {
@@ -427,7 +402,6 @@ export const caseStudies: CaseStudy[] = [
     heroCaption: "Conceptual study — dark operational UI, handoff-ready.",
     problem: {
       lead: "Dense operational data, thin hierarchy, handoff by screenshot.",
-      paragraphs: ["Demos collapse under real data; developers guess specs."],
     },
     research: {
       lead: "Three internal tools · task-focused interviews.",
@@ -445,9 +419,6 @@ export const caseStudies: CaseStudy[] = [
     },
     designThinking: {
       lead: "Card-only or table-only? Neither.",
-      paragraphs: [
-        "Three tiers with written density rules: KPI → exceptions → dense table.",
-      ],
     },
     ia: {
       lead: "Three tiers, explicit rules.",
@@ -462,15 +433,9 @@ export const caseStudies: CaseStudy[] = [
     },
     design: {
       lead: "Dark UI, lime accent, built for long sessions.",
-      paragraphs: [
-        "Every component ships spec annotations — spacing, type, states.",
-      ],
     },
     testing: {
       lead: "Heuristic review + developer handoff walkthrough.",
-      paragraphs: [
-        "Walkthrough caught missing row states — added as variants.",
-      ],
     },
     outcomes: [
       {
@@ -517,9 +482,6 @@ export const caseStudies: CaseStudy[] = [
     heroCaption: "Conceptual study — the style-guide cover at a glance.",
     problem: {
       lead: "Every product shipped a different button. That's a quality problem.",
-      paragraphs: [
-        "17 button styles, 6 type scales, unlimited grays — no standards.",
-      ],
     },
     research: {
       lead: "Audit of three surfaces · designer interviews.",
@@ -534,9 +496,6 @@ export const caseStudies: CaseStudy[] = [
     },
     designThinking: {
       lead: "Token-first, not component-first.",
-      paragraphs: [
-        "Composable primitives — with a starter set and an extension path.",
-      ],
     },
     ia: {
       lead: "Tokens → components → guidance.",
@@ -551,15 +510,9 @@ export const caseStudies: CaseStudy[] = [
     },
     design: {
       lead: "The system as a poster — scale, chips, states, grid in one view.",
-      paragraphs: [
-        "Editorial serif for display, grotesque for UI, cream/ink/lime tokens.",
-      ],
     },
     testing: {
       lead: "The dashboard study was the first consumer.",
-      paragraphs: [
-        "First consumer: the dashboard study. Three gaps found — each documented.",
-      ],
     },
     outcomes: [
       {

@@ -1,4 +1,14 @@
 import { FitCanvas } from "@/components/art/FitCanvas";
+import {
+  ArrowUpRight,
+  CircleDot,
+  Hexagon,
+  LayoutGrid,
+  Mail,
+  Menu,
+  Settings2,
+  Sparkles,
+} from "lucide-react";
 
 const ink = "#141310";
 const panel = "#1b1917";
@@ -385,8 +395,9 @@ function DashSidebar({ active }: { active: string }) {
         style={{ background: panel }}
       >
         <p style={{ fontSize: 8, color: muted }}>Systems</p>
-        <p className="font-bold" style={{ fontSize: 10, color: fg }}>
-          ● Normal
+        <p className="font-bold flex items-center gap-1.5" style={{ fontSize: 10, color: fg }}>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: green }} />
+          Normal
         </p>
       </div>
     </div>
@@ -625,21 +636,29 @@ function ButtonsForms({ s }: { s: { title: number; row: number } }) {
 }
 
 function IconsSpacing({ s }: { s: { icon: number; label: number } }) {
-  const icons = ["◪", "✦", "⬢", "↗", "⚲", "✉", "≡", "◉"];
+  const icons = [
+    LayoutGrid,
+    Sparkles,
+    Hexagon,
+    ArrowUpRight,
+    Settings2,
+    Mail,
+    Menu,
+    CircleDot,
+  ];
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
-        {icons.map(g => (
+        {icons.map((Icon, i) => (
           <span
-            key={g}
+            key={i}
             className="w-5 h-5 rounded-[4px] border border-black/10 grid place-items-center"
             style={{
-              fontSize: s.icon,
               background: "rgba(20,19,16,0.05)",
               color: ink,
             }}
           >
-            {g}
+            <Icon size={s.icon + 1} strokeWidth={2} />
           </span>
         ))}
       </div>
