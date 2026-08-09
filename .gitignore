@@ -116,3 +116,7 @@ client/public/__manus__/version.json
 
 .vercel
 .env*
+
+# Playwright
+test-results/
+playwright-report/

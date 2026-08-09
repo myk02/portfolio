@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ZoomImage } from "@/components/Lightbox";
 
 /** A device screen holds either a real screenshot (src) or a rendered node (art). */
 export type DeviceContent = { src: string; alt: string } | { node: ReactNode };
@@ -17,12 +18,14 @@ function Screen({
       className={`relative overflow-hidden bg-[#f4efe7] ${radius} ${className}`}
     >
       {"src" in content ? (
-        <img
+        <ZoomImage
           src={content.src}
           alt={content.alt}
+          caption={content.alt}
           loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover object-top"
+          quiet
+          className="h-full"
+          imgClassName="h-full object-cover object-top"
         />
       ) : (
         <div className="w-full h-full">{content.node}</div>

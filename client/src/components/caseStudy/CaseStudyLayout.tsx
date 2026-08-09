@@ -1,9 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, ArrowRight, ExternalLink, MousePointerClick, List } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  MousePointerClick,
+  List,
+} from "lucide-react";
 import type { CaseStudy } from "@/data/caseStudies";
 import type { StudyVisuals } from "@/data/caseVisuals";
-import { useScrollSpy, useReadingProgress, scrollToId } from "@/hooks/useScrollSpy";
+import {
+  useScrollSpy,
+  useReadingProgress,
+  scrollToId,
+} from "@/hooks/useScrollSpy";
 import type { ChapterBlock, GlanceItem } from "./caseChapters";
 import SiteHead from "@/components/SiteHead";
 import DesignJourney from "@/components/DesignJourney";
@@ -12,8 +22,6 @@ import { DesktopMockup } from "@/components/artifacts/DeviceMockups";
 import { DeviceShowcaseFigure } from "@/components/artifacts/DeviceShowcaseFigure";
 import BankingArt from "@/components/art/BankingArt";
 import { BankingDeviceShowcase } from "@/components/art/BankingResponsive";
-import { KenyaTraceShowcase } from "@/components/art/KenyaTraceResponsive";
-import { GigiShowcase } from "@/components/art/GigiResponsive";
 import {
   DashboardScreen,
   DesignSystemScreen,
@@ -40,12 +48,13 @@ export default function CaseStudyLayout({
   next,
   moreWork,
 }: LayoutProps) {
-  const ids = useMemo(() => chapters.map((c) => CHAPTER_ID(c.id)), [chapters]);
+  const ids = useMemo(() => chapters.map(c => CHAPTER_ID(c.id)), [chapters]);
   const active = useScrollSpy(ids, 120);
   const progress = useReadingProgress();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const activeChapter = chapters.find((c) => CHAPTER_ID(c.id) === active) ?? chapters[0];
+  const activeChapter =
+    chapters.find(c => CHAPTER_ID(c.id) === active) ?? chapters[0];
 
   /* arrow-key navigation between studies */
   useEffect(() => {
@@ -137,18 +146,6 @@ export default function CaseStudyLayout({
                 screen="home"
                 title="Concept hi-fi — one design, three viewports"
               />
-            ) : study.slug === "kenyatrace" ? (
-              <KenyaTraceShowcase
-                screen="home"
-                title="Concept hi-fi — one design, three viewports"
-                live
-              />
-            ) : study.slug === "gigi-energy" ? (
-              <GigiShowcase
-                screen="storefront"
-                title="Concept hi-fi — one design, three viewports"
-                live
-              />
             ) : visuals.hero ? (
               <HeroDeviceShowcase hero={visuals.hero} live />
             ) : study.slug === "dashboard-ui-system" ? (
@@ -159,6 +156,9 @@ export default function CaseStudyLayout({
                 phone={<DashboardScreen variant="mobile" />}
                 tablet={<DashboardScreen variant="tablet" />}
                 desktop={<DashboardScreen variant="desktop" />}
+                phoneClassName="w-[180px]"
+                tabletClassName="w-[240px]"
+                desktopClassName="w-[520px]"
               />
             ) : study.slug === "design-system-creation" ? (
               <DeviceShowcaseFigure
@@ -168,6 +168,9 @@ export default function CaseStudyLayout({
                 phone={<DesignSystemScreen variant="mobile" />}
                 tablet={<DesignSystemScreen variant="tablet" />}
                 desktop={<DesignSystemScreen variant="desktop" />}
+                phoneClassName="w-[180px]"
+                tabletClassName="w-[240px]"
+                desktopClassName="w-[520px]"
               />
             ) : (
               <figure className="border border-border bg-card p-4 sm:p-6">
@@ -190,7 +193,10 @@ export default function CaseStudyLayout({
       </header>
 
       {/* DESIGN JOURNEY — full-width scroll-driven strip */}
-      <section aria-label={`${study.name} — design journey`} className="border-b border-border">
+      <section
+        aria-label={`${study.name} — design journey`}
+        className="border-b border-border"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-14">
           <DesignJourney slug={study.slug} />
         </div>
@@ -201,7 +207,7 @@ export default function CaseStudyLayout({
         <div className="grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-8 lg:gap-12">
           {/* MAIN */}
           <article className="min-w-0 py-10 lg:py-14">
-            {chapters.map((c) => (
+            {chapters.map(c => (
               <section
                 key={c.id}
                 id={CHAPTER_ID(c.id)}
@@ -227,8 +233,11 @@ export default function CaseStudyLayout({
                   At a glance
                 </p>
                 <dl className="divide-y divide-border border-y border-border">
-                  {glance.map((g) => (
-                    <div key={g.label} className="flex items-start justify-between gap-4 py-2.5">
+                  {glance.map(g => (
+                    <div
+                      key={g.label}
+                      className="flex items-start justify-between gap-4 py-2.5"
+                    >
                       <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground shrink-0">
                         {g.label}
                       </dt>
@@ -246,7 +255,7 @@ export default function CaseStudyLayout({
                   Jump to
                 </p>
                 <ol className="space-y-1">
-                  {chapters.map((c) => {
+                  {chapters.map(c => {
                     const isActive = CHAPTER_ID(c.id) === active;
                     return (
                       <li key={c.id}>
@@ -302,7 +311,7 @@ export default function CaseStudyLayout({
         <div className="mx-auto max-w-6xl px-4">
           <button
             type="button"
-            onClick={() => setMobileOpen((o) => !o)}
+            onClick={() => setMobileOpen(o => !o)}
             aria-expanded={mobileOpen}
             className="w-full flex items-center justify-between py-3 text-sm font-semibold"
           >
@@ -315,7 +324,7 @@ export default function CaseStudyLayout({
           </button>
           {mobileOpen && (
             <ol className="pb-3 grid grid-cols-2 gap-1.5">
-              {chapters.map((c) => {
+              {chapters.map(c => {
                 const isActive = CHAPTER_ID(c.id) === active;
                 return (
                   <li key={c.id}>
@@ -339,10 +348,7 @@ export default function CaseStudyLayout({
       </div>
 
       {/* PREV / NEXT */}
-      <nav
-        aria-label="More case studies"
-        className="border-t border-border"
-      >
+      <nav aria-label="More case studies" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2">
           <Link
             href={`/work/${prev.slug}`}

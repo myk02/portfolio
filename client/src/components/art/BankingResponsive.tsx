@@ -808,9 +808,9 @@ export function BankingDeviceShowcase({
         phone={{ node: <BankingScreen variant="mobile" screen={screen} /> }}
         tablet={{ node: <BankingScreen variant="tablet" screen={screen} /> }}
         desktop={{ node: <BankingScreen variant="desktop" screen={screen} /> }}
-        phoneClassName="w-[145px]"
-        tabletClassName="w-[185px]"
-        desktopClassName="w-[340px]"
+        phoneClassName="w-[180px]"
+        tabletClassName="w-[240px]"
+        desktopClassName="w-[520px]"
       />
       <p className="mt-3 text-[11px] text-muted-foreground leading-snug">
         {SCREEN_NOTES[screen]}
@@ -861,9 +861,9 @@ export function BankingShots({
               desktop={{
                 node: <BankingScreen variant="desktop" screen={s.screen} />,
               }}
-              phoneClassName="w-[100px]"
-              tabletClassName="w-[130px]"
-              desktopClassName="w-[180px]"
+              phoneClassName="w-[115px]"
+              tabletClassName="w-[150px]"
+              desktopClassName="w-[210px]"
             />
             <p className="mt-2.5 text-[11px] text-muted-foreground leading-snug">
               {SCREEN_NOTES[s.screen]}

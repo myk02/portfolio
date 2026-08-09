@@ -2,50 +2,60 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
-import {
-  PhoneMockup,
-  TabletMockup,
-  DesktopMockup,
-  type DeviceContent,
-} from "@/components/artifacts/DeviceMockups";
+import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
 import { BankingScreen } from "@/components/art/BankingResponsive";
 import {
   DashboardScreen,
   DesignSystemScreen,
 } from "@/components/art/ResponsiveConceptArt";
-import { KenyaTraceScreen } from "@/components/art/KenyaTraceResponsive";
-import { GigiScreen } from "@/components/art/GigiResponsive";
 
-interface TileTrioProps {
+interface TileArtProps {
   phone: DeviceContent;
-  tablet: DeviceContent;
   desktop: DeviceContent;
   bg?: string;
 }
 
-function TileTrio({ phone, tablet, desktop, bg = "#f4efe7" }: TileTrioProps) {
+/**
+ * Tile art — the design shown large (desktop fills the tile so its content is
+ * readable) with the phone view overlaid, instead of a tiny three-device trio.
+ */
+function TileArt({ phone, desktop, bg = "#f4efe7" }: TileArtProps) {
   return (
     <div
-      className="w-full h-full flex items-center justify-center gap-[2%] px-[3%] py-[5%] tile-kb transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+      className="w-full h-full relative tile-kb overflow-hidden transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
       style={{ background: bg }}
     >
-      <PhoneMockup
-        content={phone}
-        className="w-full"
-        // slightly larger phone frame for better legibility in tiles
-        figureClassName="w-[26%]"
-      />
-      <TabletMockup
-        content={tablet}
-        className="w-full"
-        // slightly larger tablet frame to match phone sizing
-        figureClassName="w-[30%]"
-      />
-      <DesktopMockup
-        content={desktop}
-        className="w-full"
-        figureClassName="w-[44%]"
-      />
+      <div className="absolute inset-0">
+        {"src" in desktop ? (
+          <img
+            src={desktop.src}
+            alt={desktop.alt}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div className="w-full h-full">{desktop.node}</div>
+        )}
+      </div>
+      <div className="absolute bottom-2.5 right-2.5 w-[24%] rounded-[12px] bg-[#141310] p-[3px] border border-black/15 shadow-[0_12px_28px_rgba(20,19,16,0.45)]">
+        <div
+          className="relative overflow-hidden rounded-[9px] bg-[#f4efe7]"
+          style={{ aspectRatio: "9/17" }}
+        >
+          {"src" in phone ? (
+            <img
+              src={phone.src}
+              alt={phone.alt}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="absolute inset-0">{phone.node}</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -78,27 +88,43 @@ const TILE_ART = {
   kenyatrace: {
     bg: "#efe9dd",
     trio: () => ({
-      phone: { node: <KenyaTraceScreen variant="mobile" screen="home" /> },
-      tablet: { node: <KenyaTraceScreen variant="tablet" screen="home" /> },
-      desktop: { node: <KenyaTraceScreen variant="desktop" screen="home" /> },
+      phone: {
+        src: "/shots/kenyatrace/home-mobile.jpg",
+        alt: "KenyaTrace home — mobile",
+      },
+      tablet: {
+        src: "/shots/kenyatrace/home-tablet.jpg",
+        alt: "KenyaTrace home — tablet",
+      },
+      desktop: {
+        src: "/shots/kenyatrace/home-cards-desktop.jpg",
+        alt: "KenyaTrace home — destination cards on desktop",
+      },
     }),
   },
   gigi: {
     bg: "#141310",
     trio: () => ({
-      phone: { node: <GigiScreen variant="mobile" screen="storefront" /> },
-      tablet: { node: <GigiScreen variant="tablet" screen="storefront" /> },
-      desktop: { node: <GigiScreen variant="desktop" screen="storefront" /> },
+      phone: {
+        src: "/shots/gigi-energy/home-mobile.jpg",
+        alt: "GiGi Energy storefront — mobile",
+      },
+      tablet: {
+        src: "/shots/gigi-energy/home-tablet.jpg",
+        alt: "GiGi Energy storefront — tablet",
+      },
+      desktop: {
+        src: "/shots/gigi-energy/home-products-desktop.jpg",
+        alt: "GiGi Energy storefront — product grid on desktop",
+      },
     }),
   },
 } as const;
 
 function Artwork({ study }: { study: CaseStudy }) {
   const art = TILE_ART[study.art];
-  const { phone, tablet, desktop } = art.trio();
-  return (
-    <TileTrio bg={art.bg} phone={phone} tablet={tablet} desktop={desktop} />
-  );
+  const { phone, desktop } = art.trio();
+  return <TileArt bg={art.bg} phone={phone} desktop={desktop} />;
 }
 
 function TileBody({ study }: { study: CaseStudy }) {

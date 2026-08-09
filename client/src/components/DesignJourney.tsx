@@ -9,7 +9,11 @@ import {
 import { useInView } from "@/hooks/useInView";
 import { caseJourneys } from "@/data/caseJourneys";
 import type { JourneyStageData } from "@/data/caseJourneys";
-
+import { BankingScreen } from "@/components/art/BankingResponsive";
+import {
+  DashboardScreen,
+  DesignSystemScreen,
+} from "@/components/art/ResponsiveConceptArt";
 
 const N = 6;
 const IDLE_MS = 2000;
@@ -40,7 +44,9 @@ function Chip({ text, icon }: { text: string; icon?: React.ReactNode }) {
 function IconTile({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
     <div className="flex flex-col items-center gap-2.5">
-      <div className="w-11 h-11 grid place-items-center bg-foreground text-background">{icon}</div>
+      <div className="w-11 h-11 grid place-items-center bg-foreground text-background">
+        {icon}
+      </div>
       <Chip text={label} />
     </div>
   );
@@ -98,7 +104,9 @@ function ConceptCard({ chip, won }: { chip: string; won: boolean }) {
       </div>
       <span
         className={`self-start px-1 py-[1px] text-[6.5px] font-mono uppercase tracking-wider ${
-          won ? "bg-accent text-accent-foreground" : "border border-rose-400/60 text-rose-400"
+          won
+            ? "bg-accent text-accent-foreground"
+            : "border border-rose-400/60 text-rose-400"
         }`}
       >
         {chip}
@@ -120,7 +128,7 @@ function PhoneMini({ src }: { src?: string }) {
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-top"
             loading="lazy"
-            onError={(e) => {
+            onError={e => {
               const img = e.currentTarget;
               if (src.includes(".webp") && !img.dataset.fallback) {
                 img.dataset.fallback = "1";
@@ -160,11 +168,14 @@ function TestArt({ prototypeLabel }: { prototypeLabel: string }) {
 function DarkPhoneMini() {
   return (
     <div className="w-[72px] rounded-[14px] bg-[#141310] p-[3px] border border-[rgba(20,19,16,0.15)]">
-      <div className="overflow-hidden rounded-[11px] bg-[#141310]" style={{ aspectRatio: "9/17" }}>
+      <div
+        className="overflow-hidden rounded-[11px] bg-[#141310]"
+        style={{ aspectRatio: "9/17" }}
+      >
         <div className="p-1.5 space-y-1">
           <div className="h-1.5 w-1/2 bg-[#e8ff47]" />
           <div className="grid grid-cols-3 gap-1">
-            {[0, 1, 2].map((i) => (
+            {[0, 1, 2].map(i => (
               <div key={i} className="h-3 bg-[#f4efe7]/20" />
             ))}
           </div>
@@ -178,7 +189,10 @@ function DarkPhoneMini() {
 
 function TokensMini() {
   return (
-    <div className="w-[72px] border border-foreground/30 p-1.5" style={{ background: "var(--background)" }}>
+    <div
+      className="w-[72px] border border-foreground/30 p-1.5"
+      style={{ background: "var(--background)" }}
+    >
       <div className="space-y-1">
         <div className="flex gap-1">
           <span className="w-3 h-3 bg-[#141310] border border-foreground/20" />
@@ -247,14 +261,8 @@ function stagesFor(slug: string): JourneyStage[] {
 
   function BankingHifiArt() {
     return (
-      <div className="flex gap-1.5 items-center justify-center">
-        <PhoneMini />
-        <div className="flex flex-col gap-1">
-          <Chip text="Onboarding" />
-          <Chip text="Home" />
-          <Chip text="Goals" />
-          <Chip text="Transfer" />
-        </div>
+      <div className="w-full h-full">
+        <BankingScreen variant="desktop" screen="home" />
       </div>
     );
   }
@@ -367,19 +375,30 @@ function stagesFor(slug: string): JourneyStage[] {
       <div className="flex flex-col gap-2 w-full px-2">
         <div className="space-y-1.5 w-full">
           <div className="flex items-center gap-2">
-            <span className="text-[8px] font-mono text-muted-foreground w-16 shrink-0">Cart</span>
+            <span className="text-[8px] font-mono text-muted-foreground w-16 shrink-0">
+              Cart
+            </span>
             <div className="flex-1 h-3 bg-foreground/20" />
             <span className="text-[8px] font-mono w-8 text-right">100%</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[8px] font-mono text-muted-foreground w-16 shrink-0">Checkout</span>
-            <div className="flex-1 h-3 bg-foreground/20" style={{ width: "48%" }} />
+            <span className="text-[8px] font-mono text-muted-foreground w-16 shrink-0">
+              Checkout
+            </span>
+            <div
+              className="flex-1 h-3 bg-foreground/20"
+              style={{ width: "48%" }}
+            />
             <span className="text-[8px] font-mono w-8 text-right">48%</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[8px] font-mono text-rose-400 w-16 shrink-0">Payment</span>
+            <span className="text-[8px] font-mono text-rose-400 w-16 shrink-0">
+              Payment
+            </span>
             <div className="h-3 bg-rose-400/50" style={{ width: "31%" }} />
-            <span className="text-[8px] font-mono text-rose-400 w-8 text-right">31%</span>
+            <span className="text-[8px] font-mono text-rose-400 w-8 text-right">
+              31%
+            </span>
           </div>
         </div>
         <Chip text="GA4 funnel · −52%" />
@@ -413,11 +432,21 @@ function stagesFor(slug: string): JourneyStage[] {
     return (
       <div className="flex gap-1.5 items-center justify-center">
         <div className="w-[72px] rounded-[14px] bg-[#141310] p-[3px] border border-[rgba(20,19,16,0.15)]">
-          <div className="overflow-hidden rounded-[11px]" style={{ aspectRatio: "9/17", background: "#f4efe7" }}>
+          <div
+            className="overflow-hidden rounded-[11px]"
+            style={{ aspectRatio: "9/17", background: "#f4efe7" }}
+          >
             <div className="p-1.5 space-y-1">
               <div className="h-2 w-2/3 bg-[#141310]" />
-              <div className="text-[6px] font-mono text-[#141310]/60">FUEL YOUR</div>
-              <div className="text-[6px] font-bold" style={{ color: "#a3e635" }}>AMBITION</div>
+              <div className="text-[6px] font-mono text-[#141310]/60">
+                FUEL YOUR
+              </div>
+              <div
+                className="text-[6px] font-bold"
+                style={{ color: "#a3e635" }}
+              >
+                AMBITION
+              </div>
               <div className="h-3 bg-[#141310]/10 rounded" />
               <div className="h-4 flex items-center justify-center bg-[#141310] rounded">
                 <span className="text-[5px] text-[#f4efe7]">Explore →</span>
@@ -481,7 +510,9 @@ function stagesFor(slug: string): JourneyStage[] {
           <div className="w-[56px] border border-foreground/20 p-1 bg-[#141310]">
             <div className="space-y-0.5">
               <div className="flex gap-0.5">
-                {[0, 1, 2].map(i => <div key={i} className="flex-1 h-2 bg-[#e8ff47]/40" />)}
+                {[0, 1, 2].map(i => (
+                  <div key={i} className="flex-1 h-2 bg-[#e8ff47]/40" />
+                ))}
               </div>
               <div className="h-3 bg-[#f4efe7]/10" />
               <div className="h-4 bg-[#f4efe7]/5" />
@@ -506,21 +537,8 @@ function stagesFor(slug: string): JourneyStage[] {
 
   function DashHifiArt() {
     return (
-      <div className="w-full px-2">
-        <div className="border border-foreground/20 bg-[#141310] p-2 space-y-1.5">
-          <div className="flex gap-1.5">
-            {["KPI", "Delta", "Chart"].map(l => (
-              <div key={l} className="flex-1 border border-[#e8ff47]/30 p-1">
-                <div className="h-1.5 w-2/3 bg-[#e8ff47]/60" />
-                <div className="h-2.5 bg-[#f4efe7]/10 mt-0.5" />
-              </div>
-            ))}
-          </div>
-          <div className="space-y-0.5">
-            {[0, 1, 2].map(i => <div key={i} className="h-1.5 bg-[#f4efe7]/10" />)}
-          </div>
-          <div className="text-[6px] font-mono text-[#e8ff47]/60">Spec annotations ↗</div>
-        </div>
+      <div className="w-full h-full">
+        <DashboardScreen variant="desktop" />
       </div>
     );
   }
@@ -557,9 +575,15 @@ function stagesFor(slug: string): JourneyStage[] {
     return (
       <div className="flex flex-col gap-2 w-full px-2">
         <div className="flex flex-wrap gap-1.5">
-          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">17 button styles</span>
-          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">6 type scales</span>
-          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">∞ grays</span>
+          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">
+            17 button styles
+          </span>
+          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">
+            6 type scales
+          </span>
+          <span className="px-2 py-1 text-[7px] font-mono border border-foreground/30 text-foreground">
+            ∞ grays
+          </span>
         </div>
         <Chip text="3 surfaces · designers" />
       </div>
@@ -590,24 +614,8 @@ function stagesFor(slug: string): JourneyStage[] {
 
   function DsHifiArt() {
     return (
-      <div className="w-full px-2">
-        <div className="border border-foreground/20 bg-secondary p-2 space-y-1.5">
-          <div className="flex gap-1">
-            <span className="w-3 h-3 bg-[#141310] border border-foreground/20" />
-            <span className="w-3 h-3 bg-[#f4efe7] border border-foreground/20" />
-            <span className="w-3 h-3 bg-[#e8ff47] border border-foreground/20" />
-          </div>
-          <div className="h-1 w-4/5 bg-foreground/30" />
-          <div className="h-1 w-3/5 bg-foreground/20" />
-          <div className="flex gap-1">
-            {["Primary", "Ghost"].map(l => (
-              <div key={l} className="flex-1 h-3 border border-foreground/30 flex items-center justify-center">
-                <span className="text-[5px] font-mono text-foreground">{l}</span>
-              </div>
-            ))}
-          </div>
-          <div className="text-[6px] font-mono text-accent">Token poster ↗</div>
-        </div>
+      <div className="w-full h-full">
+        <DesignSystemScreen variant="desktop" />
       </div>
     );
   }
@@ -630,49 +638,199 @@ function stagesFor(slug: string): JourneyStage[] {
   switch (slug) {
     case "kenyatrace":
       return [
-        { kicker: "01 Brief", caption: "Brief", chips: [{ text: "5 weeks" }], art: <KenyaBriefArt /> },
-        { kicker: "02 Research", caption: "Research", chips: [{ text: "12 interviews" }, { text: "34 survey" }], art: <KenyaResearchArt /> },
-        { kicker: "03 Sketches", caption: "Sketches", chips: [{ text: "Route-first" }], art: <KenyaSketchesArt /> },
-        { kicker: "04 Wireframes", caption: "Wireframes", chips: [{ text: "3 concepts" }], art: <KenyaWireframesArt /> },
-        { kicker: "05 Hi-fi", caption: "Hi-fi", chips: [{ text: "Shipped" }], art: <KenyaHifiArt /> },
-        { kicker: "06 Test & ship", caption: "Test & ship", chips: [{ text: "Usability pass" }], art: <KenyaShipArt /> },
+        {
+          kicker: "01 Brief",
+          caption: "Brief",
+          chips: [{ text: "5 weeks" }],
+          art: <KenyaBriefArt />,
+        },
+        {
+          kicker: "02 Research",
+          caption: "Research",
+          chips: [{ text: "12 interviews" }, { text: "34 survey" }],
+          art: <KenyaResearchArt />,
+        },
+        {
+          kicker: "03 Sketches",
+          caption: "Sketches",
+          chips: [{ text: "Route-first" }],
+          art: <KenyaSketchesArt />,
+        },
+        {
+          kicker: "04 Wireframes",
+          caption: "Wireframes",
+          chips: [{ text: "3 concepts" }],
+          art: <KenyaWireframesArt />,
+        },
+        {
+          kicker: "05 Hi-fi",
+          caption: "Hi-fi",
+          chips: [{ text: "Shipped" }],
+          art: <KenyaHifiArt />,
+        },
+        {
+          kicker: "06 Test & ship",
+          caption: "Test & ship",
+          chips: [{ text: "Usability pass" }],
+          art: <KenyaShipArt />,
+        },
       ];
     case "gigi-energy":
       return [
-        { kicker: "01 Brief", caption: "Brief", chips: [{ text: "4 weeks" }], art: <GigiBriefArt /> },
-        { kicker: "02 Research", caption: "Research", chips: [{ text: "GA4 review" }, { text: "5-store audit" }], art: <GigiResearchArt /> },
-        { kicker: "03 Sketches", caption: "Sketches", chips: [{ text: "Can-first" }], art: <GigiSketchesArt /> },
-        { kicker: "04 Wireframes", caption: "Wireframes", chips: [{ text: "3 concepts" }], art: <GigiWireframesArt /> },
-        { kicker: "05 Hi-fi", caption: "Hi-fi", chips: [{ text: "Shipped" }], art: <GigiHifiArt /> },
-        { kicker: "06 Test & ship", caption: "Test & ship", chips: [{ text: "Usability pass" }], art: <GigiShipArt /> },
+        {
+          kicker: "01 Brief",
+          caption: "Brief",
+          chips: [{ text: "4 weeks" }],
+          art: <GigiBriefArt />,
+        },
+        {
+          kicker: "02 Research",
+          caption: "Research",
+          chips: [{ text: "GA4 review" }, { text: "5-store audit" }],
+          art: <GigiResearchArt />,
+        },
+        {
+          kicker: "03 Sketches",
+          caption: "Sketches",
+          chips: [{ text: "Can-first" }],
+          art: <GigiSketchesArt />,
+        },
+        {
+          kicker: "04 Wireframes",
+          caption: "Wireframes",
+          chips: [{ text: "3 concepts" }],
+          art: <GigiWireframesArt />,
+        },
+        {
+          kicker: "05 Hi-fi",
+          caption: "Hi-fi",
+          chips: [{ text: "Shipped" }],
+          art: <GigiHifiArt />,
+        },
+        {
+          kicker: "06 Test & ship",
+          caption: "Test & ship",
+          chips: [{ text: "Usability pass" }],
+          art: <GigiShipArt />,
+        },
       ];
     case "dashboard-ui-system":
       return [
-        { kicker: "01 Brief", caption: "Brief", chips: [{ text: "4 weeks" }], art: <DashBriefArt /> },
-        { kicker: "02 Research", caption: "Research", chips: [{ text: "3 tools" }, { text: "interviews" }], art: <DashResearchArt /> },
-        { kicker: "03 Sketches", caption: "Sketches", chips: [{ text: "Density first" }], art: <DashSketchesArt /> },
-        { kicker: "04 Wireframes", caption: "Wireframes", chips: [{ text: "3 concepts" }], art: <DashWireframesArt /> },
-        { kicker: "05 Hi-fi", caption: "Hi-fi", chips: [{ text: "Spec'd" }], art: <DashHifiArt /> },
-        { kicker: "06 Test & ship", caption: "Test & ship", chips: [{ text: "Dev walkthrough" }], art: <DashShipArt /> },
+        {
+          kicker: "01 Brief",
+          caption: "Brief",
+          chips: [{ text: "4 weeks" }],
+          art: <DashBriefArt />,
+        },
+        {
+          kicker: "02 Research",
+          caption: "Research",
+          chips: [{ text: "3 tools" }, { text: "interviews" }],
+          art: <DashResearchArt />,
+        },
+        {
+          kicker: "03 Sketches",
+          caption: "Sketches",
+          chips: [{ text: "Density first" }],
+          art: <DashSketchesArt />,
+        },
+        {
+          kicker: "04 Wireframes",
+          caption: "Wireframes",
+          chips: [{ text: "3 concepts" }],
+          art: <DashWireframesArt />,
+        },
+        {
+          kicker: "05 Hi-fi",
+          caption: "Hi-fi",
+          chips: [{ text: "Spec'd" }],
+          art: <DashHifiArt />,
+        },
+        {
+          kicker: "06 Test & ship",
+          caption: "Test & ship",
+          chips: [{ text: "Dev walkthrough" }],
+          art: <DashShipArt />,
+        },
       ];
     case "design-system-creation":
       return [
-        { kicker: "01 Brief", caption: "Brief", chips: [{ text: "3 weeks" }], art: <DsBriefArt /> },
-        { kicker: "02 Research", caption: "Research", chips: [{ text: "3 surfaces" }, { text: "designers" }], art: <DsResearchArt /> },
-        { kicker: "03 Sketches", caption: "Sketches", chips: [{ text: "Tokens first" }], art: <DsSketchesArt /> },
-        { kicker: "04 Wireframes", caption: "Wireframes", chips: [{ text: "3 concepts" }], art: <DsWireframesArt /> },
-        { kicker: "05 Hi-fi", caption: "Hi-fi", chips: [{ text: "Token poster" }], art: <DsHifiArt /> },
-        { kicker: "06 Test & ship", caption: "Test & ship", chips: [{ text: "Dashboard consumed it" }], art: <DsShipArt /> },
+        {
+          kicker: "01 Brief",
+          caption: "Brief",
+          chips: [{ text: "3 weeks" }],
+          art: <DsBriefArt />,
+        },
+        {
+          kicker: "02 Research",
+          caption: "Research",
+          chips: [{ text: "3 surfaces" }, { text: "designers" }],
+          art: <DsResearchArt />,
+        },
+        {
+          kicker: "03 Sketches",
+          caption: "Sketches",
+          chips: [{ text: "Tokens first" }],
+          art: <DsSketchesArt />,
+        },
+        {
+          kicker: "04 Wireframes",
+          caption: "Wireframes",
+          chips: [{ text: "3 concepts" }],
+          art: <DsWireframesArt />,
+        },
+        {
+          kicker: "05 Hi-fi",
+          caption: "Hi-fi",
+          chips: [{ text: "Token poster" }],
+          art: <DsHifiArt />,
+        },
+        {
+          kicker: "06 Test & ship",
+          caption: "Test & ship",
+          chips: [{ text: "Dashboard consumed it" }],
+          art: <DsShipArt />,
+        },
       ];
     default:
       /* mobile-banking-redesign */
       return [
-        { kicker: "01 Brief", caption: "Brief", chips: [{ text: "6 weeks" }], art: <BankingBriefArt /> },
-        { kicker: "02 Research", caption: "Research", chips: [{ text: "8 interviews" }, { text: "47 survey" }], art: <BankingResearchArt /> },
-        { kicker: "03 Sketches", caption: "Sketches", chips: [{ text: "Savings-first" }], art: <BankingSketchesArt /> },
-        { kicker: "04 Wireframes", caption: "Wireframes", chips: [{ text: "3 concepts" }], art: <BankingWireframesArt /> },
-        { kicker: "05 Hi-fi", caption: "Hi-fi", chips: [{ text: "4 screens" }], art: <BankingHifiArt /> },
-        { kicker: "06 Test & ship", caption: "Test & ship", chips: [{ text: "Usability pass" }], art: <BankingShipArt /> },
+        {
+          kicker: "01 Brief",
+          caption: "Brief",
+          chips: [{ text: "6 weeks" }],
+          art: <BankingBriefArt />,
+        },
+        {
+          kicker: "02 Research",
+          caption: "Research",
+          chips: [{ text: "8 interviews" }, { text: "47 survey" }],
+          art: <BankingResearchArt />,
+        },
+        {
+          kicker: "03 Sketches",
+          caption: "Sketches",
+          chips: [{ text: "Savings-first" }],
+          art: <BankingSketchesArt />,
+        },
+        {
+          kicker: "04 Wireframes",
+          caption: "Wireframes",
+          chips: [{ text: "3 concepts" }],
+          art: <BankingWireframesArt />,
+        },
+        {
+          kicker: "05 Hi-fi",
+          caption: "Hi-fi",
+          chips: [{ text: "4 screens" }],
+          art: <BankingHifiArt />,
+        },
+        {
+          kicker: "06 Test & ship",
+          caption: "Test & ship",
+          chips: [{ text: "Usability pass" }],
+          art: <BankingShipArt />,
+        },
       ];
   }
 }
@@ -684,7 +842,7 @@ function applyFrame(
   base: number,
   blend: number,
   reduced: boolean,
-  autoSlide = 0,
+  autoSlide = 0
 ) {
   const idx = Number(el.dataset.frame) || 0;
   const isActive = idx === base;
@@ -745,7 +903,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
       ? "https://kenyatrace.vercel.app"
       : slug === "gigi-energy"
         ? "https://gigiflavours.vercel.app/"
-        : "https://www.figma.com/proto/placeholder/" + slug;
+        : `/work/${slug}/prototype`;
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -788,7 +946,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
       autoSlide > 0
     ) {
       frameRefs.current.forEach(
-        (el) => el && applyFrame(el, base, blend, REDUCED, autoSlide),
+        el => el && applyFrame(el, base, blend, REDUCED, autoSlide)
       );
       lastBase.current = base;
       lastBlend.current = blend;
@@ -801,7 +959,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
 
   useEffect(() => {
     if (REDUCED) {
-      frameRefs.current.forEach((el) => el && applyFrame(el, 0, 0, true));
+      frameRefs.current.forEach(el => el && applyFrame(el, 0, 0, true));
       setActive(0);
       return;
     }
@@ -862,7 +1020,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
     return () => cancelAnimationFrame(rafId.current);
   }, [isMobile, paint, started]);
 
-  useInView(outerRef, (inView) => {
+  useInView(outerRef, inView => {
     if (inView) setStarted(true);
     else markActivity();
   });
@@ -876,7 +1034,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
     activeBase.current = target;
     blendCurrent.current = 0;
     setActive(target);
-    frameRefs.current.forEach((el) => el && applyFrame(el, target, 0, REDUCED));
+    frameRefs.current.forEach(el => el && applyFrame(el, target, 0, REDUCED));
 
     /* scroll strip to frame on all breakpoints */
     const strip = stripRef.current;
@@ -886,7 +1044,12 @@ export default function DesignJourney({ slug }: { slug: string }) {
     }
 
     /* desktop: scroll outer so progress lands on this frame (no horizontal strip) */
-    if (!isMobile && outerRef.current && strip && strip.scrollWidth <= strip.clientWidth + 2) {
+    if (
+      !isMobile &&
+      outerRef.current &&
+      strip &&
+      strip.scrollWidth <= strip.clientWidth + 2
+    ) {
       const outer = outerRef.current;
       const vh = window.innerHeight;
       const zone = outer.offsetHeight - vh;
@@ -918,11 +1081,11 @@ export default function DesignJourney({ slug }: { slug: string }) {
           {stages.map((s, i) => (
             <div
               key={s.kicker}
-              ref={(el) => {
+              ref={el => {
                 frameRefs.current[i] = el;
               }}
               data-frame={i}
-              className={`snap-start shrink-0 w-[calc((100vw-5rem)/3)] min-w-[140px] sm:w-[240px] md:w-[260px] border border-border bg-card p-3 sm:p-4 flex flex-col gap-2.5 transition-[transform,opacity,filter,box-shadow] duration-300 ease-out ${
+              className={`snap-start shrink-0 w-[calc((100vw-5rem)/3)] min-w-[140px] sm:w-[300px] md:w-[340px] border border-border bg-card p-3 sm:p-4 flex flex-col gap-2.5 transition-[transform,opacity,filter,box-shadow] duration-300 ease-out ${
                 REDUCED ? "" : "will-change-transform"
               }`}
             >
@@ -966,7 +1129,7 @@ export default function DesignJourney({ slug }: { slug: string }) {
                 </p>
               )}
               <div className="flex flex-wrap gap-1.5 mt-auto">
-                {s.chips.map((c) => (
+                {s.chips.map(c => (
                   <Chip key={c.text} text={c.text} icon={c.icon} />
                 ))}
               </div>
@@ -995,8 +1158,10 @@ export default function DesignJourney({ slug }: { slug: string }) {
 
       <a
         href={prototypeHref}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={prototypeHref.startsWith("http") ? "_blank" : undefined}
+        rel={
+          prototypeHref.startsWith("http") ? "noopener noreferrer" : undefined
+        }
         className="sr-only"
         aria-label="Open prototype"
       >

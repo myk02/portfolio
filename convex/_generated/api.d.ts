@@ -8,11 +8,7 @@
  * @module
  */
 
-import type * as projects from "../projects.js";
-import type * as seed from "../seed.js";
 import type * as serviceRequests from "../serviceRequests.js";
-import type * as testimonialData from "../testimonialData.js";
-import type * as testimonials from "../testimonials.js";
 
 import type {
   ApiFromModules,
@@ -21,11 +17,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  projects: typeof projects;
-  seed: typeof seed;
   serviceRequests: typeof serviceRequests;
-  testimonialData: typeof testimonialData;
-  testimonials: typeof testimonials;
 }>;
 
 /**

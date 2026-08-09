@@ -1,5 +1,10 @@
 import { ZoomImage } from "@/components/Lightbox";
-import { DeviceShowcase } from "@/components/artifacts/DeviceMockups";
+import {
+  DeviceShowcase,
+  PhoneMockup,
+  TabletMockup,
+  DesktopMockup,
+} from "@/components/artifacts/DeviceMockups";
 import type { Shot } from "@/data/caseVisuals";
 
 /** One wide screenshot in a bordered frame, with a caption. Opens in the lightbox. */
@@ -65,6 +70,9 @@ export function HeroDeviceShowcase({
         phone={{ src: mobile, alt: `${alt} — mobile` }}
         tablet={{ src: tablet, alt: `${alt} — tablet` }}
         desktop={{ src: desktop, alt: `${alt} — desktop` }}
+        phoneClassName="w-[170px] sm:w-[200px]"
+        tabletClassName="w-[220px] sm:w-[260px]"
+        desktopClassName="w-[400px] sm:w-[520px]"
       />
     </figure>
   );
@@ -92,19 +100,33 @@ export function DeviceShots({
         </span>
       </figcaption>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-start">
-        {shots.map((s) => (
-          <figure key={s.name} className="border border-border bg-secondary p-3 sm:p-4">
+      <div className="grid grid-cols-1 gap-5 sm:gap-6">
+        {shots.map(s => (
+          <figure
+            key={s.name}
+            className="border border-border bg-secondary p-3 sm:p-4"
+          >
             <p className="text-[10px] font-mono uppercase tracking-widest text-foreground mb-2">
               {s.name}
             </p>
-            <DeviceShowcase
-              showLabels={false}
-              phone={{ src: s.mobile, alt: `${s.alt} — mobile` }}
-              tablet={{ src: s.tablet, alt: `${s.alt} — tablet` }}
-              desktop={{ src: s.desktop, alt: `${s.alt} — desktop` }}
+            {/* desktop fills the column so the interface content is legible */}
+            <DesktopMockup
+              content={{ src: s.desktop, alt: `${s.alt} — desktop` }}
+              className="w-full"
             />
-            <p className="mt-2.5 text-[11px] text-muted-foreground leading-snug">{s.caption}</p>
+            <div className="mt-3 flex flex-wrap items-start gap-4 sm:gap-5">
+              <PhoneMockup
+                content={{ src: s.mobile, alt: `${s.alt} — mobile` }}
+                className="w-[200px] sm:w-[240px]"
+              />
+              <TabletMockup
+                content={{ src: s.tablet, alt: `${s.alt} — tablet` }}
+                className="w-[260px] sm:w-[320px]"
+              />
+            </div>
+            <p className="mt-2.5 text-[11px] text-muted-foreground leading-snug">
+              {s.caption}
+            </p>
           </figure>
         ))}
       </div>
