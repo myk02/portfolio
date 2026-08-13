@@ -21,10 +21,7 @@ export function ThemeProvider({
   defaultTheme = "light",
   switchable = false,
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = typeof window !== "undefined" ? window.localStorage.getItem("theme") : null;
-    return saved === "dark" || saved === "light" ? saved : defaultTheme;
-  });
+  const [theme, setTheme] = useState<Theme>(defaultTheme);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -33,11 +30,7 @@ export function ThemeProvider({
     } else {
       root.classList.remove("dark");
     }
-
-    if (switchable) {
-      localStorage.setItem("theme", theme);
-    }
-  }, [theme, switchable]);
+  }, [theme]);
 
   const toggleTheme = switchable
     ? () => {
