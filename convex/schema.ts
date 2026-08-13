@@ -9,4 +9,11 @@ export default defineSchema({
     message: v.string(),
     createdAt: v.number(),
   }),
+  donations: defineTable({
+    reference: v.string(),
+    email: v.string(),
+    amount: v.number(),
+    currency: v.string(),
+    createdAt: v.number(),
+  }),
 });

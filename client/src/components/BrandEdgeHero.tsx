@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Diamond, Download } from "lucide-react";
+import { ArrowDown, Diamond } from "lucide-react";
 import {
   PhoneMockup,
   TabletMockup,
@@ -10,6 +10,7 @@ import { BankingScreen } from "@/components/art/BankingResponsive";
 import { CountUp } from "@/components/CountUp";
 import { heroStats } from "@/data/siteContent";
 import { skillMarquee } from "@/data/caseStudies";
+import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -146,10 +147,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                   See case studies
                   <ArrowDown size={14} />
                 </button>
-                <a href="/CV.pdf" download className="btn btn-secondary">
-                  <Download size={15} />
-                  Download CV
-                </a>
+                <BuyMeCoffee />
                 <span className="inline-flex items-center gap-2 px-3 py-2 rounded-pill border border-border bg-card/60">
                   <span className="live-dot" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">

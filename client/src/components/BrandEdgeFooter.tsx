@@ -1,5 +1,6 @@
 import { Sun, Moon, Download, Mail, Linkedin } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import BuyMeCoffee from "./BuyMeCoffee";
 
 interface BrandEdgeFooterProps {
   onNavClick: (id: string) => void;
@@ -119,17 +120,24 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
             <p className="text-xs text-primary-foreground/50">
               © {year} Mike Waitindi · Designed &amp; built in Figma + React
             </p>
-            {toggleTheme && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="inline-flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-accent transition-colors w-fit"
-                aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-              >
-                {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-                {theme === "dark" ? "Light mode" : "Dark mode"}
-              </button>
-            )}
+            <div className="flex flex-wrap items-center gap-4">
+              <BuyMeCoffee
+                onDark
+                label="Buy me a coffee"
+                buttonClassName="border-primary-foreground/25 text-xs px-3 py-2"
+              />
+              {toggleTheme && (
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="inline-flex items-center gap-2 text-xs text-primary-foreground/60 hover:text-accent transition-colors w-fit"
+                  aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+                >
+                  {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+                  {theme === "dark" ? "Light mode" : "Dark mode"}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
