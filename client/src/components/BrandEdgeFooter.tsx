@@ -27,8 +27,8 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                 Mike Waitindi
               </button>
               <p className="text-sm text-primary-foreground/70 mt-2 max-w-xs leading-relaxed">
-                Web developer &amp; frontend engineer — reliable, accessible
-                web products from design to deployment. Nairobi · remote.
+                Software developer · UI/UX · automation — reliable products
+                from design to deployment. Nairobi · remote.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {TOOLS.map((t) => (

@@ -54,7 +54,8 @@ export const devToolkit = [
   "Postman",
 ];
 
-export const roleLine = "Web Developer · Frontend Engineer · Nairobi, Kenya";
+export const roleLine =
+  "Software Developer · UI/UX Developer · Automation Specialist";
 
 export const heroHeadline = "I ship.";
 

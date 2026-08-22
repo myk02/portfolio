@@ -10,7 +10,7 @@ test.describe("home page", () => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "I ship." })).toBeVisible();
     await expect(
-      page.getByText("Web Developer · Frontend Engineer · Nairobi, Kenya")
+      page.getByText("Software Developer · UI/UX Developer · Automation Specialist")
     ).toBeVisible();
 
     // Buy-me-a-coffee: visible in hero, accent-styled standout pill
@@ -113,7 +113,7 @@ test.describe("case study pages — lean template", () => {
 
   test("document titles reflect positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Web Developer & Frontend Engineer/);
+    await expect(page).toHaveTitle(/Software Developer/);
     await page.goto("/work/kenyatrace");
     await expect(page).toHaveTitle(/live product/);
   });
