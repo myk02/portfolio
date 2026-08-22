@@ -6,7 +6,7 @@ interface BrandEdgeFooterProps {
   onNavClick: (id: string) => void;
 }
 
-const TOOLS = ["Figma", "FigJam", "Miro", "Adobe CC", "Maze"];
+const TOOLS = ["React", "TypeScript", "Tailwind", "Convex", "Playwright"];
 const PROCESS = ["Discover", "Define", "Design", "Validate"];
 
 export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
@@ -28,7 +28,8 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                 Mike Waitindi
               </button>
               <p className="text-sm text-primary-foreground/70 mt-2 max-w-xs leading-relaxed">
-                UI/UX designer · digital products &amp; consumer apps.
+                Web developer &amp; frontend engineer — reliable, accessible
+                web products from design to deployment. Nairobi · remote.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {TOOLS.map((t) => (
@@ -49,8 +50,8 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               </p>
               <nav className="flex flex-col gap-2.5">
                 {[
-                  { id: "work", label: "Case studies" },
-                  { id: "process", label: "Process" },
+                  { id: "work", label: "Work & case studies" },
+                  { id: "engineering", label: "Engineering evidence" },
                   { id: "about", label: "About" },
                   { id: "contact", label: "Contact" },
                 ].map((link) => (
@@ -118,7 +119,8 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
 
           <div className="mt-12 pt-6 border-t border-primary-foreground/15 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p className="text-xs text-primary-foreground/50">
-              © {year} Mike Waitindi · Designed &amp; built in Figma + React
+              © {year} Mike Waitindi · Built with React, TypeScript &amp;
+              Tailwind — deployed on Vercel
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <BuyMeCoffee

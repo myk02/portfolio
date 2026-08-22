@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import { LightboxProvider } from "@/components/Lightbox";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -51,18 +52,21 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark" switchable>
-        <FontSizeProvider>
-          <LightboxProvider>
-            <TooltipProvider>
-              <NavigateBridge />
-              <ScrollToTop />
-              <Toaster />
-              <Router />
-            </TooltipProvider>
-          </LightboxProvider>
-        </FontSizeProvider>
-      </ThemeProvider>
+      {/* Respect the user's OS reduced-motion preference across all Framer animations */}
+      <MotionConfig reducedMotion="user">
+        <ThemeProvider defaultTheme="dark" switchable>
+          <FontSizeProvider>
+            <LightboxProvider>
+              <TooltipProvider>
+                <NavigateBridge />
+                <ScrollToTop />
+                <Toaster />
+                <Router />
+              </TooltipProvider>
+            </LightboxProvider>
+          </FontSizeProvider>
+        </ThemeProvider>
+      </MotionConfig>
     </ErrorBoundary>
   );
 }

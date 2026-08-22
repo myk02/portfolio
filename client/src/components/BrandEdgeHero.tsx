@@ -1,16 +1,14 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Diamond } from "lucide-react";
+import { ArrowDown, Download, FlaskConical, Diamond } from "lucide-react";
 import {
   PhoneMockup,
   TabletMockup,
   DesktopMockup,
 } from "@/components/artifacts/DeviceMockups";
-import { BankingScreen } from "@/components/art/BankingResponsive";
 import { CountUp } from "@/components/CountUp";
-import { heroStats } from "@/data/siteContent";
+import { heroStats, roleLine, heroHeadline, heroSupporting } from "@/data/siteContent";
 import { skillMarquee } from "@/data/caseStudies";
-import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -25,7 +23,8 @@ function HeroVisual() {
         <div className="relative w-full max-w-[440px] aspect-[4/3] mx-auto">
           <DesktopMockup
             content={{
-              node: <BankingScreen variant="desktop" screen="home" />,
+              src: "/shots/kenyatrace/home-cards-desktop.jpg",
+              alt: "KenyaTrace destination browsing on desktop",
             }}
             label={undefined}
             showStand={false}
@@ -33,13 +32,19 @@ function HeroVisual() {
             figureClassName="absolute left-1/2 top-0 -translate-x-1/2 w-[64%] z-0"
           />
           <TabletMockup
-            content={{ node: <BankingScreen variant="tablet" screen="home" /> }}
+            content={{
+              src: "/shots/kenyatrace/home-tablet.jpg",
+              alt: "KenyaTrace home on tablet",
+            }}
             label={undefined}
             className="w-full"
             figureClassName="absolute right-0 bottom-0 w-[38%] z-20 rotate-[2deg]"
           />
           <PhoneMockup
-            content={{ node: <BankingScreen variant="mobile" screen="home" /> }}
+            content={{
+              src: "/shots/kenyatrace/home-mobile.jpg",
+              alt: "KenyaTrace home on mobile",
+            }}
             label={undefined}
             className="w-full"
             figureClassName="absolute left-0 bottom-0 w-[30%] z-30 -rotate-[3deg]"
@@ -51,7 +56,7 @@ function HeroVisual() {
         </div>
       </div>
       <p className="mt-3 text-center text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-        Mobile banking · Hi-fi concept · one design, three viewports
+        KenyaTrace · live product · one build, every viewport
       </p>
     </div>
   );
@@ -87,32 +92,10 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
             <div className="order-1 lg:order-1 min-w-0">
               <div className="mb-5 md:mb-6 flex items-center gap-3 hero-kicker">
                 <span className="w-2 h-2 bg-accent shrink-0" />
-                <span className="text-mono text-muted-foreground text-sm">
-                  UI/UX Designer · Nairobi, Kenya
-                </span>
+                <p className="text-mono text-muted-foreground text-sm">
+                  {roleLine}
+                </p>
               </div>
-
-              <p className="text-[1.15rem] md:text-[1.2rem] text-foreground mb-2 flex items-center gap-2 hero-kicker">
-                Hi, I&apos;m Mike.
-                <svg
-                  width="26"
-                  height="14"
-                  viewBox="0 0 26 14"
-                  fill="none"
-                  aria-hidden
-                  className="shrink-0"
-                >
-                  <path
-                    d="M1 8 C4 3, 7 3, 10 8 S 16 13, 19 8 S 24 2, 25 5"
-                    stroke="var(--accent)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    fill="none"
-                    className="wave-arc"
-                    pathLength={1}
-                  />
-                </svg>
-              </p>
 
               <h1
                 className="heading-serif font-semibold text-foreground max-w-xl"
@@ -121,7 +104,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                   lineHeight: 1.08,
                 }}
               >
-                Visual design thinker for digital products.
+                {heroHeadline}
               </h1>
 
               <motion.p
@@ -130,7 +113,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                 transition={{ delay: 0.3, duration: 0.5, ease: EASE }}
                 className="text-muted-foreground text-base leading-snug max-w-md mt-4"
               >
-                Flows · wireframes · hi-fi · test — Figma to shipped product.
+                {heroSupporting}
               </motion.p>
 
               <motion.div
@@ -144,10 +127,21 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                   onClick={() => onCtaClick("work")}
                   className="btn btn-primary"
                 >
-                  See case studies
+                  View live work
                   <ArrowDown size={14} />
                 </button>
-                <BuyMeCoffee />
+                <button
+                  type="button"
+                  onClick={() => onCtaClick("engineering")}
+                  className="btn btn-secondary"
+                >
+                  <FlaskConical size={14} aria-hidden />
+                  See engineering evidence
+                </button>
+                <a href="/CV.pdf" download className="btn btn-ghost">
+                  <Download size={14} aria-hidden />
+                  Download CV
+                </a>
                 <span className="inline-flex items-center gap-2 px-3 py-2 rounded-pill border border-border bg-card/60">
                   <span className="live-dot" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">

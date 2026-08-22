@@ -64,8 +64,8 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `${OWNER} — UI/UX Designer | Mobile Banking & Product Design`,
+  title: `${OWNER} — Web Developer & Frontend Engineer | Nairobi, Kenya`,
   description:
-    "Nairobi-based UI/UX designer. Research, flows, wireframes, prototypes, and usability testing for mobile banking and consumer products. Discover → Define → Design → Validate.",
+    "Nairobi-based web developer building reliable, accessible, responsive web products from design to deployment. React, TypeScript, REST APIs, testing, and Git→Vercel delivery. Two live products shipped.",
   canonical: SITE_URL,
 };

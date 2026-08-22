@@ -7,13 +7,8 @@ import MoreWork from "@/components/MoreWork";
 import CaseStudyLayout from "@/components/caseStudy/CaseStudyLayout";
 import { getChapters, getGlance } from "@/components/caseStudy/caseChapters";
 
-const ORDER = [
-  "mobile-banking-redesign",
-  "kenyatrace",
-  "gigi-energy",
-  "dashboard-ui-system",
-  "design-system-creation",
-];
+/* Sequencing follows the canonical live-first order in the data file */
+const ORDER = caseStudies.map(s => s.slug);
 
 export default function CaseStudyPage() {
   const params = useParams();

@@ -120,3 +120,8 @@ client/public/__manus__/version.json
 # Playwright
 test-results/
 playwright-report/
+
+# Local tool caches
+.freebuff/
+.manus/
+.manus-logs/

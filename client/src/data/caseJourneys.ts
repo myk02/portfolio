@@ -60,11 +60,13 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
     {
       kicker: "03 Sketches",
       caption: "Sketches",
+      placeholder: "paper sketch",
       note: "Map-first was obvious — but timed out on patchy networks.",
     },
     {
       kicker: "04 Wireframes",
       caption: "Wireframes",
+      placeholder: "wireframes",
       note: "List-first won; map became secondary.",
     },
     {
@@ -112,11 +114,13 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
     {
       kicker: "03 Sketches",
       caption: "Sketches",
+      placeholder: "paper sketch",
       note: "The 'can' approach won — the brand IS the product.",
     },
     {
       kicker: "04 Wireframes",
       caption: "Wireframes",
+      placeholder: "wireframes",
       note: "4 → 3 steps; M-Pesa moved first.",
     },
     {
@@ -155,16 +159,19 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
     {
       kicker: "03 Sketches",
       caption: "Sketches",
+      placeholder: "paper sketch",
       note: "Savings-first from the start.",
     },
     {
       kicker: "04 Wireframes",
       caption: "Wireframes",
+      placeholder: "wireframes",
       note: "Calm surfaces + progressive KYC (8 → 4).",
     },
     {
       kicker: "05 Hi-fi",
       caption: "Hi-fi",
+      placeholder: "final screens",
       note: "Goal ring, quick-save, padlock confirmations.",
     },
     {
@@ -187,11 +194,13 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
     {
       kicker: "03 Sketches",
       caption: "Sketches",
+      placeholder: "paper sketch",
       note: "Density-first: written rules, not vibes.",
     },
     {
       kicker: "04 Wireframes",
       caption: "Wireframes",
+      placeholder: "wireframes",
       note: "Three tiers: KPI → exceptions → dense spec'd table.",
     },
     {
@@ -219,11 +228,13 @@ export const caseJourneys: Record<string, JourneyStageData[]> = {
     {
       kicker: "03 Sketches",
       caption: "Sketches",
+      placeholder: "paper sketch",
       note: "Token-first: primitives that compose into anything.",
     },
     {
       kicker: "04 Wireframes",
       caption: "Wireframes",
+      placeholder: "wireframes",
       note: "Tokens + docs won over component-first.",
     },
     {

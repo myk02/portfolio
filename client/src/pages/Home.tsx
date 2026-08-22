@@ -3,11 +3,13 @@ import { useLocation } from "wouter";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
 import BrandEdgeHero, { SkillMarquee } from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
+import EngineeringEvidence from "@/components/engineering/EvidenceSection";
 import UXProcessSection from "@/components/UXProcessSection";
 import DesignPlaybook from "@/components/DesignPlaybook";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
+import SiteHead, { DEFAULT_HEAD } from "@/components/SiteHead";
 import { consumePendingSection } from "@/lib/navigation";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -37,6 +39,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-secondary">
+      <SiteHead
+        title={DEFAULT_HEAD.title}
+        description={DEFAULT_HEAD.description}
+        canonical="/"
+      />
       <div className="noise-overlay" />
 
       <BrandEdgeHeader onNavClick={scrollToSection} />
@@ -45,6 +52,7 @@ export default function Home() {
         <BrandEdgeHero onCtaClick={scrollToSection} />
         <SkillMarquee />
         <BrandEdgeWork />
+        <EngineeringEvidence />
         <UXProcessSection />
         <DesignPlaybook />
         <BrandEdgeAbout />

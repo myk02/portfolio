@@ -20,6 +20,9 @@ import DesignJourney from "@/components/DesignJourney";
 import { HeroDeviceShowcase } from "@/components/artifacts/Screens";
 import { DesktopMockup } from "@/components/artifacts/DeviceMockups";
 import { DeviceShowcaseFigure } from "@/components/artifacts/DeviceShowcaseFigure";
+import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
+import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
+import ProposedBlock from "@/components/engineering/ProposedBlock";
 import BankingArt from "@/components/art/BankingArt";
 import { BankingDeviceShowcase } from "@/components/art/BankingResponsive";
 import {
@@ -38,6 +41,67 @@ interface LayoutProps {
 }
 
 const CHAPTER_ID = (id: string) => `chapter-${id}`;
+
+/** Production-evidence engineering notes — live products only. */
+function EngineeringNotesBlock({ study }: { study: CaseStudy }) {
+  const notes = study.engineeringNotes;
+  if (!notes) return null;
+  const groups = [
+    { key: "architecture", label: "Architecture & components", items: notes.architecture },
+    { key: "state", label: "State, forms & loading", items: notes.stateForms },
+    { key: "data", label: "Data & integration", items: notes.dataIntegration },
+    { key: "quality", label: "Accessibility & quality checks", items: notes.qualityChecks },
+    { key: "delivery", label: "Debugging, deployment & follow-up", items: notes.deliveryFollowUp },
+  ].filter(g => g.items && g.items.length > 0);
+
+  return (
+    <section
+      aria-labelledby="engineering-notes-heading"
+      className="border-b border-border bg-secondary"
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-14">
+        <p className="text-[11px] font-mono uppercase tracking-widest text-accent mb-2">
+          For engineers reading this
+        </p>
+        <h2
+          id="engineering-notes-heading"
+          className="font-display font-bold text-foreground tracking-tight text-3xl mb-3"
+        >
+          Engineering notes
+        </h2>
+        <p className="text-sm text-muted-foreground max-w-2xl mb-8 leading-relaxed">
+          What was actually built and how it holds up — architecture, state,
+          data, quality checks, and what happened after launch.
+        </p>
+        <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+          {groups.map(g => (
+            <div key={g.key}>
+              <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3 border-b border-border pb-2">
+                {g.label}
+              </dt>
+              <dd>
+                <ul className="space-y-2.5 mt-3">
+                  {g.items!.map((item, i) => (
+                    <li
+                      key={i}
+                      className="text-[14px] text-foreground/90 leading-relaxed pl-4 relative"
+                    >
+                      <span
+                        aria-hidden
+                        className="absolute left-0 top-[9px] w-1.5 h-1.5 bg-accent shrink-0"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
 
 export default function CaseStudyLayout({
   study,
@@ -82,8 +146,10 @@ export default function CaseStudyLayout({
   return (
     <div className="min-h-screen bg-background">
       <SiteHead
-        title={`${study.name} — ${study.kind} case study | Mike Waitindi`}
-        description={study.tagline}
+        title={`${study.name} — ${
+          toneFromKind(study.kind) === "live" ? "live production" : "concept study"
+        } | Mike Waitindi`}
+        description={`${study.tagline} Stack: ${study.stack.join(", ")}.`}
         canonical={`/work/${study.slug}`}
         image={visuals.hero?.desktop ?? "/og-cover.png"}
         type="article"
@@ -107,9 +173,7 @@ export default function CaseStudyLayout({
           </Link>
 
           <div className="mt-6 flex flex-wrap items-start gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest border border-border text-foreground">
-              {study.kind}
-            </span>
+            <StatusBadge tone={toneFromKind(study.kind)} />
             <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
               {study.year}
             </span>
@@ -137,6 +201,15 @@ export default function CaseStudyLayout({
             <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
               {study.role}
             </span>
+          </div>
+
+          {/* FACTS STRIP — status, role, stack, scope, constraints, outcome */}
+          <div className="mt-8">
+            <h2 className="sr-only">Project facts</h2>
+            <ProjectMetaLine study={study} />
+            <p className="mt-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
+              {study.heroCaption}
+            </p>
           </div>
 
           {/* HERO DEVICES — the design shown inside mobile, tablet and desktop mockups */}
@@ -191,6 +264,30 @@ export default function CaseStudyLayout({
           </div>
         </div>
       </header>
+
+      {/* ENGINEERING NOTES — production evidence for live products */}
+      <EngineeringNotesBlock study={study} />
+
+      {/* PROPOSED IMPLEMENTATION / CONSIDERATIONS — conceptual studies only */}
+      {(study.proposedImplementation || study.engineeringConsiderations) && (
+        <section
+          aria-label="Proposed implementation and engineering considerations"
+          className="border-b border-border"
+        >
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-14 space-y-8">
+            {study.proposedImplementation && (
+              <ProposedBlock sections={study.proposedImplementation} />
+            )}
+            {study.engineeringConsiderations && (
+              <ProposedBlock
+                variant="considerations"
+                intro={study.engineeringConsiderations.intro}
+                sections={study.engineeringConsiderations.sections}
+              />
+            )}
+          </div>
+        </section>
+      )}
 
       {/* DESIGN JOURNEY — full-width scroll-driven strip */}
       <section

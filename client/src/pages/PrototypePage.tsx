@@ -263,10 +263,80 @@ function DesignSystemPrototype() {
   );
 }
 
-const PROTOS: Record<string, { title: string; render: () => React.ReactNode }> = {
-  "mobile-banking-redesign": { title: "Mobile banking — savings-first", render: () => <BankingPrototype /> },
-  "dashboard-ui-system": { title: "Ops dashboard — dense, scannable", render: () => <DashboardPrototype /> },
-  "design-system-creation": { title: "Design system — tokens & components", render: () => <DesignSystemPrototype /> },
+const PROTOS: Record<
+  string,
+  {
+    title: string;
+    render: () => React.ReactNode;
+    demonstrates: { label: string; text: string }[];
+  }
+> = {
+  "mobile-banking-redesign": {
+    title: "Mobile banking — savings-first",
+    render: () => <BankingPrototype />,
+    demonstrates: [
+      {
+        label: "Interaction",
+        text: "Quick save opens a bottom sheet; tapping an amount updates balance and progress in place.",
+      },
+      {
+        label: "State",
+        text: "The goal ring percentage is derived from a single saved-amount value — one source of truth across the screen.",
+      },
+      {
+        label: "Focus behavior",
+        text: "All controls are native buttons — keyboard-focusable with visible browser focus outlines.",
+      },
+      {
+        label: "Responsive scope",
+        text: "Fixed 300px frame by design: it demos one mobile viewport, not a responsive layout.",
+      },
+    ],
+  },
+  "dashboard-ui-system": {
+    title: "Ops dashboard — dense, scannable",
+    render: () => <DashboardPrototype />,
+    demonstrates: [
+      {
+        label: "Component variants",
+        text: "Density toggle switches the table between 1× and 2× row heights without re-layout of KPI cards.",
+      },
+      {
+        label: "Row states",
+        text: "Exception rows carry a lime tint plus a bold text status — color never carries meaning alone.",
+      },
+      {
+        label: "Keyboard behavior",
+        text: "Rows are real buttons: Tab through them, Enter to select, visible outline marks the selected row.",
+      },
+      {
+        label: "Responsive scope",
+        text: "Single-column demo panel; the full three-tier layout is specified in the case study.",
+      },
+    ],
+  },
+  "design-system-creation": {
+    title: "Design system — tokens & components",
+    render: () => <DesignSystemPrototype />,
+    demonstrates: [
+      {
+        label: "Component variants",
+        text: "Three button styles shown across default and disabled states, exactly as spec'd in the study.",
+      },
+      {
+        label: "Token application",
+        text: "Type scale and color swatches render from the same token values documented in the case study.",
+      },
+      {
+        label: "Feedback pattern",
+        text: "Copy-to-clipboard on each swatch shows a transient confirmation state — a micro-interaction done accessibly.",
+      },
+      {
+        label: "Focus behavior",
+        text: "Swatches are labeled buttons (aria-label carries the hex) so screen readers announce the action.",
+      },
+    ],
+  },
 };
 
 export default function PrototypePage() {
@@ -315,7 +385,34 @@ export default function PrototypePage() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
-        <div className="flex justify-center">{proto.render()}</div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 items-start">
+          <div>{proto.render()}</div>
+
+          {/* WHAT THIS DEMONSTRATES — recruiter-readable proof panel */}
+          <aside
+            aria-labelledby="demonstrates-heading"
+            className="border border-dashed border-border bg-card p-5"
+          >
+            <h2
+              id="demonstrates-heading"
+              className="text-xs font-mono uppercase tracking-widest text-accent mb-4"
+            >
+              What this demonstrates
+            </h2>
+            <dl className="space-y-4">
+              {proto.demonstrates.map(d => (
+                <div key={d.label}>
+                  <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
+                    {d.label}
+                  </dt>
+                  <dd className="text-[13px] text-foreground/90 leading-snug">
+                    {d.text}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </div>
         <p className="mt-8 text-center text-xs text-muted-foreground max-w-md mx-auto">
           Tap through the screens. This is a clickable mock-up built to show the interaction
           decisions described in the case study.

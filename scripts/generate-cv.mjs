@@ -98,7 +98,7 @@ let y = 800;
 
 textLine("MIKE WAITINDI", { font: "F2", size: 25, y, color: [0.05, 0.05, 0.05] });
 y -= 22;
-textLine("UI/UX Designer & Product Strategist", { size: 12.5, y, color: [0.3, 0.3, 0.3] });
+textLine("Web Developer & Frontend Engineer", { size: 12.5, y, color: [0.3, 0.3, 0.3] });
 y -= 15;
 textLine("Nairobi, Kenya \u00B7 Remote", { size: 9, y, color: [0.4, 0.4, 0.4] });
 y -= 12.5;
@@ -111,26 +111,34 @@ y -= 26;
 
 y = sectionHeader("PROFESSIONAL SUMMARY", y);
 y = paragraph(
-  "UI/UX Designer and product strategist with 4+ years of experience delivering research-driven digital products for fintech, e-commerce, tourism and B2B clients. I translate complex business requirements into intuitive, accessible interfaces \u2014 leading user research, competitive analysis, wireframing and high-fidelity prototyping in Figma. I scope, estimate and prioritize work in fast-paced environments, collaborate across business, technology and creative teams, and ship polished designs through to production.",
+  "Web developer focused on turning designs and requirements into reliable, accessible, responsive production interfaces. Shipped live products include a mobile-first tourism trip planner (KenyaTrace) and an e-commerce storefront (GiGi Energy Drink). Builds and maintains full frontend systems in React, TypeScript and Tailwind against typed backend APIs, with end-to-end tests and Git-to-Vercel deployment. A background in UX research and design means requirements are read accurately, designers get a collaborator who speaks their language, and handoff ambiguity is designed out.",
   y,
 );
 y -= 18;
 
-y = sectionHeader("EXPERIENCE & PROJECT HIGHLIGHTS", y);
-y = bullet("Led end-to-end UI/UX design for e-commerce, tourism and banking platforms, including a youth-focused mobile banking app and a research-driven tourism explorer (KenyaTrace).", y);
-y = bullet("Conducted user research, stakeholder interviews, competitive analysis and usability testing to ground every design decision in evidence and insight.", y);
-y = bullet("Built scalable design systems \u2014 typography scales, colour theory, reusable component libraries \u2014 and documented them for consistent product teams.", y);
-y = bullet("Created wireframes, user flows, journey maps and high-fidelity prototypes in Figma with developer-ready specs and clean handoff.", y);
-y = bullet("Collaborated with business, technology and creative stakeholders to scope, estimate and prioritize features, delivering on tight deadlines.", y);
-y = bullet("Designed and shipped 7+ live, responsive websites and web apps (React, Next.js, TypeScript), bridging design and front-end implementation.", y);
-y = bullet("Applied on-page SEO, GA4 analytics and WCAG accessibility fundamentals to improve usability, visibility and conversion.", y);
+y = sectionHeader("ENGINEERING HIGHLIGHTS", y);
+y = bullet("Built and shipped KenyaTrace (kenyatrace.vercel.app), a live mobile-first tourism planner for 3G conditions - list-first architecture, client-side route-builder state, progressive loading, and every planning task verified usable at a 360px viewport.", y);
+y = bullet("Rebuilt the GiGi Energy Drink storefront (gigiflavours.vercel.app): merged checkout from 4 steps to 3, lifted text contrast from 2.1:1 to WCAG AA across the brand palette, and ordered payment options M-Pesa first to match real purchase behavior.", y);
+y = bullet("Engineered this portfolio end-to-end: React + TypeScript application with typed Convex backend functions powering the contact form and Paystack donations, verified server-side before confirming success.", y);
+y = bullet("Quality practice in daily use: Playwright end-to-end suite covering routes, CTAs, dialogs, form validation and the 404 path; tsc typecheck gates; Prettier formatting; fixes traced to root cause in browser DevTools rather than patched symptoms.", y);
+y = bullet("Delivery workflow: feature branches and reviewed pull requests in Git/GitHub, automatic deployment to Vercel on merge, canonical URLs and per-route metadata kept healthy.", y);
+y -= 18;
+
+y = sectionHeader("EXPERIENCE & DESIGN BACKGROUND", y);
+y = bullet("Led end-to-end UI/UX design for e-commerce, tourism and banking platforms, including youth-focused mobile banking concepts validated in moderated testing.", y);
+y = bullet("Conducted user research, stakeholder interviews, competitive analysis and usability testing to ground interface decisions in evidence.", y);
+y = bullet("Built scalable design systems - tokens, typography scales, reusable component libraries - documented with states and edge cases for developer handoff.", y);
+y = bullet("Created wireframes, user flows and high-fidelity prototypes in Figma with build-ready specs, reducing back-and-forth during implementation.", y);
+y = bullet("Collaborated across business, technology and creative stakeholders to scope, estimate and prioritize features on tight deadlines.", y);
 y -= 18;
 
 y = sectionHeader("KEY SKILLS", y);
-y = bullet("Design \u2014 Figma, FigJam/Miro, Adobe Creative Cloud, Sketch, wireframing, prototyping, design systems, typography, usability testing, information architecture.", y);
-y = bullet("Strategy \u2014 user research, competitive analysis, journey mapping, stakeholder management, scoping, estimation and prioritization.", y);
-y = bullet("Technical \u2014 HTML/CSS, React, Next.js, TypeScript, Tailwind CSS, REST APIs, WordPress, Webflow, Git, Vercel.", y);
-y = bullet("Tools \u2014 GA4, Jira, n8n, CapCut Pro, Canva.  Languages \u2014 English (fluent), Kiswahili (fluent).", y);
+y = bullet("Frontend - JavaScript/ES6+, TypeScript, React, Next.js, semantic HTML, CSS/Tailwind, responsive layouts.", y);
+y = bullet("Quality & testing - Playwright e2e, accessibility (WCAG AA contrast, keyboard/focus states), form validation, loading/error/empty states, cross-browser and viewport testing.", y);
+y = bullet("Systems & data - component architecture, design tokens, state modeling (hooks/context), REST-style API integration, typed data contracts.", y);
+y = bullet("Delivery - Git/GitHub, code review via pull requests, Vercel deployment, browser DevTools debugging, performance basics (image pipelines, lazy loading).", y);
+y = bullet("Design & research - Figma, FigJam/Miro, wireframing, prototyping, information architecture, usability testing.", y);
+y = bullet("Tools - GA4, Jira.  Languages - English (fluent), Kiswahili (fluent).", y);
 y -= 18;
 
 y = sectionHeader("EDUCATION", y);

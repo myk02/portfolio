@@ -1,10 +1,11 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import TechSummary from "@/components/engineering/TechSummary";
 import {
   aboutStats,
   socialLinks,
   contactItems,
-  skillGroups,
+  applicationLine,
 } from "@/data/siteContent";
 
 const contactIcons: Record<string, React.ReactNode> = {
@@ -42,36 +43,46 @@ export default function BrandEdgeAbout() {
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <h2 className="heading-section text-foreground mb-2">About</h2>
+            <p className="text-muted-foreground text-sm max-w-xl">
+              Web developer &amp; product-minded frontend engineer — Nairobi,
+              Kenya · remote available.
+            </p>
           </Reveal>
 
-          <div className="flex flex-col sm:flex-row items-start gap-6 mt-6">
+          <div className="flex flex-col sm:flex-row items-start gap-6 mt-8">
             <Reveal delay={1} scale>
               <Portrait />
             </Reveal>
-            <div className="pt-1 space-y-3">
+            <div className="pt-1 space-y-3 max-w-2xl">
               <Reveal delay={2}>
                 <p className="text-foreground font-display font-bold text-xl leading-snug">
-                  I design digital products end to end.
+                  I build reliable products from design to deployment.
                 </p>
               </Reveal>
               <Reveal delay={3}>
-                <p className="text-sm text-muted-foreground">
-                  Flows · IA · Figma systems · usability testing
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  My background is product design, and it works as an
+                  engineering advantage: I interpret requirements and designs
+                  accurately, speak designers&apos; language, and cut the
+                  ambiguity that usually burns time between design and code.
+                  Then I do the engineering — semantic markup, typed React, API
+                  wiring, tests, and deploys.
                 </p>
               </Reveal>
               <Reveal delay={3}>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Photography", "Five-a-side", "Samosas"].map(c => (
-                    <span key={c} className="tag-pill text-xs">
-                      {c}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-sm text-foreground/90 leading-relaxed border-l-2 border-accent pl-4">
+                  {applicationLine}
+                </p>
               </Reveal>
             </div>
           </div>
 
-          <Reveal delay={3} className="flex gap-4 mt-8">
+          {/* Skills matrix — technical skills first, hobbies nowhere in the way */}
+          <div className="mt-14">
+            <TechSummary />
+          </div>
+
+          <Reveal delay={2} className="flex gap-4 mt-12">
             {socialLinks.map(s => (
               <a
                 key={s.alt}
@@ -79,7 +90,7 @@ export default function BrandEdgeAbout() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.alt}
-                className="w-11 h-11 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                className="w-11 h-11 flex items-center justify-center border border-border text-muted-foreground hover:text-foreground hover:border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
               >
                 {s.icon ? (
                   <img src={s.icon} alt="" className="w-5 h-5" />
@@ -106,58 +117,34 @@ export default function BrandEdgeAbout() {
               ))}
             </div>
 
-            <div className="space-y-8">
-              <div>
-                <h3 className="font-medium text-foreground mb-4">
-                  Skills & Tools
-                </h3>
-                <div className="space-y-4">
-                  {skillGroups.map(group => (
-                    <div key={group.title}>
-                      <h4 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
-                        {group.title}
-                      </h4>
-                      <div className="flex flex-wrap gap-1.5">
-                        {group.skills.map(skill => (
-                          <span key={skill} className="tag-pill text-xs">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-medium text-foreground mb-4">Contact</h3>
-                <div className="space-y-3">
-                  {contactItems.map(item => (
-                    <div
-                      key={item.label}
-                      className="flex items-center gap-4 min-h-[44px]"
-                    >
-                      <span className="text-muted-foreground shrink-0">
-                        {contactIcons[item.label]}
-                      </span>
-                      <span className="text-sm text-muted-foreground w-24 shrink-0">
-                        {item.label}
-                      </span>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="text-sm text-foreground hover:underline underline-offset-4 min-w-0 break-words"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="text-sm text-foreground min-w-0 break-words">
-                          {item.value}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
+            <div>
+              <h3 className="font-medium text-foreground mb-4">Contact</h3>
+              <div className="space-y-3">
+                {contactItems.map(item => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-4 min-h-[44px]"
+                  >
+                    <span className="text-muted-foreground shrink-0">
+                      {contactIcons[item.label]}
+                    </span>
+                    <span className="text-sm text-muted-foreground w-24 shrink-0">
+                      {item.label}
+                    </span>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="text-sm text-foreground hover:underline underline-offset-4 min-w-0 break-words focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-sm text-foreground min-w-0 break-words">
+                        {item.value}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>

@@ -467,38 +467,36 @@ function ValidateBlock({ slug, visuals }: { slug: string; visuals: StudyVisuals 
 /* ------------------------------------------------------------------ */
 
 function fidelityFor(slug: string): FidelityStep[] {
-  const mobile = { wireW: "w-full max-w-[130px]", hiW: "w-full max-w-[130px]" };
-  const desktop = { wireW: "w-full max-w-[240px]", hiW: "w-full max-w-[260px]" };
+  const box = (layout: string) => (
+    <div className="w-full h-full p-3">
+      <Wire layout={layout} />
+    </div>
+  );
 
   switch (slug) {
     case "kenyatrace":
       return [
         {
           label: "Wireframe",
+          shape: "mobile",
           sub: "List-first structure — browse beats map on 3G.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="list" />
-            </div>
-          ),
+          node: box("list"),
         },
         {
           label: "Structured",
+          shape: "mobile",
           sub: "Map kept as secondary; route previews added.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="map" />
-            </div>
-          ),
+          node: box("map"),
         },
         {
           label: "Hi-fi",
+          shape: "mobile",
           sub: "Photography leads the shipped screen.",
           node: (
             <img
               src="/shots/kenyatrace/home-mobile.jpg"
               alt="KenyaTrace shipped home screen"
-              className={`${mobile.hiW} aspect-[9/17] object-cover object-top`}
+              className="w-full h-full object-cover object-top"
             />
           ),
         },
@@ -507,30 +505,25 @@ function fidelityFor(slug: string): FidelityStep[] {
       return [
         {
           label: "Wireframe",
+          shape: "mobile",
           sub: "Cart-first, then a wall at payment.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="cart" />
-            </div>
-          ),
+          node: box("cart"),
         },
         {
           label: "Structured",
+          shape: "mobile",
           sub: "M-Pesa moved first — payment is one decision.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="pay" />
-            </div>
-          ),
+          node: box("pay"),
         },
         {
           label: "Hi-fi",
+          shape: "mobile",
           sub: "Bold type carries hierarchy — shipped.",
           node: (
             <img
               src="/shots/gigi-energy/flavours-mobile.jpg"
               alt="GiGi flavours screen on mobile"
-              className={`${mobile.hiW} aspect-[9/17] object-cover object-top`}
+              className="w-full h-full object-cover object-top"
             />
           ),
         },
@@ -539,27 +532,22 @@ function fidelityFor(slug: string): FidelityStep[] {
       return [
         {
           label: "Wireframe",
+          shape: "desktop",
           sub: "The data table is the workhorse — scan for exceptions.",
-          node: (
-            <div className={desktop.wireW}>
-              <Wire layout="table" />
-            </div>
-          ),
+          node: box("table"),
         },
         {
           label: "Structured",
+          shape: "desktop",
           sub: "Three tiers: KPI → exceptions → dense spec'd table.",
-          node: (
-            <div className={desktop.wireW}>
-              <Wire layout="tiers" />
-            </div>
-          ),
+          node: box("tiers"),
         },
         {
           label: "Hi-fi",
+          shape: "desktop",
           sub: "Warm dark surfaces; color only for exceptions.",
           node: (
-            <div className={desktop.hiW}>
+            <div className="w-full h-full">
               <DashboardScreen variant="desktop" />
             </div>
           ),
@@ -569,27 +557,22 @@ function fidelityFor(slug: string): FidelityStep[] {
       return [
         {
           label: "Wireframe",
+          shape: "desktop",
           sub: "17 button styles collapse into one spec.",
-          node: (
-            <div className={desktop.wireW}>
-              <Wire layout="buttons" />
-            </div>
-          ),
+          node: box("buttons"),
         },
         {
           label: "Structured",
+          shape: "desktop",
           sub: "Tokens first — primitives compose into anything.",
-          node: (
-            <div className={desktop.wireW}>
-              <Wire layout="tokens" />
-            </div>
-          ),
+          node: box("tokens"),
         },
         {
           label: "Hi-fi",
+          shape: "desktop",
           sub: "The system as a poster — one view of everything.",
           node: (
-            <div className={desktop.hiW}>
+            <div className="w-full h-full">
               <DesignSystemScreen variant="desktop" />
             </div>
           ),
@@ -599,27 +582,22 @@ function fidelityFor(slug: string): FidelityStep[] {
       return [
         {
           label: "Wireframe",
+          shape: "mobile",
           sub: "Calm surfaces, progressive KYC.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="onboard" />
-            </div>
-          ),
+          node: box("onboard"),
         },
         {
           label: "Structured",
+          shape: "mobile",
           sub: "The goal ring becomes the home-screen anchor.",
-          node: (
-            <div className={mobile.wireW}>
-              <Wire layout="ring" />
-            </div>
-          ),
+          node: box("ring"),
         },
         {
           label: "Hi-fi",
+          shape: "mobile",
           sub: "Goal ring, quick-save, padlock confirmations.",
           node: (
-            <div className={mobile.hiW}>
+            <div className="w-full h-full">
               <BankingScreen variant="mobile" screen="home" />
             </div>
           ),

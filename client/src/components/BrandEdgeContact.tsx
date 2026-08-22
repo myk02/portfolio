@@ -6,7 +6,6 @@ import BuyMeCoffee from "./BuyMeCoffee";
 
 const inputClass =
   "w-full bg-card border border-border px-4 min-h-[44px] text-[16px] text-foreground placeholder:text-foreground/60 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40";
-
 export default function BrandEdgeContact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -91,7 +90,8 @@ export default function BrandEdgeContact() {
           <div className="mb-8">
             <h2 className="heading-section text-foreground mb-2">Get in touch</h2>
             <p className="text-muted-foreground text-sm">
-              Let&apos;s talk about your next project.
+              Let&apos;s talk about your product or team — projects, roles, or a
+              working session.
             </p>
           </div>
 
@@ -99,30 +99,38 @@ export default function BrandEdgeContact() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Name
+                  Name <span aria-hidden>*</span>
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
+                  required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
+                  aria-required="true"
+                  aria-invalid={Boolean(error && !name.trim())}
+                  aria-describedby={error ? "contact-form-error" : undefined}
                   className={inputClass}
                   placeholder="Your name"
                 />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email
+                  Email <span aria-hidden>*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
+                  aria-required="true"
+                  aria-invalid={Boolean(error && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))}
+                  aria-describedby={error ? "contact-form-error" : undefined}
                   className={inputClass}
                   placeholder="your@email.com"
                 />
@@ -131,21 +139,25 @@ export default function BrandEdgeContact() {
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                Message
+                Message <span aria-hidden>*</span>
               </label>
               <textarea
                 id="message"
                 name="message"
+                required
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 rows={4}
+                aria-required="true"
+                aria-invalid={Boolean(error && !message.trim())}
+                aria-describedby={error ? "contact-form-error" : undefined}
                 className={`${inputClass} min-h-28 resize-none`}
                 placeholder="Tell me about your project, goals, and timeline..."
               />
             </div>
 
             {error && (
-              <p role="alert" className="text-sm text-destructive">
+              <p id="contact-form-error" role="alert" className="text-sm text-destructive">
                 {error}
               </p>
             )}
@@ -153,7 +165,7 @@ export default function BrandEdgeContact() {
             <button
               type="submit"
               disabled={submitting}
-              className="btn btn-primary w-full sm:w-auto"
+              className="btn btn-primary w-full sm:w-auto disabled:opacity-60"
             >
               {submitting ? "Sending..." : "Send message"}
             </button>
@@ -182,7 +194,7 @@ export default function BrandEdgeContact() {
               </a>
             </p>
             <a
-              href="mailto:mikegary201@gmail.com?subject=UI%2FUX%20Designer%20%E2%80%94%20Portfolio%20discussion"
+              href="mailto:mikegary201@gmail.com?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion"
               className="btn btn-secondary text-sm"
             >
               Book a 15-min chat

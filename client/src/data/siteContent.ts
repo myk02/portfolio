@@ -54,48 +54,84 @@ export const devToolkit = [
   "Postman",
 ];
 
+export const roleLine = "Web Developer · Frontend Engineer · Nairobi, Kenya";
+
+export const heroHeadline =
+  "I build reliable web products from design to deployment.";
+
+export const heroSupporting =
+  "Responsive, accessible interfaces from real designs — connected to working data and improved through testing and iteration. Design background included: it means fewer handoff gaps, not just prettier screens.";
+
 export const heroStats = [
   { label: "Case studies", value: "5" },
-  { label: "Live products shipped", value: "3" },
-  { label: "Conceptual studies", value: "2" },
-  { label: "Design tools", value: "Figma" },
+  { label: "Live products", value: "2" },
+  { label: "Concept studies", value: "3" },
+  { label: "Frontend stack", value: "React + TS" },
 ];
 
-export const aboutStats = heroStats;
+export const aboutStats = [
+  { label: "Case studies", value: "5" },
+  { label: "Live products", value: "2" },
+  { label: "e2e tests passing", value: "18" },
+  { label: "Frontend stack", value: "React + TS" },
+];
 
-export const aboutTitle = "Visual Thinker & UX Strategist";
+export const aboutTitle = "Web Developer & Product-minded Frontend Engineer";
 export const aboutSubtitle =
-  "Shaping digital experiences that feel personal and intuitive.";
+  "I turn designs and requirements into reliable, accessible production interfaces.";
 
 export const aboutParagraphs = [
-  "As a UI/UX Designer, I thrive in fast-paced environments where I can act as an internal consultant. I specialize in translating complex business requirements into elegant, user-centric solutions. I excel at collaborating across business, technology, and creative teams to build consensus and deliver products that solve real-world UX challenges.",
-  "I'm comfortable scoping, estimating, and prioritizing work in fast-paced environments — breaking ambiguous briefs into clear deliverables, setting realistic timelines, and shipping on schedule without sacrificing quality.",
+  "I'm a web developer in Nairobi who builds responsive, accessible interfaces, connects them to real APIs, and keeps them healthy through testing and iteration. My background is product design — which shows up as an engineering advantage: I interpret requirements accurately, collaborate with designers in their own language, and reduce the ambiguity that usually burns time between design and code.",
+  "I'm comfortable scoping work in fast-paced environments — breaking ambiguous briefs into clear deliverables, setting realistic timelines, and shipping on schedule without sacrificing quality. When something breaks, I debug to root cause rather than patch symptoms.",
 ];
+
+/** Application-facing line shown near contact CTAs. */
+export const applicationLine =
+  "I'm interested in building reliable products for people and teams who depend on them.";
 
 export const skillGroups = [
   {
-    title: "Core UX/UI Toolkit",
+    title: "Frontend engineering",
     skills: [
-      "Figma (Wireframes, Prototypes, Design Systems)",
-      "FigJam & Miro (Workshops, Journey Mapping)",
-      "Adobe Creative Cloud (Visual Design, Branding)",
-      "Sketch (Interface Design, Handoff)",
+      "JavaScript / ES6+",
+      "TypeScript",
+      "React 19",
+      "Next.js",
+      "Semantic HTML",
+      "CSS / Tailwind v4",
+      "Responsive UI",
     ],
   },
   {
-    title: "UX Methodologies",
+    title: "Product quality",
     skills: [
-      "User Research & Surveys",
-      "Competitive Analysis & Market Research",
-      "Wireframing & Prototyping",
-      "Information Architecture",
-      "Usability Testing",
-      "Stakeholder Management",
+      "Accessibility (AA contrast, focus states)",
+      "Form validation & error handling",
+      "Loading / error / empty states",
+      "Browser & viewport testing",
+      "Performance awareness",
     ],
   },
   {
-    title: "Technical Collaboration",
-    skills: ["React", "Next.js", "HTML/CSS", "Tailwind CSS"],
+    title: "Systems & data",
+    skills: [
+      "Component architecture",
+      "Design tokens",
+      "State modeling (hooks + context)",
+      "REST APIs",
+      "Convex backend functions",
+    ],
+  },
+  {
+    title: "Delivery & collaboration",
+    skills: [
+      "Git & GitHub",
+      "Code review via PRs",
+      "Vercel deploys",
+      "Playwright e2e",
+      "Figma-to-code handoff",
+      "GA4 analytics",
+    ],
   },
   {
     title: "Languages",

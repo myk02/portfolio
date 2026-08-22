@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
+import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
+import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
 import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
 import { BankingScreen } from "@/components/art/BankingResponsive";
 import {
@@ -130,40 +132,46 @@ function Artwork({ study }: { study: CaseStudy }) {
 function TileBody({ study }: { study: CaseStudy }) {
   return (
     <div className="p-5 space-y-3">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-display font-bold text-lg sm:text-xl text-foreground leading-snug group-hover:opacity-70 transition-opacity">
-          {study.name}
-        </h3>
-        <ArrowUpRight
-          size={18}
-          className="mt-0.5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:text-foreground group-hover:translate-x-1 group-hover:-translate-y-1"
-        />
-      </div>
+      <h3 className="font-display font-bold text-lg sm:text-xl text-foreground leading-snug">
+        {study.name}
+      </h3>
       <p className="text-sm text-muted-foreground leading-snug">
         {study.tileLine}
       </p>
+      {/* Compact technical metadata: status · role · stack */}
+      <ProjectMetaLine study={study} compact />
       <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent/20 text-foreground border border-accent/40">
         {study.tileBadge}
       </span>
-      <div className="pt-1 text-sm font-medium text-foreground transition-transform duration-300 group-hover:translate-x-1">
-        View case →
+      {/* Descriptive, distinct link targets */}
+      <div className="pt-1 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+        <Link
+          href={`/work/${study.slug}`}
+          className="inline-flex items-center gap-1.5 text-foreground transition-transform duration-300 group-hover:translate-x-1 underline-offset-4 hover:underline"
+        >
+          Read the case study
+          <ArrowUpRight size={14} aria-hidden />
+        </Link>
+        {study.liveUrl && (
+          <a
+            href={study.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
+          >
+            Open {study.liveUrlLabel}
+            <span aria-hidden>↗</span>
+          </a>
+        )}
       </div>
     </div>
   );
 }
 
-function Badges({ study }: { study: CaseStudy }) {
+function CardBadges({ study }: { study: CaseStudy }) {
   return (
     <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-[1]">
-      <span
-        className={`px-2 py-1 text-[11px] font-mono tracking-widest uppercase transition-transform duration-300 group-hover:-translate-y-0.5 ${
-          study.kind === "LIVE PRODUCT"
-            ? "bg-foreground text-background"
-            : "bg-accent text-accent-foreground"
-        }`}
-      >
-        {study.kind}
-      </span>
+      <StatusBadge tone={toneFromKind(study.kind)} />
       <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-background/85 backdrop-blur border border-border text-foreground">
         {study.year}
       </span>
@@ -171,44 +179,52 @@ function Badges({ study }: { study: CaseStudy }) {
   );
 }
 
+function CardShell({
+  study,
+  children,
+}: {
+  study: CaseStudy;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="group block h-full border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_16px_40px_-16px_rgba(10,10,10,0.3)]">
+      <Link
+        href={`/work/${study.slug}`}
+        className="block relative aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        aria-label={`${study.name} — read the case study`}
+      >
+        <Artwork study={study} />
+        <CardBadges study={study} />
+        <span className="tile-flash" aria-hidden />
+      </Link>
+      {children}
+    </div>
+  );
+}
+
 function FeatureCard({ study }: { study: CaseStudy }) {
   return (
     <Reveal className="lg:col-span-2">
-      <Link
-        href={`/work/${study.slug}`}
-        className="group block h-full border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_16px_40px_-16px_rgba(10,10,10,0.3)]"
-      >
-        <div className="relative aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-muted">
-          <Artwork study={study} />
-          <Badges study={study} />
-          <span className="tile-flash" aria-hidden />
-        </div>
+      <CardShell study={study}>
         <TileBody study={study} />
-      </Link>
+      </CardShell>
     </Reveal>
   );
 }
 
 function GridCard({ study, i }: { study: CaseStudy; i: number }) {
   return (
-    <Reveal delay={i % 4}>
-      <Link
-        href={`/work/${study.slug}`}
-        className="group block h-full border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_16px_40px_-16px_rgba(10,10,10,0.3)]"
-      >
-        <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-          <Artwork study={study} />
-          <Badges study={study} />
-          <span className="tile-flash" aria-hidden />
-        </div>
+    <Reveal delay={i % 4} className="h-full">
+      <CardShell study={study}>
         <TileBody study={study} />
-      </Link>
+      </CardShell>
     </Reveal>
   );
 }
 
 export default function BrandEdgeWork() {
   const [featured, ...rest] = caseStudies;
+  const liveCount = caseStudies.filter(s => s.kind === "LIVE PRODUCT").length;
   return (
     <section
       id="work"
@@ -222,10 +238,12 @@ export default function BrandEdgeWork() {
               Selected work
             </span>
             <h2 className="heading-section text-foreground mb-3">
-              Case studies
+              Work, live products first
             </h2>
             <p className="text-muted-foreground text-sm max-w-md">
-              Five studies. Watch how each was made.
+              {liveCount} shipped products, then{" "}
+              {caseStudies.length - liveCount} clearly-labeled concept studies —
+              every project states its status, stack, and challenge.
             </p>
           </Reveal>
 

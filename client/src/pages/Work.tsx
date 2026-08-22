@@ -2,13 +2,79 @@ import { Link } from "wouter";
 import { caseStudies } from "@/data/caseStudies";
 import { ArrowUpRight } from "lucide-react";
 import SiteHead from "@/components/SiteHead";
+import StatusBadge, {
+  toneFromKind,
+} from "@/components/engineering/StatusBadge";
+import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
+import type { CaseStudy } from "@/data/caseStudies";
+
+function WorkCard({ study }: { study: CaseStudy }) {
+  return (
+    <li className="group flex flex-col border border-border bg-card hover:border-foreground/40 transition-all duration-300 hover:-translate-y-1">
+      <Link
+        href={`/work/${study.slug}`}
+        aria-label={`${study.name} — read the case study`}
+        className="p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <StatusBadge tone={toneFromKind(study.kind)} />
+          <ArrowUpRight
+            size={20}
+            className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0"
+            aria-hidden
+          />
+        </div>
+        <h2 className="mt-4 font-display font-bold text-foreground text-2xl tracking-tight group-hover:underline underline-offset-4 decoration-1">
+          {study.name}
+        </h2>
+        <p className="mt-3 text-sm text-muted-foreground leading-snug">
+          {study.tagline}
+        </p>
+      </Link>
+      <div className="px-5 pb-5 mt-auto space-y-4">
+        <ProjectMetaLine study={study} compact />
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] font-medium pt-1">
+          <Link
+            href={`/work/${study.slug}`}
+            className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
+          >
+            Read the case study
+            <span aria-hidden>→</span>
+          </Link>
+          {study.liveUrl ? (
+            <a
+              href={study.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
+            >
+              Open live site
+              <ArrowUpRight size={13} aria-hidden />
+            </a>
+          ) : (
+            <Link
+              href={`/work/${study.slug}/prototype`}
+              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
+            >
+              Open interactive prototype
+              <span aria-hidden>→</span>
+            </Link>
+          )}
+        </div>
+      </div>
+    </li>
+  );
+}
 
 export default function Work() {
+  const live = caseStudies.filter(s => s.kind === "LIVE PRODUCT");
+  const concepts = caseStudies.filter(s => s.kind === "CONCEPTUAL");
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHead
-        title="Work — case studies | Mike Waitindi"
-        description="Case studies in research, UX, and design systems — live products and concept work, each with the decisions behind it."
+        title="Work — live products & engineering case studies | Mike Waitindi"
+        description="Two live production web apps and three clearly-labeled concept studies — each with stack, role, constraints, and the engineering decisions behind it."
         canonical="/work"
         type="website"
       />
@@ -27,40 +93,43 @@ export default function Work() {
           Work
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-foreground/85 leading-snug">
-          Case studies in research, UX, and design systems — live products and
-          concept work, each with the decisions behind it.
+          Live production first, concept studies clearly labeled. Every card
+          states its status, role, stack, and challenge.
         </p>
 
-        <ul className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {caseStudies.map((s) => (
-            <li key={s.slug}>
-              <Link
-                href={`/work/${s.slug}`}
-                className="group block border border-border bg-card p-5 hover:border-foreground/40 transition-colors"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest border border-border text-foreground">
-                      {s.kind}
-                    </span>
-                    <h2 className="mt-3 font-display font-bold text-foreground text-2xl tracking-tight">
-                      {s.name}
-                    </h2>
-                  </div>
-                  <ArrowUpRight
-                    size={20}
-                    className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0"
-                    aria-hidden
-                  />
-                </div>
-                <p className="mt-3 text-sm text-muted-foreground leading-snug">{s.tagline}</p>
-                <p className="mt-4 text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-                  {s.year} · {s.role}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* Live production */}
+        <section aria-labelledby="live-heading" className="mt-12">
+          <h2
+            id="live-heading"
+            className="text-xs font-mono uppercase tracking-widest text-accent mb-5"
+          >
+            Live production ({live.length})
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {live.map(s => (
+              <WorkCard key={s.slug} study={s} />
+            ))}
+          </ul>
+        </section>
+
+        {/* Concept studies */}
+        <section aria-labelledby="concept-heading" className="mt-14">
+          <h2
+            id="concept-heading"
+            className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1"
+          >
+            Concept studies ({concepts.length})
+          </h2>
+          <p className="text-sm text-muted-foreground mb-5 max-w-2xl">
+            Research-led design work validated in testing or review — not
+            deployed products. Each includes a proposed implementation plan.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {concepts.map(s => (
+              <WorkCard key={s.slug} study={s} />
+            ))}
+          </ul>
+        </section>
       </div>
     </div>
   );
