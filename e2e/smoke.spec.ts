@@ -75,7 +75,7 @@ test.describe("home page", () => {
     await expect(
       section.getByRole("heading", { name: "How I build, with proof" })
     ).toBeVisible();
-    await expect(section.getByText("Verified in this repo")).toHaveCount(5);
+    await expect(section.getByText("Verified in this repo")).toHaveCount(8);
   });
 });
 
@@ -235,6 +235,66 @@ test.describe("image lightbox", () => {
     await expect(dialog.locator("img")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
+  });
+});
+
+test.describe("linkedin alignment", () => {
+  test("what-I-do section groups services into build/design/operate", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const services = page.locator("#services");
+    await expect(services).toBeAttached();
+    for (const group of ["Build", "Design", "Operate & improve"]) {
+      await expect(
+        services.getByRole("heading", { name: group, exact: true })
+      ).toBeVisible();
+    }
+    // Core LinkedIn service categories are represented
+    await expect(services.getByText("SaaS Development")).toBeVisible();
+    await expect(services.getByText("API Integrations")).toBeVisible();
+    await expect(services.getByText("Technical Support")).toBeVisible();
+    await expect(services.getByText("Network Support")).toBeVisible();
+  });
+
+  test("engineering section separates provenance per capability card", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const section = page.locator("#engineering");
+    await expect(
+      section.getByText("Beyond the frontend — APIs, automation, support")
+    ).toBeVisible();
+    // Explicit source labels, never a generic "verified"
+    // (counts include the explanatory legend span)
+    await expect(section.getByText("Verified in this repo")).toHaveCount(8);
+    await expect(section.getByText("Professional experience")).toHaveCount(5);
+  });
+
+  test("unconfirmed experience entries are dev-gated, never unlabeled", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    // e2e runs against the dev server, where pending entries may preview —
+    // but every occurrence must sit inside a data-pending wrapper marked
+    // "dev only". Production exclusion is asserted against the built bundle
+    // in CI (grep for the placeholder string).
+    const badges = page.getByText("Details to be confirmed");
+    const count = await badges.count();
+    for (let i = 0; i < count; i++) {
+      const wrapper = badges.nth(i).locator('xpath=ancestor::li[@data-pending="true"]');
+      await expect(wrapper).toHaveCount(1);
+      await expect(badges.nth(i)).toContainText("dev only");
+    }
+  });
+
+  test("header carries the work-with-me CTA for employment and freelance", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("button", { name: "Work with me" })
+    ).toBeVisible();
   });
 });
 

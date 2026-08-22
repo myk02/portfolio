@@ -1,12 +1,13 @@
 import type { StudyKind } from "@/data/caseStudies";
 import { cn } from "@/lib/utils";
 
-export type BadgeTone = "live" | "concept" | "prototype";
+export type BadgeTone = "live" | "concept" | "prototype" | "saas";
 
 const TONE_LABEL: Record<BadgeTone, string> = {
   live: "Live production",
   concept: "Concept study",
   prototype: "Interactive prototype",
+  saas: "SaaS project",
 };
 
 export function toneFromKind(kind: StudyKind): BadgeTone {
@@ -35,8 +36,7 @@ export default function StatusBadge({
           ? "bg-foreground text-background"
           : tone === "concept"
             ? "bg-accent/20 text-foreground border border-accent/50"
-            : "bg-background/85 backdrop-blur border border-border text-foreground",
-        className,
+            : "bg-background/85 backdrop-blur border border-border text-foreground",        className,
       )}
     >
       {tone === "live" && (

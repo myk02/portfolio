@@ -1,12 +1,14 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import TechSummary from "@/components/engineering/TechSummary";
+import ExperienceTimeline from "@/components/engineering/ExperienceTimeline";
 import {
   aboutStats,
   socialLinks,
   contactItems,
   applicationLine,
 } from "@/data/siteContent";
+import { experienceEntries, isEntryComplete } from "@/data/experience";
 
 const contactIcons: Record<string, React.ReactNode> = {
   Email: <Mail size={18} />,
@@ -61,12 +63,13 @@ export default function BrandEdgeAbout() {
               </Reveal>
               <Reveal delay={3}>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  My background is product design, and it works as an
-                  engineering advantage: I interpret requirements and designs
-                  accurately, speak designers&apos; language, and cut the
-                  ambiguity that usually burns time between design and code.
-                  Then I do the engineering — semantic markup, typed React, API
-                  wiring, tests, and deploys.
+                  I&apos;m a developer, designer, API and automation specialist
+                  based in Nairobi. I build web products and SaaS workflows,
+                  connect interfaces to useful services, troubleshoot
+                  real-world problems, and design experiences that people can
+                  understand. My design background helps me translate
+                  requirements clearly and collaborate across technical and
+                  non-technical teams.
                 </p>
               </Reveal>
               <Reveal delay={3}>
@@ -77,8 +80,13 @@ export default function BrandEdgeAbout() {
             </div>
           </div>
 
-          {/* Skills matrix — technical skills first, hobbies nowhere in the way */}
+          {/* Experience — renders only fully-confirmed entries; dev previews pending ones */}
           <div className="mt-14">
+            <ExperienceTimeline />
+          </div>
+
+          {/* Skills matrix — technical skills first, hobbies nowhere in the way */}
+          <div className={experienceEntries.some(isEntryComplete) ? "mt-14" : ""}>
             <TechSummary />
           </div>
 

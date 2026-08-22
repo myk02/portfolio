@@ -148,7 +148,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
             onClick={() => handleNav("contact")}
             className="hidden md:inline-flex btn btn-primary text-sm"
           >
-            Get in touch
+            Work with me
           </button>
 
           <button
@@ -192,7 +192,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
                 onClick={() => handleNav("contact")}
                 className="btn btn-primary w-full text-center"
               >
-                Get in touch
+                Work with me
               </button>
               <a href="/CV.pdf" download className="btn btn-secondary w-full text-center">
                 Download CV

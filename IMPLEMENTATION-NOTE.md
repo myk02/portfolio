@@ -1,5 +1,8 @@
 # Implementation note â€” engineering-led repositioning (Aug 2026)
 
+> **Round 2 (LinkedIn alignment) appended at the bottom** â€” experience model,
+> LegalFlow gating, What-I-do services, provenance-labeled capability cards.
+
 Repositioning of mikeships.vercel.app from a UI/UX-designer-first portfolio to a
 **Web Developer / Frontend Engineer** portfolio for the Savannah Informatics
 application (Nairobi). This was an information-architecture and copy
@@ -142,3 +145,92 @@ repo â€” delivery story is Gitâ†’PRâ†’auto-deploy on Vercel (stated as such).
 4. **CV "7+ live websites" claim** â€” dropped as unverified; restore if you can
    stand behind it.
 5. **About stat "18 e2e tests passing"** â€” true today; update if the suite grows.
+
+---
+
+# Round 2 — LinkedIn alignment (Aug 2026)
+
+Goal: represent the full public LinkedIn identity (developer, designer, API,
+automation, tech support, SaaS, web design, UX) without inventing a single
+fact. Unconfirmed content is **structurally present but excluded from
+production** — verified by grepping the built bundle.
+
+## New content model (`client/src/data/experience.ts`)
+
+- `ExperienceEntry` with `source` ("repository" | "live project" | "LinkedIn" |
+  "CV" | "user confirmation") and `todo[]`.
+- `experienceEntries`: seeded ONLY with the publicly-visible Freelancer.com
+  entry; title/dates/description deliberately blank (LinkedIn hides them behind
+  an auth wall). Marked slots show exactly where to paste the real text.
+- `pendingProjects`: LegalFlow with scope copied from its public LinkedIn
+  description and a TODO list (role, status, stack, auth/roles, AI boundaries,
+  links, dates). **Not rendered anywhere in production** — the string
+  "LegalFlow" does not exist in the shipped bundle.
+- Gate rule: entries render only when complete. Dev builds preview pending
+  entries behind "Details to be confirmed · dev only"; production strips the
+  branch at build time via inline `import.meta.env.DEV`.
+
+## New components
+
+- `components/engineering/ExperienceTimeline.tsx` — renders confirmed entries;
+  renders nothing misleading otherwise (in prod, currently shows only an honest
+  note that history publishes once titles/dates are confirmed).
+- `components/WhatIDo.tsx` (#services) — LinkedIn service categories grouped:
+  **Build** (web dev, SaaS, API integrations, automation) / **Design** (web,
+  UI/UX, design systems, brand) / **Operate & improve** (support, debugging,
+  site management & analytics, accessibility, security-minded implementation,
+  network support).
+
+## Engineering section expansion
+
+Second card row ("Beyond the frontend") added under #engineering, each card
+carrying an explicit provenance label — no generic "verified":
+
+| Card | Label |
+|---|---|
+| APIs & integrations | Verified in this repo |
+| Security-minded implementation | Verified in this repo |
+| Automation & workflows | Professional experience |
+| SaaS & product development | Professional experience |
+| Technical support & troubleshooting | Professional experience |
+| Network & infrastructure support | Professional experience |
+
+The SaaS card references "a legal-practice SaaS project … details published
+once confirmed" — existence is public on LinkedIn; role/status are not claimed.
+
+## Other changes
+
+- Header + mobile CTA renamed "Get in touch" ? **"Work with me"** (suits both
+  employment and freelance/SaaS inquiries); contact section retitled to match.
+- Hero supporting copy broadened: interfaces "connected to working APIs,
+  automated where it saves real time".
+- About first paragraph now states the broader developer/designer/API/
+  automation identity (Mike's own suggested wording).
+- `StatusBadge` gained a "SaaS project" tone, ready for LegalFlow once
+  confirmed.
+
+## LinkedIn items — representation status
+
+Represented now: developer ? · designer/UX ? · API specialist ? · automation ?
+· tech support ? · web design ? · SaaS development ? (card + services, without
+unconfirmed specifics) · network support ? (service-level wording from Mike's
+own existing copy) · cybersecurity ? folded into "Security-minded
+implementation" (repo-evidenced practices only) and Building next.
+
+Awaiting Mike's input before publishing: exact LinkedIn employment titles +
+dates (Freelancer.com entry and any other roles), LegalFlow role/status/stack/
+links/AI-boundaries, final sign-off on the About paragraph.
+
+## Claims relabeled or constrained this round
+
+- "Cybersecurity" (a listed LinkedIn service) is NOT presented as expertise —
+  only concrete repo-verifiable security practices are claimed.
+- No employer/title/date inferred for Freelancer.com.
+- LegalFlow existence acknowledged only as "pending confirmation", never as
+  shipped work.
+
+## Verification (round 2)
+
+- `pnpm run check` ? · `pnpm run build` ? · `pnpm test` ? **22/22** ?
+- Production-bundle grep: "Details to be confirmed", "Awaiting:",
+  "Title/Dates to be confirmed", "LegalFlow" — all **absent** from dist.

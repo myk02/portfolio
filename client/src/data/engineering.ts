@@ -12,6 +12,8 @@ export interface EvidenceCard {
   id: string;
   title: string;
   points: string[];
+  /** Explicit provenance label rendered on the card. Never a generic "verified". */
+  sourceLabel?: string;
 }
 
 export const engineeringIntro =
@@ -140,4 +142,71 @@ export const collaborationPoints = [
   "Design background means I read Figma intent, not just redlines — fewer back-and-forths.",
   "I translate requirements into acceptance criteria before writing code.",
   "Comfortable pairing with backend engineers on contracts, and with QA on repro steps.",
+];
+
+/**
+ * Second capability row — the broader LinkedIn profile beyond frontend.
+ * Each card states its own evidence source; nothing here is claimed as
+ * repo-verified unless it can be inspected in this codebase.
+ */
+export const capabilityCards: EvidenceCard[] = [
+  {
+    id: "apis-integrations",
+    title: "APIs & integrations",
+    sourceLabel: "Verified in this repo",
+    points: [
+      "Typed Convex functions power this site's contact form and donations end-to-end",
+      "Paystack checkout initialized client-side, verified server-side before success feedback",
+      "Failure paths handled explicitly — user-facing errors, never silent catch blocks",
+    ],
+  },
+  {
+    id: "automation",
+    title: "Automation & workflows",
+    sourceLabel: "Professional experience",
+    points: [
+      "n8n workflows built for lead qualification, invoice processing, ticket classification, reporting, and social scheduling",
+      "Workflow specs exported and versioned as JSON in this repository (client/public/workflows)",
+      "Focus on dependable triggers and clear failure behavior over clever one-offs",
+    ],
+  },
+  {
+    id: "saas-product",
+    title: "SaaS & product development",
+    sourceLabel: "Professional experience",
+    points: [
+      "Multi-step product flows shipped live: browse → cart → payment; plan → build → share",
+      "Forms, operational states (loading / error / empty), and role-aware screens designed and implemented",
+      "A legal-practice SaaS project is in documentation — details published once confirmed",
+    ],
+  },
+  {
+    id: "support",
+    title: "Technical support & troubleshooting",
+    sourceLabel: "Professional experience",
+    points: [
+      "Helpdesk and IT support: hardware/software faults, account issues, AV setup — logged in Jira for a clear record",
+      "Website management: uptime monitoring, page-speed fixes, scheduled patching",
+      "Root-cause habit carried into engineering: reproduce, isolate in DevTools, fix the cause, verify",
+    ],
+  },
+  {
+    id: "security-minded",
+    title: "Security-minded implementation",
+    sourceLabel: "Verified in this repo",
+    points: [
+      "Payments delegated to Paystack's hosted flow; transaction state verified server-side before UI confirms success",
+      "No secrets bundled client-side; keys stay in environment/server configuration",
+      "Input validation with explicit error states; auth/RBAC patterns listed under Building next until shipped",
+    ],
+  },
+  {
+    id: "network-support",
+    title: "Network & infrastructure support",
+    sourceLabel: "Professional experience",
+    points: [
+      "LAN/WAN troubleshooting, DNS/DHCP and Wi-Fi fault-finding for home and small-office setups",
+      "Security checks, patch schedules, and backups that are actually tested",
+    ],
+  },
 ];

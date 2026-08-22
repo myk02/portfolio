@@ -60,7 +60,7 @@ export const heroHeadline =
   "I build reliable web products from design to deployment.";
 
 export const heroSupporting =
-  "Responsive, accessible interfaces from real designs — connected to working data and improved through testing and iteration. Design background included: it means fewer handoff gaps, not just prettier screens.";
+  "Responsive, accessible interfaces from real designs — connected to working APIs, automated where it saves real time, and improved through testing and iteration. Design background included: it means fewer handoff gaps, not just prettier screens.";
 
 export const heroStats = [
   { label: "Case studies", value: "5" },
@@ -88,6 +88,109 @@ export const aboutParagraphs = [
 /** Application-facing line shown near contact CTAs. */
 export const applicationLine =
   "I'm interested in building reliable products for people and teams who depend on them.";
+
+/**
+ * "What I do" — mirrors the public LinkedIn service categories, grouped by
+ * intent. Descriptions stay within what the portfolio/CV already evidence.
+ * `href` anchors point at proof sections on this page.
+ */
+export type ServiceGroupId = "build" | "design" | "operate";
+
+export const serviceGroups: {
+  id: ServiceGroupId;
+  heading: string;
+  blurb: string;
+  items: { title: string; desc: string; href?: string }[];
+}[] = [
+  {
+    id: "build",
+    heading: "Build",
+    blurb: "Products and systems, shipped.",
+    items: [
+      {
+        title: "Web Development",
+        desc: "Responsive, accessible sites and apps in React, TypeScript, and Tailwind — deployed on Vercel.",
+        href: "#work",
+      },
+      {
+        title: "SaaS Development",
+        desc: "Product flows, multi-step forms, operational states, and integrations for software people rely on.",
+        href: "#work",
+      },
+      {
+        title: "API Integrations",
+        desc: "Typed backend functions and third-party APIs wired end-to-end, failures handled explicitly.",
+        href: "#engineering",
+      },
+      {
+        title: "Automation",
+        desc: "n8n workflows that remove repetitive work — lead qualification, invoicing, ticket routing, reporting.",
+        href: "#engineering",
+      },
+    ],
+  },
+  {
+    id: "design",
+    heading: "Design",
+    blurb: "Interfaces that read clearly and ship cleanly.",
+    items: [
+      {
+        title: "Web Design",
+        desc: "Editorial, brand-true layouts that survive contact with real content.",
+        href: "#work",
+      },
+      {
+        title: "UI/UX Design",
+        desc: "Research-led flows and usability testing — my first craft, now feeding cleaner handoffs.",
+        href: "#work",
+      },
+      {
+        title: "Design Systems",
+        desc: "Tokens and component libraries documented so quality survives team growth.",
+        href: "#work",
+      },
+      {
+        title: "Brand & Graphic Design",
+        desc: "Logos, social assets, presentations, and print in Figma and Adobe CC.",
+      },
+    ],
+  },
+  {
+    id: "operate",
+    heading: "Operate & improve",
+    blurb: "Keeping products healthy after launch.",
+    items: [
+      {
+        title: "Technical Support",
+        desc: "Fault-finding from user symptom to root cause — logged so nothing is diagnosed twice.",
+        href: "#engineering",
+      },
+      {
+        title: "Debugging & Performance",
+        desc: "DevTools-driven investigation; fixes aimed at causes, not symptoms.",
+        href: "#engineering",
+      },
+      {
+        title: "Website Management & Analytics",
+        desc: "Uptime, scheduled patches, page speed, GA4 funnels reviewed post-launch.",
+      },
+      {
+        title: "Accessibility",
+        desc: "AA contrast, keyboard paths, labelled forms — verified rather than assumed.",
+        href: "#engineering",
+      },
+      {
+        title: "Security-minded Implementation",
+        desc: "Hosted payment flows, server-side verification, secrets kept out of the client bundle.",
+        href: "#engineering",
+      },
+      {
+        title: "Network Support",
+        desc: "LAN/WAN, DNS/DHCP, and Wi-Fi troubleshooting for small offices and home setups.",
+      },
+    ],
+  },
+];
 
 export const skillGroups = [
   {

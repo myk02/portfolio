@@ -88,10 +88,10 @@ export default function BrandEdgeContact() {
       <div className="container">
         <div className="max-w-2xl mx-auto">
           <div className="mb-8">
-            <h2 className="heading-section text-foreground mb-2">Get in touch</h2>
+            <h2 className="heading-section text-foreground mb-2">Work with me</h2>
             <p className="text-muted-foreground text-sm">
-              Let&apos;s talk about your product or team — projects, roles, or a
-              working session.
+              Projects, full-time roles, or a working session — if it needs to
+              be built, debugged, or kept healthy, let&apos;s talk.
             </p>
           </div>
 

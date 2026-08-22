@@ -4,6 +4,7 @@ import BrandEdgeHeader from "@/components/BrandEdgeHeader";
 import BrandEdgeHero, { SkillMarquee } from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
 import EngineeringEvidence from "@/components/engineering/EvidenceSection";
+import WhatIDo from "@/components/WhatIDo";
 import UXProcessSection from "@/components/UXProcessSection";
 import DesignPlaybook from "@/components/DesignPlaybook";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
@@ -53,6 +54,7 @@ export default function Home() {
         <SkillMarquee />
         <BrandEdgeWork />
         <EngineeringEvidence />
+        <WhatIDo />
         <UXProcessSection />
         <DesignPlaybook />
         <BrandEdgeAbout />
