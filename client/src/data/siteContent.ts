@@ -60,34 +60,38 @@ export const heroHeadline =
   "I build reliable web products from design to deployment.";
 
 export const heroSupporting =
-  "Responsive, accessible interfaces from real designs — connected to working APIs, automated where it saves real time, and improved through testing and iteration. Design background included: it means fewer handoff gaps, not just prettier screens.";
+  "Responsive, accessible React interfaces — wired to real APIs and kept healthy with tests.";
 
 export const heroStats = [
-  { label: "Case studies", value: "5" },
   { label: "Live products", value: "2" },
-  { label: "Concept studies", value: "3" },
+  { label: "e2e tests passing", value: "22" },
   { label: "Frontend stack", value: "React + TS" },
 ];
 
-export const aboutStats = [
-  { label: "Case studies", value: "5" },
-  { label: "Live products", value: "2" },
-  { label: "e2e tests passing", value: "18" },
-  { label: "Frontend stack", value: "React + TS" },
-];
+export const aboutStats = heroStats;
 
 export const aboutTitle = "Web Developer & Product-minded Frontend Engineer";
 export const aboutSubtitle =
   "I turn designs and requirements into reliable, accessible production interfaces.";
 
 export const aboutParagraphs = [
-  "I'm a web developer in Nairobi who builds responsive, accessible interfaces, connects them to real APIs, and keeps them healthy through testing and iteration. My background is product design — which shows up as an engineering advantage: I interpret requirements accurately, collaborate with designers in their own language, and reduce the ambiguity that usually burns time between design and code.",
-  "I'm comfortable scoping work in fast-paced environments — breaking ambiguous briefs into clear deliverables, setting realistic timelines, and shipping on schedule without sacrificing quality. When something breaks, I debug to root cause rather than patch symptoms.",
+  "Developer, designer, API and automation specialist in Nairobi. I build responsive, accessible interfaces, connect them to real services, and debug to root cause. My design background means requirements get read right the first time.",
 ];
 
 /** Application-facing line shown near contact CTAs. */
 export const applicationLine =
   "I'm interested in building reliable products for people and teams who depend on them.";
+
+/** Compact skills row for the slim About section. */
+export const coreSkills = [
+  "TypeScript",
+  "React",
+  "Tailwind CSS",
+  "REST APIs",
+  "Playwright e2e",
+  "Accessibility",
+  "Git & Vercel",
+];
 
 /**
  * "What I do" — mirrors the public LinkedIn service categories, grouped by

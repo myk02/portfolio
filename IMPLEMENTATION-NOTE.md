@@ -234,3 +234,37 @@ links/AI-boundaries, final sign-off on the About paragraph.
 - `pnpm run check` ? · `pnpm run build` ? · `pnpm test` ? **22/22** ?
 - Production-bundle grep: "Details to be confirmed", "Awaiting:",
   "Title/Dates to be confirmed", "LegalFlow" — all **absent** from dist.
+
+---
+
+# Round 3 — vital-info trim (Aug 2026)
+
+User directive: keep only vital info, show only real shipped projects.
+
+## Changes
+
+- **caseStudies.ts reduced to the two live products** (KenyaTrace, GiGi Energy).
+  The three conceptual studies were removed from display entirely; their
+  routes now resolve to 404 (covered by e2e). A documented LegalFlow slot with
+  a template entry remains in the data file — wire it in once its public URL
+  (law-five-eta.vercel.app currently returns DEPLOYMENT_NOT_FOUND) is live,
+  plus visuals/journeys/TILE_ART entries.
+- **Prototype route + page removed** (only conceptual studies had internal
+  prototypes).
+- **Homepage slimmed to five sections**: Hero (one-line supporting copy,
+  three honest stats) ? Shipped products grid ? compact evidence strip
+  ("Proof, not claims", five cards, =3 short bullets each) ? slim About
+  (portrait, two-sentence bio, core-skills pills, contact links) ? contact
+  form. Removed from home: skill marquee, What-I-do services, process
+  timeline, design playbook, skills matrix/building-next blocks.
+- Header nav simplified to Work / About / Contact (+CV); footer reduced to
+  brand + nav + contact links; buy-me-a-coffee panel removed from the contact
+  section (still low-priority in footer bar).
+- LegalFlow tile art key pre-wired in BrandEdgeWork (renders from
+  /shots/legalflow/ when captures exist).
+
+## Verification
+
+- `pnpm run check` ? · build ? · **12/12 e2e pass** (incl. assertions that
+  removed studies 404 and exactly 2 live badges render)
+- Live tiles use real product screenshots only (4 images across 2 tiles).

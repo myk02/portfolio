@@ -7,7 +7,6 @@ interface BrandEdgeFooterProps {
 }
 
 const TOOLS = ["React", "TypeScript", "Tailwind", "Convex", "Playwright"];
-const PROCESS = ["Discover", "Define", "Design", "Validate"];
 
 export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
   const year = new Date().getFullYear();
@@ -17,7 +16,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
     <footer className="bg-primary border-t border-border text-primary-foreground">
       <div className="container py-12 lg:py-14">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-10 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 lg:gap-12">
             {/* brand */}
             <div>
               <button
@@ -43,15 +42,14 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               </div>
             </div>
 
-            {/* nav */}
+            {/* nav + contact */}
             <div>
               <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
                 Navigate
               </p>
               <nav className="flex flex-col gap-2.5">
                 {[
-                  { id: "work", label: "Work & case studies" },
-                  { id: "engineering", label: "Engineering evidence" },
+                  { id: "work", label: "Work" },
                   { id: "about", label: "About" },
                   { id: "contact", label: "Contact" },
                 ].map((link) => (
@@ -73,22 +71,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                   Download CV
                 </a>
               </nav>
-            </div>
-
-            {/* process + contact */}
-            <div>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
-                Design process
-              </p>
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {PROCESS.map((p, i) => (
-                  <span key={p} className="flex items-center gap-1.5 text-xs text-primary-foreground/75">
-                    {i > 0 && <span className="text-accent">→</span>}
-                    {p}
-                  </span>
-                ))}
-              </div>
-              <div className="space-y-2">
+              <div className="space-y-2 mt-6">
                 <a
                   href="mailto:mikegary201@gmail.com"
                   className="flex items-center gap-2 text-sm text-primary-foreground/75 hover:text-accent transition-colors"

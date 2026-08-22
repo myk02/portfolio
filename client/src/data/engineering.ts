@@ -17,57 +17,52 @@ export interface EvidenceCard {
 }
 
 export const engineeringIntro =
-  "I build responsive, accessible interfaces from real designs, connect them to working data, and improve them through testing and iteration. The strongest proof is this site — it is the same stack I'd use on your product.";
+  "Proof over promises — every claim below is visible in this site's own code.";
 
 export const evidenceCards: EvidenceCard[] = [
   {
     id: "frontend",
     title: "Frontend",
     points: [
-      "React 19 with TypeScript across every route and component",
-      "Semantic landmarks, heading order, named links, visible focus",
-      "Responsive layouts from 360px phones to desktop grids",
-      "Component-based UI: tiles, cards, mockups, galleries composed from one token set",
+      "React 19 + TypeScript on every route",
+      "Semantic landmarks, focus states, responsive from 360px",
+      "One token set drives all components",
     ],
   },
   {
     id: "apis-data",
     title: "APIs & data",
     points: [
-      "Convex backend functions power the contact form and donations",
-      "Typed client calls with loading, error, and success states",
-      "Paystack payment integration verified server-side before confirming",
-      "Form payloads validated on submit with actionable error messages",
+      "Convex functions power the contact form end-to-end",
+      "Paystack payments verified server-side before success",
+      "Typed calls with loading / error / success states",
     ],
   },
   {
     id: "testing-quality",
     title: "Testing & quality",
     points: [
-      "Playwright end-to-end suite covers routes, CTAs, lightbox, 404, form validation",
-      "tsc --noEmit typecheck gate plus Prettier formatting",
-      "Keyboard paths tested: focus-trapped mobile menu, Esc-closable dialogs",
-      "Reduced-motion respected in animations and counters",
+      "Playwright e2e suite covers routes, CTAs, forms, 404",
+      "tsc typecheck gate; keyboard paths tested",
+      "Animations respect reduced motion",
     ],
   },
   {
     id: "debugging-delivery",
-    title: "Debugging & delivery",
+    title: "Delivery",
     points: [
-      "Git workflow with reviewed PRs; auto-deploys to Vercel on merge",
-      "SPA rewrites, canonical URLs, per-route titles and OG tags maintained",
-      "Root-cause fixes over patches — e.g. contrast fixed at the palette level, not per text run",
-      "Image pipeline: WebP variants, explicit dimensions, lazy loading below the fold",
+      "Git → reviewed PRs → auto-deploy on Vercel",
+      "Per-route titles, canonical URLs, OG tags maintained",
+      "WebP images, lazy loading, no layout shift",
     ],
   },
   {
     id: "accessibility-security",
     title: "Accessibility & security",
     points: [
-      "AA contrast targets on brand palettes (documented in the GiGi case study)",
-      "Labels tied to inputs, role=alert errors, aria-expanded/controls on toggles",
-      "No secrets in the client; payments delegated to Paystack's hosted flow",
-      "Server-side verification of payment state before success feedback",
+      "WCAG AA contrast targets on shipped brand palettes",
+      "Labelled inputs, role=alert errors, aria-wired toggles",
+      "No secrets client-side; payments in hosted flow",
     ],
   },
 ];

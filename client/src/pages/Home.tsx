@@ -1,12 +1,9 @@
 import { useEffect, useCallback } from "react";
 import { useLocation } from "wouter";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
-import BrandEdgeHero, { SkillMarquee } from "@/components/BrandEdgeHero";
+import BrandEdgeHero from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
 import EngineeringEvidence from "@/components/engineering/EvidenceSection";
-import WhatIDo from "@/components/WhatIDo";
-import UXProcessSection from "@/components/UXProcessSection";
-import DesignPlaybook from "@/components/DesignPlaybook";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
@@ -51,12 +48,8 @@ export default function Home() {
 
       <main>
         <BrandEdgeHero onCtaClick={scrollToSection} />
-        <SkillMarquee />
         <BrandEdgeWork />
         <EngineeringEvidence />
-        <WhatIDo />
-        <UXProcessSection />
-        <DesignPlaybook />
         <BrandEdgeAbout />
         <BrandEdgeContact />
       </main>

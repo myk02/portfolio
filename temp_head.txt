@@ -1,0 +1,77 @@
+export type StudyKind = "LIVE PRODUCT" | "CONCEPTUAL";
+
+export interface InsightCallout {
+  quote: string;
+  source: string;
+}
+
+export interface CaseSection {
+  lead?: string;
+  paragraphs?: string[];
+  bullets?: { label?: string; text: string }[];
+  callouts?: InsightCallout[];
+}
+
+export interface OutcomeDelta {
+  metric: string;
+  value: string;
+  note: string;
+}
+
+/** Engineering notes for shipped products — production evidence only. */
+export interface EngineeringNotes {
+  architecture: string[];
+  stateForms?: string[];
+  dataIntegration?: string[];
+  qualityChecks?: string[];
+  deliveryFollowUp?: string[];
+}
+
+/** Proposed (not built) implementation detail for conceptual studies. */
+export interface ProposedSection {
+  heading: string;
+  points: string[];
+}
+
+export interface CaseStudy {
+  slug: string;
+  name: string;
+  year: string;
+  kind: StudyKind;
+  tagline: string;
+  summary: string;
+  methods: string[];
+  role: string;
+  timeline: string;
+  tools: string[];
+  status: string;
+  liveUrl?: string;
+  liveUrlLabel?: string;
+  /** Compact technical metadata shown on cards + case-study heroes. */
+  stack: string[];
+  challenge: string;
+  scope: string;
+  constraints: string[];
+  outcomeLine: string;
+  art: "banking" | "dashboard" | "design-system" | "kenyatrace" | "gigi";
+  image?: string;
+  tileLine: string;
+  tileBadge: string;
+  heroCaption: string;
+  problem: { lead: string; paragraphs?: string[] };
+  research: CaseSection;
+  designThinking: CaseSection;
+  ia: CaseSection;
+  design: CaseSection;
+  testing: CaseSection;
+  outcomes: OutcomeDelta[];
+  outcomeDetail: string;
+  lessons: string[];
+  /** Live products only — what was actually engineered. */
+  engineeringNotes?: EngineeringNotes;
+  /** Conceptual studies only — explicitly labeled "Proposed implementation". */
+  proposedImplementation?: ProposedSection[];
+  /** Conceptual studies only — honest engineering considerations. */
+  engineeringConsiderations?: { intro: string; sections: ProposedSection[] };
+}
+

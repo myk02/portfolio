@@ -5,11 +5,6 @@ import { Reveal } from "@/components/Reveal";
 import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
 import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
 import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
-import { BankingScreen } from "@/components/art/BankingResponsive";
-import {
-  DashboardScreen,
-  DesignSystemScreen,
-} from "@/components/art/ResponsiveConceptArt";
 
 interface TileArtProps {
   phone: DeviceContent;
@@ -62,41 +57,16 @@ function TileArt({ phone, desktop, bg = "#f4efe7" }: TileArtProps) {
   );
 }
 
-const TILE_ART = {
-  banking: {
-    bg: "#f4efe7",
-    trio: () => ({
-      phone: { node: <BankingScreen variant="mobile" screen="home" /> },
-      tablet: { node: <BankingScreen variant="tablet" screen="home" /> },
-      desktop: { node: <BankingScreen variant="desktop" screen="home" /> },
-    }),
-  },
-  dashboard: {
-    bg: "#141310",
-    trio: () => ({
-      phone: { node: <DashboardScreen variant="mobile" /> },
-      tablet: { node: <DashboardScreen variant="tablet" /> },
-      desktop: { node: <DashboardScreen variant="desktop" /> },
-    }),
-  },
-  "design-system": {
-    bg: "#f4efe7",
-    trio: () => ({
-      phone: { node: <DesignSystemScreen variant="mobile" /> },
-      tablet: { node: <DesignSystemScreen variant="tablet" /> },
-      desktop: { node: <DesignSystemScreen variant="desktop" /> },
-    }),
-  },
+const TILE_ART: Record<
+  CaseStudy["art"],
+  { bg: string; trio: () => { phone: DeviceContent; desktop: DeviceContent } }
+> = {
   kenyatrace: {
     bg: "#efe9dd",
     trio: () => ({
       phone: {
         src: "/shots/kenyatrace/home-mobile.jpg",
         alt: "KenyaTrace home — mobile",
-      },
-      tablet: {
-        src: "/shots/kenyatrace/home-tablet.jpg",
-        alt: "KenyaTrace home — tablet",
       },
       desktop: {
         src: "/shots/kenyatrace/home-cards-desktop.jpg",
@@ -111,13 +81,24 @@ const TILE_ART = {
         src: "/shots/gigi-energy/home-mobile.jpg",
         alt: "GiGi Energy storefront — mobile",
       },
-      tablet: {
-        src: "/shots/gigi-energy/home-tablet.jpg",
-        alt: "GiGi Energy storefront — tablet",
-      },
       desktop: {
         src: "/shots/gigi-energy/home-products-desktop.jpg",
         alt: "GiGi Energy storefront — product grid on desktop",
+      },
+    }),
+  },
+  /* LegalFlow: add a "legalflow" entry with real screenshots from
+     client/public/shots/legalflow/ once the deployment URL is live. */
+  legalflow: {
+    bg: "#141310",
+    trio: () => ({
+      phone: {
+        src: "/shots/legalflow/home-mobile.jpg",
+        alt: "LegalFlow — mobile",
+      },
+      desktop: {
+        src: "/shots/legalflow/home-desktop.jpg",
+        alt: "LegalFlow — desktop",
       },
     }),
   },
@@ -223,8 +204,8 @@ function GridCard({ study, i }: { study: CaseStudy; i: number }) {
 }
 
 export default function BrandEdgeWork() {
-  const [featured, ...rest] = caseStudies;
-  const liveCount = caseStudies.filter(s => s.kind === "LIVE PRODUCT").length;
+  const live = caseStudies.filter(s => s.kind === "LIVE PRODUCT");
+  const [featured, ...rest] = live;
   return (
     <section
       id="work"
@@ -238,17 +219,16 @@ export default function BrandEdgeWork() {
               Selected work
             </span>
             <h2 className="heading-section text-foreground mb-3">
-              Work, live products first
+              Shipped products
             </h2>
             <p className="text-muted-foreground text-sm max-w-md">
-              {liveCount} shipped products, then{" "}
-              {caseStudies.length - liveCount} clearly-labeled concept studies —
-              every project states its status, stack, and challenge.
+              {live.length} live production apps — every one states its stack
+              and challenge.
             </p>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
-            <FeatureCard study={featured} />
+            {featured && <FeatureCard study={featured} />}
             {rest.map((study, i) => (
               <GridCard key={study.slug} study={study} i={i} />
             ))}

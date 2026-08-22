@@ -1,12 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const CONCEPTUAL_SLUGS = [
-  "mobile-banking-redesign",
-  "dashboard-ui-system",
-  "design-system-creation",
-];
-
-const ALL_SLUGS = ["kenyatrace", "gigi-energy", ...CONCEPTUAL_SLUGS];
+const LIVE_SLUGS = ["kenyatrace", "gigi-energy"];
 
 test.describe("home page", () => {
   test("renders engineering-led hero with primary CTAs", async ({ page }) => {
@@ -34,76 +28,83 @@ test.describe("home page", () => {
       page.getByRole("link", { name: "Download CV" }).first()
     ).toHaveAttribute("href", "/CV.pdf");
 
-    // Honest stats: 5 studies, 2 live, 3 concept
+    // Honest, compact stats
     await expect(
       page.getByText("Live products", { exact: true }).first()
     ).toBeVisible();
     await expect(
-      page.getByText("Concept studies", { exact: true }).first()
+      page.getByText("e2e tests passing", { exact: true }).first()
     ).toBeVisible();
 
     expect(errors).toEqual([]);
   });
 
-  test("features a live product first and labels every card", async ({
+  test("shows exactly the two live projects with real screenshots and labels", async ({
     page,
   }) => {
     await page.goto("/");
 
-    // Featured tile is KenyaTrace (live), not the conceptual banking study
+    // Featured tile is KenyaTrace
     await expect(
       page.getByRole("link", { name: /KenyaTrace — read the case study/i })
     ).toBeVisible();
 
-    // Status badges: exactly 2 "Live production", 3 "Concept study"
-    // (exact match avoids counting the longer metadata lines)
+    // Exactly 2 live badges, no concept-study leftovers
     await expect(page.getByText("Live production", { exact: true })).toHaveCount(2);
-    await expect(page.getByText("Concept study", { exact: true })).toHaveCount(3);
+    await expect(page.getByText("Concept study")).toHaveCount(0);
 
-    // Every card exposes stack metadata and descriptive links
-    await expect(page.getByText(/Read the case study/)).toHaveCount(5);
-    await expect(page.getByRole("link", { name: /Open kenyatrace\.vercel\.app/ })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Open gigiflavours\.vercel\.app/ })).toBeVisible();
+    // Descriptive links + external live-site links
+    await expect(page.getByText(/Read the case study/)).toHaveCount(2);
+    await expect(
+      page.getByRole("link", { name: /Open kenyatrace\.vercel\.app/ })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /Open gigiflavours\.vercel\.app/ })
+    ).toBeVisible();
+
+    // Tiles render real screenshots (not code-art placeholders)
+    const tileImages = page.locator('a[aria-label*="read the case study"] img');
+    await expect(tileImages).toHaveCount(4); // desktop + phone per tile
   });
 
-  test("engineering evidence section renders verified claim cards", async ({
-    page,
-  }) => {
+  test("compact evidence section renders five proof cards", async ({ page }) => {
     await page.goto("/");
     const section = page.locator("#engineering");
     await expect(section).toBeAttached();
     await expect(
-      section.getByRole("heading", { name: "How I build, with proof" })
+      section.getByRole("heading", { name: "Proof, not claims" })
     ).toBeVisible();
-    await expect(section.getByText("Verified in this repo")).toHaveCount(8);
+    for (const card of [
+      "Frontend",
+      "APIs & data",
+      "Testing & quality",
+      "Delivery",
+      "Accessibility & security",
+    ]) {
+      await expect(section.getByRole("heading", { name: card })).toBeVisible();
+    }
   });
 });
 
 test.describe("work page", () => {
-  test("groups live products before concept studies with status badges", async ({
-    page,
-  }) => {
+  test("lists only the live production projects", async ({ page }) => {
     await page.goto("/work");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Work");
 
     await expect(page.getByText("Live production (2)")).toBeVisible();
-    await expect(page.getByText("Concept studies (3)")).toBeVisible();
+    await expect(page.getByText(/Concept studies/)).toHaveCount(0);
 
-    // All five case-study pages are linked (excluding prototype routes)
-    const studyLinks = page.locator('a[href^="/work/"]:not([href*="prototype"])');
-    const hrefs = await studyLinks.evaluateAll(els =>
-      Array.from(new Set(els.map(el => el.getAttribute("href"))))
-    );
-    expect(hrefs.sort()).toEqual(
-      ALL_SLUGS.map(s => `/work/${s}`).sort()
-    );
+    const hrefs = await page
+      .locator('a[href^="/work/"]:not([href*="prototype"])')
+      .evaluateAll(els =>
+        Array.from(new Set(els.map(el => el.getAttribute("href"))))
+      );
+    expect(hrefs.sort()).toEqual(LIVE_SLUGS.map(s => `/work/${s}`).sort());
 
-    // Concept cards offer their interactive prototypes distinctly
-    for (const slug of CONCEPTUAL_SLUGS) {
-      await expect(
-        page.locator(`a[href="/work/${slug}/prototype"]`).first()
-      ).toBeVisible();
-    }
+    // External links are distinct from internal ones
+    await expect(
+      page.getByRole("link", { name: "Open live site" }).first()
+    ).toHaveAttribute("href", "https://kenyatrace.vercel.app");
   });
 });
 
@@ -111,66 +112,30 @@ test.describe("case study pages", () => {
   test("every case study shows a facts strip under the hero", async ({
     page,
   }) => {
-    for (const slug of ALL_SLUGS) {
+    for (const slug of LIVE_SLUGS) {
       await page.goto(`/work/${slug}`);
       for (const label of ["Status", "Stack", "Scope", "Challenge", "Outcome"]) {
         await expect(
           page.getByText(label, { exact: true }).first()
         ).toBeVisible();
       }
-      // Outcome line carries real content, not a placeholder
-      await expect(page.getByText(/kenyatrace\.vercel\.app|SUS|spec'd end-to-end|collapsed to 3|AA contrast/).first()).toBeVisible();
+      await expect(
+        page.getByText(/kenyatrace\.vercel\.app|AA contrast/).first()
+      ).toBeVisible();
     }
   });
 
   test("live product studies expose production engineering notes", async ({
     page,
   }) => {
-    for (const slug of ["kenyatrace", "gigi-energy"]) {
+    for (const slug of LIVE_SLUGS) {
       await page.goto(`/work/${slug}`);
       await expect(
         page.getByRole("heading", { name: "Engineering notes" })
       ).toBeVisible();
-      await expect(page.getByText("Architecture & components").first()).toBeVisible();
-    }
-  });
-
-  test("conceptual studies carry clearly-labeled proposed implementation blocks", async ({
-    page,
-  }) => {
-    for (const slug of CONCEPTUAL_SLUGS) {
-      await page.goto(`/work/${slug}`);
-      await expect(page.getByText("Proposed implementation")).toHaveCount(1);
       await expect(
-        page.getByText(/not production evidence/i).first()
+        page.getByText("Architecture & components").first()
       ).toBeVisible();
-    }
-  });
-
-  test("banking study includes honest engineering considerations", async ({
-    page,
-  }) => {
-    await page.goto("/work/mobile-banking-redesign");
-    await expect(
-      page.getByRole("heading", { name: "Engineering considerations" })
-    ).toBeVisible();
-    await expect(
-      page.getByText(/listed as proposals, not claims/i)
-    ).toBeVisible();
-  });
-
-  test("conceptual prototype CTAs point to the in-site prototype", async ({
-    page,
-  }) => {
-    for (const slug of CONCEPTUAL_SLUGS) {
-      await page.goto(`/work/${slug}`);
-      await expect(page.getByRole("heading", { level: 1 })).not.toBeEmpty();
-      const prototypeLinks = page.locator('a[href*="prototype"]');
-      await expect(prototypeLinks.first()).toBeVisible();
-      for (const link of await prototypeLinks.all()) {
-        const href = await link.getAttribute("href");
-        expect(href).toBe(`/work/${slug}/prototype`);
-      }
     }
   });
 
@@ -185,41 +150,23 @@ test.describe("case study pages", () => {
     ).toHaveAttribute("href", "https://kenyatrace.vercel.app");
   });
 
-  test("renders chapter content and at-a-glance rail", async ({ page }) => {
-    await page.goto("/work/mobile-banking-redesign");
-    await expect(
-      page.getByRole("heading", { name: "The problem" })
-    ).toBeVisible();
-    await expect(page.getByText("At a glance", { exact: true })).toBeVisible();
+  test("removed conceptual studies no longer resolve", async ({ page }) => {
+    for (const slug of [
+      "mobile-banking-redesign",
+      "dashboard-ui-system",
+      "design-system-creation",
+    ]) {
+      await page.goto(`/work/${slug}`);
+      await expect(page.getByText("404")).toBeVisible();
+    }
   });
 
-  test("document titles reflect engineering-led positioning", async ({
-    page,
-  }) => {
+  test("document titles reflect positioning", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Web Developer & Frontend Engineer/);
     await page.goto("/work/kenyatrace");
     await expect(page).toHaveTitle(/live production/);
-    await page.goto("/work/dashboard-ui-system");
-    await expect(page).toHaveTitle(/concept study/);
   });
-});
-
-test.describe("prototype pages", () => {
-  for (const slug of CONCEPTUAL_SLUGS) {
-    test(`${slug} prototype keeps the not-a-live-product label and adds proof panel`, async ({
-      page,
-    }) => {
-      await page.goto(`/work/${slug}/prototype`);
-      await expect(page.getByRole("heading", { level: 1 })).not.toBeEmpty();
-      await expect(
-        page.getByText("Interactive concept · not a live product")
-      ).toBeVisible();
-      await expect(
-        page.getByRole("heading", { name: "What this demonstrates" })
-      ).toBeVisible();
-    });
-  }
 });
 
 test.describe("image lightbox", () => {
@@ -235,66 +182,6 @@ test.describe("image lightbox", () => {
     await expect(dialog.locator("img")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-  });
-});
-
-test.describe("linkedin alignment", () => {
-  test("what-I-do section groups services into build/design/operate", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const services = page.locator("#services");
-    await expect(services).toBeAttached();
-    for (const group of ["Build", "Design", "Operate & improve"]) {
-      await expect(
-        services.getByRole("heading", { name: group, exact: true })
-      ).toBeVisible();
-    }
-    // Core LinkedIn service categories are represented
-    await expect(services.getByText("SaaS Development")).toBeVisible();
-    await expect(services.getByText("API Integrations")).toBeVisible();
-    await expect(services.getByText("Technical Support")).toBeVisible();
-    await expect(services.getByText("Network Support")).toBeVisible();
-  });
-
-  test("engineering section separates provenance per capability card", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    const section = page.locator("#engineering");
-    await expect(
-      section.getByText("Beyond the frontend — APIs, automation, support")
-    ).toBeVisible();
-    // Explicit source labels, never a generic "verified"
-    // (counts include the explanatory legend span)
-    await expect(section.getByText("Verified in this repo")).toHaveCount(8);
-    await expect(section.getByText("Professional experience")).toHaveCount(5);
-  });
-
-  test("unconfirmed experience entries are dev-gated, never unlabeled", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    // e2e runs against the dev server, where pending entries may preview —
-    // but every occurrence must sit inside a data-pending wrapper marked
-    // "dev only". Production exclusion is asserted against the built bundle
-    // in CI (grep for the placeholder string).
-    const badges = page.getByText("Details to be confirmed");
-    const count = await badges.count();
-    for (let i = 0; i < count; i++) {
-      const wrapper = badges.nth(i).locator('xpath=ancestor::li[@data-pending="true"]');
-      await expect(wrapper).toHaveCount(1);
-      await expect(badges.nth(i)).toContainText("dev only");
-    }
-  });
-
-  test("header carries the work-with-me CTA for employment and freelance", async ({
-    page,
-  }) => {
-    await page.goto("/");
-    await expect(
-      page.getByRole("button", { name: "Work with me" })
-    ).toBeVisible();
   });
 });
 
@@ -316,7 +203,6 @@ test.describe("contact form", () => {
     await expect(page.getByRole("alert")).toContainText(
       "Please fill in all fields"
     );
-    // Error state is exposed to assistive tech
     await expect(page.locator("#name")).toHaveAttribute("aria-invalid", "true");
   });
 });

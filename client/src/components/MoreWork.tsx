@@ -1,7 +1,5 @@
 import { Link } from "wouter";
 import { caseStudies } from "@/data/caseStudies";
-import BankingArt from "@/components/art/BankingArt";
-import MiniBankingScreens from "@/components/art/MiniBankingScreens";
 
 function Thumb({ slug }: { slug: string }) {
   const study = caseStudies.find((s) => s.slug === slug);
@@ -12,11 +10,7 @@ function Thumb({ slug }: { slug: string }) {
       className="group flex flex-col gap-2 w-[220px] sm:w-[240px] shrink-0"
     >
       <div className="border border-border bg-card p-3 overflow-hidden">
-        {study.slug === "mobile-banking-redesign" ? (
-          <div className="scale-[0.62] origin-top -mb-8">
-            <MiniBankingScreens compact />
-          </div>
-        ) : study.image ? (
+        {study.image ? (
           <img
             src={study.image.replace(".png", "-640.webp")}
             srcSet={`${study.image.replace(".png", "-640.webp")} 640w, ${study.image.replace(".png", "-1200.webp")} 1200w`}
@@ -49,6 +43,7 @@ function Thumb({ slug }: { slug: string }) {
 
 export default function MoreWork({ current }: { current: string }) {
   const others = caseStudies.filter((s) => s.slug !== current);
+  if (others.length === 0) return null;
   return (
     <div className="mt-10">
       <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">

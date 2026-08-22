@@ -18,17 +18,8 @@ import type { ChapterBlock, GlanceItem } from "./caseChapters";
 import SiteHead from "@/components/SiteHead";
 import DesignJourney from "@/components/DesignJourney";
 import { HeroDeviceShowcase } from "@/components/artifacts/Screens";
-import { DesktopMockup } from "@/components/artifacts/DeviceMockups";
-import { DeviceShowcaseFigure } from "@/components/artifacts/DeviceShowcaseFigure";
 import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
 import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
-import ProposedBlock from "@/components/engineering/ProposedBlock";
-import BankingArt from "@/components/art/BankingArt";
-import { BankingDeviceShowcase } from "@/components/art/BankingResponsive";
-import {
-  DashboardScreen,
-  DesignSystemScreen,
-} from "@/components/art/ResponsiveConceptArt";
 
 interface LayoutProps {
   study: CaseStudy;
@@ -212,82 +203,17 @@ export default function CaseStudyLayout({
             </p>
           </div>
 
-          {/* HERO DEVICES — the design shown inside mobile, tablet and desktop mockups */}
+          {/* HERO DEVICES — the shipped design inside mobile, tablet and desktop mockups */}
           <div className="mt-10 sm:mt-12">
-            {study.slug === "mobile-banking-redesign" ? (
-              <BankingDeviceShowcase
-                screen="home"
-                title="Concept hi-fi — one design, three viewports"
-              />
-            ) : visuals.hero ? (
+            {visuals.hero ? (
               <HeroDeviceShowcase hero={visuals.hero} live />
-            ) : study.slug === "dashboard-ui-system" ? (
-              <DeviceShowcaseFigure
-                title="Concept hi-fi — one design, three viewports"
-                meta="mobile · tablet · desktop"
-                note="A dense analytics product can still breathe at every size."
-                phone={<DashboardScreen variant="mobile" />}
-                tablet={<DashboardScreen variant="tablet" />}
-                desktop={<DashboardScreen variant="desktop" />}
-                phoneClassName="w-[180px]"
-                tabletClassName="w-[240px]"
-                desktopClassName="w-[520px]"
-              />
-            ) : study.slug === "design-system-creation" ? (
-              <DeviceShowcaseFigure
-                title="Concept hi-fi — one design, three viewports"
-                meta="mobile · tablet · desktop"
-                note="Components that stay honest from phone to desktop."
-                phone={<DesignSystemScreen variant="mobile" />}
-                tablet={<DesignSystemScreen variant="tablet" />}
-                desktop={<DesignSystemScreen variant="desktop" />}
-                phoneClassName="w-[180px]"
-                tabletClassName="w-[240px]"
-                desktopClassName="w-[520px]"
-              />
-            ) : (
-              <figure className="border border-border bg-card p-4 sm:p-6">
-                <figcaption className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                  Hi-fi concept — desktop monitor
-                </figcaption>
-                <DesktopMockup
-                  content={{
-                    node: <BankingArt />,
-                  }}
-                  showStand
-                  aspect="aspect-auto"
-                  className="w-full"
-                  label="Desktop · concept"
-                />
-              </figure>
-            )}
+            ) : null}
           </div>
         </div>
       </header>
 
       {/* ENGINEERING NOTES — production evidence for live products */}
       <EngineeringNotesBlock study={study} />
-
-      {/* PROPOSED IMPLEMENTATION / CONSIDERATIONS — conceptual studies only */}
-      {(study.proposedImplementation || study.engineeringConsiderations) && (
-        <section
-          aria-label="Proposed implementation and engineering considerations"
-          className="border-b border-border"
-        >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-14 space-y-8">
-            {study.proposedImplementation && (
-              <ProposedBlock sections={study.proposedImplementation} />
-            )}
-            {study.engineeringConsiderations && (
-              <ProposedBlock
-                variant="considerations"
-                intro={study.engineeringConsiderations.intro}
-                sections={study.engineeringConsiderations.sections}
-              />
-            )}
-          </div>
-        </section>
-      )}
 
       {/* DESIGN JOURNEY — full-width scroll-driven strip */}
       <section

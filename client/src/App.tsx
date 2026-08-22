@@ -13,7 +13,6 @@ import Home from "./pages/Home";
 
 const Work = lazy(() => import("./pages/Work"));
 const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
-const PrototypePage = lazy(() => import("./pages/PrototypePage"));
 
 function NavigateBridge() {
   const [, navigate] = useLocation();
@@ -41,7 +40,6 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/work"} component={Work} />
         <Route path={"/work/:slug"} component={CaseStudyPage} />
-        <Route path={"/work/:slug/prototype"} component={PrototypePage} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>

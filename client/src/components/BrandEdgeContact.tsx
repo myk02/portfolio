@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import BuyMeCoffee from "./BuyMeCoffee";
+import { applicationLine } from "@/data/siteContent";
 
 const inputClass =
   "w-full bg-card border border-border px-4 min-h-[44px] text-[16px] text-foreground placeholder:text-foreground/60 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40";
@@ -89,9 +89,8 @@ export default function BrandEdgeContact() {
         <div className="max-w-2xl mx-auto">
           <div className="mb-8">
             <h2 className="heading-section text-foreground mb-2">Work with me</h2>
-            <p className="text-muted-foreground text-sm">
-              Projects, full-time roles, or a working session — if it needs to
-              be built, debugged, or kept healthy, let&apos;s talk.
+            <p className="text-muted-foreground text-sm max-w-lg">
+              {applicationLine} Projects, full-time roles, or a working session.
             </p>
           </div>
 
@@ -170,18 +169,6 @@ export default function BrandEdgeContact() {
               {submitting ? "Sending..." : "Send message"}
             </button>
           </form>
-
-          <div className="mt-8 border border-border bg-card p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-            <div>
-              <p className="font-display font-semibold text-xl text-foreground">
-                Enjoyed my work?
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                Buy me a coffee — it keeps the pixels flowing.
-              </p>
-            </div>
-            <BuyMeCoffee buttonClassName="sm:shrink-0" />
-          </div>
 
           <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p className="text-sm text-muted-foreground">

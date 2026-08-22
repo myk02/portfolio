@@ -27,11 +27,13 @@ export interface EngineeringNotes {
   deliveryFollowUp?: string[];
 }
 
-/** Proposed (not built) implementation detail for conceptual studies. */
+/** Proposed (not built) implementation detail — reserved for future studies. */
 export interface ProposedSection {
   heading: string;
   points: string[];
 }
+
+export type StudyArt = "kenyatrace" | "gigi" | "legalflow";
 
 export interface CaseStudy {
   slug: string;
@@ -53,7 +55,7 @@ export interface CaseStudy {
   scope: string;
   constraints: string[];
   outcomeLine: string;
-  art: "banking" | "dashboard" | "design-system" | "kenyatrace" | "gigi";
+  art: StudyArt;
   image?: string;
   tileLine: string;
   tileBadge: string;
@@ -69,11 +71,26 @@ export interface CaseStudy {
   lessons: string[];
   /** Live products only — what was actually engineered. */
   engineeringNotes?: EngineeringNotes;
-  /** Conceptual studies only — explicitly labeled "Proposed implementation". */
-  proposedImplementation?: ProposedSection[];
-  /** Conceptual studies only — honest engineering considerations. */
-  engineeringConsiderations?: { intro: string; sections: ProposedSection[] };
 }
+
+/* -------------------------------------------------------------------------
+   LegalFlow (SaaS legal-practice management) joins this list once its public
+   URL is reachable and role/status are confirmed. Template:
+
+   {
+     slug: "legalflow",
+     name: "LegalFlow",
+     year: "2026",
+     kind: "LIVE PRODUCT",
+     tagline: "…",
+     stack: […],
+     challenge: "…",
+     …
+   }
+   Also add: visuals in caseVisuals.ts, journeys in caseJourneys.ts,
+   TILE_ART in BrandEdgeWork.tsx ("legalflow" key already supported), and a
+   screenshots set in client/public/shots/legalflow/.
+-------------------------------------------------------------------------- */
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -340,442 +357,6 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
   },
-  {
-    slug: "mobile-banking-redesign",
-    name: "Youth Mobile Banking Redesign",
-    year: "2025",
-    kind: "CONCEPTUAL",
-    tagline:
-      "Mobile banking for 18–30 year-olds — built around irregular income, trust friction, and saving goals.",
-    summary:
-      "Research → flows → wireframes → hi-fi → usability testing for youth banking.",
-    methods: [
-      "User Interviews",
-      "Usability Testing",
-      "Journey Mapping",
-      "Wireframing",
-    ],
-    role: "End-to-end UX — research plan, flows, wireframes, hi-fi, usability testing",
-    timeline: "6 weeks (conceptual study)",
-    tools: ["Figma", "FigJam", "Maze", "Miro"],
-    status: "Concept study · 2025",
-    stack: ["Figma", "FigJam", "Maze", "Miro"],
-    challenge: "Turn distrust of banking apps into a savings habit for irregular earners.",
-    scope: "Interviews → flows → wireframes → hi-fi → moderated usability tests",
-    constraints: [
-      "Conceptual — validated in testing, never deployed",
-      "Five-participant moderated test budget",
-      "Users with irregular, often daily income",
-    ],
-    outcomeLine:
-      "Onboarding 8 → 4 steps and SUS 68 → 84 across five moderated tests — hypothesis-level results, clearly not production metrics.",
-    art: "banking",
-    tileLine: "Onboarding 8 → 4. Savings-first home.",
-    tileBadge: "6 weeks · 8 → 4 steps",
-    heroCaption: "Conceptual study — not affiliated with any bank.",
-    problem: {
-      lead: "Young customers with irregular income don't trust or use their banking app.",
-    },
-    research: {
-      lead: "8 interviews · 47-survey · 6-app audit.",
-      callouts: [
-        {
-          quote:
-            "I don't check my balance because I don't want to see it. I know it's low and I'll just feel bad.",
-          source: "Interviewee, 23 · freelancer",
-        },
-        {
-          quote:
-            "The app asked me for documents I didn't have on me. I said I'll finish later. That was three months ago.",
-          source: "Interviewee, 21 · campus student",
-        },
-      ],
-      bullets: [
-        {
-          label: "Abandonment",
-          text: "Onboarding dies at document verification.",
-        },
-        {
-          label: "Avoidance",
-          text: "Users avoid apps that shame their balance.",
-        },
-        {
-          label: "Income mismatch",
-          text: "Monthly budgets fail irregular earners.",
-        },
-        { label: "Trust", text: "Trust cues are visual, not verbal." },
-      ],
-    },
-    designThinking: {
-      lead: "Two directions killed before any visual polish.",
-      bullets: [
-        {
-          label: "Kept",
-          text: "Savings-first home — leads with what the user wants.",
-        },
-        {
-          label: "Kept",
-          text: "Progressive KYC — essentials first, documents deferred.",
-        },
-        {
-          label: "Rejected",
-          text: "Dark fintech aesthetic — failed the 'understood' test.",
-        },
-      ],
-    },
-    ia: {
-      lead: "Eight onboarding screens → four. Five flat destinations.",
-      bullets: [
-        { label: "Onboarding", text: "8 → 4 steps; verification deferred." },
-        { label: "Home", text: "Balance, goal ring, quick actions in 0 taps." },
-        {
-          label: "Goals",
-          text: "Round-up, quick-save (+500/+1000), 'save when paid'.",
-        },
-      ],
-    },
-    design: {
-      lead: "Hi-fi in phone frames — one small, consistent component set.",
-      bullets: [
-        {
-          label: "Greeting",
-          text: "Warm header — first name + a 'hustle' message.",
-        },
-        { label: "Goal ring", text: "Quick-save chips sized to real hustles." },
-        { label: "Trust", text: "Padlock + amount + recipient at first send." },
-      ],
-    },
-    testing: {
-      lead: "Five moderated tests in Maze — one iteration pass.",
-      callouts: [
-        {
-          quote:
-            "Oh, it's like a savings circle. I thought the ring was the network loading.",
-          source: "Usability test, participant 3 · round 1",
-        },
-      ],
-    },
-    outcomes: [
-      {
-        metric: "Onboarding",
-        value: "8 → 4 steps",
-        note: "est. −50% activation abandonment (hypothesis-based; conceptual study)",
-      },
-      {
-        metric: "Goal visibility",
-        value: "3 taps → 0",
-        note: "goal progress always on the home screen",
-      },
-      {
-        metric: "SUS score",
-        value: "68 → 84",
-        note: "system usability scale across 5 moderated tests",
-      },
-    ],
-    outcomeDetail:
-      "Conceptual — outcomes are hypotheses validated by usability testing.",
-    lessons: [
-      "Lead with what the customer wants, not the ledger.",
-      "Progressive KYC is standard — that friction was killing activation.",
-      "Trust cues are visual; users skim every security sentence.",
-    ],
-    proposedImplementation: [
-      {
-        heading: "Data & auth",
-        points: [
-          "Phone-number identity with OTP verification, PIN hashed server-side — never stored or logged raw.",
-          "Progressive KYC modeled as a verification state machine: essentials unlock send/receive; document checks gate higher limits later.",
-        ],
-      },
-      {
-        heading: "Forms & validation",
-        points: [
-          "Amount inputs validated against balance and limits before submit; quick-save chips pre-fill but stay editable.",
-          "Inline field-level errors with plain-language recovery ('Top up first' rather than error codes).",
-        ],
-      },
-      {
-        heading: "States & failure recovery",
-        points: [
-          "Loading, empty, offline, and declined states designed per screen — the goal ring degrades to a number if animation is unavailable.",
-          "Failed transfers return explicit state (pending / reversed) with a receipt the user can act on.",
-        ],
-      },
-      {
-        heading: "Testing & privacy",
-        points: [
-          "Unit tests around money math (round-ups, limits) before UI polish; e2e pass over onboarding and first-send.",
-          "Privacy boundaries: balances masked by default with deliberate reveal; no balance shaming in notifications.",
-        ],
-      },
-    ],
-    engineeringConsiderations: {
-      intro:
-        "This study stops at tested design. If it were taken to build, these are the engineering problems I'd expect to solve first — listed as proposals, not claims:",
-      sections: [
-        {
-          heading: "Authentication & progressive verification",
-          points: [
-            "Session strategy for a shareable-phone context; re-auth thresholds for sends above a limit.",
-            "Deferred KYC needs server-side enforcement of what each tier may do — the UI promise must be backed by authorization checks.",
-          ],
-        },
-        {
-          heading: "Validation & privacy",
-          points: [
-            "Client-side validation mirrors server rules, but the server stays the authority on limits and balances.",
-            "Personal data minimization: collect only what the current tier requires, retain what regulation requires, nothing more.",
-          ],
-        },
-        {
-          heading: "Role & access boundaries",
-          points: [
-            "Customer vs. agent vs. back-office roles need RBAC from day one — retrofitting access control into a payments product is how incidents happen.",
-          ],
-        },
-        {
-          heading: "Failure recovery",
-          points: [
-            "Money movement demands idempotent operations: a retried submit must never double-charge.",
-            "Every failure path needs a user-visible recovery state — pending, retry, or reversal — not a generic error toast.",
-          ],
-        },
-      ],
-    },
-  },
-  {
-    slug: "dashboard-ui-system",
-    name: "Complex Dashboard UI System",
-    year: "2025",
-    kind: "CONCEPTUAL",
-    tagline:
-      "A scalable dashboard UI system — dense data, clear hierarchy, build-ready specs.",
-    summary: "A dashboard UI system — dense, legible, spec'd for developers.",
-    methods: [
-      "Information Architecture",
-      "Data Design",
-      "UI Systems",
-      "Developer Handoff",
-    ],
-    role: "IA · UI System · Handoff Documentation",
-    timeline: "4 weeks (conceptual study)",
-    tools: ["Figma", "Tokens Studio"],
-    status: "Concept study · 2025",
-    stack: ["Figma", "Tokens Studio", "Spec documentation"],
-    challenge: "Give operators dense data they can scan in seconds — and developers specs they don't have to guess from.",
-    scope: "IA → three-tier hierarchy → dense-table system → states matrix → handoff specs",
-    constraints: [
-      "Conceptual — spec-only deliverable, no production codebase",
-      "Long-session dark UI; color reserved for exceptions",
-      "Handoff culture to fix: specs were screenshots",
-    ],
-    outcomeLine:
-      "Three-tier hierarchy spec'd end-to-end — states, spacing, and edge cases annotated per component.",
-    art: "dashboard",
-    tileLine: "Ops dashboards. Dense data, clear hierarchy.",
-    tileBadge: "4 weeks · spec handoff",
-    heroCaption: "Conceptual study — dark operational UI, handoff-ready.",
-    problem: {
-      lead: "Dense operational data, thin hierarchy, handoff by screenshot.",
-    },
-    research: {
-      lead: "Three internal tools · task-focused interviews.",
-      bullets: [
-        { label: "Scan, not read", text: "Users scan for exceptions first." },
-        {
-          label: "Table density",
-          text: "The data table is the least-designed workhorse.",
-        },
-        {
-          label: "Handoff gap",
-          text: "Developers reverse-engineer specs from screenshots.",
-        },
-      ],
-    },
-    designThinking: {
-      lead: "Card-only or table-only? Neither.",
-    },
-    ia: {
-      lead: "Three tiers, explicit rules.",
-      bullets: [
-        { label: "Status", text: "KPI cards with deltas — read in 2 seconds." },
-        { label: "Context", text: "Exception list + trend charts." },
-        {
-          label: "Detail",
-          text: "Dense table, pinned columns, keyboard-first.",
-        },
-      ],
-    },
-    design: {
-      lead: "Dark UI, lime accent, built for long sessions.",
-    },
-    testing: {
-      lead: "Heuristic review + developer handoff walkthrough.",
-    },
-    outcomes: [
-      {
-        metric: "Task scan",
-        value: "≤2 seconds",
-        note: "exception state visible at a glance (heuristic baseline)",
-      },
-      {
-        metric: "Handoff",
-        value: "100% spec'd",
-        note: "states, spacing, and edge cases annotated per component",
-      },
-      {
-        metric: "Table density",
-        value: "2×",
-        note: "data rows per viewport vs. typical card-based dashboards",
-      },
-    ],
-    outcomeDetail:
-      "Conceptual — three-tier hierarchy beats card-first and table-only.",
-    lessons: [
-      "The data table deserves senior design attention.",
-      "Handoff is a deliverable, not a handoff.",
-      "Every pixel of chart geometry should carry data.",
-    ],
-    proposedImplementation: [
-      {
-        heading: "Data fetching & table state",
-        points: [
-          "Server pagination + debounced client filtering; sort, filter, selection, and density held in URL-synced state so views are shareable.",
-          "Row selection supports range-select and keyboard-only operation; exception rows get non-color affordances too (icon + text), never lime alone.",
-        ],
-      },
-      {
-        heading: "Permissions",
-        points: [
-          "Column- and action-level permissions resolved server-side and mirrored into disabled/hidden variants — the states matrix already names each variant a dev would implement.",
-        ],
-      },
-      {
-        heading: "Errors, empty & loading states",
-        points: [
-          "Per-region skeletons (KPIs load independently of the table); failed tiles degrade to a retry card, never a blank grid.",
-          "Empty states distinguish 'no data' from 'filters matched nothing' with a reset action.",
-        ],
-      },
-      {
-        heading: "Tests",
-        points: [
-          "Component tests for row-state logic and filter composition; e2e coverage of the exception-scan path (load → spot exception → open row).",
-          "Visual regression snapshots on the dark theme to catch drift in the token set.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "design-system-creation",
-    name: "Design System Creation",
-    year: "2025",
-    kind: "CONCEPTUAL",
-    tagline:
-      "Tokens, components, documentation — the standards layer for quality at scale.",
-    summary:
-      "Tokens, components, documentation — standards that keep quality alive.",
-    methods: ["Design Systems", "Typography", "Tokens", "Documentation"],
-    role: "Design System · Tokens · Documentation",
-    timeline: "3 weeks (conceptual study)",
-    tools: ["Figma", "Tokens Studio"],
-    status: "Concept study · 2025",
-    stack: ["Figma", "Tokens Studio", "Documentation"],
-    challenge: "Stop visual drift across surfaces with tokens a team will actually adopt.",
-    scope: "Audit → token architecture → component APIs → states matrix → usage docs",
-    constraints: [
-      "Conceptual — adoption untested in production",
-      "Three legacy surfaces audited; 17 competing button styles inherited",
-      "Designers feared a library they couldn't extend",
-    ],
-    outcomeLine:
-      "17 button styles collapsed to 3 fully-spec'd variants; 10 core components documented with usage rules.",
-    art: "design-system",
-    tileLine: "Tokens first. 17 buttons → 3.",
-    tileBadge: "3 weeks · unified system",
-    heroCaption: "Conceptual study — the style-guide cover at a glance.",
-    problem: {
-      lead: "Every product shipped a different button. That's a quality problem.",
-    },
-    research: {
-      lead: "Audit of three surfaces · designer interviews.",
-      bullets: [
-        { label: "Drift", text: "17 button styles, re-derived per screen." },
-        { label: "Copy-paste", text: "Spacing nudged until nothing aligned." },
-        {
-          label: "Adoption fear",
-          text: "Designers feared a library they couldn't extend.",
-        },
-      ],
-    },
-    designThinking: {
-      lead: "Token-first, not component-first.",
-    },
-    ia: {
-      lead: "Tokens → components → guidance.",
-      bullets: [
-        { label: "Tokens", text: "Type, color, spacing, radii, elevation." },
-        {
-          label: "Components",
-          text: "Buttons, inputs, toggles, dialogs — all states.",
-        },
-        { label: "Docs", text: "When to use, when not to, how to extend." },
-      ],
-    },
-    design: {
-      lead: "The system as a poster — scale, chips, states, grid in one view.",
-    },
-    testing: {
-      lead: "The dashboard study was the first consumer.",
-    },
-    outcomes: [
-      {
-        metric: "Button styles",
-        value: "17 → 3",
-        note: "primary, secondary, ghost — every state specified",
-      },
-      {
-        metric: "Type scale",
-        value: "6 → 7 steps",
-        note: "from display to caption with defined roles",
-      },
-      {
-        metric: "Components",
-        value: "10 core",
-        note: "each with states, edge cases, and usage rules",
-      },
-    ],
-    outcomeDetail:
-      "Conceptual — success is adoption: tokens on new screens within two sprints.",
-    lessons: [
-      "Tokens before components — teams compose primitives.",
-      "A system is its 'when not to use this' documentation.",
-      "Let real work break the system, then document the fix.",
-    ],
-    proposedImplementation: [
-      {
-        heading: "Token naming & composition",
-        points: [
-          "Semantic tokens (--color-surface-raised, --space-gutter) composed from primitives, so a rebrand touches dozens of variables, not thousands of nodes.",
-          "This very site runs on that pattern — Tailwind v4 CSS variables mapped to semantic roles.",
-        ],
-      },
-      {
-        heading: "Component APIs & accessibility states",
-        points: [
-          "Each component ships a props contract (variant, size, state) with focus-visible, hover, active, disabled, and aria wiring documented beside the visual states.",
-          "Interactive states verified by keyboard walkthrough, not just screenshots.",
-        ],
-      },
-      {
-        heading: "Visual regression & docs",
-        points: [
-          "Snapshot tests per component variant would catch drift automatically; today the equivalent is the manual audit this study performed.",
-          "Docs generated alongside code so 'when not to use this' lives where engineers already look.",
-        ],
-      },
-    ],
-  },
 ];
 
 export const skillMarquee = [
@@ -789,6 +370,4 @@ export const skillMarquee = [
   "Git & GitHub",
   "Vercel",
   "Accessibility",
-  "Design tokens",
-  "Figma",
 ];

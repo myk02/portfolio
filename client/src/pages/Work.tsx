@@ -93,8 +93,8 @@ export default function Work() {
           Work
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-foreground/85 leading-snug">
-          Live production first, concept studies clearly labeled. Every card
-          states its status, role, stack, and challenge.
+          Live production web apps — every card states its status, role, stack,
+          and challenge.
         </p>
 
         {/* Live production */}
@@ -113,23 +113,25 @@ export default function Work() {
         </section>
 
         {/* Concept studies */}
-        <section aria-labelledby="concept-heading" className="mt-14">
-          <h2
-            id="concept-heading"
-            className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1"
-          >
-            Concept studies ({concepts.length})
-          </h2>
-          <p className="text-sm text-muted-foreground mb-5 max-w-2xl">
-            Research-led design work validated in testing or review — not
-            deployed products. Each includes a proposed implementation plan.
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {concepts.map(s => (
-              <WorkCard key={s.slug} study={s} />
-            ))}
-          </ul>
-        </section>
+        {concepts.length > 0 && (
+          <section aria-labelledby="concept-heading" className="mt-14">
+            <h2
+              id="concept-heading"
+              className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1"
+            >
+              Concept studies ({concepts.length})
+            </h2>
+            <p className="text-sm text-muted-foreground mb-5 max-w-2xl">
+              Research-led design work validated in testing or review — not
+              deployed products.
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {concepts.map(s => (
+                <WorkCard key={s.slug} study={s} />
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );
