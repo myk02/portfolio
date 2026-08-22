@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
 import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
-import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
 import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
 
 interface TileArtProps {
@@ -119,8 +118,7 @@ function TileBody({ study }: { study: CaseStudy }) {
       <p className="text-sm text-muted-foreground leading-snug">
         {study.tileLine}
       </p>
-      {/* Compact technical metadata: status · role · stack */}
-      <ProjectMetaLine study={study} compact />
+      {/* Vital proof numbers */}
       <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent/20 text-foreground border border-accent/40">
         {study.tileBadge}
       </span>
@@ -130,7 +128,7 @@ function TileBody({ study }: { study: CaseStudy }) {
           href={`/work/${study.slug}`}
           className="inline-flex items-center gap-1.5 text-foreground transition-transform duration-300 group-hover:translate-x-1 underline-offset-4 hover:underline"
         >
-          Read the case study
+          Case study
           <ArrowUpRight size={14} aria-hidden />
         </Link>
         {study.liveUrl && (
@@ -140,7 +138,7 @@ function TileBody({ study }: { study: CaseStudy }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
           >
-            Open {study.liveUrlLabel}
+            Live site
             <span aria-hidden>↗</span>
           </a>
         )}
@@ -172,7 +170,7 @@ function CardShell({
       <Link
         href={`/work/${study.slug}`}
         className="block relative aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-        aria-label={`${study.name} — read the case study`}
+        aria-label={`${study.name} — case study`}
       >
         <Artwork study={study} />
         <CardBadges study={study} />

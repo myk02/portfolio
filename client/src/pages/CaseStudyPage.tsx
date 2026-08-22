@@ -5,9 +5,8 @@ import { caseVisuals } from "@/data/caseVisuals";
 import NotFound from "@/pages/NotFound";
 import MoreWork from "@/components/MoreWork";
 import CaseStudyLayout from "@/components/caseStudy/CaseStudyLayout";
-import { getChapters, getGlance } from "@/components/caseStudy/caseChapters";
 
-/* Sequencing follows the canonical live-first order in the data file */
+/* Sequencing follows the canonical order in the data file */
 const ORDER = caseStudies.map(s => s.slug);
 
 export default function CaseStudyPage() {
@@ -30,23 +29,12 @@ export default function CaseStudyPage() {
     };
   }, [slug]);
 
-  const chapters = useMemo(
-    () => (study && visuals ? getChapters(study, visuals) : []),
-    [study, visuals],
-  );
-  const glance = useMemo(
-    () => (study && visuals ? getGlance(study, visuals) : []),
-    [study, visuals],
-  );
-
   if (!study || !visuals) return <NotFound />;
 
   return (
     <CaseStudyLayout
       study={study}
       visuals={visuals}
-      chapters={chapters}
-      glance={glance}
       prev={prev}
       next={next}
       moreWork={<MoreWork current={slug} />}

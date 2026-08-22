@@ -5,7 +5,6 @@ import SiteHead from "@/components/SiteHead";
 import StatusBadge, {
   toneFromKind,
 } from "@/components/engineering/StatusBadge";
-import ProjectMetaLine from "@/components/engineering/ProjectMetaLine";
 import type { CaseStudy } from "@/data/caseStudies";
 
 function WorkCard({ study }: { study: CaseStudy }) {
@@ -13,7 +12,7 @@ function WorkCard({ study }: { study: CaseStudy }) {
     <li className="group flex flex-col border border-border bg-card hover:border-foreground/40 transition-all duration-300 hover:-translate-y-1">
       <Link
         href={`/work/${study.slug}`}
-        aria-label={`${study.name} — read the case study`}
+        aria-label={`${study.name} — case study`}
         className="p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
       >
         <div className="flex items-start justify-between gap-3">
@@ -27,38 +26,29 @@ function WorkCard({ study }: { study: CaseStudy }) {
         <h2 className="mt-4 font-display font-bold text-foreground text-2xl tracking-tight group-hover:underline underline-offset-4 decoration-1">
           {study.name}
         </h2>
-        <p className="mt-3 text-sm text-muted-foreground leading-snug">
+        <p className="mt-2 text-sm text-muted-foreground leading-snug">
           {study.tagline}
         </p>
       </Link>
-      <div className="px-5 pb-5 mt-auto space-y-4">
-        <ProjectMetaLine study={study} compact />
+      <div className="px-5 pb-5 mt-auto">
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] font-medium pt-1">
           <Link
             href={`/work/${study.slug}`}
             className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
           >
-            Read the case study
+            Case study
             <span aria-hidden>→</span>
           </Link>
-          {study.liveUrl ? (
+          {study.liveUrl && (
             <a
               href={study.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
             >
-              Open live site
+              Live site
               <ArrowUpRight size={13} aria-hidden />
             </a>
-          ) : (
-            <Link
-              href={`/work/${study.slug}/prototype`}
-              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
-            >
-              Open interactive prototype
-              <span aria-hidden>→</span>
-            </Link>
           )}
         </div>
       </div>
@@ -92,19 +82,9 @@ export default function Work() {
         >
           Work
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-foreground/85 leading-snug">
-          Live production web apps — every card states its status, role, stack,
-          and challenge.
-        </p>
 
         {/* Live production */}
-        <section aria-labelledby="live-heading" className="mt-12">
-          <h2
-            id="live-heading"
-            className="text-xs font-mono uppercase tracking-widest text-accent mb-5"
-          >
-            Live production ({live.length})
-          </h2>
+        <section aria-labelledby="live-heading" className="mt-10">
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {live.map(s => (
               <WorkCard key={s.slug} study={s} />
@@ -117,14 +97,10 @@ export default function Work() {
           <section aria-labelledby="concept-heading" className="mt-14">
             <h2
               id="concept-heading"
-              className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1"
+              className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-5"
             >
               Concept studies ({concepts.length})
             </h2>
-            <p className="text-sm text-muted-foreground mb-5 max-w-2xl">
-              Research-led design work validated in testing or review — not
-              deployed products.
-            </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {concepts.map(s => (
                 <WorkCard key={s.slug} study={s} />

@@ -17,52 +17,44 @@ export interface EvidenceCard {
 }
 
 export const engineeringIntro =
-  "Proof over promises — every claim below is visible in this site's own code.";
+  "Proof over promises — every claim below lives in this site's own code.";
 
 export const evidenceCards: EvidenceCard[] = [
   {
     id: "frontend",
     title: "Frontend",
     points: [
-      "React 19 + TypeScript on every route",
-      "Semantic landmarks, focus states, responsive from 360px",
-      "One token set drives all components",
+      "React 19 + TypeScript, semantic & responsive",
+      "One design-token set drives every component",
     ],
   },
   {
     id: "apis-data",
     title: "APIs & data",
     points: [
-      "Convex functions power the contact form end-to-end",
-      "Paystack payments verified server-side before success",
-      "Typed calls with loading / error / success states",
+      "Convex functions power this site's forms",
+      "Paystack verified server-side before success",
     ],
   },
   {
     id: "testing-quality",
-    title: "Testing & quality",
+    title: "Testing",
     points: [
-      "Playwright e2e suite covers routes, CTAs, forms, 404",
-      "tsc typecheck gate; keyboard paths tested",
-      "Animations respect reduced motion",
+      "Playwright e2e: routes, CTAs, forms, 404",
+      "Typecheck gate; keyboard paths verified",
     ],
   },
   {
     id: "debugging-delivery",
     title: "Delivery",
-    points: [
-      "Git → reviewed PRs → auto-deploy on Vercel",
-      "Per-route titles, canonical URLs, OG tags maintained",
-      "WebP images, lazy loading, no layout shift",
-    ],
+    points: ["Git → PR → auto-deploy on Vercel", "WebP images, lazy loading, no CLS"],
   },
   {
     id: "accessibility-security",
-    title: "Accessibility & security",
+    title: "A11y & security",
     points: [
-      "WCAG AA contrast targets on shipped brand palettes",
-      "Labelled inputs, role=alert errors, aria-wired toggles",
-      "No secrets client-side; payments in hosted flow",
+      "WCAG AA contrast on shipped palettes",
+      "No secrets client-side; hosted payments",
     ],
   },
 ];
