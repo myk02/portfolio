@@ -56,11 +56,10 @@ export const devToolkit = [
 
 export const roleLine = "Web Developer · Frontend Engineer · Nairobi, Kenya";
 
-export const heroHeadline =
-  "I build reliable web products from design to deployment.";
+export const heroHeadline = "I ship.";
 
 export const heroSupporting =
-  "Responsive, accessible React interfaces — wired to real APIs and kept healthy with tests.";
+  "Reliable web products from design to deployment — responsive, accessible React interfaces wired to real APIs.";
 
 export const heroStats = [
   { label: "Live products", value: "2" },

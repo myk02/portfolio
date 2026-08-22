@@ -7,6 +7,7 @@ import {
   DesktopMockup,
 } from "@/components/artifacts/DeviceMockups";
 import { CountUp } from "@/components/CountUp";
+import BuyMeCoffee from "@/components/BuyMeCoffee";
 import { heroStats, roleLine, heroHeadline, heroSupporting } from "@/data/siteContent";
 import { skillMarquee } from "@/data/caseStudies";
 
@@ -142,6 +143,9 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                   <Download size={14} aria-hidden />
                   Download CV
                 </a>
+                <BuyMeCoffee
+                  buttonClassName="bg-accent text-accent-foreground border border-accent hover:opacity-90 font-semibold px-4 py-2.5"
+                />
                 <span className="inline-flex items-center gap-2 px-3 py-2 rounded-pill border border-border bg-card/60">
                   <span className="live-dot" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">

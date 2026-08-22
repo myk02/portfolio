@@ -8,15 +8,16 @@ test.describe("home page", () => {
     page.on("pageerror", e => errors.push(e.message));
 
     await page.goto("/");
-    await expect(
-      page.getByRole("heading", {
-        name: "I build reliable web products from design to deployment.",
-      })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "I ship." })).toBeVisible();
     await expect(
       page.getByText("Web Developer · Frontend Engineer · Nairobi, Kenya")
     ).toBeVisible();
 
+    // Buy-me-a-coffee visible in the hero with accent styling
+    const heroCoffee = page
+      .locator("#home")
+      .getByRole("button", { name: /buy me a coffee/i });
+    await expect(heroCoffee).toBeVisible();
     await expect(
       page.getByRole("button", { name: "View live work" })
     ).toBeVisible();
