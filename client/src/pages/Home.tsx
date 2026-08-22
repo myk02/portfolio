@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
 import BrandEdgeHero from "@/components/BrandEdgeHero";
 import BrandEdgeWork from "@/components/BrandEdgeWork";
-import EngineeringEvidence from "@/components/engineering/EvidenceSection";
 import BrandEdgeAbout from "@/components/BrandEdgeAbout";
 import BrandEdgeContact from "@/components/BrandEdgeContact";
 import BrandEdgeFooter from "@/components/BrandEdgeFooter";
@@ -49,7 +48,6 @@ export default function Home() {
       <main>
         <BrandEdgeHero onCtaClick={scrollToSection} />
         <BrandEdgeWork />
-        <EngineeringEvidence />
         <BrandEdgeAbout />
         <BrandEdgeContact />
       </main>

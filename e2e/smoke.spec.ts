@@ -13,11 +13,12 @@ test.describe("home page", () => {
       page.getByText("Web Developer · Frontend Engineer · Nairobi, Kenya")
     ).toBeVisible();
 
-    // Buy-me-a-coffee visible in the hero with accent styling
+    // Buy-me-a-coffee: visible in hero, accent-styled standout pill
     const heroCoffee = page
       .locator("#home")
       .getByRole("button", { name: /buy me a coffee/i });
     await expect(heroCoffee).toBeVisible();
+    await expect(heroCoffee).toHaveClass(/bg-accent/);
     await expect(
       page.getByRole("button", { name: "View live work" })
     ).toBeVisible();
@@ -52,19 +53,6 @@ test.describe("home page", () => {
     await expect(tileImages).toHaveCount(4);
   });
 
-  test("compact evidence section renders five proof cards", async ({ page }) => {
-    await page.goto("/");
-    const section = page.locator("#engineering");
-    for (const card of [
-      "Frontend",
-      "APIs & data",
-      "Testing",
-      "Delivery",
-      "A11y & security",
-    ]) {
-      await expect(section.getByRole("heading", { name: card })).toBeVisible();
-    }
-  });
 });
 
 test.describe("work page", () => {

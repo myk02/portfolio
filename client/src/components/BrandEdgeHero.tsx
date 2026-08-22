@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Download, FlaskConical, Diamond } from "lucide-react";
+import { ArrowDown, Download, Diamond } from "lucide-react";
 import {
   PhoneMockup,
   TabletMockup,
@@ -131,20 +131,12 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                   View live work
                   <ArrowDown size={14} />
                 </button>
-                <button
-                  type="button"
-                  onClick={() => onCtaClick("engineering")}
-                  className="btn btn-secondary"
-                >
-                  <FlaskConical size={14} aria-hidden />
-                  See engineering evidence
-                </button>
                 <a href="/CV.pdf" download className="btn btn-ghost">
                   <Download size={14} aria-hidden />
                   Download CV
                 </a>
                 <BuyMeCoffee
-                  buttonClassName="bg-accent text-accent-foreground border border-accent hover:opacity-90 font-semibold px-4 py-2.5"
+                  buttonClassName="rounded-pill px-5 py-3 font-display font-semibold text-sm tracking-wide bg-accent text-accent-foreground border-2 border-foreground shadow-[4px_4px_0_0_var(--foreground)] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-0 active:shadow-[3px_3px_0_0_var(--foreground)] transition-all"
                 />
                 <span className="inline-flex items-center gap-2 px-3 py-2 rounded-pill border border-border bg-card/60">
                   <span className="live-dot" />
