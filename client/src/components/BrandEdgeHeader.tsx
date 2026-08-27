@@ -82,6 +82,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
 
   const navLinks = [
     { id: "work", label: "Work" },
+    { id: "roles", label: "Experience" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];

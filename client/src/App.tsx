@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { FontSizeProvider } from "./contexts/FontSizeContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { registerNavigator } from "./lib/navigation";
 import Home from "./pages/Home";
@@ -53,16 +52,14 @@ function App() {
       {/* Respect the user's OS reduced-motion preference across all Framer animations */}
       <MotionConfig reducedMotion="user">
         <ThemeProvider defaultTheme="dark" switchable>
-          <FontSizeProvider>
-            <LightboxProvider>
-              <TooltipProvider>
-                <NavigateBridge />
-                <ScrollToTop />
-                <Toaster />
-                <Router />
-              </TooltipProvider>
-            </LightboxProvider>
-          </FontSizeProvider>
+          <LightboxProvider>
+            <TooltipProvider>
+              <NavigateBridge />
+              <ScrollToTop />
+              <Toaster />
+              <Router />
+            </TooltipProvider>
+          </LightboxProvider>
         </ThemeProvider>
       </MotionConfig>
     </ErrorBoundary>

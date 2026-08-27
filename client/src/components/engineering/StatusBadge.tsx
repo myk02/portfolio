@@ -36,7 +36,8 @@ export default function StatusBadge({
           ? "bg-foreground text-background"
           : tone === "concept"
             ? "bg-accent/20 text-foreground border border-accent/50"
-            : "bg-background/85 backdrop-blur border border-border text-foreground",        className,
+            : "bg-background/85 backdrop-blur border border-border text-foreground",
+        className,
       )}
     >
       {tone === "live" && (

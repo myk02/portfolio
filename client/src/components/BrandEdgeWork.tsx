@@ -216,13 +216,24 @@ export default function BrandEdgeWork() {
               <span className="section-label-line" />
               Selected work
             </span>
-            <h2 className="heading-section text-foreground mb-3">
-              Shipped products
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-md">
-              {live.length} live production apps — every one states its stack
-              and challenge.
-            </p>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="heading-section text-foreground mb-3">
+                  Shipped products
+                </h2>
+                <p className="text-muted-foreground text-sm max-w-md">
+                  {live.length} live production apps — every one states its stack,
+                  role, and measurable outcome.
+                </p>
+              </div>
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0"
+              >
+                View all work
+                <ArrowUpRight size={14} aria-hidden />
+              </Link>
+            </div>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">

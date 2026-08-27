@@ -15,5 +15,5 @@ export default defineSchema({
     amount: v.number(),
     currency: v.string(),
     createdAt: v.number(),
-  }),
+  }).index("by_reference", ["reference"]),
 });

@@ -10,6 +10,23 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const STORAGE_KEY = "theme";
+
+/** Mirrors the inline boot script in index.html — must stay in sync. */
+export function getInitialTheme(fallback: Theme = "dark"): Theme {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark") return stored;
+  } catch {
+    // localStorage may be unavailable (private mode, etc.)
+  }
+  if (window.matchMedia?.("(prefers-color-scheme: light)").matches) {
+    return "light";
+  }
+  return fallback;
+}
+
 interface ThemeProviderProps {
   children: React.ReactNode;
   defaultTheme?: Theme;
@@ -18,23 +35,27 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "light",
+  defaultTheme = "dark",
   switchable = false,
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [theme, setTheme] = useState<Theme>(() => getInitialTheme(defaultTheme));
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    root.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
   const toggleTheme = switchable
     ? () => {
-        setTheme(prev => (prev === "light" ? "dark" : "light"));
+        setTheme(prev => {
+          const next: Theme = prev === "light" ? "dark" : "light";
+          try {
+            window.localStorage.setItem(STORAGE_KEY, next);
+          } catch {
+            // ignore
+          }
+          return next;
+        });
       }
     : undefined;
 

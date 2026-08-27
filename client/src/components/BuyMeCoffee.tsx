@@ -71,9 +71,17 @@ export default function BuyMeCoffee({
     setStatus("verifying");
     try {
       const result = await verifyPayment({ reference: transaction.reference });
-      toast.success(result?.ok ? "Asante! Coffee on the way." : "Payment received — thank you!");
+      if (result?.ok) {
+        toast.success("Asante! Coffee on the way.");
+      } else {
+        toast.warning(
+          "Payment completed, but automatic confirmation didn't go through. It will be reconciled shortly — thank you!"
+        );
+      }
     } catch {
-      toast.success("Payment received — thank you!");
+      toast.warning(
+        "Payment completed — confirmation is pending and will be reconciled automatically. Thank you!"
+      );
     }
     close();
   };

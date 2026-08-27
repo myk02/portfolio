@@ -9,6 +9,7 @@
  */
 
 import type * as donations from "../donations.js";
+import type * as http from "../http.js";
 import type * as serviceRequests from "../serviceRequests.js";
 
 import type {
@@ -19,6 +20,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   donations: typeof donations;
+  http: typeof http;
   serviceRequests: typeof serviceRequests;
 }>;
 

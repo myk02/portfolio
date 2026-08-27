@@ -150,7 +150,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5, ease: EASE }}
-                className="grid grid-cols-2 gap-x-4 gap-y-5 mt-10 pt-8 border-t border-border md:grid-cols-4"
+                className="grid grid-cols-2 gap-x-4 gap-y-5 mt-10 pt-8 border-t border-border sm:grid-cols-3"
               >
                 {heroStats.map(stat => (
                   <div key={stat.label} className="min-w-0">

@@ -1,4 +1,4 @@
-/** Single source of truth for contact details, canonical URLs and share text. */
+/** Single source of truth for contact details and canonical URLs. */
 
 export const SITE_URL = "https://mikeships.vercel.app";
 
@@ -20,12 +20,4 @@ export const CONTACT = {
 export function absoluteUrl(path: string): string {
   if (/^https?:\/\//i.test(path)) return path;
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
-}
-
-export function linkedInShareUrl(url: string): string {
-  return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-}
-
-export function whatsappShareUrl(text: string, url: string): string {
-  return `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
 }

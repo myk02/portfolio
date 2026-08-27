@@ -6,6 +6,12 @@ import {
   contactItems,
 } from "@/data/siteContent";
 
+const TIMELINE = [
+  { year: "2024", event: "Shipped KenyaTrace — live tourism explorer, 6 → 3 tap route planning" },
+  { year: "2025", event: "Shipped GiGi Energy — e-commerce checkout redesign, WCAG AA pass" },
+  { year: "Now", event: "Building accessible, test-covered React products in Nairobi · remote" },
+];
+
 export default function BrandEdgeAbout() {
   return (
     <section
@@ -15,65 +21,35 @@ export default function BrandEdgeAbout() {
       <div className="container">
         <div className="max-w-5xl mx-auto">
           <Reveal>
-            <h2 className="heading-section text-foreground mb-2">About</h2>
+            <span className="section-label">
+              <span className="section-label-line" />
+              About
+            </span>
+            <h2 className="heading-section text-foreground mb-2">
+              Mike Waitindi
+            </h2>
           </Reveal>
 
-          <div className="flex flex-col sm:flex-row items-start gap-6 mt-8">
-            <Reveal delay={1} scale>
-              <div
-                className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-soft overflow-hidden border border-foreground/25 bg-[#f4efe7]"
-                role="img"
-                aria-label="Portrait of Mike Waitindi"
-              >
-                <img
-                  src="/profile.webp"
-                  alt="Portrait of Mike Waitindi"
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </Reveal>
-            <div className="pt-1 space-y-3 max-w-2xl">
-              <Reveal delay={2}>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl">
-                  {aboutParagraphs[0]}
-                </p>
-              </Reveal>
-
-              {/* Core skills — one compact row */}
-              <Reveal delay={3}>
-                <ul className="flex flex-wrap gap-1.5 pt-1" aria-label="Core skills">
-                  {coreSkills.map(skill => (
-                    <li key={skill} className="tag-pill text-xs">
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal delay={3}>
-                <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[13px]">
-                  {contactItems.map(item =>
-                    item.href ? (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <span key={item.label} className="text-muted-foreground">
-                        {item.value}
-                      </span>
-                    )
-                  )}
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 mt-8">
+            {/* portrait + social */}
+            <div className="flex flex-row lg:flex-col items-start gap-5">
+              <Reveal delay={1} scale>
+                <div
+                  className="relative w-28 h-28 sm:w-36 sm:h-36 overflow-hidden border border-foreground/25 bg-[#f4efe7] shrink-0"
+                  role="img"
+                  aria-label="Portrait of Mike Waitindi"
+                >
+                  <img
+                    src="/profile.webp"
+                    alt="Portrait of Mike Waitindi"
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </Reveal>
-
               <Reveal delay={3}>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {socialLinks.map(s => (
+                  {socialLinks.map((s) => (
                     <a
                       key={s.alt}
                       href={s.href}
@@ -91,6 +67,66 @@ export default function BrandEdgeAbout() {
                       )}
                     </a>
                   ))}
+                </div>
+              </Reveal>
+            </div>
+
+            {/* main content */}
+            <div className="space-y-5 max-w-2xl">
+              {/* paragraphs */}
+              {aboutParagraphs.map((para, i) => (
+                <Reveal key={i} delay={2}>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    {para}
+                  </p>
+                </Reveal>
+              ))}
+
+              {/* timeline */}
+              <Reveal delay={2}>
+                <div className="mt-2 border-l-2 border-accent pl-4 space-y-3">
+                  {TIMELINE.map((item) => (
+                    <div key={item.year} className="flex items-start gap-3">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-accent shrink-0 mt-0.5 w-8">
+                        {item.year}
+                      </span>
+                      <p className="text-[12px] text-muted-foreground leading-snug">
+                        {item.event}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+
+              {/* skills */}
+              <Reveal delay={3}>
+                <ul className="flex flex-wrap gap-1.5 pt-1" aria-label="Core skills">
+                  {coreSkills.map((skill) => (
+                    <li key={skill} className="tag-pill text-xs">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              {/* contact details */}
+              <Reveal delay={3}>
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[13px]">
+                  {contactItems.map((item) =>
+                    item.href ? (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        className="text-muted-foreground hover:text-foreground underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span key={item.label} className="text-muted-foreground">
+                        {item.value}
+                      </span>
+                    )
+                  )}
                 </div>
               </Reveal>
             </div>

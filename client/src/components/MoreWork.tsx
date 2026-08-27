@@ -4,6 +4,10 @@ import { caseStudies } from "@/data/caseStudies";
 function Thumb({ slug }: { slug: string }) {
   const study = caseStudies.find((s) => s.slug === slug);
   if (!study) return null;
+  const toVariant = (width: number) =>
+    study.image?.endsWith(".png")
+      ? `${study.image.slice(0, -4)}-${width}.webp`
+      : study.image;
   return (
     <Link
       href={`/work/${slug}`}
@@ -12,8 +16,8 @@ function Thumb({ slug }: { slug: string }) {
       <div className="border border-border bg-card p-3 overflow-hidden">
         {study.image ? (
           <img
-            src={study.image.replace(".png", "-640.webp")}
-            srcSet={`${study.image.replace(".png", "-640.webp")} 640w, ${study.image.replace(".png", "-1200.webp")} 1200w`}
+            src={toVariant(640)}
+            srcSet={`${toVariant(640)} 640w, ${toVariant(1200)} 1200w`}
             sizes="240px"
             width={1200}
             height={750}

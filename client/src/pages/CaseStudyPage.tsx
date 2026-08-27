@@ -18,14 +18,16 @@ export default function CaseStudyPage() {
 
   const { prev, next } = useMemo(() => {
     const i = ORDER.indexOf(slug);
-    if (i === -1) return { prev: { slug, name: slug }, next: { slug, name: slug } };
-    const p = ORDER[(i - 1 + ORDER.length) % ORDER.length];
-    const n = ORDER[(i + 1) % ORDER.length];
-    const ps = caseStudies.find((s) => s.slug === p)!;
-    const ns = caseStudies.find((s) => s.slug === n)!;
+    if (i === -1) return { prev: null, next: null };
+    // With only two studies, prev and next would both point at the same
+    // study — render a single "next" link instead.
+    const p = i > 0 ? ORDER[i - 1] : null;
+    const n = i < ORDER.length - 1 ? ORDER[i + 1] : null;
+    const ps = p ? caseStudies.find((s) => s.slug === p) : undefined;
+    const ns = n ? caseStudies.find((s) => s.slug === n) : undefined;
     return {
-      prev: { slug: p, name: ps.name },
-      next: { slug: n, name: ns.name },
+      prev: ps ? { slug: p!, name: ps.name } : null,
+      next: ns ? { slug: n!, name: ns.name } : null,
     };
   }, [slug]);
 

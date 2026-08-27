@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { applicationLine } from "@/data/siteContent";
+import { CONTACT } from "@/lib/site";
 
 const inputClass =
   "w-full bg-card border border-border px-4 min-h-[44px] text-[16px] text-foreground placeholder:text-foreground/60 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40";
@@ -10,6 +11,7 @@ export default function BrandEdgeContact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -39,6 +41,7 @@ export default function BrandEdgeContact() {
         email: trimmedEmail,
         projectType: "General Inquiry",
         message: trimmedMessage,
+        website: honeypot,
       });
       setSubmitted(true);
     } catch {
@@ -95,6 +98,19 @@ export default function BrandEdgeContact() {
           </div>
 
           <form onSubmit={handleSubmit} noValidate className="space-y-6 border border-border bg-card p-6 sm:p-8">
+            {/* Honeypot field — hidden from humans, catches bots */}
+            <div className="absolute -left-[9999px] top-auto" aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -174,14 +190,14 @@ export default function BrandEdgeContact() {
             <p className="text-sm text-muted-foreground">
               Prefer email?{" "}
               <a
-                href="mailto:mikegary201@gmail.com"
+                href={CONTACT.emailHref}
                 className="text-foreground font-medium hover:underline underline-offset-4"
               >
-                mikegary201@gmail.com
+                {CONTACT.email}
               </a>
             </p>
             <a
-              href="mailto:mikegary201@gmail.com?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion"
+              href={`${CONTACT.emailHref}?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion`}
               className="btn btn-secondary text-sm"
             >
               Book a 15-min chat

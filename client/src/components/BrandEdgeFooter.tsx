@@ -1,5 +1,6 @@
 import { Sun, Moon, Download, Mail, Linkedin } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { CONTACT } from "@/lib/site";
 import BuyMeCoffee from "./BuyMeCoffee";
 
 interface BrandEdgeFooterProps {
@@ -50,6 +51,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               <nav className="flex flex-col gap-2.5">
                 {[
                   { id: "work", label: "Work" },
+                  { id: "roles", label: "Experience" },
                   { id: "about", label: "About" },
                   { id: "contact", label: "Contact" },
                 ].map((link) => (
@@ -73,14 +75,14 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               </nav>
               <div className="space-y-2 mt-6">
                 <a
-                  href="mailto:mikegary201@gmail.com"
+                  href={CONTACT.emailHref}
                   className="flex items-center gap-2 text-sm text-primary-foreground/75 hover:text-accent transition-colors"
                 >
                   <Mail size={14} />
-                  mikegary201@gmail.com
+                  {CONTACT.email}
                 </a>
                 <a
-                  href="https://linkedin.com/in/mike-waitindi-654bb2344"
+                  href={CONTACT.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm text-primary-foreground/75 hover:text-accent transition-colors"
@@ -89,7 +91,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                   LinkedIn
                 </a>
                 <a
-                  href="https://wa.me/254792618156"
+                  href={CONTACT.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-primary-foreground/75 hover:text-accent transition-colors"
