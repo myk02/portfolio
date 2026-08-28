@@ -214,7 +214,7 @@ export default function BrandEdgeWork() {
                   Shipped <span className="relative inline-block"><span className="relative z-10 text-accent-foreground px-1">products</span><span aria-hidden className="absolute left-0 right-0 bottom-[0.15em] h-[0.55em] bg-accent -z-0" /></span>
                 </h2>
                 <p className="text-muted-foreground text-sm max-w-[520px] mt-3 leading-relaxed">
-                  Two live apps — each with stack, role, and the decision that moved a metric.
+                  Live apps — each with stack, role, and the decision that moved the work forward.
                   No concept decks, no placeholders.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -250,8 +250,8 @@ export default function BrandEdgeWork() {
 
           <Reveal delay={2} className="mt-8 border border-dashed border-border bg-card/60 px-4 py-3 flex flex-wrap items-center gap-3 text-xs">
             <span className="w-2 h-2 bg-accent shrink-0" />
-            <span className="font-mono uppercase tracking-widest text-muted-foreground">Next:</span>
-            <span className="text-foreground">LegalFlow — SaaS slot reserved. Visuals + case study publish once deployment is verified.</span>
+            <span className="font-mono uppercase tracking-widest text-muted-foreground">Live:</span>
+            <span className="text-foreground">LegalFlow joins KenyaTrace and GiGi — three shipped products, one portfolio.</span>
           </Reveal>
         </div>
       </div>

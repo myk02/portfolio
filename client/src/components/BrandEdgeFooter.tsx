@@ -108,6 +108,13 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
                   <span className="text-xs text-[#f2ede6]">GiGi Energy</span>
                   <ArrowUpRight size={12} className="text-[#f2ede6]/40" />
                 </Link>
+                <Link
+                  href="/work/legalflow"
+                  className="flex items-center justify-between gap-2 border border-[#f2ede6]/10 bg-[#f2ede6]/5 px-3 py-2 hover:border-[#f2ede6]/20 hover:bg-[#f2ede6]/10 transition-colors"
+                >
+                  <span className="text-xs text-[#f2ede6]">LegalFlow</span>
+                  <ArrowUpRight size={12} className="text-[#f2ede6]/40" />
+                </Link>
               </div>
             </div>
 

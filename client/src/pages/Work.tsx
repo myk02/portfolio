@@ -16,11 +16,13 @@ import { useReveal } from "@/hooks/useReveal";
 const COVER: Record<string, string> = {
   kenyatrace: "/shots/kenyatrace/home-cards-desktop.jpg",
   "gigi-energy": "/shots/gigi-energy/home-products-desktop.jpg",
+  legalflow: "/shots/legalflow/home-desktop.jpg",
 };
 
 const BG: Record<string, string> = {
   kenyatrace: "#efe9dd",
   "gigi-energy": "#141310",
+  legalflow: "#141310",
 };
 
 function VisualCard({ study, featured }: { study: CaseStudy; featured?: boolean }) {

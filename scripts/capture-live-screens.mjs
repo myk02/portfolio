@@ -81,6 +81,25 @@ const TARGETS = [
       },
     ],
   },
+  {
+    slug: "legalflow",
+    base: "https://law-ten-iota.vercel.app",
+    screens: [
+      { name: "home", path: "/", viewports: ["mobile", "tablet", "desktop"] },
+      {
+        name: "home-scroll",
+        path: "/",
+        scroll: 900,
+        viewports: ["mobile", "tablet", "desktop"],
+      },
+      {
+        name: "home-features",
+        path: "/",
+        scroll: 1900,
+        viewports: ["mobile", "tablet", "desktop"],
+      },
+    ],
+  },
 ];
 
 const browser = await chromium.launch({ headless: true });

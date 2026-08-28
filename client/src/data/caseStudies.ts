@@ -70,7 +70,7 @@ export interface CaseStudy {
   engineeringNotes?: EngineeringNotes;
 }
 
-/* LegalFlow slot — add when /shots/legalflow/ exists */
+/* LegalFlow — live SaaS, visuals captured from https://law-ten-iota.vercel.app */
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -223,6 +223,84 @@ export const caseStudies: CaseStudy[] = [
       stateForms: ["Inline validation; cart persists."],
       dataIntegration: ["GA4 before/after; M-Pesa first."],
       qualityChecks: ["AA audit; 5-user test."],
+    },
+  },
+  {
+    slug: "legalflow",
+    name: "LegalFlow",
+    year: "2025",
+    kind: "LIVE PRODUCT",
+    tagline: "Practice management for Kenyan law firms — matters, documents, billing, payments in one place.",
+    summary: "Mobile-first legal workspace — intake to billing in one app.",
+    methods: ["Product design", "UX", "Frontend", "PWA"],
+    role: "Product · UX · Build",
+    timeline: "7 weeks",
+    tools: ["Figma", "React"],
+    status: "Live · 2025",
+    liveUrl: "https://law-ten-iota.vercel.app",
+    liveUrlLabel: "law-ten-iota.vercel.app",
+    stack: ["React", "Vercel", "PWA"],
+    challenge: "Firm work scattered across spreadsheets, email, and WhatsApp.",
+    scope: "Research → shipped SaaS",
+    constraints: ["Kenyan small firms", "Mobile-first field use", "Solo + team workspaces"],
+    outcomeLine: "One workspace — intake → billing → payments.",
+    art: "legalflow",
+    image: "/thumbnails/legalflow.png",
+    tileLine: "Matters, documents, billing — one mobile-first workspace.",
+    tileBadge: "Live · one workspace",
+    heroCaption: "Live product — law-ten-iota.vercel.app",
+    problem: {
+      lead: "Client work lived in spreadsheets, email, and WhatsApp — nothing connected.",
+      paragraphs: [
+        "Solo lawyers and small firms juggle intake, matter status, documents, billing, and client messages across disconnected tools. Context gets lost and deadlines slip.",
+      ],
+    },
+    research: {
+      lead: "Solo + small-firm interviews; mapped the intake→billing loop.",
+      bullets: [
+        { label: "Users", text: "Solo + small/mid Kenyan firms." },
+        { label: "Pain", text: "Disconnected tools, lost context." },
+        { label: "Must", text: "Work on the phone, in the field." },
+      ],
+    },
+    designThinking: {
+      lead: "One workspace, not another inbox.",
+      bullets: [
+        { label: "Kept", text: "Unified matter + client record." },
+        { label: "Kept", text: "Billing tied to matter status." },
+        { label: "Cut", text: "Separate doc/email silos." },
+      ],
+    },
+    ia: {
+      lead: "Workspace → matters → tasks → billing.",
+      bullets: [
+        { label: "Capture", text: "Intake becomes a matter." },
+        { label: "Track", text: "Tasks + deadlines per matter." },
+        { label: "Bill", text: "Invoices + M-Pesa payments." },
+      ],
+    },
+    design: {
+      lead: "Mobile-first, calm, dense where it counts.",
+    },
+    testing: {
+      lead: "Walkthroughs with 3 firms.",
+    },
+    outcomes: [
+      { metric: "Surface", value: "Intake → billing", note: "one workspace" },
+      { metric: "Reach", value: "Mobile-first", note: "field + office" },
+      { metric: "Team", value: "Shared", note: "firm-level visibility" },
+    ],
+    outcomeDetail: "Shipped and in use.",
+    lessons: [
+      "One record beats five tools.",
+      "Billing must follow matter status.",
+      "Mobile-first is how firms actually work.",
+    ],
+    engineeringNotes: {
+      architecture: ["Unified matter model; client record as the spine."],
+      stateForms: ["Intake → matter conversion keeps context."],
+      dataIntegration: ["Invoicing + M-Pesa payments linked to matters."],
+      qualityChecks: ["Verified at 390px; PWA installable."],
     },
   },
 ];
