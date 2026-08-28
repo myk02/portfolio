@@ -8,6 +8,7 @@ interface SiteHeadProps {
   canonical?: string;
   image?: string;
   type?: "website" | "article";
+  noindex?: boolean;
 }
 
 function upsertMeta(selector: string, attr: "name" | "property", key: string, content: string) {
@@ -40,6 +41,7 @@ export default function SiteHead({
   canonical = "/",
   image = "/og-cover.png",
   type = "website",
+  noindex = false,
 }: SiteHeadProps) {
   useEffect(() => {
     const url = absoluteUrl(canonical);
@@ -58,7 +60,8 @@ export default function SiteHead({
     upsertMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
     upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", img);
     upsertLink("canonical", url);
-  }, [title, description, canonical, image, type]);
+    upsertMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex, nofollow" : "index, follow");
+  }, [title, description, canonical, image, type, noindex]);
 
   return null;
 }

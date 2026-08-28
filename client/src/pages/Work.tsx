@@ -161,18 +161,28 @@ export default function Work() {
         <div className="mt-8 mb-12">
           <span className="section-label mb-2">
             <span className="section-label-line" />
-            Portfolio
+            Portfolio · 0{live.length} shipped
           </span>
           <h1
-            className="font-display font-black text-foreground tracking-tight leading-[0.95] mb-3"
-            style={{ fontSize: "clamp(2.4rem, 7vw, 4.6rem)" }}
+            className="font-display font-black text-foreground tracking-tight leading-[0.95] mb-4"
+            style={{ fontSize: "clamp(2.6rem, 7vw, 4.8rem)", letterSpacing: "-0.03em" }}
           >
-            Work
+            Work<span className="text-accent">.</span>
           </h1>
-          <p className="text-muted-foreground text-sm max-w-md">
-            {live.length} live production apps — each with a case study covering
-            the problem, research, design decisions, and measurable outcomes.
-          </p>
+          <div className="flex flex-wrap gap-3 items-start">
+            <p className="text-muted-foreground text-sm max-w-md leading-relaxed">
+              Every project is live, linkable, and measurable — stack, role, and the
+              decision that moved a number. No placeholders.
+            </p>
+            <div className="flex flex-wrap gap-2 ml-auto">
+              <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1.5 border border-border bg-card text-muted-foreground">
+                React 19 · TypeScript · Tailwind v4
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1.5 bg-accent text-accent-foreground border border-foreground/10">
+                2 live · 0 concept
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Live production — visual grid */}

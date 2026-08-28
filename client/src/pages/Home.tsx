@@ -23,9 +23,8 @@ export default function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
-  /* Always start at hero on fresh load; only scroll to section when navigating from another page */
+  /* Handle cross-page section navigation (e.g., footer Work → home#work) */
   useEffect(() => {
-    window.scrollTo(0, 0);
     const pending = consumePendingSection();
     if (pending && pending !== "home") {
       const t = window.setTimeout(() => {
@@ -42,7 +41,6 @@ export default function Home() {
         description={DEFAULT_HEAD.description}
         canonical="/"
       />
-      <div className="noise-overlay" />
 
       <BrandEdgeHeader onNavClick={scrollToSection} />
 

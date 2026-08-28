@@ -147,47 +147,48 @@ export default function CaseStudyLayout({
       <BrandEdgeHeader onNavClick={scrollToSection} />
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
-      <header className="border-b border-border pt-16">
+      <header className="border-b border-border pt-16 relative">
+        <div className="absolute top-16 left-0 right-0 h-[3px] bg-accent" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-8 sm:pt-14 sm:pb-10">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors border border-transparent hover:border-border px-2 py-1 -ml-2"
           >
             <ArrowLeft size={13} aria-hidden /> Work
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-2.5">
             <StatusBadge tone={toneFromKind(study.kind)} />
-            <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-              {study.year}
+            <span className="px-2 py-1 text-[11px] font-mono uppercase tracking-widest bg-secondary border border-border text-muted-foreground">
+              {study.year} · {study.timeline}
             </span>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-              {study.timeline}
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22c55e] border border-[#22c55e]/20 bg-[#22c55e]/10 px-2 py-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" /> Live product
             </span>
           </div>
 
           <h1
             className="mt-4 font-display font-black text-foreground tracking-tight leading-[0.95]"
-            style={{ fontSize: "clamp(2.4rem, 7vw, 4.6rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 7vw, 4.6rem)", letterSpacing: "-0.03em" }}
           >
-            {study.name}
+            {study.name}<span className="text-accent">.</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-lg sm:text-xl text-foreground/85 leading-snug">
+          <p className="mt-3 max-w-2xl text-[17px] sm:text-[19px] text-foreground/80 leading-snug font-medium">
             {study.tagline}
           </p>
 
-          {/* THREE FACTS */}
-          <dl className="mt-7 grid grid-cols-1 sm:grid-cols-3 border-y border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
+          {/* THREE FACTS — as cards */}
+          <dl className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { label: "Role", value: study.role },
               { label: "Stack", value: study.stack.join(" · ") },
               { label: "Outcome", value: study.outcomeLine },
             ].map((f) => (
-              <div key={f.label} className="py-3 sm:px-5 first:sm:pl-0 last:sm:pr-0">
-                <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              <div key={f.label} className="border border-border bg-card p-4">
+                <dt className="text-[10px] font-mono uppercase tracking-widest text-accent">
                   {f.label}
                 </dt>
-                <dd className="text-[13px] text-foreground leading-snug mt-1">
+                <dd className="text-[13px] text-foreground leading-snug mt-2 font-medium">
                   {f.value}
                 </dd>
               </div>
@@ -200,10 +201,13 @@ export default function CaseStudyLayout({
               href={visuals.prototype.href}
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2.5 text-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-3 text-sm font-semibold hover:bg-accent hover:text-accent-foreground border border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             >
               <ExternalLink size={15} aria-hidden /> {visuals.prototype.label}
             </a>
+            <span className="inline-flex items-center text-xs font-mono uppercase tracking-widest text-muted-foreground border border-border bg-card px-3 py-2">
+              No paywall · Open in new tab
+            </span>
           </div>
 
           {/* HERO DEVICE SHOWCASE */}

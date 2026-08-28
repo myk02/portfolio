@@ -65,6 +65,10 @@ export default function BuyMeCoffee({
     setOpen(false);
     setError("");
     setStatus("idle");
+    // Clear PII on close — prevents next visitor seeing previous email/amount
+    setEmail("");
+    setCustom("");
+    setPreset(null);
   };
 
   const handleSuccess = async (transaction: PaystackTransaction) => {

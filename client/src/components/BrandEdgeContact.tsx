@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Mail, MessageCircle, Clock, ShieldCheck } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { applicationLine } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
+import { Reveal } from "@/components/Reveal";
 
 const inputClass =
-  "w-full bg-card border border-border px-4 min-h-[44px] text-[16px] text-foreground placeholder:text-foreground/60 outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/40";
+  "w-full bg-card border border-border px-4 min-h-[44px] text-[15px] text-foreground placeholder:text-foreground/50 outline-none transition-colors focus:border-foreground focus:bg-secondary/20";
+const labelClass = "block text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-2";
+
 export default function BrandEdgeContact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -55,17 +58,17 @@ export default function BrandEdgeContact() {
     return (
       <section id="contact" className="section-pad bg-secondary border-t border-border">
         <div className="container">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="border border-border bg-card p-8 sm:p-10 text-center">
               <div className="w-14 h-14 mx-auto flex items-center justify-center bg-accent text-accent-foreground mb-5">
                 <CheckCircle2 size={28} />
               </div>
-              <h2 className="heading-section text-foreground mb-3">Message received</h2>
-              <p className="font-display font-semibold text-xl text-foreground">
+              <h2 className="heading-section text-foreground mb-3" style={{ fontSize: "clamp(1.6rem, 4vw, 2rem)" }}>Message received</h2>
+              <p className="font-display font-semibold text-lg text-foreground">
                 Asante! Thank you! Merci! Grazie!
               </p>
-              <p className="text-muted-foreground text-base mt-2">
-                Thanks, {name.split(" ")[0]} — I reply within 24 hours.
+              <p className="text-muted-foreground text-sm mt-2">
+                Thanks, {name.split(" ")[0]} — I reply within 24 hours (Mon–Sat, EAT).
               </p>
               <button
                 type="button"
@@ -87,121 +90,198 @@ export default function BrandEdgeContact() {
   }
 
   return (
-    <section id="contact" className="section-pad bg-secondary border-t border-border">
+    <section id="contact" className="section-pad bg-secondary border-t border-border relative">
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" aria-hidden />
       <div className="container">
-        <div className="max-w-2xl mx-auto">
-          <div className="mb-8">
-            <h2 className="heading-section text-foreground mb-2">Work with me</h2>
-            <p className="text-muted-foreground text-sm max-w-lg">
-              {applicationLine} Projects, full-time roles, or a working session.
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <span className="section-label">
+              <span className="section-label-line" />
+              Contact
+            </span>
+          </Reveal>
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-6 border border-border bg-card p-6 sm:p-8">
-            {/* Honeypot field — hidden from humans, catches bots */}
-            <div className="absolute -left-[9999px] top-auto" aria-hidden="true">
-              <label htmlFor="website">Website</label>
-              <input
-                type="text"
-                id="website"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                value={honeypot}
-                onChange={(e) => setHoneypot(e.target.value)}
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.15fr] gap-8 lg:gap-10 mt-8 items-start">
+            {/* left — info */}
+            <div className="space-y-6">
+              <Reveal>
+                <h2 className="heading-section text-foreground" style={{ letterSpacing: "-0.03em" }}>
+                  Work with me
+                </h2>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-md mt-3">
+                  {applicationLine}
+                </p>
+              </Reveal>
+
+              <Reveal delay={1}>
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
+                  {[
+                    { icon: Clock, label: "Response", value: "< 24 hours" },
+                    { icon: ShieldCheck, label: "Timezone", value: "EAT · UTC+3" },
+                    { icon: MessageCircle, label: "Prefers", value: "Email · WhatsApp" },
+                  ].map((item) => (
+                    <div key={item.label} className="border border-border bg-card p-3 flex items-center gap-3">
+                      <item.icon size={16} className="text-accent shrink-0" />
+                      <div>
+                        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground leading-none">{item.label}</p>
+                        <p className="text-xs font-medium text-foreground mt-1 leading-none">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+
+              <Reveal delay={2}>
+                <div className="border border-border bg-card p-5 space-y-4">
+                  <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">Direct</p>
+                  <div className="space-y-3">
+                    <a
+                      href={CONTACT.emailHref}
+                      className="flex items-center gap-3 text-sm text-foreground hover:text-accent transition-colors group"
+                    >
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
+                        <Mail size={14} />
+                      </span>
+                      {CONTACT.email}
+                    </a>
+                    <a
+                      href={CONTACT.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-sm text-foreground hover:text-accent transition-colors group"
+                    >
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
+                        <MessageCircle size={14} />
+                      </span>
+                      WhatsApp · {CONTACT.phone}
+                    </a>
+                    <a
+                      href={CONTACT.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary">
+                        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+                      </span>
+                      linkedin.com/in/mikeships
+                    </a>
+                  </div>
+                  <div className="pt-4 border-t border-border flex flex-col gap-2">
+                    <a
+                      href={`${CONTACT.emailHref}?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion`}
+                      className="btn btn-primary w-full justify-center"
+                    >
+                      Book a 15-min chat
+                    </a>
+                    <p className="text-[11px] text-muted-foreground text-center">
+                      Or email directly — no form required.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Name <span aria-hidden>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  autoComplete="name"
-                  aria-required="true"
-                  aria-invalid={Boolean(error && !name.trim())}
-                  aria-describedby={error ? "contact-form-error" : undefined}
-                  className={inputClass}
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email <span aria-hidden>*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  aria-required="true"
-                  aria-invalid={Boolean(error && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))}
-                  aria-describedby={error ? "contact-form-error" : undefined}
-                  className={inputClass}
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                Message <span aria-hidden>*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={4}
-                aria-required="true"
-                aria-invalid={Boolean(error && !message.trim())}
-                aria-describedby={error ? "contact-form-error" : undefined}
-                className={`${inputClass} min-h-28 resize-none`}
-                placeholder="Tell me about your project, goals, and timeline..."
-              />
-            </div>
+            {/* right — form */}
+            <Reveal delay={1}>
+              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-6 sm:p-7 space-y-5 shadow-[0_12px_32px_-20px_rgba(10,10,10,0.18)]">
+                <div className="flex items-center justify-between gap-3 pb-4 border-b border-border">
+                  <h3 className="font-display font-bold text-foreground text-lg">Send a message</h3>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1 bg-secondary">
+                    Replies in 24h
+                  </span>
+                </div>
 
-            {error && (
-              <p id="contact-form-error" role="alert" className="text-sm text-destructive">
-                {error}
-              </p>
-            )}
+                <div className="absolute -left-[9999px] top-auto" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="btn btn-primary w-full sm:w-auto disabled:opacity-60"
-            >
-              {submitting ? "Sending..." : "Send message"}
-            </button>
-          </form>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="name" className={labelClass}>
+                      Name <span aria-hidden className="text-destructive">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      autoComplete="name"
+                      aria-required="true"
+                      aria-invalid={Boolean(error && !name.trim())}
+                      aria-describedby={error ? "contact-form-error" : undefined}
+                      className={inputClass}
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className={labelClass}>
+                      Email <span aria-hidden className="text-destructive">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="email"
+                      aria-required="true"
+                      aria-invalid={Boolean(error && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))}
+                      aria-describedby={error ? "contact-form-error" : undefined}
+                      className={inputClass}
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                </div>
 
-          <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              Prefer email?{" "}
-              <a
-                href={CONTACT.emailHref}
-                className="text-foreground font-medium hover:underline underline-offset-4"
-              >
-                {CONTACT.email}
-              </a>
-            </p>
-            <a
-              href={`${CONTACT.emailHref}?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion`}
-              className="btn btn-secondary text-sm"
-            >
-              Book a 15-min chat
-            </a>
+                <div>
+                  <label htmlFor="message" className={labelClass}>
+                    Message <span aria-hidden className="text-destructive">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={4}
+                    aria-required="true"
+                    aria-invalid={Boolean(error && !message.trim())}
+                    aria-describedby={error ? "contact-form-error" : undefined}
+                    className={`${inputClass} min-h-28 resize-none py-3`}
+                    placeholder="Project, goals, timeline..."
+                  />
+                </div>
+
+                {error && (
+                  <p id="contact-form-error" role="alert" className="text-sm text-destructive border border-destructive/20 bg-destructive/5 px-3 py-2">
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn btn-primary w-full justify-center disabled:opacity-60"
+                >
+                  {submitting ? "Sending..." : "Send message →"}
+                </button>
+              </form>
+            </Reveal>
           </div>
         </div>
       </div>

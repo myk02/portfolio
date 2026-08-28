@@ -13,7 +13,7 @@ export const CONTACT = {
   whatsapp: "https://wa.me/254792618156",
   whatsappChat:
     "https://wa.me/254792618156?text=Hi%20Mike%2C%20I'd%20like%20to%20book%20a%2015-min%20chat.",
-  linkedin: "https://linkedin.com/in/mike-waitindi-654bb2344",
+  linkedin: "https://www.linkedin.com/in/mikeships",
   location: "Nairobi, Kenya · Remote",
 } as const;
 

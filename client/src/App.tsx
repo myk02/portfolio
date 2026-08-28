@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { LightboxProvider } from "@/components/Lightbox";
 import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -29,7 +28,18 @@ function ScrollToTop() {
 }
 
 function RouteFallback() {
-  return <div className="min-h-screen bg-background" aria-hidden />;
+  return (
+    <div
+      className="min-h-screen bg-background grid place-items-center"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading"
+    >
+      <span className="text-sm font-mono uppercase tracking-widest text-muted-foreground">
+        Loading…
+      </span>
+    </div>
+  );
 }
 
 function Router() {
@@ -53,12 +63,10 @@ function App() {
       <MotionConfig reducedMotion="user">
         <ThemeProvider defaultTheme="dark" switchable>
           <LightboxProvider>
-            <TooltipProvider>
-              <NavigateBridge />
-              <ScrollToTop />
-              <Toaster />
-              <Router />
-            </TooltipProvider>
+            <NavigateBridge />
+            <ScrollToTop />
+            <Toaster />
+            <Router />
           </LightboxProvider>
         </ThemeProvider>
       </MotionConfig>

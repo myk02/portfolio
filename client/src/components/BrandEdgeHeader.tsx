@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Download } from "lucide-react";
-import { useRoute } from "wouter";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useRoute, useLocation } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { goHomeToSection } from "@/lib/navigation";
 
@@ -12,6 +12,7 @@ interface BrandEdgeHeaderProps {
 export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const [isHome] = useRoute("/");
+  const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -39,7 +40,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
 
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [isHome]);
+  }, [location, isHome]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -120,14 +121,6 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               {link.label}
             </button>
           ))}
-          <a
-            href="/CV.pdf"
-            download
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Download size={14} />
-            CV
-          </a>
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -193,9 +186,6 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
               >
                 Work with me
               </button>
-              <a href="/CV.pdf" download className="btn btn-secondary w-full text-center">
-                Download CV
-              </a>
             </div>
           </motion.nav>
         )}

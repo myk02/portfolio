@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Download, Diamond } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import {
   PhoneMockup,
   TabletMockup,
@@ -8,8 +8,7 @@ import {
 } from "@/components/artifacts/DeviceMockups";
 import { CountUp } from "@/components/CountUp";
 import BuyMeCoffee from "@/components/BuyMeCoffee";
-import { heroStats, roleLine, heroHeadline, heroSupporting } from "@/data/siteContent";
-import { skillMarquee } from "@/data/caseStudies";
+import { heroStats, roleLine, heroHeadline } from "@/data/siteContent";
 
 interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
@@ -19,46 +18,91 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 function HeroVisual() {
   return (
-    <div className="w-full hero-float">
-      <div className="rounded-soft-sm border border-border bg-card p-4 sm:p-5 md:p-6 shadow-[0_24px_60px_-20px_rgba(10,10,10,0.18)]">
-        <div className="relative w-full max-w-[440px] aspect-[4/3] mx-auto">
-          <DesktopMockup
-            content={{
-              src: "/shots/kenyatrace/home-cards-desktop.jpg",
-              alt: "KenyaTrace destination browsing on desktop",
-            }}
-            label={undefined}
-            showStand={false}
-            className="w-full"
-            figureClassName="absolute left-1/2 top-0 -translate-x-1/2 w-[64%] z-0"
-          />
-          <TabletMockup
-            content={{
-              src: "/shots/kenyatrace/home-tablet.jpg",
-              alt: "KenyaTrace home on tablet",
-            }}
-            label={undefined}
-            className="w-full"
-            figureClassName="absolute right-0 bottom-0 w-[38%] z-20 rotate-[2deg]"
-          />
-          <PhoneMockup
-            content={{
-              src: "/shots/kenyatrace/home-mobile.jpg",
-              alt: "KenyaTrace home on mobile",
-            }}
-            label={undefined}
-            className="w-full"
-            figureClassName="absolute left-0 bottom-0 w-[30%] z-30 -rotate-[3deg]"
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[88%] h-4 rounded-full bg-foreground/10 blur-md"
-          />
+    <div className="w-full">
+      {/* editorial card - border only, no rounded for brutalist but soft inner for devices */}
+      <div className="border border-border bg-card overflow-hidden">
+        {/* top bar */}
+        <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-border bg-secondary/60">
+          <div className="flex items-center gap-2">
+            <span className="live-dot" aria-hidden />
+            <span className="text-[10px] font-mono uppercase tracking-widest text-foreground font-medium">
+              Featured — KenyaTrace · Live on Vercel
+            </span>
+          </div>
+          <span className="hidden sm:inline-flex text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            2024 · Mobile-first
+          </span>
+        </div>
+
+        <div className="p-4 sm:p-5 md:p-6 bg-card">
+          <div className="relative w-full max-w-[460px] aspect-[4/2.9] mx-auto">
+            <DesktopMockup
+              content={{
+                src: "/shots/kenyatrace/home-cards-desktop.jpg",
+                alt: "KenyaTrace destination browsing on desktop",
+              }}
+              label={undefined}
+              showStand={false}
+              className="w-full"
+              figureClassName="absolute left-1/2 top-0 -translate-x-1/2 w-[66%] z-0"
+            />
+            <TabletMockup
+              content={{
+                src: "/shots/kenyatrace/home-tablet.jpg",
+                alt: "KenyaTrace home on tablet",
+              }}
+              label={undefined}
+              className="w-full"
+              figureClassName="absolute right-[2%] bottom-0 w-[38%] z-20 rotate-[1.5deg]"
+            />
+            <PhoneMockup
+              content={{
+                src: "/shots/kenyatrace/home-mobile.jpg",
+                alt: "KenyaTrace home on mobile",
+              }}
+              label={undefined}
+              className="w-full"
+              figureClassName="absolute left-[2%] bottom-0 w-[30%] z-30 -rotate-[2deg]"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[88%] h-4 rounded-full bg-foreground/10 blur-md"
+            />
+          </div>
+        </div>
+
+        {/* caption bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 border-t border-border bg-secondary/40">
+          <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
+            One build · every viewport · holds on 3G
+          </p>
+          <a
+            href="https://kenyatrace.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[11px] font-medium text-foreground hover:text-accent transition-colors"
+          >
+            Open live site <ArrowUpRight size={12} />
+          </a>
         </div>
       </div>
-      <p className="mt-3 text-center text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-        KenyaTrace · live product · one build, every viewport
-      </p>
+
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        {[
+          { k: "Stack", v: "React 19 · TypeScript" },
+          { k: "Tested", v: "10+ Playwright" },
+          { k: "Access", v: "WCAG AA" },
+        ].map((chip) => (
+          <div key={chip.k} className="border border-border bg-card px-2.5 py-2 text-center">
+            <p className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">
+              {chip.k}
+            </p>
+            <p className="text-[11px] font-medium text-foreground leading-tight mt-0.5">
+              {chip.v}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -69,95 +113,122 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const artY = useTransform(scrollYProgress, [0, 1], [0, 32]);
+  const artY = useTransform(scrollYProgress, [0, 1], [0, 24]);
+
+  // split headline to highlight "reliable" — high-contrast dark-on-lime in both themes
+  const headlineParts = heroHeadline.split("reliable");
+  const renderHeadline = () => {
+    if (headlineParts.length === 2) {
+      return (
+        <>
+          {headlineParts[0]}
+          <span className="relative inline-block">
+            <span className="relative z-10 px-1.5 py-0.5 bg-accent text-[#141310] dark:text-[#0a0a0a] font-black">
+              reliable
+            </span>
+          </span>
+          {headlineParts[1]}
+        </>
+      );
+    }
+    return heroHeadline;
+  };
 
   return (
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-[100dvh] bg-secondary flex items-center overflow-hidden"
+      className="relative bg-secondary flex items-center overflow-hidden border-b border-border"
+      style={{ minHeight: "calc(100dvh - 0px)", paddingTop: "4rem" }}
     >
+      {/* subtle editorial wash — single layer, no grid duplication */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.3]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] dark:opacity-[0.08]"
         style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 85% 20%, rgba(232,255,71,0.1), transparent 60%)",
+          background: `radial-gradient(ellipse 60% 45% at 82% 18%, rgba(232,255,71,0.12), transparent 58%)`,
         }}
       />
 
-      <div className="relative z-10 w-full px-[22px] py-14 md:py-16 lg:py-20">
-        <div className="max-w-[1080px] mx-auto">
-          {/* tablet + desktop: side-by-side from lg; tablet stacks cleanly */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-14 items-center">
-            <div className="order-1 lg:order-1 min-w-0">
-              <div className="mb-5 md:mb-6 flex items-center gap-3 hero-kicker">
-                <span className="w-2 h-2 bg-accent shrink-0" />
-                <p className="text-mono text-muted-foreground text-sm">
+      <div className="relative z-10 w-full px-4 sm:px-6 py-10 md:py-14 lg:py-16">
+        <div className="max-w-[1160px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-10 xl:gap-14 items-center">
+            <div className="order-1 min-w-0">
+              <div className="mb-6 flex items-center gap-3 hero-kicker">
+                <span className="w-2.5 h-2.5 bg-accent shrink-0" />
+                <p className="text-mono text-muted-foreground dark:text-white/70 text-[11px] sm:text-xs tracking-[0.14em]">
                   {roleLine}
                 </p>
               </div>
 
               <h1
-                className="heading-serif font-semibold text-foreground max-w-xl"
+                className="heading-serif font-black tracking-tight max-w-[560px] text-[#0a0a0a] dark:text-white dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]"
                 style={{
-                  fontSize: "clamp(2rem, 5.5vw, 3rem)",
-                  lineHeight: 1.08,
+                  fontSize: "clamp(2.15rem, 5.2vw, 3.4rem)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.03em",
                 }}
               >
-                {heroHeadline}
+                {renderHeadline()}
               </h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5, ease: EASE }}
-                className="text-muted-foreground text-base leading-snug max-w-md mt-4"
-              >
-                {heroSupporting}
-              </motion.p>
-
+              {/* availability */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: EASE }}
-                className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 mt-7"
+                transition={{ delay: 0.28, duration: 0.5, ease: EASE }}
+                className="mt-6 flex flex-wrap items-center gap-3"
               >
-                <button
-                  type="button"
-                  onClick={() => onCtaClick("work")}
-                  className="btn btn-primary"
-                >
-                  View live work
-                  <ArrowDown size={14} />
-                </button>
-                <a href="/CV.pdf" download className="btn btn-ghost">
-                  <Download size={14} aria-hidden />
-                  Download CV
-                </a>
-                <BuyMeCoffee
-                  buttonClassName="rounded-pill px-5 py-3 font-display font-semibold text-sm tracking-wide bg-accent text-accent-foreground border-2 border-foreground shadow-[4px_4px_0_0_var(--foreground)] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--foreground)] active:translate-y-0 active:shadow-[3px_3px_0_0_var(--foreground)] transition-all"
-                />
-                <span className="inline-flex items-center gap-2 px-3 py-2 rounded-pill border border-border bg-card/60">
+                <span className="inline-flex items-center gap-2 px-3 py-2 border border-border bg-card">
                   <span className="live-dot" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">
-                    Open to opportunities
+                    Available for work
                   </span>
+                  <span className="hidden sm:inline text-xs text-muted-foreground">· Replies within 24h</span>
+                </span>
+                <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground dark:text-white/70">
+                  Nairobi · Remote
                 </span>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5, ease: EASE }}
+                className="flex flex-wrap items-center gap-3 mt-7"
+              >
+                <button
+                  type="button"
+                  onClick={() => onCtaClick("work")}
+                  className="btn btn-primary gap-2"
+                >
+                  View live work
+                  <ArrowDown size={14} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onCtaClick("contact")}
+                  className="btn btn-secondary"
+                >
+                  Work with me
+                </button>
+                <BuyMeCoffee
+                  buttonClassName="bg-accent text-accent-foreground border-2 border-foreground shadow-[3px_3px_0_0_var(--foreground)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--foreground)] transition-all text-sm px-4 py-2.5 font-semibold"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5, ease: EASE }}
-                className="grid grid-cols-2 gap-x-4 gap-y-5 mt-10 pt-8 border-t border-border sm:grid-cols-3"
+                className="grid grid-cols-3 gap-4 mt-10 pt-6 border-t border-white/10 dark:border-white/15 max-w-[520px]"
               >
-                {heroStats.map(stat => (
-                  <div key={stat.label} className="min-w-0">
-                    <div className="font-display font-bold text-[1.5rem] md:text-[1.65rem] text-foreground whitespace-nowrap">
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="min-w-0 border-l-2 border-accent pl-3">
+                    <div className="font-display font-black text-[1.45rem] md:text-[1.6rem] text-[#0a0a0a] dark:text-white leading-none whitespace-nowrap">
                       <CountUp value={stat.value} />
                     </div>
-                    <div className="text-[0.7rem] md:text-[0.72rem] text-muted-foreground leading-snug mt-1">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground dark:text-white/65 leading-snug mt-1.5">
                       {stat.label}
                     </div>
                   </div>
@@ -165,12 +236,11 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               </motion.div>
             </div>
 
-            {/* visual — visible on tablet (md) and desktop */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.55, ease: EASE }}
-              className="order-2 lg:order-2 w-full sm:max-w-md md:max-w-lg lg:max-w-none mx-auto lg:mx-0"
+              transition={{ delay: 0.22, duration: 0.55, ease: EASE }}
+              className="order-2 w-full max-w-[520px] mx-auto lg:max-w-none lg:mx-0"
             >
               <motion.div style={{ y: artY }}>
                 <HeroVisual />
@@ -180,31 +250,5 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
         </div>
       </div>
     </section>
-  );
-}
-
-export function SkillMarquee() {
-  const items = [...skillMarquee, ...skillMarquee];
-  return (
-    <div
-      className="marquee-band bg-[#141310] text-[#f2ede6] overflow-hidden"
-      aria-hidden
-    >
-      <div className="marquee-container py-5">
-        <div className="marquee-track items-center">
-          {items.map((skill, i) => (
-            <span
-              key={`${skill}-${i}`}
-              className="flex items-center gap-6 whitespace-nowrap"
-            >
-              <span className="text-sm font-medium tracking-wide opacity-90">
-                {skill}
-              </span>
-              <Diamond size={11} className="text-accent shrink-0" fill="currentColor" strokeWidth={0} />
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }

@@ -1,24 +1,14 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
 import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
 import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
 
-interface TileArtProps {
-  phone: DeviceContent;
-  desktop: DeviceContent;
-  bg?: string;
-}
-
-/**
- * Tile art — the design shown large (desktop fills the tile so its content is
- * readable) with the phone view overlaid, instead of a tiny three-device trio.
- */
-function TileArt({ phone, desktop, bg = "#f4efe7" }: TileArtProps) {
+function TileArt({ phone, desktop, bg = "#f4efe7" }: { phone: DeviceContent; desktop: DeviceContent; bg?: string }) {
   return (
     <div
-      className="w-full h-full relative tile-kb overflow-hidden transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+      className="w-full h-full relative overflow-hidden transition-transform duration-[700ms] ease-out group-hover:scale-[1.03]"
       style={{ background: bg }}
     >
       <div className="absolute inset-0">
@@ -86,8 +76,6 @@ const TILE_ART: Record<
       },
     }),
   },
-  /* LegalFlow: add a "legalflow" entry with real screenshots from
-     client/public/shots/legalflow/ once the deployment URL is live. */
   legalflow: {
     bg: "#141310",
     trio: () => ({
@@ -109,24 +97,43 @@ function Artwork({ study }: { study: CaseStudy }) {
   return <TileArt bg={art.bg} phone={phone} desktop={desktop} />;
 }
 
-function TileBody({ study }: { study: CaseStudy }) {
+function TileBody({ study, index }: { study: CaseStudy; index: number }) {
   return (
-    <div className="p-5 space-y-3">
-      <h3 className="font-display font-bold text-lg sm:text-xl text-foreground leading-snug">
+    <div className="p-5 sm:p-6 space-y-3 flex flex-col flex-1">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
+            0{index + 1}
+          </span>
+          <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            {study.timeline} · {study.year}
+          </span>
+        </div>
+        <span className="hidden sm:inline-flex text-[10px] font-mono uppercase tracking-widest px-2 py-1 border border-border bg-card text-muted-foreground">
+          {study.stack[0]}
+        </span>
+      </div>
+
+      <h3 className="font-display font-black text-[19px] sm:text-[21px] text-foreground leading-none tracking-tight">
         {study.name}
       </h3>
-      <p className="text-sm text-muted-foreground leading-snug">
+      <p className="text-sm text-muted-foreground leading-snug line-clamp-2">
         {study.tileLine}
       </p>
-      {/* Vital proof numbers */}
-      <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent/20 text-foreground border border-accent/40">
-        {study.tileBadge}
-      </span>
-      {/* Descriptive, distinct link targets */}
-      <div className="pt-1 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
+
+      <div className="flex flex-wrap gap-1.5">
+        <span className="inline-flex px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent text-accent-foreground border border-foreground/10 font-medium">
+          {study.tileBadge}
+        </span>
+        <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-muted-foreground">
+          {study.role}
+        </span>
+      </div>
+
+      <div className="pt-3 mt-auto border-t border-border flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         <Link
           href={`/work/${study.slug}`}
-          className="inline-flex items-center gap-1.5 text-foreground transition-transform duration-300 group-hover:translate-x-1 underline-offset-4 hover:underline"
+          className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline group-hover:translate-x-0.5 transition-transform"
         >
           Case study
           <ArrowUpRight size={14} aria-hidden />
@@ -138,8 +145,8 @@ function TileBody({ study }: { study: CaseStudy }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
           >
+            <ExternalLink size={13} aria-hidden />
             Live site
-            <span aria-hidden>↗</span>
           </a>
         )}
       </div>
@@ -149,9 +156,9 @@ function TileBody({ study }: { study: CaseStudy }) {
 
 function CardBadges({ study }: { study: CaseStudy }) {
   return (
-    <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-[1]">
+    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
       <StatusBadge tone={toneFromKind(study.kind)} />
-      <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-background/85 backdrop-blur border border-border text-foreground">
+      <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-background/90 backdrop-blur border border-border text-foreground">
         {study.year}
       </span>
     </div>
@@ -160,88 +167,92 @@ function CardBadges({ study }: { study: CaseStudy }) {
 
 function CardShell({
   study,
-  children,
+  index,
 }: {
   study: CaseStudy;
-  children: React.ReactNode;
+  index: number;
 }) {
   return (
-    <div className="group block h-full border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-foreground/40 hover:shadow-[0_16px_40px_-16px_rgba(10,10,10,0.3)]">
+    <div className="group relative h-full border border-border bg-card flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-foreground/20 hover:shadow-[0_18px_45px_-18px_rgba(10,10,10,0.28)]">
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden />
       <Link
         href={`/work/${study.slug}`}
-        className="block relative aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        className="block relative aspect-[16/9.2] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
         aria-label={`${study.name} — case study`}
       >
         <Artwork study={study} />
         <CardBadges study={study} />
-        <span className="tile-flash" aria-hidden />
+        <span className="absolute inset-0 border border-transparent group-hover:border-accent/40 transition-colors pointer-events-none" aria-hidden />
       </Link>
-      {children}
+      <TileBody study={study} index={index} />
     </div>
-  );
-}
-
-function FeatureCard({ study }: { study: CaseStudy }) {
-  return (
-    <Reveal className="lg:col-span-2">
-      <CardShell study={study}>
-        <TileBody study={study} />
-      </CardShell>
-    </Reveal>
-  );
-}
-
-function GridCard({ study, i }: { study: CaseStudy; i: number }) {
-  return (
-    <Reveal delay={i % 4} className="h-full">
-      <CardShell study={study}>
-        <TileBody study={study} />
-      </CardShell>
-    </Reveal>
   );
 }
 
 export default function BrandEdgeWork() {
   const live = caseStudies.filter(s => s.kind === "LIVE PRODUCT");
-  const [featured, ...rest] = live;
   return (
     <section
       id="work"
-      className="section-pad bg-secondary border-t border-border"
+      className="section-pad bg-secondary border-t border-border relative"
     >
+      {/* subtle top accent */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent/40" aria-hidden />
       <div className="container">
         <div className="max-w-6xl mx-auto">
           <Reveal as="div" className="mb-10">
-            <span className="section-label">
-              <span className="section-label-line" />
-              Selected work
-            </span>
-            <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
-                <h2 className="heading-section text-foreground mb-3">
-                  Shipped products
+                <span className="section-label">
+                  <span className="section-label-line" />
+                  Selected work · 0{live.length}
+                </span>
+                <h2
+                  className="heading-section text-foreground mt-2"
+                  style={{ letterSpacing: "-0.03em" }}
+                >
+                  Shipped <span className="relative inline-block"><span className="relative z-10 text-accent-foreground px-1">products</span><span aria-hidden className="absolute left-0 right-0 bottom-[0.15em] h-[0.55em] bg-accent -z-0" /></span>
                 </h2>
-                <p className="text-muted-foreground text-sm max-w-md">
-                  {live.length} live production apps — every one states its stack,
-                  role, and measurable outcome.
+                <p className="text-muted-foreground text-sm max-w-[520px] mt-3 leading-relaxed">
+                  Two live apps — each with stack, role, and the decision that moved a metric.
+                  No concept decks, no placeholders.
                 </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["React 19", "TypeScript", "Playwright", "Vercel"].map((t) => (
+                    <span key={t} className="text-[10px] font-mono uppercase tracking-widest px-2 py-1 border border-border bg-card text-muted-foreground">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <Link
-                href="/work"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors shrink-0"
-              >
-                View all work
-                <ArrowUpRight size={14} aria-hidden />
-              </Link>
+              <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
+                <Link
+                  href="/work"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground border border-foreground px-4 py-2.5 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  View all work
+                  <ArrowUpRight size={14} aria-hidden />
+                </Link>
+                <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground hidden sm:block">
+                  Case study • Live site • Measurable outcome
+                </span>
+              </div>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
-            {featured && <FeatureCard study={featured} />}
-            {rest.map((study, i) => (
-              <GridCard key={study.slug} study={study} i={i} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+            {live.map((study, i) => (
+              <Reveal key={study.slug} delay={i} className="h-full">
+                <CardShell study={study} index={i} />
+              </Reveal>
             ))}
           </div>
+
+          <Reveal delay={2} className="mt-8 border border-dashed border-border bg-card/60 px-4 py-3 flex flex-wrap items-center gap-3 text-xs">
+            <span className="w-2 h-2 bg-accent shrink-0" />
+            <span className="font-mono uppercase tracking-widest text-muted-foreground">Next:</span>
+            <span className="text-foreground">LegalFlow — SaaS slot reserved. Visuals + case study publish once deployment is verified.</span>
+          </Reveal>
         </div>
       </div>
     </section>

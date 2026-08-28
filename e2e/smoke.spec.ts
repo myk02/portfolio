@@ -8,26 +8,26 @@ test.describe("home page", () => {
     page.on("pageerror", e => errors.push(e.message));
 
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "I ship." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /I ship reliable/ })).toBeVisible();
     await expect(
       page.getByText("Software Developer · UI/UX Developer · Automation Specialist")
     ).toBeVisible();
 
-    // Buy-me-a-coffee: visible in hero, accent-styled standout pill
-    const heroCoffee = page
-      .locator("#home")
-      .getByRole("button", { name: /buy me a coffee/i });
+    // Hero: BuyMeCoffee visible for donations (accent pill) + primary CTAs
+    const heroCoffee = page.locator("#home").getByRole("button", { name: /buy me a coffee/i });
     await expect(heroCoffee).toBeVisible();
     await expect(heroCoffee).toHaveClass(/bg-accent/);
     await expect(
-      page.getByRole("button", { name: "View live work" })
+      page.locator("#home").getByRole("button", { name: "View live work" })
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Download CV" }).first()
-    ).toHaveAttribute("href", "/CV.pdf");
+      page.locator("#home").getByRole("button", { name: "Work with me" })
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Download CV" })).toHaveCount(0);
 
     await expect(
-      page.getByText("Live products", { exact: true }).first()
+      page.getByText(/Live products/).first()
     ).toBeVisible();
 
     expect(errors).toEqual([]);
@@ -58,7 +58,7 @@ test.describe("home page", () => {
 test.describe("work page", () => {
   test("lists only the live projects with distinct links", async ({ page }) => {
     await page.goto("/work");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Work");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Work");
 
     const hrefs = await page
       .locator('a[href^="/work/"]')
@@ -107,7 +107,7 @@ test.describe("case study pages — lean template", () => {
       "design-system-creation",
     ]) {
       await page.goto(`/work/${slug}`);
-      await expect(page.getByText("404")).toBeVisible();
+      await expect(page.getByText("404").first()).toBeVisible();
     }
   });
 

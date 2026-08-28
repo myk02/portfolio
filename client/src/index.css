@@ -121,6 +121,7 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
+    /* brutalist scale — 11px intentional, compensates via clamp() headings */
     font-size: 11px;
   }
   body {
@@ -163,11 +164,6 @@
     max-width: 1200px;
   }
 
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem;
@@ -196,17 +192,6 @@
   font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
-
 .grid-overlay {
   position: absolute;
   inset: 0;
@@ -215,12 +200,6 @@
     linear-gradient(rgba(242, 237, 230, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(242, 237, 230, 0.04) 1px, transparent 1px);
   background-size: 80px 80px;
-}
-
-.dark .grid-overlay {
-  background-image:
-    linear-gradient(rgba(242, 237, 230, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 237, 230, 0.04) 1px, transparent 1px);
 }
 
 .section-label {
@@ -340,46 +319,6 @@
   transform: translateY(1px);
 }
 
-/* Legacy aliases — new code should use .btn-primary / .btn-secondary / .btn-ghost */
-.btn-accent,
-.btn-gradient {
-  font-family: var(--font-accent);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 0.625rem 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: var(--foreground);
-  color: var(--background);
-  border: 1px solid var(--foreground);
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.1s ease;
-}
-
-.btn-accent:hover,
-.btn-gradient:hover {
-  background: var(--accent);
-  color: var(--accent-foreground);
-  border-color: var(--foreground);
-}
-
-.btn-accent:active,
-.btn-gradient:active {
-  transform: translateY(1px);
-}
-
-.btn-accent:disabled,
-.btn-gradient:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
 .tag-pill {
   font-family: var(--font-accent);
   font-size: 0.75rem;
@@ -423,38 +362,6 @@
   font-family: var(--font-sans);
 }
 
-/* scroll indicator */
-.scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 48px;
-  background: rgba(242, 237, 230, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.scroll-line-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--accent);
-  animation: scrollFill 2s ease-in-out infinite;
-}
-
-@keyframes scrollFill {
-  0% { transform: translateY(-100%); }
-  50% { transform: translateY(0%); }
-  100% { transform: translateY(100%); }
-}
-
 /* hide scrollbar for drag container */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -476,26 +383,6 @@
   border-radius: 9999px !important;
 }
 
-/* hero word-reveal */
-.reveal-word {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-.reveal-word > span {
-  display: inline-block;
-  transform: translateY(16px);
-  opacity: 0;
-  animation: wordUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes wordUp {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 /* hero kicker — CSS-only, paints with first frame (no JS gating) */
 .hero-kicker {
   opacity: 0;
@@ -509,20 +396,7 @@
   }
 }
 
-/* decorative ampersand — the single hero accent */
-.amp {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--accent-foreground);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 600;
-  padding: 0 0.22em;
-  margin: 0 0.06em;
-  line-height: 1;
-}
-
-/* scroll-reveal system — one observer, GPU-only transitions */
+/* scroll-reveal — no blank: always visible, only transform animates when JS is present */
 .scrollbar-none {
   scrollbar-width: none;
 }
@@ -531,182 +405,37 @@
 }
 
 [data-reveal] {
-  opacity: 0;
+  opacity: 1;
+  transform: none;
+}
+html.js [data-reveal] {
+  opacity: 1;
   transform: translateY(16px);
   transition:
     opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--i, 0) * 80ms);
 }
-[data-reveal].in-view {
+html.js [data-reveal].in-view {
   opacity: 1;
   transform: translateY(0);
 }
-[data-reveal].reveal-scale {
+html.js [data-reveal].reveal-scale {
   transform: translateY(16px) scale(0.92);
 }
-[data-reveal].reveal-scale.in-view {
+html.js [data-reveal].reveal-scale.in-view {
   transform: translateY(0) scale(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
+  html.js [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;
     transition-delay: 0ms;
   }
-  [data-reveal].reveal-scale {
+  html.js [data-reveal].reveal-scale {
     transform: none;
   }
-}
-
-/* hero phone float — the only infinite loop on the site */
-.hero-float {
-  animation: heroFloat 6s ease-in-out infinite;
-  will-change: transform;
-}
-@keyframes heroFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-/* work tile Ken Burns on hover */
-.group:hover .tile-kb {
-  animation: tileKb 8s linear infinite;
-}
-@keyframes tileKb {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.03);
-  }
-}
-
-/* Ken Burns — subtle scale loop while the carousel card is active */
-.carousel-kb {
-  animation: kenburns 6s linear infinite;
-  will-change: transform;
-}
-@keyframes kenburns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.04);
-  }
-}
-
-/* lime step indicator — fills over one carousel cycle */
-.carousel-bar {
-  width: 100%;
-  transform-origin: left;
-  animation: carouselFill 3.5s linear forwards;
-}
-@keyframes carouselFill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* stroke draw-in for the hero arc + before/after arrow */
-.wave-arc,
-.arrow-draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-.wave-arc {
-  animation: arcDraw 0.6s ease-out forwards;
-  animation-delay: 0.15s;
-}
-.arrow-draw {
-  transition: stroke-dashoffset 0.4s ease-out;
-}
-.arrow-draw.drawn {
-  stroke-dashoffset: 0;
-}
-@keyframes arcDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Figma pipeline arrow draw-in */
-.pipeline-arrow {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.pipeline-arrow.drawn {
-  stroke-dashoffset: 0;
-}
-
-/* process timeline connector — draws in on reveal */
-.process-line {
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-.process-line.drawn {
-  transform: scaleX(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-float,
-  .group:hover .tile-kb {
-    animation: none;
-  }
-  .carousel-kb,
-  .carousel-bar,
-  .wave-arc,
-  .arrow-draw,
-  .process-line {
-    animation: none;
-    transition: none;
-  }
-  .carousel-kb {
-    transform: none;
-  }
-  .carousel-bar {
-    transform: scaleX(1);
-  }
-  .wave-arc,
-  .arrow-draw {
-    stroke-dashoffset: 0;
-  }
-  .process-line {
-    transform: scaleX(1);
-  }
-}
-
-/* device frame for wireframe artifacts */
-.device-frame {
-  position: relative;
-  border: 2px solid var(--foreground);
-  border-radius: 20px !important;
-  background: var(--card);
-  padding: 6px;
-}
-.device-frame::before {
-  content: "";
-  position: absolute;
-  top: 9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 26px;
-  height: 4px;
-  border-radius: 9999px !important;
-  background: var(--foreground);
-  opacity: 0.35;
 }
 
 /* lime flash on work-tile hover */
@@ -721,11 +450,6 @@
 }
 .group:hover .tile-flash {
   opacity: 1;
-}
-
-/* marquee band */
-.marquee-band {
-  border-top: 1px solid var(--accent);
 }
 
 /* live dot pulse */
@@ -755,35 +479,10 @@
   }
 }
 
-.marquee-container {
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-}
-
-.marquee-track {
-  display: flex;
-  gap: 1.5rem;
-  width: fit-content;
-  animation: marquee 40s linear infinite;
-}
-
-.marquee-container:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .scroll-line-fill {
-    animation: none;
   }
 }

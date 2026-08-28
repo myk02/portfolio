@@ -4,10 +4,17 @@ import { caseStudies } from "@/data/caseStudies";
 function Thumb({ slug }: { slug: string }) {
   const study = caseStudies.find((s) => s.slug === slug);
   if (!study) return null;
-  const toVariant = (width: number) =>
-    study.image?.endsWith(".png")
-      ? `${study.image.slice(0, -4)}-${width}.webp`
-      : study.image;
+  const toVariant = (width: number) => {
+    if (!study.image) return "";
+    const dot = study.image.lastIndexOf(".");
+    if (dot === -1) return study.image;
+    const base = study.image.slice(0, dot);
+    const ext = study.image.slice(dot).toLowerCase();
+    if (ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".webp") {
+      return `${base}-${width}.webp`;
+    }
+    return study.image;
+  };
   return (
     <Link
       href={`/work/${slug}`}

@@ -34,15 +34,18 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const lastFocused = useRef<HTMLElement | null>(null);
 
   const register = useCallback((entry: Entry) => {
+    // Deduplicate by element (React strict-mode double mount)
+    entries.current = entries.current.filter((e) => e.el !== entry.el);
     entries.current.push(entry);
     return () => {
-      entries.current = entries.current.filter((e) => e !== entry);
+      entries.current = entries.current.filter((e) => e.el !== entry.el);
     };
   }, []);
 
   const open = useCallback((el: HTMLElement) => {
-    /* order by document position so ←/→ follows reading order */
-    const ordered = [...entries.current].sort((a, b) =>
+    /* Deduplicate then order by document position so ←/→ follows reading order */
+    const unique = Array.from(new Map(entries.current.map((e) => [e.el, e])).values());
+    const ordered = [...unique].sort((a, b) =>
       a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1,
     );
     const i = ordered.findIndex((e) => e.el === el);
