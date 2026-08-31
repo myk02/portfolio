@@ -1,32 +1,3 @@
-export interface Persona {
-  initials: string;
-  name: string;
-  age: string;
-  role: string;
-  quote: string;
-  facts: { label: string; value: string }[];
-}
-
-export interface SketchItem {
-  label: string;
-  state: "won" | "rejected" | "kept";
-  layout: string;
-}
-
-export interface MetricRow {
-  metric: string;
-  baseline: string;
-  target: string;
-  result: string;
-}
-
-export interface PrototypeLink {
-  /** internal = in-site interactive prototype, external = real live product */
-  kind: "internal" | "external";
-  href: string;
-  label: string;
-}
-
 export interface MetricCardData {
   label: string;
   value: string;
@@ -37,7 +8,6 @@ export interface MetricCardData {
   note?: string;
 }
 
-/** A real screenshot of a shipped screen (captured from the live product) — one design, three viewports. */
 export interface Shot {
   name: string;
   alt: string;
@@ -47,17 +17,16 @@ export interface Shot {
   desktop: string;
 }
 
+export interface PrototypeLink {
+  kind: "internal" | "external";
+  href: string;
+  label: string;
+}
+
 export interface StudyVisuals {
   prototype: PrototypeLink;
-  personas?: Persona[];
-  empathyMap?: { says: string[]; does: string[]; thinks: string[]; feels: string[] };
-  sketches: SketchItem[];
-  brandEvolution?: { title: string; items: { label: string; state: string; swatches: string[] }[] };
   validate: { before: { label: string; note: string }; after: { label: string; note: string } };
-  metrics: MetricRow[];
   metricCards: MetricCardData[];
-  roadmap: string[];
-  /** hero image (live products only) — one design, three viewports */
   hero?: {
     mobile: string;
     tablet: string;
@@ -65,7 +34,6 @@ export interface StudyVisuals {
     alt: string;
     caption: string;
   };
-  /** distinct hi-fi screens for the UI chapter — never reuses the hero image */
   screens?: Shot[];
 }
 
@@ -116,70 +84,11 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         tablet: "/shots/kenyatrace/trips-tablet.jpg",
         desktop: "/shots/kenyatrace/trips-desktop.jpg",
       },
-      {
-        name: "Stays",
-        alt: "KenyaTrace stays listing",
-        caption: "Stays — the same card grammar, different content type.",
-        mobile: "/shots/kenyatrace/stays-mobile.jpg",
-        tablet: "/shots/kenyatrace/stays-tablet.jpg",
-        desktop: "/shots/kenyatrace/stays-desktop.jpg",
-      },
-    ],
-    personas: [
-      {
-        initials: "B",
-        name: "Brian",
-        age: "28",
-        role: "Weekend road-tripper",
-        quote: "I ended up with 14 tabs open and a PDF from my cousin.",
-        facts: [
-          { label: "Trip style", value: "Short multi-stop escapes" },
-          { label: "Planning", value: "On phone, often on 3G" },
-          { label: "Frustration", value: "County sites break on mobile" },
-        ],
-      },
-      {
-        initials: "A",
-        name: "Achieng",
-        age: "32",
-        role: "Family safari planner",
-        quote: "I need days, distances, and someone the kids can trust.",
-        facts: [
-          { label: "Trip style", value: "One big annual trip" },
-          { label: "Planning", value: "Reviews and WhatsApp groups" },
-          { label: "Frustration", value: "No single shareable plan" },
-        ],
-      },
-      {
-        initials: "T",
-        name: "Toby",
-        age: "24",
-        role: "Backpacker",
-        quote: "Give me the route. I'll figure out the rest on the ground.",
-        facts: [
-          { label: "Trip style", value: "Multi-county loops" },
-          { label: "Planning", value: "Itinerary links from friends" },
-          { label: "Frustration", value: "Map-first sites time out" },
-        ],
-      },
-    ],
-    sketches: [
-      { label: "Map-first home — concept A", state: "rejected", layout: "map" },
-      { label: "List-first browse — concept B", state: "won", layout: "list" },
-      { label: "Route builder v1 — add-stop leaves route", state: "rejected", layout: "flow" },
-      { label: "Inline add-stop — concept C", state: "won", layout: "flow" },
-      { label: "Itinerary share card", state: "kept", layout: "card" },
-      { label: "Day-by-day plan", state: "kept", layout: "days" },
     ],
     validate: {
-      before: { label: "ROUND 1 ✗", note: "Adding a stop left the route screen — 6 interactions" },
-      after: { label: "ROUND 2 ✓", note: "Inline add-stop — 3 interactions, most-used task" },
+      before: { label: "Before", note: "Adding a stop left the route screen — 6 interactions" },
+      after: { label: "After", note: "Inline add-stop — 3 interactions, most-used task" },
     },
-    metrics: [
-      { metric: "Route planning", baseline: "6 interactions", target: "3", result: "−50% task time" },
-      { metric: "Itinerary share", baseline: "PDF + WhatsApp chain", target: "1 link", result: "shareable plan" },
-      { metric: "Mobile parity", baseline: "—", target: "100%", result: "all tasks on 360px" },
-    ],
     metricCards: [
       {
         label: "Route planning",
@@ -209,7 +118,6 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         note: "Planning works on the phones people actually use",
       },
     ],
-    roadmap: ["Trip templates", "Offline itineraries", "Group planning"],
   },
   "gigi-energy": {
     prototype: {
@@ -249,41 +157,11 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         tablet: "/shots/gigi-energy/home-scroll-tablet.jpg",
         desktop: "/shots/gigi-energy/home-scroll-desktop.jpg",
       },
-      {
-        name: "Events",
-        alt: "GiGi Energy events page on mobile",
-        caption: "Events — the loud brand voice with legible containers.",
-        mobile: "/shots/gigi-energy/events-mobile.jpg",
-        tablet: "/shots/gigi-energy/events-tablet.jpg",
-        desktop: "/shots/gigi-energy/events-desktop.jpg",
-      },
     ],
-    sketches: [
-      { label: "Fluorescent checkout — concept A", state: "rejected", layout: "cart" },
-      { label: "Can-approach palette — concept B", state: "won", layout: "swatch" },
-      { label: "4-step checkout — before", state: "rejected", layout: "flow" },
-      { label: "3-step checkout — merged address + delivery", state: "won", layout: "flow" },
-      { label: "Flavour-led product card", state: "kept", layout: "card" },
-      { label: "M-Pesa-first payment", state: "kept", layout: "pay" },
-    ],
-    brandEvolution: {
-      title: "Brand evolution — keep the energy, fix the legibility",
-      items: [
-        { label: "Palette v1 — orange on pink", state: "rejected", swatches: ["#ff5a1f", "#ff8ab3", "#ffd700", "#1a1a1a"] },
-        { label: "Contrast audit — 2.1:1", state: "rejected", swatches: ["#ff5a1f", "#ffd7e8", "#ffffff", "#222"] },
-        { label: "Can approach — dark containers", state: "won", swatches: ["#141310", "#ff5a1f", "#ffd700", "#f4efe7"] },
-        { label: "Final AA tokens", state: "won", swatches: ["#141310", "#f4efe7", "#e8ff47", "#ff5a1f"] },
-      ],
-    },
     validate: {
-      before: { label: "ROUND 1 ✗", note: "4-step checkout — funnel halves at address + payment" },
-      after: { label: "ROUND 2 ✓", note: "3 steps, M-Pesa first — matches 80% of shoppers" },
+      before: { label: "Before", note: "4-step checkout — funnel halves at address + payment" },
+      after: { label: "After", note: "3 steps, M-Pesa first — matches 80% of shoppers" },
     },
-    metrics: [
-      { metric: "Checkout", baseline: "4 steps", target: "3 steps", result: "address + delivery merged" },
-      { metric: "Contrast", baseline: "2.1:1", target: "≥ 4.5:1", result: "AA on all text" },
-      { metric: "Payment order", baseline: "Card first", target: "M-Pesa first", result: "majority pattern" },
-    ],
     metricCards: [
       {
         label: "Checkout",
@@ -313,7 +191,6 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         note: "Payment order follows purchase behaviour, not processing preference",
       },
     ],
-    roadmap: ["Promo-code engine", "Stock alerts", "Loyalty points"],
   },
   legalflow: {
     prototype: {
@@ -321,32 +198,6 @@ export const caseVisuals: Record<string, StudyVisuals> = {
       href: "https://law-ten-iota.vercel.app",
       label: "View live product ↗",
     },
-    personas: [
-      {
-        initials: "A",
-        name: "Adv. Achieng",
-        age: "34",
-        role: "Solo practitioner",
-        quote: "My matters, my invoices, my client chats — all in different places.",
-        facts: [
-          { label: "Firm size", value: "Just me, 20+ active matters" },
-          { label: "Context", value: "Phone-first, often in court" },
-          { label: "Frustration", value: "Billing trails the work" },
-        ],
-      },
-      {
-        initials: "M",
-        name: "Mr. Mutua",
-        age: "41",
-        role: "Managing partner, 6-lawyer firm",
-        quote: "I need the whole team seeing the same matter status, not forwarded threads.",
-        facts: [
-          { label: "Firm size", value: "Small firm, shared workload" },
-          { label: "Need", value: "Assigned tasks + deadlines" },
-          { label: "Frustration", value: "No single source of truth" },
-        ],
-      },
-    ],
     hero: {
       mobile: "/shots/legalflow/home-mobile.jpg",
       tablet: "/shots/legalflow/home-tablet.jpg",
@@ -372,23 +223,10 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         desktop: "/shots/legalflow/home-features-desktop.jpg",
       },
     ],
-    sketches: [
-      { label: "Spreadsheet + email — status quo", state: "rejected", layout: "list" },
-      { label: "Unified matter record — concept A", state: "won", layout: "card" },
-      { label: "Billing as separate app — concept B", state: "rejected", layout: "flow" },
-      { label: "Matter-linked invoicing — concept C", state: "won", layout: "flow" },
-      { label: "Client comms inbox — kept", state: "kept", layout: "card" },
-      { label: "Firm-wide matter board", state: "kept", layout: "board" },
-    ],
     validate: {
-      before: { label: "ROUND 1 ✗", note: "Five disconnected tools — billing trailed the work" },
-      after: { label: "ROUND 2 ✓", note: "One workspace — intake, matter, billing, payments linked" },
+      before: { label: "Before", note: "Five disconnected tools — billing trailed the work" },
+      after: { label: "After", note: "One workspace — intake, matter, billing, payments linked" },
     },
-    metrics: [
-      { metric: "Tools", baseline: "spreadsheets + email + WhatsApp", target: "1 workspace", result: "unified records" },
-      { metric: "Billing", baseline: "manual invoices", target: "in-app", result: "M-Pesa linked to matters" },
-      { metric: "Reach", baseline: "office only", target: "mobile", result: "works at 390px" },
-    ],
     metricCards: [
       {
         label: "Tools",
@@ -418,6 +256,5 @@ export const caseVisuals: Record<string, StudyVisuals> = {
         note: "Installable, usable on 390px — how firms actually work",
       },
     ],
-    roadmap: ["Client portal", "eFiling integration", "Conflict checking"],
   },
 };

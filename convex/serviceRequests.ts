@@ -1,19 +1,21 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { action, internalMutation } from "./_generated/server";
+import { internal } from "./_generated/api";
+import type { Id } from "./_generated/dataModel";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const create = mutation({
-  args: {
-    name: v.string(),
-    email: v.string(),
-    projectType: v.string(),
-    message: v.string(),
-    // Honeypot — real users never fill this; bots do.
-    website: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    // Honeypot tripped: pretend success without storing anything.
+const requestArgs = {
+  name: v.string(),
+  email: v.string(),
+  projectType: v.string(),
+  message: v.string(),
+  website: v.optional(v.string()),
+};
+
+export const insert = internalMutation({
+  args: requestArgs,
+  handler: async (ctx, args): Promise<Id<"serviceRequests"> | null> => {
     if (args.website && args.website.trim() !== "") {
       return null;
     }
@@ -37,5 +39,63 @@ export const create = mutation({
       message,
       createdAt: Date.now(),
     });
+  },
+});
+
+async function notifyOwner(args: {
+  name: string;
+  email: string;
+  projectType: string;
+  message: string;
+}) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("RESEND_API_KEY is not set — contact stored in Convex only.");
+    return;
+  }
+
+  const to = process.env.CONTACT_TO_EMAIL ?? "mikegary201@gmail.com";
+  const from =
+    process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>";
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      reply_to: args.email,
+      subject: `Portfolio inquiry from ${args.name}`,
+      text: `From: ${args.name} <${args.email}>\nType: ${args.projectType}\n\n${args.message}`,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    console.error("Resend failed", response.status, body);
+  }
+}
+
+export const submit = action({
+  args: requestArgs,
+  handler: async (ctx, args): Promise<Id<"serviceRequests"> | null> => {
+    const id: Id<"serviceRequests"> | null = await ctx.runMutation(internal.serviceRequests.insert, args);
+    if (!id) return null;
+
+    try {
+      await notifyOwner({
+        name: args.name.trim(),
+        email: args.email.trim(),
+        projectType: args.projectType.trim() || "General Inquiry",
+        message: args.message.trim(),
+      });
+    } catch (err) {
+      console.error("Contact notify failed", err);
+    }
+
+    return id;
   },
 });

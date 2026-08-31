@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import {
   PhoneMockup,
@@ -14,14 +12,10 @@ interface BrandEdgeHeroProps {
   onCtaClick: (id: string) => void;
 }
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
 function HeroVisual() {
   return (
     <div className="w-full">
-      {/* editorial card - border only, no rounded for brutalist but soft inner for devices */}
       <div className="border border-border bg-card overflow-hidden">
-        {/* top bar */}
         <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-border bg-secondary/60">
           <div className="flex items-center gap-2">
             <span className="live-dot" aria-hidden />
@@ -53,7 +47,7 @@ function HeroVisual() {
               }}
               label={undefined}
               className="w-full"
-              figureClassName="absolute right-[2%] bottom-0 w-[38%] z-20 rotate-[1.5deg]"
+              figureClassName="absolute right-[2%] bottom-0 w-[38%] z-20"
             />
             <PhoneMockup
               content={{
@@ -62,16 +56,11 @@ function HeroVisual() {
               }}
               label={undefined}
               className="w-full"
-              figureClassName="absolute left-[2%] bottom-0 w-[30%] z-30 -rotate-[2deg]"
-            />
-            <div
-              aria-hidden
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[88%] h-4 rounded-full bg-foreground/10 blur-md"
+              figureClassName="absolute left-[2%] bottom-0 w-[30%] z-30"
             />
           </div>
         </div>
 
-        {/* caption bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 border-t border-border bg-secondary/40">
           <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
             One build · every viewport · holds on 3G
@@ -108,12 +97,6 @@ function HeroVisual() {
 }
 
 export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const artY = useTransform(scrollYProgress, [0, 1], [0, 24]);
 
   // split headline to highlight "reliable" — high-contrast dark-on-lime in both themes
   const headlineParts = heroHeadline.split("reliable");
@@ -136,20 +119,10 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
 
   return (
     <section
-      ref={sectionRef}
       id="home"
       className="relative bg-secondary flex items-center overflow-hidden border-b border-border"
       style={{ minHeight: "calc(100dvh - 0px)", paddingTop: "4rem" }}
     >
-      {/* subtle editorial wash — single layer, no grid duplication */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06] dark:opacity-[0.08]"
-        style={{
-          background: `radial-gradient(ellipse 60% 45% at 82% 18%, rgba(232,255,71,0.12), transparent 58%)`,
-        }}
-      />
-
       <div className="relative z-10 w-full px-4 sm:px-6 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1160px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-10 xl:gap-14 items-center">
@@ -162,7 +135,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
               </div>
 
               <h1
-                className="heading-serif font-black tracking-tight max-w-[560px] text-[#0a0a0a] dark:text-white dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]"
+                className="heading-serif font-black tracking-tight max-w-[560px] text-[#0a0a0a] dark:text-white"
                 style={{
                   fontSize: "clamp(2.15rem, 5.2vw, 3.4rem)",
                   lineHeight: 0.95,
@@ -172,13 +145,7 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                 {renderHeadline()}
               </h1>
 
-              {/* availability */}
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.28, duration: 0.5, ease: EASE }}
-                className="mt-6 flex flex-wrap items-center gap-3"
-              >
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center gap-2 px-3 py-2 border border-border bg-card">
                   <span className="live-dot" />
                   <span className="text-xs font-medium text-foreground whitespace-nowrap">
@@ -189,14 +156,9 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                 <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground dark:text-white/70">
                   Nairobi · Remote
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: EASE }}
-                className="flex flex-wrap items-center gap-3 mt-7"
-              >
+              <div className="flex flex-wrap items-center gap-3 mt-7">
                 <button
                   type="button"
                   onClick={() => onCtaClick("work")}
@@ -212,17 +174,10 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                 >
                   Work with me
                 </button>
-                <BuyMeCoffee
-                  buttonClassName="bg-accent text-accent-foreground border-2 border-foreground shadow-[3px_3px_0_0_var(--foreground)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--foreground)] active:translate-y-0 active:shadow-[2px_2px_0_0_var(--foreground)] transition-all text-sm px-4 py-2.5 font-semibold"
-                />
-              </motion.div>
+                <BuyMeCoffee buttonClassName="bg-accent text-accent-foreground border border-foreground" />
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5, ease: EASE }}
-                className="grid grid-cols-3 gap-4 mt-10 pt-6 border-t border-white/10 dark:border-white/15 max-w-[520px]"
-              >
+              <div className="grid grid-cols-3 gap-4 mt-10 pt-6 border-t border-white/10 dark:border-white/15 max-w-[520px]">
                 {heroStats.map((stat) => (
                   <div key={stat.label} className="min-w-0 border-l-2 border-accent pl-3">
                     <div className="font-display font-black text-[1.45rem] md:text-[1.6rem] text-[#0a0a0a] dark:text-white leading-none whitespace-nowrap">
@@ -233,19 +188,12 @@ export default function BrandEdgeHero({ onCtaClick }: BrandEdgeHeroProps) {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.55, ease: EASE }}
-              className="order-2 w-full max-w-[520px] mx-auto lg:max-w-none lg:mx-0"
-            >
-              <motion.div style={{ y: artY }}>
-                <HeroVisual />
-              </motion.div>
-            </motion.div>
+            <div className="order-2 w-full max-w-[520px] mx-auto lg:max-w-none lg:mx-0">
+              <HeroVisual />
+            </div>
           </div>
         </div>
       </div>

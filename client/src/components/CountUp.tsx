@@ -11,6 +11,13 @@ function easeOutQuart(t: number) {
   return 1 - Math.pow(1 - t, 4);
 }
 
+/** Animate only plain integers with an optional suffix like 10+ — not "4→3". */
+function parseCountable(value: string): { target: number; suffix: string } | null {
+  const match = value.match(/^(\d+)(\+)?$/);
+  if (!match) return null;
+  return { target: Number(match[1]), suffix: match[2] ?? "" };
+}
+
 export function CountUp({
   value,
   className = "",
@@ -22,13 +29,11 @@ export function CountUp({
   const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    const match = value.match(/^([\d.,]+)(.*)$/);
-    if (!match || prefersReducedMotion()) {
+    const parsed = parseCountable(value);
+    if (!parsed || prefersReducedMotion()) {
       setDisplay(value);
       return;
     }
-    const target = parseFloat(match[1].replace(/,/g, ""));
-    const suffix = match[2];
     const el = ref.current;
     if (!el) return;
 
@@ -43,10 +48,7 @@ export function CountUp({
           const tick = (now: number) => {
             const p = Math.min((now - start) / dur, 1);
             const eased = easeOutQuart(p);
-            const formatted = Number.isInteger(target)
-              ? String(Math.round(target * eased))
-              : (target * eased).toFixed(match[1].includes(".") ? 1 : 0);
-            setDisplay(`${formatted}${suffix}`);
+            setDisplay(`${Math.round(parsed.target * eased)}${parsed.suffix}`);
             if (p < 1) raf = requestAnimationFrame(tick);
           };
           raf = requestAnimationFrame(tick);

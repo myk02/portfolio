@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { caseStudies } from "@/data/caseStudies";
+import { caseStudies, liveCount } from "@/data/caseStudies";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import SiteHead from "@/components/SiteHead";
 import StatusBadge, {
@@ -173,15 +173,15 @@ export default function Work() {
           </h1>
           <div className="flex flex-wrap gap-3 items-start">
             <p className="text-muted-foreground text-sm max-w-md leading-relaxed">
-              Every project is live, linkable, and measurable — stack, role, and the
-              decision that moved a number. No placeholders.
+              Every project is live and linkable — stack, role, and the decision
+              that moved a number.
             </p>
             <div className="flex flex-wrap gap-2 ml-auto">
               <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1.5 border border-border bg-card text-muted-foreground">
                 React 19 · TypeScript · Tailwind v4
               </span>
               <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1.5 bg-accent text-accent-foreground border border-foreground/10">
-                2 live · 0 concept
+                {liveCount} live · {concepts.length} concept
               </span>
             </div>
           </div>

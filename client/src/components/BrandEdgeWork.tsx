@@ -2,15 +2,13 @@ import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 import { caseStudies, type CaseStudy } from "@/data/caseStudies";
 import { Reveal } from "@/components/Reveal";
+import { Chip, ChipAccent } from "@/components/ui/kicker";
 import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
 import { type DeviceContent } from "@/components/artifacts/DeviceMockups";
 
 function TileArt({ phone, desktop, bg = "#f4efe7" }: { phone: DeviceContent; desktop: DeviceContent; bg?: string }) {
   return (
-    <div
-      className="w-full h-full relative overflow-hidden transition-transform duration-[700ms] ease-out group-hover:scale-[1.03]"
-      style={{ background: bg }}
-    >
+    <div className="w-full h-full relative overflow-hidden" style={{ background: bg }}>
       <div className="absolute inset-0">
         {"src" in desktop ? (
           <img
@@ -122,12 +120,8 @@ function TileBody({ study, index }: { study: CaseStudy; index: number }) {
       </p>
 
       <div className="flex flex-wrap gap-1.5">
-        <span className="inline-flex px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest bg-accent text-accent-foreground border border-foreground/10 font-medium">
-          {study.tileBadge}
-        </span>
-        <span className="inline-flex px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-muted-foreground">
-          {study.role}
-        </span>
+        <ChipAccent>{study.tileBadge}</ChipAccent>
+        <Chip>{study.role}</Chip>
       </div>
 
       <div className="pt-3 mt-auto border-t border-border flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
@@ -173,7 +167,7 @@ function CardShell({
   index: number;
 }) {
   return (
-    <div className="group relative h-full border border-border bg-card flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-foreground/20 hover:shadow-[0_18px_45px_-18px_rgba(10,10,10,0.28)]">
+    <div className="group relative h-full border border-border bg-card flex flex-col overflow-hidden transition-colors duration-200 hover:border-foreground/20">
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden />
       <Link
         href={`/work/${study.slug}`}
@@ -215,13 +209,10 @@ export default function BrandEdgeWork() {
                 </h2>
                 <p className="text-muted-foreground text-sm max-w-[520px] mt-3 leading-relaxed">
                   Live apps — each with stack, role, and the decision that moved the work forward.
-                  No concept decks, no placeholders.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {["React 19", "TypeScript", "Playwright", "Vercel"].map((t) => (
-                    <span key={t} className="text-[10px] font-mono uppercase tracking-widest px-2 py-1 border border-border bg-card text-muted-foreground">
-                      {t}
-                    </span>
+                    <Chip key={t}>{t}</Chip>
                   ))}
                 </div>
               </div>
@@ -233,9 +224,6 @@ export default function BrandEdgeWork() {
                   View all work
                   <ArrowUpRight size={14} aria-hidden />
                 </Link>
-                <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground hidden sm:block">
-                  Case study • Live site • Measurable outcome
-                </span>
               </div>
             </div>
           </Reveal>
@@ -247,12 +235,6 @@ export default function BrandEdgeWork() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={2} className="mt-8 border border-dashed border-border bg-card/60 px-4 py-3 flex flex-wrap items-center gap-3 text-xs">
-            <span className="w-2 h-2 bg-accent shrink-0" />
-            <span className="font-mono uppercase tracking-widest text-muted-foreground">Live:</span>
-            <span className="text-foreground">LegalFlow joins KenyaTrace and GiGi — three shipped products, one portfolio.</span>
-          </Reveal>
         </div>
       </div>
     </section>

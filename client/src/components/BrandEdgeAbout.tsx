@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { Kicker, Card, Chip } from "@/components/ui/kicker";
 import {
   aboutParagraphs,
   coreSkills,
@@ -10,6 +11,7 @@ import { MapPin, Clock3, CheckCircle2 } from "lucide-react";
 const TIMELINE = [
   { year: "2024", event: "KenyaTrace 6→3 · live" },
   { year: "2025", event: "GiGi 4→3 · AA · live" },
+  { year: "2025", event: "LegalFlow workspace · live" },
   { year: "Now", event: "React · remote" },
 ];
 
@@ -17,15 +19,9 @@ export default function BrandEdgeAbout() {
   return (
     <section
       id="about"
-      className="section-pad bg-secondary border-t border-border relative overflow-hidden"
+      className="section-pad bg-secondary border-t border-border"
     >
-      {/* subtle accent wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-20 -top-20 w-[380px] h-[380px] rounded-full opacity-[0.04]"
-        style={{ background: "radial-gradient(circle, #0a0a0a 0%, transparent 70%)" }}
-      />
-      <div className="container relative">
+      <div className="container">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <span className="section-label">
@@ -45,8 +41,8 @@ export default function BrandEdgeAbout() {
           <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 lg:gap-10 mt-10 items-start">
             {/* left — portrait card */}
             <div className="space-y-4">
-              <Reveal delay={1} scale>
-                <div className="border border-border bg-card p-3">
+              <Reveal delay={0} scale>
+                <Card className="p-3">
                   <div
                     className="relative aspect-square overflow-hidden bg-[#f4efe7] border border-border"
                     role="img"
@@ -71,18 +67,18 @@ export default function BrandEdgeAbout() {
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mt-1">
                     Developer · UI/UX · Automation
                   </p>
-                </div>
+                </Card>
               </Reveal>
 
-              <Reveal delay={2}>
-                <div className="border border-border bg-card p-3 flex flex-col gap-3">
+              <Reveal delay={1}>
+                <Card className="p-3 flex flex-col gap-3">
                   <div className="flex flex-wrap gap-2">
                     {socialLinks.map((s) => (
                       <a
                         key={s.alt}
                         href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={s.external ? "_blank" : undefined}
+                        rel={s.external ? "noopener noreferrer" : undefined}
                         aria-label={s.alt}
                         className="w-10 h-10 flex items-center justify-center border border-border bg-secondary text-muted-foreground hover:text-foreground hover:border-foreground hover:bg-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
                       >
@@ -100,28 +96,28 @@ export default function BrandEdgeAbout() {
                     <Clock3 size={13} className="shrink-0" />
                     <span>Replies within 24 hours · Mon–Sat EAT</span>
                   </div>
-                </div>
+                </Card>
               </Reveal>
 
-              <Reveal delay={3}>
-                <div className="border border-accent/30 bg-accent/10 px-3 py-3 flex gap-2.5">
+              <Reveal delay={2}>
+                <Card className="border-accent/30 bg-accent/10 px-3 py-3 flex gap-2.5">
                   <CheckCircle2 size={16} className="text-foreground shrink-0 mt-0.5" />
                   <p className="text-xs leading-snug text-foreground">
                     Open to React / design / automation roles.
                   </p>
-                </div>
+                </Card>
               </Reveal>
             </div>
 
             {/* right — narrative */}
             <div className="space-y-6 max-w-2xl">
-              <Reveal delay={1}>
+              <Reveal delay={0}>
                 <p className="text-base sm:text-[17px] text-foreground leading-relaxed font-medium">
                   {aboutParagraphs[0]}
                 </p>
               </Reveal>
               {aboutParagraphs[1] && (
-                <Reveal delay={1}>
+                <Reveal delay={0}>
                   <p className="text-sm text-muted-foreground leading-relaxed border-l-2 border-accent pl-4">
                     {aboutParagraphs[1]}
                   </p>
@@ -129,59 +125,42 @@ export default function BrandEdgeAbout() {
               )}
 
               {/* timeline — visual */}
-              <Reveal delay={2}>
-                <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
-                    Timeline
-                  </p>
-                  <div className="relative border border-border bg-card p-4 sm:p-5">
-                    <div className="absolute left-[22px] top-6 bottom-6 w-[2px] bg-border hidden sm:block" aria-hidden />
-                    <div className="space-y-4">
-                      {TIMELINE.map((item) => (
-                        <div key={item.year} className="flex gap-3 sm:gap-4">
-                          <div className="hidden sm:flex flex-col items-center gap-1 shrink-0">
-                            <span className="w-3 h-3 bg-accent border-2 border-foreground shrink-0 mt-1" aria-hidden />
-                          </div>
-                          <div className="flex-1 flex gap-3 items-start min-w-0">
-                            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-foreground bg-secondary border border-border px-2 py-1 shrink-0">
-                              {item.year}
-                            </span>
-                            <p className="text-[13px] text-muted-foreground leading-snug pt-1">
-                              {item.event}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+              <div>
+                <Kicker className="mb-3 block">Timeline</Kicker>
+                <Card className="p-4 sm:p-5">
+                  <div className="space-y-3">
+                    {TIMELINE.map((item) => (
+                      <div key={`${item.year}-${item.event}`} className="flex gap-3 items-start min-w-0">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-foreground bg-secondary border border-border px-2 py-1 shrink-0">
+                          {item.year}
+                        </span>
+                        <p className="text-[13px] text-muted-foreground leading-snug pt-1">
+                          {item.event}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </Reveal>
+                </Card>
+              </div>
 
               {/* skills — compact + scannable */}
-              <Reveal delay={3}>
-                <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
-                    Core stack — what I ship with
-                  </p>
-                  <ul className="flex flex-wrap gap-1.5" aria-label="Core skills">
-                    {coreSkills.map((skill) => (
-                      <li
-                        key={skill}
-                        className="px-2.5 py-1.5 text-xs font-medium border border-border bg-card text-foreground hover:border-foreground/30 hover:bg-secondary transition-colors"
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
+              <div>
+                <Kicker className="mb-3 block">Core stack — what I ship with</Kicker>
+                <ul className="flex flex-wrap gap-1.5" aria-label="Core skills">
+                  {coreSkills.map((skill) => (
+                    <li
+                      key={skill}
+                      className="px-2.5 py-1.5 text-xs font-medium border border-border bg-card text-foreground"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               {/* contact details — as pills */}
-              <Reveal delay={3}>
-                <div className="pt-4 border-t border-border">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
-                    Get in touch
-                  </p>
+              <div className="pt-4 border-t border-border">
+                <Kicker className="mb-3 block">Get in touch</Kicker>
                   <div className="flex flex-wrap gap-2">
                     {contactItems.map((item) =>
                       item.href ? (
@@ -203,7 +182,6 @@ export default function BrandEdgeAbout() {
                     )}
                   </div>
                 </div>
-              </Reveal>
             </div>
           </div>
         </div>

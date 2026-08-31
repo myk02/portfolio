@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const LIVE_SLUGS = ["kenyatrace", "gigi-energy"];
+const LIVE_SLUGS = ["kenyatrace", "gigi-energy", "legalflow"];
 
 test.describe("home page", () => {
   test("renders engineering-led hero with primary CTAs", async ({ page }) => {
@@ -41,16 +41,14 @@ test.describe("home page", () => {
     await expect(
       page.getByRole("link", { name: /KenyaTrace — case study/i })
     ).toBeVisible();
-    await expect(page.getByText("Live production", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("Live production", { exact: true })).toHaveCount(3);
     await expect(page.getByText("Concept study")).toHaveCount(0);
 
-    // Distinct descriptive links per tile
-    await expect(page.getByRole("link", { name: /^Case study$/ })).toHaveCount(2);
-    await expect(page.getByRole("link", { name: /^Live site/ })).toHaveCount(2);
+    await expect(page.getByRole("link", { name: /^Case study$/ })).toHaveCount(3);
+    await expect(page.getByRole("link", { name: /^Live site/ })).toHaveCount(3);
 
-    // Real screenshots in tiles (desktop + phone per project)
     const tileImages = page.locator('a[aria-label*="case study"] img');
-    await expect(tileImages).toHaveCount(4);
+    await expect(tileImages).toHaveCount(6);
   });
 
 });

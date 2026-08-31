@@ -1,28 +1,25 @@
 import { CONTACT } from "@/lib/site";
+import { liveCount } from "@/data/caseStudies";
 
 export const roleLine =
   "Software Developer · UI/UX Developer · Automation Specialist";
 
 export const heroHeadline = "I ship reliable web products.";
 
-export const heroSupporting = "";
-
 export const heroStats = [
-  { label: "Live products", value: "2" },
+  { label: "Live products", value: String(liveCount) },
   { label: "e2e passing", value: "10+" },
   { label: "Checkout cut", value: "4→3" },
 ];
 
 export const aboutParagraphs = [
   "Nairobi developer–designer: React + TypeScript, accessible UI wired to real APIs.",
-  "2 live apps — KenyaTrace & GiGi Energy — on Vercel.",
+  `${liveCount} live apps — KenyaTrace, GiGi Energy, and LegalFlow — on Vercel.`,
 ];
 
-/** Application-facing line shown near contact CTAs. */
 export const applicationLine =
   "Full-time or freelance — clear process, fast feedback.";
 
-/** Compact skills row for the slim About section. */
 export const coreSkills = [
   "TypeScript",
   "React",
@@ -48,18 +45,18 @@ export const socialLinks = [
     href: CONTACT.emailHref,
     icon: "https://cdn.simpleicons.org/gmail/EA4335",
     alt: "Email",
-    className: "bg-gray-100 dark:bg-slate-700",
+    external: false,
   },
   {
     href: CONTACT.whatsapp,
     icon: "https://cdn.simpleicons.org/whatsapp/25D366",
     alt: "WhatsApp",
-    className: "bg-gray-100 dark:bg-slate-700",
+    external: true,
   },
   {
     href: CONTACT.linkedin,
     icon: null,
     alt: "LinkedIn",
-    className: "bg-[#0A66C2]",
+    external: true,
   },
 ];

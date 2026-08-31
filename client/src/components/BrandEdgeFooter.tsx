@@ -50,7 +50,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               </p>
 
               <div className="mt-4 inline-flex items-center gap-2 border border-[#f2ede6]/15 bg-[#f2ede6]/5 px-3 py-2">
-                <span className="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-[#22c55e] rounded-full" />
                 <span className="text-xs font-mono uppercase tracking-widest text-[#f2ede6]/80">Available for roles & freelance</span>
               </div>
 
@@ -168,7 +168,7 @@ export default function BrandEdgeFooter({ onNavClick }: BrandEdgeFooterProps) {
               <BuyMeCoffee
                 onDark
                 label="Buy me a coffee"
-                buttonClassName="bg-[#e8ff47] text-black border-2 border-[#e8ff47] hover:bg-white hover:border-white hover:text-black font-semibold text-xs px-4 py-2.5 shadow-[3px_3px_0_0_rgba(242,237,230,0.25)] hover:shadow-[4px_4px_0_0_rgba(242,237,230,0.35)] transition-all"
+                buttonClassName="bg-[#e8ff47] text-black border border-[#e8ff47] hover:bg-white hover:border-white hover:text-black text-xs px-4 py-2.5"
               />
               {toggleTheme && (
                 <button

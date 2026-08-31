@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CheckCircle2, Mail, MessageCircle, Clock, ShieldCheck } from "lucide-react";
-import { useMutation } from "convex/react";
+import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { applicationLine } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
@@ -19,7 +19,7 @@ export default function BrandEdgeContact() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const submitRequest = useMutation(api.serviceRequests.create);
+  const submitRequest = useAction(api.serviceRequests.submit);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,11 +64,8 @@ export default function BrandEdgeContact() {
                 <CheckCircle2 size={28} />
               </div>
               <h2 className="heading-section text-foreground mb-3" style={{ fontSize: "clamp(1.6rem, 4vw, 2rem)" }}>Message received</h2>
-              <p className="font-display font-semibold text-lg text-foreground">
-                Asante! Thank you! Merci! Grazie!
-              </p>
               <p className="text-muted-foreground text-sm mt-2">
-                Thanks, {name.split(" ")[0]} — I reply within 24 hours (Mon–Sat, EAT).
+                Thanks{name.trim() ? `, ${name.trim().split(" ")[0]}` : ""} — I reply within 24 hours (Mon–Sat, EAT).
               </p>
               <button
                 type="button"
@@ -169,13 +166,15 @@ export default function BrandEdgeContact() {
                   </div>
                   <div className="pt-4 border-t border-border flex flex-col gap-2">
                     <a
-                      href={`${CONTACT.emailHref}?subject=Web%20Developer%20%E2%80%94%20Portfolio%20discussion`}
+                      href={CONTACT.whatsappChat}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="btn btn-primary w-full justify-center"
                     >
                       Book a 15-min chat
                     </a>
                     <p className="text-[11px] text-muted-foreground text-center">
-                      Or email directly — no form required.
+                      WhatsApp, or email — no form required.
                     </p>
                   </div>
                 </div>
@@ -186,7 +185,7 @@ export default function BrandEdgeContact() {
 
             {/* right — form */}
             <Reveal delay={1}>
-              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-6 sm:p-7 space-y-5 shadow-[0_12px_32px_-20px_rgba(10,10,10,0.18)]">
+              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-6 sm:p-7 space-y-5">
                 <div className="flex items-center justify-between gap-3 pb-4 border-b border-border">
                   <h3 className="font-display font-bold text-foreground text-lg">Send a message</h3>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1 bg-secondary">

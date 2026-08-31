@@ -1,19 +1,17 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
-import { defineConfig } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { defineConfig, loadEnv } from "vite";
 
-// Manus platform plugins inject JSX source locations + a debug runtime;
-// keep them out of production bundles.
-export default defineConfig(({ command }) => {
-  const isDev = command === "serve";
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(mode, path.resolve(import.meta.dirname), "");
+  const convexUrl = process.env.VITE_CONVEX_URL ?? env.VITE_CONVEX_URL;
+  if (command === "build" && !convexUrl) {
+    throw new Error("VITE_CONVEX_URL is required to build.");
+  }
 
   return {
-    plugins: isDev
-      ? [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()]
-      : [react(), tailwindcss()],
+    plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -38,15 +36,6 @@ export default defineConfig(({ command }) => {
       port: 5173,
       strictPort: false, // Will find next available port if 5173 is busy
       host: true,
-      allowedHosts: [
-        ".manuspre.computer",
-        ".manus.computer",
-        ".manus-asia.computer",
-        ".manuscomputer.ai",
-        ".manusvm.computer",
-        "localhost",
-        "127.0.0.1",
-      ],
       fs: {
         strict: true,
         deny: ["**/.*"],

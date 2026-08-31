@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -121,15 +120,16 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
-    /* brutalist scale — 11px intentional, compensates via clamp() headings */
-    font-size: 11px;
+    font-size: 16px;
   }
   body {
     overflow-x: clip;
   }
   * {
     @apply border-border outline-ring/50;
-    border-radius: 0 !important;
+  }
+  * {
+    border-radius: 0;
   }
   body {
     @apply bg-secondary text-foreground font-sans antialiased;
@@ -256,15 +256,7 @@
     background-color 0.2s ease,
     color 0.2s ease,
     border-color 0.2s ease,
-    transform 0.15s ease,
     opacity 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-.btn:active {
-  transform: translateY(0) scale(0.98);
 }
 
 .btn:disabled {
@@ -285,9 +277,7 @@
   border-color: var(--foreground);
 }
 
-.btn-primary:active {
-  transform: translateY(1px);
-}
+
 
 .btn-secondary {
   background: transparent;
@@ -300,9 +290,7 @@
   color: var(--background);
 }
 
-.btn-secondary:active {
-  transform: translateY(1px);
-}
+
 
 .btn-ghost {
   background: transparent;
@@ -315,9 +303,7 @@
   color: var(--accent);
 }
 
-.btn-ghost:active {
-  transform: translateY(1px);
-}
+
 
 .tag-pill {
   font-family: var(--font-accent);

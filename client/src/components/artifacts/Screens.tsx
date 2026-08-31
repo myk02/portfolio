@@ -2,7 +2,6 @@ import { ZoomImage } from "@/components/Lightbox";
 import {
   DeviceShowcase,
   PhoneMockup,
-  TabletMockup,
   DesktopMockup,
 } from "@/components/artifacts/DeviceMockups";
 import type { Shot } from "@/data/caseVisuals";
@@ -58,10 +57,7 @@ export function HeroDeviceShowcase({
         </span>
         {live && (
           <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-accent">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-            </span>
+            <span className="h-1.5 w-1.5 bg-accent" />
             Live product
           </span>
         )}
@@ -79,12 +75,12 @@ export function HeroDeviceShowcase({
 }
 
 /**
- * Shipped screens — each distinct screen shown as a mobile + tablet + desktop
- * device trio, so the responsive behaviour is visible at a glance.
+ * Shipped screens — each screen shown as a desktop frame with a phone thumbnail.
+ * Reduced from 3 mockups per screen to 2 to cut LCP weight.
  */
 export function DeviceShots({
   shots,
-  title = "Shipped screens — one design, three viewports",
+  title = "Shipped screens",
 }: {
   shots: Shot[];
   title?: string;
@@ -109,19 +105,14 @@ export function DeviceShots({
             <p className="text-[10px] font-mono uppercase tracking-widest text-foreground mb-2">
               {s.name}
             </p>
-            {/* desktop fills the column so the interface content is legible */}
             <DesktopMockup
               content={{ src: s.desktop, alt: `${s.alt} — desktop` }}
               className="w-full"
             />
-            <div className="mt-3 flex flex-wrap items-start gap-4 sm:gap-5">
+            <div className="mt-3 flex justify-start">
               <PhoneMockup
                 content={{ src: s.mobile, alt: `${s.alt} — mobile` }}
-                className="w-[200px] sm:w-[240px]"
-              />
-              <TabletMockup
-                content={{ src: s.tablet, alt: `${s.alt} — tablet` }}
-                className="w-[260px] sm:w-[320px]"
+                className="w-[200px] sm:w-[220px]"
               />
             </div>
             <p className="mt-2.5 text-[11px] text-muted-foreground leading-snug">

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { liveCount } from "@/data/caseStudies";
 import { absoluteUrl, OWNER, SITE_URL } from "@/lib/site";
 
 interface SiteHeadProps {
@@ -69,6 +70,6 @@ export default function SiteHead({
 export const DEFAULT_HEAD = {
   title: `${OWNER} — Software Developer · UI/UX Developer · Automation Specialist`,
   description:
-    "Nairobi-based software developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. Two live products shipped.",
+    `Nairobi-based software developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. ${liveCount} live products shipped.`,
   canonical: SITE_URL,
 };

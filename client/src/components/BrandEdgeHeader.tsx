@@ -92,7 +92,7 @@ export default function BrandEdgeHeader({ onNavClick }: BrandEdgeHeaderProps) {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-secondary/95 backdrop-blur-md border-b border-border shadow-[0_4px_24px_-8px_rgba(10,10,10,0.08)]"
+          ? "bg-secondary/95 border-b border-border"
           : "bg-transparent"
       }`}
     >

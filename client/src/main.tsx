@@ -10,10 +10,15 @@ if ("scrollRestoration" in history) {
 const convexUrl = import.meta.env.VITE_CONVEX_URL as string | undefined;
 
 if (!convexUrl) {
-  console.error("VITE_CONVEX_URL is not set. Portfolio data and forms will not work.");
+  if (import.meta.env.PROD) {
+    throw new Error("VITE_CONVEX_URL is not set.");
+  }
+  console.error("VITE_CONVEX_URL is not set. Portfolio forms will not work.");
 }
 
-const convex = new ConvexReactClient(convexUrl ?? "https://placeholder.convex.cloud");
+const convex = new ConvexReactClient(
+  convexUrl ?? "https://placeholder.convex.cloud",
+);
 
 createRoot(document.getElementById("root")!).render(
   <ConvexProvider client={convex}>

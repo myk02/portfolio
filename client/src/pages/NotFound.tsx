@@ -21,7 +21,7 @@ export default function NotFound() {
         />
       </div>
       <div className="relative max-w-lg w-full">
-        <div className="border border-border bg-card p-8 sm:p-10 text-center shadow-[0_12px_32px_-20px_rgba(10,10,10,0.18)]">
+        <div className="border border-border bg-card p-8 sm:p-10 text-center">
           <div className="inline-flex items-center gap-2 border border-accent bg-accent/10 px-3 py-1.5 mb-6">
             <span className="w-2 h-2 bg-accent" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-foreground">404 — Not found</span>

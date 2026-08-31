@@ -100,6 +100,15 @@ export default function BuyMeCoffee({
       setError("Please choose or enter an amount.");
       return;
     }
+    const limits: Record<Currency, { min: number; max: number }> = {
+      KES: { min: 50, max: 10000 },
+      USD: { min: 1, max: 100 },
+    };
+    const { min, max } = limits[currency];
+    if (amount < min || amount > max) {
+      setError(`Amount must be between ${CURRENCY_SYMBOL[currency]} ${min} and ${max}.`);
+      return;
+    }
     setError("");
     setStatus("working");
     try {

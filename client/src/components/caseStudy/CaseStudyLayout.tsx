@@ -3,13 +3,13 @@ import {
   ArrowLeft,
   ArrowRight,
   ExternalLink,
-  CheckCircle2,
-  XCircle,
 } from "lucide-react";
 import type { CaseStudy } from "@/data/caseStudies";
 import type { StudyVisuals } from "@/data/caseVisuals";
 import SiteHead from "@/components/SiteHead";
-import StatusBadge, { toneFromKind } from "@/components/engineering/StatusBadge";
+import StatusBadge, {
+  toneFromKind,
+} from "@/components/engineering/StatusBadge";
 import { HeroDeviceShowcase, DeviceShots } from "@/components/artifacts/Screens";
 import { MetricCardRow } from "@/components/artifacts/MetricCard";
 import BrandEdgeHeader from "@/components/BrandEdgeHeader";
@@ -24,95 +24,6 @@ interface LayoutProps {
   prev: { slug: string; name: string } | null;
   next: { slug: string; name: string } | null;
   moreWork: React.ReactNode;
-}
-
-function SketchBoard({ sketches }: { sketches: StudyVisuals["sketches"] }) {
-  const stateIcon = (state: "won" | "rejected" | "kept") => {
-    if (state === "won" || state === "kept")
-      return <CheckCircle2 size={13} className="text-accent shrink-0" />;
-    return <XCircle size={13} className="text-destructive shrink-0" />;
-  };
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {sketches.map((s) => (
-        <div
-          key={s.label}
-          className={`flex items-start gap-2.5 p-3 border text-[12px] ${
-            s.state === "rejected"
-              ? "border-border bg-card text-muted-foreground"
-              : "border-accent/30 bg-accent/5 text-foreground"
-          }`}
-        >
-          {stateIcon(s.state)}
-          <span className="leading-snug">{s.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function PersonaCards({ personas }: { personas: NonNullable<StudyVisuals["personas"]> }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {personas.map((p) => (
-        <div key={p.name} className="border border-border bg-card p-4 space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-foreground text-background font-display font-bold text-sm shrink-0">
-              {p.initials}
-            </div>
-            <div>
-              <p className="font-semibold text-foreground text-sm">{p.name}</p>
-              <p className="text-[11px] text-muted-foreground">{p.role} · {p.age}</p>
-            </div>
-          </div>
-          <blockquote className="text-[12px] italic text-muted-foreground border-l-2 border-accent pl-2.5 leading-snug">
-            "{p.quote}"
-          </blockquote>
-          <ul className="space-y-1">
-            {p.facts.map((f) => (
-              <li key={f.label} className="flex gap-2 text-[11px]">
-                <span className="text-muted-foreground shrink-0">{f.label}:</span>
-                <span className="text-foreground">{f.value}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function BrandEvolution({ brand }: { brand: NonNullable<StudyVisuals["brandEvolution"]> }) {
-  return (
-    <div className="space-y-3">
-      <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-        {brand.title}
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {brand.items.map((item) => (
-          <div
-            key={item.label}
-            className={`p-3 border ${
-              item.state === "rejected" ? "border-border" : "border-accent/30"
-            } bg-card`}
-          >
-            <div className="flex flex-wrap gap-1.5 mb-2">
-              {item.swatches.map((sw) => (
-                <span
-                  key={sw}
-                  className="w-5 h-5 border border-border"
-                  style={{ background: sw }}
-                  title={sw}
-                />
-              ))}
-            </div>
-            <p className="text-[11px] text-muted-foreground">{item.label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 /**
@@ -162,9 +73,11 @@ export default function CaseStudyLayout({
             <span className="px-2 py-1 text-[11px] font-mono uppercase tracking-widest bg-secondary border border-border text-muted-foreground">
               {study.year} · {study.timeline}
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#22c55e] border border-[#22c55e]/20 bg-[#22c55e]/10 px-2 py-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" /> Live product
+            {study.kind === "LIVE PRODUCT" && (
+            <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1">
+              Live
             </span>
+            )}
           </div>
 
           <h1
@@ -259,21 +172,8 @@ export default function CaseStudyLayout({
             </p>
           </Reveal>
 
-          {/* Personas */}
-          {visuals.personas && visuals.personas.length > 0 && (
-            <Reveal delay={1}>
-              <div className="mb-8">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                  User personas
-                </p>
-                <PersonaCards personas={visuals.personas} />
-              </div>
-            </Reveal>
-          )}
-
-          {/* Research bullets / callouts */}
           {study.research.bullets && study.research.bullets.length > 0 && (
-            <Reveal delay={2}>
+            <Reveal delay={1}>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {study.research.bullets.map((b) => (
                   <div key={b.text} className="border border-border bg-card p-4">
@@ -286,25 +186,6 @@ export default function CaseStudyLayout({
                       {b.text}
                     </p>
                   </div>
-                ))}
-              </div>
-            </Reveal>
-          )}
-
-          {/* Callouts */}
-          {study.research.callouts && study.research.callouts.length > 0 && (
-            <Reveal delay={3}>
-              <div className="mt-5 space-y-3">
-                {study.research.callouts.map((c) => (
-                  <blockquote
-                    key={c.quote}
-                    className="border-l-2 border-accent pl-4 py-1"
-                  >
-                    <p className="text-sm text-foreground italic">"{c.quote}"</p>
-                    <cite className="text-[11px] font-mono text-muted-foreground not-italic mt-1 block">
-                      — {c.source}
-                    </cite>
-                  </blockquote>
                 ))}
               </div>
             </Reveal>
@@ -325,18 +206,7 @@ export default function CaseStudyLayout({
             </p>
           </Reveal>
 
-          <Reveal delay={1}>
-            <SketchBoard sketches={visuals.sketches} />
-          </Reveal>
-
-          {/* Brand evolution for GiGi */}
-          {visuals.brandEvolution && (
-            <Reveal delay={2}>
-              <div className="mt-8">
-                <BrandEvolution brand={visuals.brandEvolution} />
-              </div>
-            </Reveal>
-          )}
+          {/* Design decisions are captured in the shipped screens below — no extra conceptual sketches */}
         </div>
       </section>
 
@@ -437,34 +307,6 @@ export default function CaseStudyLayout({
                       </li>
                     ))}
                   </ul>
-                </div>
-              </Reveal>
-            )}
-
-            {/* Roadmap */}
-            {visuals.roadmap.length > 0 && (
-              <Reveal delay={3}>
-                <div className="mt-6">
-                  <p
-                    className="text-[10px] font-mono uppercase tracking-widest mb-3"
-                    style={{ color: "rgba(242,237,230,0.5)" }}
-                  >
-                    Roadmap
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {visuals.roadmap.map((r) => (
-                      <span
-                        key={r}
-                        className="px-3 py-1 text-[11px] font-mono border"
-                        style={{
-                          borderColor: "rgba(242,237,230,0.15)",
-                          color: "rgba(242,237,230,0.6)",
-                        }}
-                      >
-                        {r}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </Reveal>
             )}
