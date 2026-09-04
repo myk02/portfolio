@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx vite build",
+  "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
   "framework": "vite",
   "rewrites": [

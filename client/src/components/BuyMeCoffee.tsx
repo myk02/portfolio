@@ -25,13 +25,11 @@ const inputClass =
 interface BuyMeCoffeeProps {
   label?: string;
   buttonClassName?: string;
-  onDark?: boolean;
 }
 
 export default function BuyMeCoffee({
   label = "Buy me a coffee",
   buttonClassName,
-  onDark = false,
 }: BuyMeCoffeeProps) {
   const [open, setOpen] = useState(false);
   const [currency, setCurrency] = useState<Currency>("KES");
@@ -135,9 +133,14 @@ export default function BuyMeCoffee({
           setError(err.message ?? "Payment failed to load. Please try again.");
         },
       });
-    } catch {
+    } catch (err) {
       setStatus("idle");
-      setError("Couldn't start the payment. Please try again.");
+      const message = err instanceof Error ? err.message : "";
+      setError(
+        /not configured/i.test(message)
+          ? "Tips are disabled on this deployment (payment key not configured). Please use the contact form instead — thank you!"
+          : "Couldn't start the payment. Please try again.",
+      );
     }
   };
 
@@ -146,13 +149,7 @@ export default function BuyMeCoffee({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={cn(
-          "btn",
-          onDark
-            ? "border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            : "btn-secondary",
-          buttonClassName
-        )}
+        className={cn("btn btn-secondary", buttonClassName)}
       >
         <Coffee size={16} />
         {label}

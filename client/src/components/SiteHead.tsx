@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { liveCount } from "@/data/caseStudies";
+import { liveCount } from "@/data/projects";
 import { absoluteUrl, OWNER, SITE_URL } from "@/lib/site";
 
 interface SiteHeadProps {
@@ -10,6 +10,8 @@ interface SiteHeadProps {
   image?: string;
   type?: "website" | "article";
   noindex?: boolean;
+  /** structured data, e.g. CreativeWork for a case study. Removed on unmount. */
+  jsonLd?: { id: string; data: Record<string, unknown> };
 }
 
 function upsertMeta(selector: string, attr: "name" | "property", key: string, content: string) {
@@ -20,6 +22,25 @@ function upsertMeta(selector: string, attr: "name" | "property", key: string, co
     document.head.appendChild(el);
   }
   el.setAttribute("content", content);
+}
+
+function upsertJsonLd(id: string, data: Record<string, unknown>) {
+  let el = document.head.querySelector<HTMLScriptElement>(
+    `script[data-jsonld="${id}"]`,
+  );
+  if (!el) {
+    el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.dataset.jsonld = id;
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(data);
+}
+
+function removeJsonLd(id: string) {
+  document.head
+    .querySelector(`script[data-jsonld="${id}"]`)
+    ?.remove();
 }
 
 function upsertLink(rel: string, href: string) {
@@ -43,6 +64,7 @@ export default function SiteHead({
   image = "/og-cover.png",
   type = "website",
   noindex = false,
+  jsonLd,
 }: SiteHeadProps) {
   useEffect(() => {
     const url = absoluteUrl(canonical);
@@ -62,14 +84,18 @@ export default function SiteHead({
     upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", img);
     upsertLink("canonical", url);
     upsertMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex, nofollow" : "index, follow");
-  }, [title, description, canonical, image, type, noindex]);
+    if (jsonLd) upsertJsonLd(jsonLd.id, jsonLd.data);
+    return () => {
+      if (jsonLd) removeJsonLd(jsonLd.id);
+    };
+  }, [title, description, canonical, image, type, noindex, jsonLd]);
 
   return null;
 }
 
 export const DEFAULT_HEAD = {
-  title: `${OWNER} — Software Developer · UI/UX Developer · Automation Specialist`,
+  title: `${OWNER} — Fullstack Developer | Automation Specialist | UX/UI Designer`,
   description:
-    `Nairobi-based software developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. ${liveCount} live products shipped.`,
+    `Nairobi-based fullstack developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. ${liveCount} live products shipped.`,
   canonical: SITE_URL,
 };

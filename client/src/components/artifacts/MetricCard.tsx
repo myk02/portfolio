@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
+import { Surface } from "@/components/ui/section";
 
 export interface MetricCardData {
   /** what is being measured, e.g. "Onboarding" */
@@ -45,7 +46,7 @@ export function MetricCard({
         : "border-accent bg-accent/25 text-foreground";
 
   return (
-    <div className="border border-border bg-card p-4 sm:p-5 flex flex-col gap-2 h-full">
+    <Surface className="p-4 sm:p-5 flex flex-col gap-2 h-full">
       <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
         {label}
       </p>
@@ -65,7 +66,7 @@ export function MetricCard({
         </p>
       )}
       {note && <p className="text-xs text-muted-foreground leading-snug mt-auto">{note}</p>}
-    </div>
+    </Surface>
   );
 }
 

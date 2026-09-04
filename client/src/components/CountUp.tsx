@@ -18,13 +18,7 @@ function parseCountable(value: string): { target: number; suffix: string } | nul
   return { target: Number(match[1]), suffix: match[2] ?? "" };
 }
 
-export function CountUp({
-  value,
-  className = "",
-}: {
-  value: string;
-  className?: string;
-}) {
+export function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);
 
@@ -65,7 +59,7 @@ export function CountUp({
   }, [value]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref}>
       {display}
     </span>
   );

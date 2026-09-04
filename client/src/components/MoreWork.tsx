@@ -1,72 +1,15 @@
-import { Link } from "wouter";
-import { caseStudies } from "@/data/caseStudies";
-
-function Thumb({ slug }: { slug: string }) {
-  const study = caseStudies.find((s) => s.slug === slug);
-  if (!study) return null;
-  const toVariant = (width: number) => {
-    if (!study.image) return "";
-    const dot = study.image.lastIndexOf(".");
-    if (dot === -1) return study.image;
-    const base = study.image.slice(0, dot);
-    const ext = study.image.slice(dot).toLowerCase();
-    if (ext === ".png" || ext === ".jpg" || ext === ".jpeg" || ext === ".webp") {
-      return `${base}-${width}.webp`;
-    }
-    return study.image;
-  };
-  return (
-    <Link
-      href={`/work/${slug}`}
-      className="group flex flex-col gap-2 w-[220px] sm:w-[240px] shrink-0"
-    >
-      <div className="border border-border bg-card p-3 overflow-hidden">
-        {study.image ? (
-          <img
-            src={toVariant(640)}
-            srcSet={`${toVariant(640)} 640w, ${toVariant(1200)} 1200w`}
-            sizes="240px"
-            width={1200}
-            height={750}
-            alt=""
-            loading="lazy"
-            className="w-full aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        ) : (
-          <div className="w-full aspect-[16/10] flex items-center justify-center bg-secondary">
-            <span className="font-display font-black text-4xl text-foreground/20 tracking-tight">
-              {study.name.split(" ").map((w) => w[0]).join("").slice(0, 3)}
-            </span>
-          </div>
-        )}
-      </div>
-      <div>
-        <p className="text-sm font-display font-bold text-foreground group-hover:underline underline-offset-4">
-          {study.name}
-        </p>
-        <p className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mt-0.5">
-          {study.year} · {study.kind}
-        </p>
-      </div>
-    </Link>
-  );
-}
+import { projects } from "@/data/projects";
+import { ProjectCardGrid } from "@/components/ProjectCard";
 
 export default function MoreWork({ current }: { current: string }) {
-  const others = caseStudies.filter((s) => s.slug !== current);
+  const others = projects.filter((s) => s.slug !== current);
   if (others.length === 0) return null;
   return (
-    <div className="mt-10">
-      <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12 border-t border-border">
+      <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-6">
         More work
       </p>
-      <div className="flex gap-5 overflow-x-auto pb-3 snap-x">
-        {others.map((s) => (
-          <div key={s.slug} className="snap-start">
-            <Thumb slug={s.slug} />
-          </div>
-        ))}
-      </div>
+      <ProjectCardGrid studies={others} />
     </div>
   );
 }

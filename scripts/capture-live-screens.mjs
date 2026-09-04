@@ -1,9 +1,13 @@
 /**
- * Captures DISTINCT screens from the two live products so every case-study
- * chapter can show a different artifact (Phase 1.4 — no duplicated images).
+ * Captures DISTINCT screens from the live products for the case studies.
  *
  * Output: client/public/shots/<slug>/<name>-<viewport>.jpg
  * Run:    node scripts/capture-live-screens.mjs
+ *
+ * Viewports: desktop only by default — nothing in client/src references
+ * mobile/tablet captures (Phase 0 media diet). Add "mobile" to a screen's
+ * viewports only when Phase 2 needs an annotated desktop/mobile pair for
+ * the money flow, and wire the file into the data the same commit.
  */
 import { chromium } from "playwright";
 import fs from "fs";
@@ -13,8 +17,6 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(__dirname, "..", "client", "public", "shots");
 
-const MOBILE = { width: 390, height: 844 };
-const TABLET = { width: 834, height: 1112 };
 const DESKTOP = { width: 1440, height: 900 };
 
 /** name → url (+ optional scrollTo in px, or a heading marker to scroll into view) */
@@ -23,32 +25,32 @@ const TARGETS = [
     slug: "kenyatrace",
     base: "https://kenyatrace.vercel.app",
     screens: [
-      { name: "home", path: "/", viewports: ["mobile", "tablet", "desktop"] },
+      { name: "home", path: "/", viewports: ["desktop"] },
       {
         name: "home-cards",
         path: "/",
         marker: "Places worth the detour",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "discover",
         path: "/discover",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "plan",
         path: "/plan",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "trips",
         path: "/trips",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "stays",
         path: "/discover/stays",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
     ],
   },
@@ -56,28 +58,28 @@ const TARGETS = [
     slug: "gigi-energy",
     base: "https://gigiflavours.vercel.app",
     screens: [
-      { name: "home", path: "/", viewports: ["mobile", "tablet", "desktop"] },
+      { name: "home", path: "/", viewports: ["desktop"] },
       {
         name: "home-products",
         path: "/",
         marker: "CHOOSE YOUR FUEL",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "flavours",
         path: "/flavours",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "events",
         path: "/events",
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "home-scroll",
         path: "/",
         scroll: 1100,
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
     ],
   },
@@ -85,18 +87,18 @@ const TARGETS = [
     slug: "legalflow",
     base: "https://law-ten-iota.vercel.app",
     screens: [
-      { name: "home", path: "/", viewports: ["mobile", "tablet", "desktop"] },
+      { name: "home", path: "/", viewports: ["desktop"] },
       {
         name: "home-scroll",
         path: "/",
         scroll: 900,
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
       {
         name: "home-features",
         path: "/",
         scroll: 1900,
-        viewports: ["mobile", "tablet", "desktop"],
+        viewports: ["desktop"],
       },
     ],
   },
@@ -110,8 +112,7 @@ for (const target of TARGETS) {
 
   for (const screen of target.screens) {
     for (const vp of screen.viewports) {
-      const viewport =
-        vp === "mobile" ? MOBILE : vp === "tablet" ? TABLET : DESKTOP;
+      const viewport = DESKTOP;
       const ctx = await browser.newContext({
         viewport,
         deviceScaleFactor: 2,
