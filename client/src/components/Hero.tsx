@@ -65,10 +65,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
       return (
         <>
           {headlineParts[0]}
-          <span className="relative inline-block">
-            <span className="relative z-10 px-1.5 py-0.5 bg-accent text-accent-foreground font-black">
-              automate
-            </span>
+          <span className="bg-accent text-accent-foreground font-black px-[0.14em] box-decoration-clone">
+            automate
           </span>
           {headlineParts[1]}
         </>
@@ -94,10 +92,10 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
 
               <h1
-                className="heading-serif font-black tracking-tight max-w-[560px] text-foreground"
+                className="heading-serif font-black tracking-tight max-w-[560px] text-foreground text-balance"
                 style={{
                   fontSize: "clamp(2.15rem, 5.2vw, 3.4rem)",
-                  lineHeight: 0.95,
+                  lineHeight: 1.02,
                   letterSpacing: "-0.03em",
                 }}
               >
