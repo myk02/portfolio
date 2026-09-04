@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = "theme";
 
 /** Mirrors the inline boot script in index.html — must stay in sync. */
-export function getInitialTheme(fallback: Theme = "light"): Theme {
+export function getInitialTheme(fallback: Theme = "dark"): Theme {
   if (typeof window === "undefined") return fallback;
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -32,7 +32,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "light",
+  defaultTheme = "dark",
   switchable = false,
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme(defaultTheme));

@@ -146,7 +146,7 @@ test.describe("case study pages — lean template", () => {
 
   test("document titles reflect positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Fullstack Developer/);
+    await expect(page).toHaveTitle(/Developer, Designer/);
     await page.goto("/work/kenyatrace");
     await expect(page).toHaveTitle(/live product/);
   });

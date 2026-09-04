@@ -64,7 +64,7 @@ function App() {
     <ErrorBoundary>
       {/* Respect the user's OS reduced-motion preference across all Framer animations */}
       <MotionConfig reducedMotion="user">
-        <ThemeProvider defaultTheme="light" switchable>
+        <ThemeProvider defaultTheme="dark" switchable>
           <LightboxProvider>
             <NavigateBridge />
             <ScrollToTop />
