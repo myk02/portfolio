@@ -47,8 +47,8 @@ export default function SiteFooter() {
                 </span>
               </Link>
               <p className="text-sm text-background/65 mt-3 max-w-sm leading-relaxed">
-                Fullstack developer in Nairobi — reliable products from research
-                to deployment. Remote.
+                Developer & designer in Nairobi — brand direction, web apps,
+                and AI automation. Remote.
               </p>
             </div>
 

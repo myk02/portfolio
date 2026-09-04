@@ -94,8 +94,8 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `${OWNER} — Fullstack Developer | Automation Specialist | UX/UI Designer`,
+  title: `${OWNER} — Developer, Designer, Tech Support & Automation Specialist`,
   description:
-    `Nairobi-based fullstack developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. ${liveCount} live products shipped.`,
+    `Nairobi-based developer and designer crafting brand direction, web apps, AI automation, and launch-ready digital experiences. ${liveCount} live products shipped.`,
   canonical: SITE_URL,
 };
