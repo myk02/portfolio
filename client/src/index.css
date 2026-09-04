@@ -6,7 +6,6 @@
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-accent: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -79,6 +78,7 @@
   --sidebar-accent-foreground: #0a0a0a;
   --sidebar-border: rgba(10, 10, 10, 0.12);
   --sidebar-ring: #e8ff47;
+  --live: #16a34a;
 }
 
 .dark {
@@ -114,6 +114,7 @@
   --sidebar-accent-foreground: #141310;
   --sidebar-border: rgba(242, 237, 230, 0.14);
   --sidebar-ring: #e8ff47;
+  --live: #4ade80;
 }
 
 @layer base {
@@ -132,7 +133,7 @@
     border-radius: 0;
   }
   body {
-    @apply bg-secondary text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -192,16 +193,6 @@
   font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(242, 237, 230, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 237, 230, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -234,14 +225,8 @@
   text-transform: uppercase;
 }
 
-.border-brutal {
-  border-width: 1.5px;
-  border-style: solid;
-  border-color: var(--border);
-}
-
 .btn {
-  font-family: var(--font-accent);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -277,8 +262,6 @@
   border-color: var(--foreground);
 }
 
-
-
 .btn-secondary {
   background: transparent;
   color: var(--foreground);
@@ -289,8 +272,6 @@
   background: var(--foreground);
   color: var(--background);
 }
-
-
 
 .btn-ghost {
   background: transparent;
@@ -303,73 +284,6 @@
   color: var(--accent);
 }
 
-
-
-.tag-pill {
-  font-family: var(--font-accent);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid var(--border);
-  background: var(--muted);
-}
-
-/* preserve old form styles for forms */
-.form-shell {
-  background: var(--background);
-}
-
-.form-field {
-  border-bottom: 1.5px solid var(--border);
-  background: transparent;
-  transition: border-color 0.2s ease;
-}
-
-.form-field:focus {
-  border-color: var(--accent);
-  outline: none;
-}
-
-.dark .form-field {
-  border-color: rgba(242, 237, 230, 0.12);
-}
-
-.section-title-accent {
-  font-family: var(--font-display);
-  color: var(--foreground);
-}
-
-.type-form-title {
-  font-family: var(--font-display);
-}
-
-.type-subtitle-hand {
-  font-family: var(--font-sans);
-}
-
-/* hide scrollbar for drag container */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* soft radius helpers — the global `border-radius: 0` override stays for the
-   brutalist identity; apply these where rounding is intentional (phones, chips) */
-.rounded-soft {
-  border-radius: 14px !important;
-}
-.rounded-soft-sm {
-  border-radius: 9px !important;
-}
-.rounded-pill {
-  border-radius: 9999px !important;
-}
-
-/* hero kicker — CSS-only, paints with first frame (no JS gating) */
 .hero-kicker {
   opacity: 0;
   transform: translateY(12px);
@@ -380,14 +294,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* scroll-reveal — no blank: always visible, only transform animates when JS is present */
-.scrollbar-none {
-  scrollbar-width: none;
-}
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
 }
 
 [data-reveal] {
@@ -424,34 +330,18 @@ html.js [data-reveal].reveal-scale.in-view {
   }
 }
 
-/* lime flash on work-tile hover */
-.tile-flash {
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--accent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-.group:hover .tile-flash {
-  opacity: 1;
-}
-
-/* live dot pulse */
 .live-dot {
   width: 8px;
   height: 8px;
   border-radius: 9999px !important;
-  background: #22c55e;
+  background: var(--live);
   position: relative;
-}
-.live-dot::after {
+}.live-dot::after {
   content: "";
   position: absolute;
   inset: -4px;
   border-radius: 9999px !important;
-  border: 1px solid #22c55e;
+  border: 1px solid var(--live);
   animation: livePulse 1.8s ease-out infinite;
 }
 @keyframes livePulse {
@@ -463,6 +353,19 @@ html.js [data-reveal].reveal-scale.in-view {
     transform: scale(1.6);
     opacity: 0;
   }
+}
+
+/* Lightbox is a deliberate always-dark viewer (works in both themes).
+   All hex lives here — no literals in Lightbox.tsx. */
+.lightbox {
+  --lightbox-bg: #0b0a08;
+  --lightbox-fg: #f2ede6;
+  --lightbox-dim: rgb(242 237 230 / 0.7);
+  --lightbox-faint: rgb(242 237 230 / 0.5);
+  --lightbox-line: rgb(242 237 230 / 0.15);
+  --lightbox-edge: rgb(242 237 230 / 0.25);
+  --lightbox-accent: #e8ff47;
+  --lightbox-ink: #141310;
 }
 
 @media (prefers-reduced-motion: reduce) {

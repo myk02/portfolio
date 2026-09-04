@@ -33,8 +33,10 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     server: {
-      port: 5173,
-      strictPort: false, // Will find next available port if 5173 is busy
+      // 5173 is often reserved by Windows Hyper-V (excluded TCP ranges),
+      // which yields EACCES instead of a busy-port retry.
+      port: 3000,
+      strictPort: false,
       host: true,
       fs: {
         strict: true,

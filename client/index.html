@@ -6,10 +6,10 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1" />
-    <title>Mike Waitindi - Software Developer · UI/UX Developer · Automation Specialist</title>
-    <meta name="description" content="Nairobi-based software developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. Three live products shipped." />
+    <title>Mike Waitindi - Fullstack Developer | Automation Specialist | UX/UI Designer</title>
+    <meta name="description" content="Nairobi-based fullstack developer building reliable, accessible web products from design to deployment — React, TypeScript, REST APIs, automation and testing. Three live products shipped." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Mike Waitindi - Software Developer · UI/UX Developer · Automation Specialist" />
+    <meta property="og:title" content="Mike Waitindi - Fullstack Developer | Automation Specialist | UX/UI Designer" />
     <meta property="og:description" content="I build reliable web products from design to deployment — responsive, accessible interfaces, real API integration, and testing that keeps them healthy." />
     <meta property="og:url" content="https://mikeships.vercel.app/" />
     <meta property="og:image" content="https://mikeships.vercel.app/og-cover.png" />
@@ -17,15 +17,33 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mike Waitindi",
+        "url": "https://mikeships.vercel.app",
+        "jobTitle": "Fullstack Developer",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Nairobi",
+          "addressCountry": "KE"
+        },
+        "email": "mailto:mikegary201@gmail.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/mikeships",
+          "https://github.com/myk02"
+        ]
+      }
+    </script>
     <script>
       document.documentElement.classList.add("js");
       (function () {
         var stored = null;
         try { stored = localStorage.getItem("theme"); } catch (e) {}
-        var dark = stored === "dark"
-          || ((stored !== "light") && !window.matchMedia("(prefers-color-scheme: light)").matches);
-        document.documentElement.classList.toggle("dark", dark);
+        /* Cream identity is the default; dark is opt-in via the toggle. */
+        document.documentElement.classList.toggle("dark", stored === "dark");
       })();
     </script>
   </head>

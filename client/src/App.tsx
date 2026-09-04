@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { LightboxProvider } from "@/components/Lightbox";
 import { Toaster } from "@/components/ui/sonner";
+import Analytics from "@/components/Analytics";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -57,15 +58,32 @@ function Router() {
 }
 
 function App() {
+  const convexMissing =
+    import.meta.env.DEV && !import.meta.env.VITE_CONVEX_URL;
   return (
     <ErrorBoundary>
       {/* Respect the user's OS reduced-motion preference across all Framer animations */}
       <MotionConfig reducedMotion="user">
-        <ThemeProvider defaultTheme="dark" switchable>
+        <ThemeProvider defaultTheme="light" switchable>
           <LightboxProvider>
             <NavigateBridge />
             <ScrollToTop />
             <Toaster />
+            <Analytics />
+            <a
+              href="#main"
+              className="sr-only focus:not-sr-only focus:absolute focus:z-[130] focus:px-4 focus:py-2 focus:bg-accent focus:text-accent-foreground focus:text-sm focus:font-medium"
+            >
+              Skip to content
+            </a>
+            {convexMissing && (
+              <p
+                role="status"
+                className="bg-accent text-accent-foreground text-center text-xs font-mono uppercase tracking-widest px-4 py-2"
+              >
+                Dev: VITE_CONVEX_URL not set — contact form and tips are disabled
+              </p>
+            )}
             <Router />
           </LightboxProvider>
         </ThemeProvider>

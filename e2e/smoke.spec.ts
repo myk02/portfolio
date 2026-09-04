@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
+// Single source of truth: slugs live in client/src/data/projects.ts
+import { projects } from "../client/src/data/projects";
 
-const LIVE_SLUGS = ["kenyatrace", "gigi-energy", "legalflow"];
+const LIVE_SLUGS = projects.map((s) => s.slug);
 
 test.describe("home page", () => {
   test("renders engineering-led hero with primary CTAs", async ({ page }) => {
@@ -8,15 +10,12 @@ test.describe("home page", () => {
     page.on("pageerror", e => errors.push(e.message));
 
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: /I ship reliable/ })).toBeVisible();
-    await expect(
-      page.getByText("Software Developer · UI/UX Developer · Automation Specialist")
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: /design, automate/ })).toBeVisible();
 
-    // Hero: BuyMeCoffee visible for donations (accent pill) + primary CTAs
-    const heroCoffee = page.locator("#home").getByRole("button", { name: /buy me a coffee/i });
-    await expect(heroCoffee).toBeVisible();
-    await expect(heroCoffee).toHaveClass(/bg-accent/);
+    // Hero: hire CTAs + coffee (footer keeps a second instance)
+    await expect(
+      page.locator("#home").getByRole("button", { name: /buy me a coffee/i })
+    ).toBeVisible();
     await expect(
       page.locator("#home").getByRole("button", { name: "View live work" })
     ).toBeVisible();
@@ -30,27 +29,56 @@ test.describe("home page", () => {
       page.getByText(/Live products/).first()
     ).toBeVisible();
 
+    await expect(
+      page.getByRole("link", { name: "github.com/myk02" })
+    ).toBeVisible();
+
     expect(errors).toEqual([]);
   });
 
-  test("shows exactly the two live projects with real screenshots", async ({
+  test("shows three live products with real screenshots", async ({
     page,
   }) => {
     await page.goto("/");
 
-    await expect(
-      page.getByRole("link", { name: /KenyaTrace — case study/i })
-    ).toBeVisible();
     await expect(page.getByText("Live production", { exact: true })).toHaveCount(3);
     await expect(page.getByText("Concept study")).toHaveCount(0);
 
-    await expect(page.getByRole("link", { name: /^Case study$/ })).toHaveCount(3);
-    await expect(page.getByRole("link", { name: /^Live site/ })).toHaveCount(3);
+    const workGrid = page.locator("#work");
+    const hrefs = await workGrid
+      .locator('a[href^="/work/"]')
+      .evaluateAll(els =>
+        Array.from(new Set(els.map(el => el.getAttribute("href"))))
+      );
+    expect(hrefs.sort()).toEqual(LIVE_SLUGS.map(s => `/work/${s}`).sort());
 
-    const tileImages = page.locator('a[aria-label*="case study"] img');
-    await expect(tileImages).toHaveCount(6);
+    const tileImages = workGrid.locator('a[href^="/work/"] img');
+    await expect(tileImages).toHaveCount(3);
   });
 
+});
+
+test.describe("project data — single source, unique screens", () => {
+  test("tile, hero, decisions, and gallery never repeat a src", async () => {
+    for (const p of projects) {
+      const srcs = [
+        p.tileShot,
+        p.hero.src,
+        ...p.decisions.filter((d) => d.shot).map((d) => d.shot as string),
+        ...p.screens.map((s) => s.src),
+      ];
+      expect(new Set(srcs).size).toBe(srcs.length);
+    }
+  });
+
+  test("every study has ownership, ordeal, and context", async () => {
+    for (const p of projects) {
+      expect(p.outcomeTitle.length).toBeGreaterThan(0);
+      expect(p.context.length).toBeGreaterThan(0);
+      expect(p.ownership).toHaveLength(3);
+      expect(p.ordeal.length).toBeGreaterThan(0);
+    }
+  });
 });
 
 test.describe("work page", () => {
@@ -85,9 +113,16 @@ test.describe("case study pages — lean template", () => {
       // Real-screenshot gallery + numbers
       await expect(page.getByRole("heading", { name: "Screens" })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Results" })).toBeVisible();
+      await expect(page.getByText("Design decisions")).toBeVisible();
       // Live out-link
       const liveLink = page.getByRole("link", { name: /View live product/ });
       await expect(liveLink.first()).toBeVisible();
+      // Structured data for the shipped product
+      const jsonLd = page.locator(
+        'script[type="application/ld+json"][data-jsonld^="creative-work-"]',
+      );
+      await expect(jsonLd).toHaveCount(1);
+      expect(await jsonLd.textContent()).toContain("WebApplication");
     }
   });
 
@@ -111,7 +146,7 @@ test.describe("case study pages — lean template", () => {
 
   test("document titles reflect positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Software Developer/);
+    await expect(page).toHaveTitle(/Fullstack Developer/);
     await page.goto("/work/kenyatrace");
     await expect(page).toHaveTitle(/live product/);
   });
@@ -152,5 +187,20 @@ test.describe("contact form", () => {
       "Please fill in all fields"
     );
     await expect(page.locator("#name")).toHaveAttribute("aria-invalid", "true");
+  });
+});
+
+test.describe("buy me a coffee", () => {
+  test("footer shows buy-me-a-coffee and opens the tip dialog", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const footer = page.locator("footer");
+    await expect(
+      footer.getByRole("button", { name: /buy me a coffee/i })
+    ).toBeVisible();
+    await footer.getByRole("button", { name: /buy me a coffee/i }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.keyboard.press("Escape");
   });
 });

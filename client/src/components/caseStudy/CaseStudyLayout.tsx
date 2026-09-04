@@ -1,152 +1,222 @@
 import { Link } from "wouter";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ExternalLink,
-} from "lucide-react";
-import type { CaseStudy } from "@/data/caseStudies";
-import type { StudyVisuals } from "@/data/caseVisuals";
+import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react";
+import type { Project } from "@/data/projects";
+import { OWNER, SITE_URL } from "@/lib/site";
 import SiteHead from "@/components/SiteHead";
-import StatusBadge, {
-  toneFromKind,
-} from "@/components/engineering/StatusBadge";
-import { HeroDeviceShowcase, DeviceShots } from "@/components/artifacts/Screens";
+import StatusBadge from "@/components/engineering/StatusBadge";
+import { DeviceShots, ShotFigure } from "@/components/artifacts/Screens";
 import { MetricCardRow } from "@/components/artifacts/MetricCard";
-import BrandEdgeHeader from "@/components/BrandEdgeHeader";
-import BrandEdgeFooter from "@/components/BrandEdgeFooter";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { Reveal } from "@/components/Reveal";
+import { SectionLabel, Surface } from "@/components/ui/section";
 import { useReveal } from "@/hooks/useReveal";
-import { goHomeToSection } from "@/lib/navigation";
 
 interface LayoutProps {
-  study: CaseStudy;
-  visuals: StudyVisuals;
+  project: Project;
   prev: { slug: string; name: string } | null;
   next: { slug: string; name: string } | null;
   moreWork: React.ReactNode;
 }
 
+function uniqueSrcs(project: Project) {
+  const used = new Set<string>([project.hero.src]);
+  const decisionShots =
+    project.decisions.filter((b) => b.shot && !used.has(b.shot)) ?? [];
+  decisionShots.forEach((b) => used.add(b.shot!));
+  const textDecisions = project.decisions.filter((b) => !b.shot);
+  const gallery = (project.screens ?? []).filter((s) => !used.has(s.src));
+  return { decisionShots, textDecisions, gallery };
+}
+
 /**
- * Visual-first case study template.
- * Header → Three-fact bar → Hero devices → Process sections (Research / Design / Test) →
- * Screens → Results → Engineering notes → Prev/Next → More work.
+ * Visual-first case study: outcome + snapshot + one money shot, then
+ * ownership → problem → decisions → screens → results → compact build notes.
  */
 export default function CaseStudyLayout({
-  study,
-  visuals,
+  project,
   prev,
   next,
   moreWork,
 }: LayoutProps) {
   useReveal();
-  const isExternal = visuals.prototype.kind === "external";
+  const { decisionShots, textDecisions, gallery } = uniqueSrcs(project);
 
-  const scrollToSection = (id: string) => goHomeToSection(id);
+  const noteGroups = project.buildNotes
+    ? [
+        { label: "Architecture", items: project.buildNotes.architecture },
+        { label: "Build", items: project.buildNotes.build },
+        { label: "Quality", items: project.buildNotes.quality },
+      ].filter((g) => g.items && g.items.length > 0)
+    : [];
 
   return (
     <div className="min-h-screen bg-background">
       <SiteHead
-        title={`${study.name} — ${
-          toneFromKind(study.kind) === "live" ? "live product" : "case study"
-        } | Mike Waitindi`}
-        description={`${study.tagline} Stack: ${study.stack.join(", ")}.`}
-        canonical={`/work/${study.slug}`}
-        image={visuals.hero?.desktop ?? "/og-cover.png"}
+        title={`${project.name} — live product | Mike Waitindi`}
+        description={`${project.tagline} Stack: ${project.stack.join(", ")}.`}
+        canonical={`/work/${project.slug}`}
+        image={project.hero.src}
         type="article"
+        jsonLd={
+          project.liveUrl
+            ? {
+                id: `creative-work-${project.slug}`,
+                data: {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  name: project.name,
+                  url: project.liveUrl,
+                  applicationCategory: "WebApplication",
+                  operatingSystem: "Web",
+                  description: project.tagline,
+                  author: {
+                    "@type": "Person",
+                    name: OWNER,
+                    url: SITE_URL,
+                  },
+                },
+              }
+            : undefined
+        }
       />
 
-      <BrandEdgeHeader onNavClick={scrollToSection} />
+      <SiteHeader />
 
-      {/* ── HERO ──────────────────────────────────────────────────── */}
-      <header className="border-b border-border pt-16 relative">
-        <div className="absolute top-16 left-0 right-0 h-[3px] bg-accent" aria-hidden />
+      <main id="main" tabIndex={-1} className="outline-none">
+      <header className="border-b border-border pt-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-8 sm:pt-14 sm:pb-10">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors border border-transparent hover:border-border px-2 py-1 -ml-2"
+            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft size={13} aria-hidden /> Work
           </Link>
 
           <div className="mt-6 flex flex-wrap items-center gap-2.5">
-            <StatusBadge tone={toneFromKind(study.kind)} />
+            <StatusBadge />
             <span className="px-2 py-1 text-[11px] font-mono uppercase tracking-widest bg-secondary border border-border text-muted-foreground">
-              {study.year} · {study.timeline}
+              {project.year} · {project.timeline}
             </span>
-            {study.kind === "LIVE PRODUCT" && (
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1">
-              Live
-            </span>
-            )}
           </div>
 
+          <p className="mt-5 text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] text-muted-foreground">
+            {project.outcomeTitle}
+          </p>
           <h1
-            className="mt-4 font-display font-black text-foreground tracking-tight leading-[0.95]"
-            style={{ fontSize: "clamp(2.5rem, 7vw, 4.6rem)", letterSpacing: "-0.03em" }}
+            className="mt-2 font-display font-black text-foreground tracking-tight leading-[0.95]"
+            style={{
+              fontSize: "clamp(2.5rem, 7vw, 4.6rem)",
+              letterSpacing: "-0.03em",
+            }}
           >
-            {study.name}<span className="text-accent">.</span>
+            {project.name}
           </h1>
           <p className="mt-3 max-w-2xl text-[17px] sm:text-[19px] text-foreground/80 leading-snug font-medium">
-            {study.tagline}
+            {project.tagline}
           </p>
 
-          {/* THREE FACTS — as cards */}
           <dl className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { label: "Role", value: study.role },
-              { label: "Stack", value: study.stack.join(" · ") },
-              { label: "Outcome", value: study.outcomeLine },
+              { label: "Role", value: project.role },
+              { label: "Stack", value: project.stack.join(" · ") },
+              { label: "Outcome", value: project.outcomeLine },
             ].map((f) => (
-              <div key={f.label} className="border border-border bg-card p-4">
-                <dt className="text-[10px] font-mono uppercase tracking-widest text-accent">
+              <Surface key={f.label} className="p-4">
+                <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   {f.label}
                 </dt>
                 <dd className="text-[13px] text-foreground leading-snug mt-2 font-medium">
                   {f.value}
                 </dd>
-              </div>
+              </Surface>
             ))}
           </dl>
 
-          {/* LIVE LINK */}
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href={visuals.prototype.href}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
-              className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-3 text-sm font-semibold hover:bg-accent hover:text-accent-foreground border border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-            >
-              <ExternalLink size={15} aria-hidden /> {visuals.prototype.label}
-            </a>
-            <span className="inline-flex items-center text-xs font-mono uppercase tracking-widest text-muted-foreground border border-border bg-card px-3 py-2">
-              No paywall · Open in new tab
-            </span>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-3 text-sm font-semibold hover:bg-accent hover:text-accent-foreground border border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                <ExternalLink size={15} aria-hidden /> View live product ↗
+              </a>
+            )}
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground hover:border-foreground transition-colors"
+              >
+                <Github size={15} aria-hidden /> Source
+              </a>
+            )}
           </div>
 
-          {/* HERO DEVICE SHOWCASE */}
-          {visuals.hero && (
-            <div className="mt-8 sm:mt-10">
-              <HeroDeviceShowcase hero={visuals.hero} live />
-            </div>
-          )}
+          <div className="mt-8 sm:mt-10">
+            <ShotFigure
+              src={project.hero.src}
+              alt={project.hero.alt}
+              caption={project.hero.caption}
+              eager
+            />
+          </div>
         </div>
       </header>
 
-      {/* ── PROBLEM ───────────────────────────────────────────────── */}
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
           <Reveal>
-            <span className="section-label mb-4">
-              <span className="section-label-line" />
-              01 · Problem
-            </span>
-            <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl tracking-tight mb-3">
-              {study.problem.lead}
+            <SectionLabel>What I owned</SectionLabel>
+          </Reveal>
+          <ul className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {project.ownership.map((item) => (
+              <Reveal key={item}>
+                <li className="border border-border bg-card p-4 text-[13px] text-foreground leading-snug">
+                  <span
+                    className="block w-1.5 h-1.5 bg-accent mb-2"
+                    aria-hidden
+                  />
+                  {item}
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+          <Reveal>
+            <SectionLabel>Problem</SectionLabel>
+            <p className="text-muted-foreground text-sm max-w-2xl">
+              {project.context}
+            </p>
+            <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl tracking-tight mt-4 mb-3">
+              {project.problemLead}
             </h2>
+            {project.researchLead && (
+              <p className="text-muted-foreground text-sm max-w-2xl">
+                {project.researchLead}
+              </p>
+            )}
+          </Reveal>
+          <Reveal delay={1}>
+            <Surface className="mt-6 p-5 border-l-4 border-l-accent max-w-2xl">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                What broke the plan
+              </p>
+              <p className="text-sm text-foreground leading-snug">
+                {project.ordeal}
+              </p>
+            </Surface>
           </Reveal>
           <Reveal delay={1}>
             <div className="flex flex-wrap gap-2 mt-4">
-              {study.constraints.map((c) => (
+              {project.constraints.map((c) => (
                 <span
                   key={c}
                   className="px-3 py-1.5 text-[11px] font-mono border border-border bg-card text-muted-foreground"
@@ -159,148 +229,116 @@ export default function CaseStudyLayout({
         </div>
       </section>
 
-      {/* ── RESEARCH ──────────────────────────────────────────────── */}
       <section className="border-b border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
           <Reveal>
-            <span className="section-label mb-4">
-              <span className="section-label-line" />
-              02 · Research
-            </span>
-            <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-              {study.research.lead}
-            </p>
+            <SectionLabel>Design decisions</SectionLabel>
           </Reveal>
 
-          {study.research.bullets && study.research.bullets.length > 0 && (
-            <Reveal delay={1}>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {study.research.bullets.map((b) => (
-                  <div key={b.text} className="border border-border bg-card p-4">
-                    {b.label && (
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1">
-                        {b.label}
-                      </p>
+          {decisionShots.length > 0 && (
+            <div className="grid grid-cols-1 gap-8 mt-6">
+              {decisionShots.map((b) => (
+                <Reveal key={b.text}>
+                  <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-5 items-start">
+                    <div>
+                      {b.label && (
+                        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                          {b.label}
+                        </p>
+                      )}
+                      <p className="text-foreground leading-snug">{b.text}</p>
+                    </div>
+                    {b.shot && (
+                      <ShotFigure src={b.shot} alt={b.alt ?? b.text} />
                     )}
-                    <p className="text-[13px] text-foreground leading-snug">
-                      {b.text}
-                    </p>
                   </div>
-                ))}
-              </div>
-            </Reveal>
-          )}
-        </div>
-      </section>
-
-      {/* ── DESIGN THINKING ───────────────────────────────────────── */}
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
-          <Reveal>
-            <span className="section-label mb-4">
-              <span className="section-label-line" />
-              03 · Design decisions
-            </span>
-            <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-              {study.designThinking.lead}
-            </p>
-          </Reveal>
-
-          {/* Design decisions are captured in the shipped screens below — no extra conceptual sketches */}
-        </div>
-      </section>
-
-      {/* ── TEST / VALIDATE ───────────────────────────────────────── */}
-      <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
-          <Reveal>
-            <span className="section-label mb-4">
-              <span className="section-label-line" />
-              04 · Test & iterate
-            </span>
-          </Reveal>
-          <Reveal delay={1}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="border border-border bg-card p-5 border-l-4 border-l-destructive">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-destructive mb-2">
-                  {visuals.validate.before.label}
-                </p>
-                <p className="text-sm text-foreground leading-snug">
-                  {visuals.validate.before.note}
-                </p>
-              </div>
-              <div className="border border-border bg-card p-5 border-l-4 border-l-accent">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-2">
-                  {visuals.validate.after.label}
-                </p>
-                <p className="text-sm text-foreground leading-snug">
-                  {visuals.validate.after.note}
-                </p>
-              </div>
+                </Reveal>
+              ))}
             </div>
-          </Reveal>
+          )}
+
+          {textDecisions.length > 0 && (
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-3 gap-4 ${decisionShots.length > 0 ? "mt-6" : "mt-6"}`}
+            >
+              {textDecisions.map((b) => (
+                <Surface key={b.text} className="p-4">
+                  {b.label && (
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
+                      {b.label}
+                    </p>
+                  )}
+                  <p className="text-[13px] text-foreground leading-snug">
+                    {b.text}
+                  </p>
+                </Surface>
+              ))}
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+            <Surface className="p-5 border-l-4 border-l-destructive">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-destructive mb-2">
+                Before
+              </p>
+              <p className="text-sm text-foreground leading-snug">
+                {project.validateBefore}
+              </p>
+            </Surface>
+            <Surface className="p-5 border-l-4 border-l-accent">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                After
+              </p>
+              <p className="text-sm text-foreground leading-snug">
+                {project.validateAfter}
+              </p>
+            </Surface>
+          </div>
         </div>
       </section>
 
-      {/* ── SCREENS ───────────────────────────────────────────────── */}
-      {visuals.screens && visuals.screens.length > 0 && (
-        <section aria-label={`${study.name} screens`} className="border-b border-border">
+      {gallery.length > 0 && (
+        <section
+          aria-label={`${project.name} screens`}
+          className="border-b border-border"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
             <Reveal>
-              <span className="section-label mb-4">
-                <span className="section-label-line" />
-                05 · Shipped screens
-              </span>
+            <SectionLabel>Shipped screens</SectionLabel>
               <h2 className="font-display font-bold text-foreground tracking-tight text-2xl mb-6">
                 Screens
               </h2>
             </Reveal>
-            <DeviceShots shots={visuals.screens} />
+            <DeviceShots shots={gallery} />
           </div>
         </section>
       )}
 
-      {/* ── RESULTS ───────────────────────────────────────────────── */}
-      {visuals.metricCards.length > 0 && (
-        <section aria-label="Results" className="border-b border-border bg-[#141310]">
+      {project.metricCards.length > 0 && (
+        <section aria-label="Results" className="border-b border-border bg-secondary">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
             <Reveal>
-              <span
-                className="section-label mb-4"
-                style={{ color: "rgba(242,237,230,0.5)" }}
-              >
-                <span className="section-label-line" />
-                06 · Results
-              </span>
-              <h2
-                className="font-display font-bold tracking-tight text-2xl mb-6"
-                style={{ color: "#f2ede6" }}
-              >
+            <SectionLabel>Results</SectionLabel>
+              <h2 className="font-display font-bold tracking-tight text-2xl mb-6 text-foreground">
                 Results
               </h2>
             </Reveal>
-            <MetricCardRow cards={visuals.metricCards} />
+            <MetricCardRow cards={project.metricCards} />
 
-            {/* Lessons */}
-            {study.lessons.length > 0 && (
+            {project.lessons.length > 0 && (
               <Reveal delay={2}>
-                <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(242,237,230,0.08)" }}>
-                  <p
-                    className="text-[10px] font-mono uppercase tracking-widest mb-3"
-                    style={{ color: "rgba(242,237,230,0.5)" }}
-                  >
+                <div className="mt-8 pt-6 border-t border-border">
+                  <p className="text-[10px] font-mono uppercase tracking-widest mb-3 text-muted-foreground">
                     Lessons
                   </p>
                   <ul className="space-y-2">
-                    {study.lessons.map((l) => (
+                    {project.lessons.map((l) => (
                       <li
                         key={l}
-                        className="flex items-start gap-2 text-[13px]"
-                        style={{ color: "rgba(242,237,230,0.7)" }}
+                        className="flex items-start gap-2 text-[13px] text-muted-foreground"
                       >
                         <span
-                          className="mt-1.5 w-1 h-1 rounded-full shrink-0"
-                          style={{ background: "#e8ff47" }}
+                          className="mt-1.5 w-1 h-1 shrink-0 bg-accent"
                           aria-hidden
                         />
                         {l}
@@ -314,69 +352,37 @@ export default function CaseStudyLayout({
         </section>
       )}
 
-      {/* ── ENGINEERING NOTES ─────────────────────────────────────── */}
-      {study.engineeringNotes && (
+      {noteGroups.length > 0 && (
         <section className="border-b border-border">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
             <Reveal>
-              <span className="section-label mb-4">
-                <span className="section-label-line" />
-                Engineering notes
-              </span>
-              <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-                Implementation details from the build — decisions that shaped the
-                shipped product.
-              </p>
+            <SectionLabel>Build notes</SectionLabel>
             </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {[
-                {
-                  label: "Architecture",
-                  items: study.engineeringNotes.architecture,
-                },
-                {
-                  label: "State & forms",
-                  items: study.engineeringNotes.stateForms,
-                },
-                {
-                  label: "Data & integration",
-                  items: study.engineeringNotes.dataIntegration,
-                },
-                {
-                  label: "Quality checks",
-                  items: study.engineeringNotes.qualityChecks,
-                },
-              ]
-                .filter((g) => g.items && g.items.length > 0)
-                .map((group, i) => (
-                  <Reveal key={group.label} delay={i % 2}>
-                    <div className="border border-border bg-card p-5">
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-3">
-                        {group.label}
-                      </p>
-                      <ul className="space-y-2">
-                        {group.items!.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2 text-[12px] text-muted-foreground leading-snug"
-                          >
-                            <span
-                              className="mt-1.5 w-1 h-1 bg-accent shrink-0"
-                              aria-hidden
-                            />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Reveal>
-                ))}
-            </div>
+            <dl className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+              {noteGroups.map((group) => (
+                <Surface key={group.label} className="p-5">
+                  <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
+                    {group.label}
+                  </dt>
+                  <dd>
+                    <ul className="space-y-2">
+                      {group.items!.map((item) => (
+                        <li
+                          key={item}
+                          className="text-[12px] text-muted-foreground leading-snug"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </Surface>
+              ))}
+            </dl>
           </div>
         </section>
       )}
 
-      {/* ── PREV / NEXT ───────────────────────────────────────────── */}
       {(prev || next) && (
         <nav aria-label="More projects" className="border-t border-border">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2">
@@ -400,7 +406,10 @@ export default function CaseStudyLayout({
                 </span>
               </Link>
             ) : (
-              <div aria-hidden className="hidden sm:block sm:border-r border-border" />
+              <div
+                aria-hidden
+                className="hidden sm:block sm:border-r border-border"
+              />
             )}
             {next && (
               <Link
@@ -426,10 +435,10 @@ export default function CaseStudyLayout({
         </nav>
       )}
 
-      {/* MORE WORK */}
       {moreWork}
+      </main>
 
-      <BrandEdgeFooter onNavClick={scrollToSection} />
+      <SiteFooter />
     </div>
   );
 }

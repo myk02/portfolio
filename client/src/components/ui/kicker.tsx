@@ -1,3 +1,5 @@
+import { Surface } from "@/components/ui/section";
+
 export function Kicker({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span className={`text-[10px] font-mono uppercase tracking-widest text-muted-foreground ${className}`}>
@@ -6,14 +8,8 @@ export function Kicker({ children, className = "" }: { children: React.ReactNode
   );
 }
 
-export function KickerAccent({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span className={`text-[10px] font-mono uppercase tracking-widest text-accent ${className}`}>{children}</span>
-  );
-}
-
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`border border-border bg-card ${className}`}>{children}</div>;
+  return <Surface className={className}>{children}</Surface>;
 }
 
 export function Chip({ children, className = "" }: { children: React.ReactNode; className?: string }) {

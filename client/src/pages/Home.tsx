@@ -1,29 +1,19 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useLocation } from "wouter";
-import BrandEdgeHeader from "@/components/BrandEdgeHeader";
-import BrandEdgeHero from "@/components/BrandEdgeHero";
-import BrandEdgeWork from "@/components/BrandEdgeWork";
-import RolesShowcase from "@/components/RolesShowcase";
-import BrandEdgeAbout from "@/components/BrandEdgeAbout";
-import BrandEdgeContact from "@/components/BrandEdgeContact";
-import BrandEdgeFooter from "@/components/BrandEdgeFooter";
+import SiteHeader from "@/components/SiteHeader";
+import Hero from "@/components/Hero";
+import WorkSection from "@/components/WorkSection";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+import SiteFooter from "@/components/SiteFooter";
 import SiteHead, { DEFAULT_HEAD } from "@/components/SiteHead";
-import { consumePendingSection } from "@/lib/navigation";
+import { consumePendingSection, scrollToHomeSection } from "@/lib/navigation";
 import { useReveal } from "@/hooks/useReveal";
 
 export default function Home() {
   useReveal();
   const [location] = useLocation();
 
-  const scrollToSection = useCallback((id: string) => {
-    if (id === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
-  /* Handle cross-page section navigation (e.g., footer Work → home#work) */
   useEffect(() => {
     const pending = consumePendingSection();
     if (pending && pending !== "home") {
@@ -42,17 +32,16 @@ export default function Home() {
         canonical="/"
       />
 
-      <BrandEdgeHeader onNavClick={scrollToSection} />
+      <SiteHeader onNavClick={scrollToHomeSection} />
 
-      <main>
-        <BrandEdgeHero onCtaClick={scrollToSection} />
-        <BrandEdgeWork />
-        <RolesShowcase />
-        <BrandEdgeAbout />
-        <BrandEdgeContact />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Hero onCtaClick={scrollToHomeSection} />
+        <WorkSection />
+        <About />
+        <Contact />
       </main>
 
-      <BrandEdgeFooter onNavClick={scrollToSection} />
+      <SiteFooter />
     </div>
   );
 }
