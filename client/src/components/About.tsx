@@ -25,19 +25,16 @@ export default function About() {
       className="section-pad bg-secondary border-t border-border"
     >
       <div className="container">
-        <div className="max-w-6xl mx-auto">
-          <Reveal>
+        <div>
+          <Reveal className="section-intro">
             <SectionLabel>About</SectionLabel>
-            <h2
-              className="heading-section text-foreground"
-              style={{ letterSpacing: "-0.03em" }}
-            >
+            <h2 className="heading-section text-foreground">
               Mike Waitindi
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 lg:gap-10 mt-10 items-start">
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] lg:grid-cols-[240px_1fr] gap-6 lg:gap-8 mt-8 items-start max-w-3xl mx-auto md:max-w-none">
+            <div className="space-y-4 mx-auto w-full max-w-[220px] md:max-w-none md:mx-0">
               <Reveal delay={0} scale>
                 <Card className="p-3">
                   <div
@@ -52,10 +49,10 @@ export default function About() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-xs font-medium text-foreground leading-none mt-3">
+                  <p className="text-[11px] font-medium text-foreground leading-none mt-3 text-center md:text-left">
                     Mike Waitindi
                   </p>
-                  <div className="flex flex-wrap gap-2 mt-3">
+                  <div className="flex flex-wrap gap-2 mt-3 justify-center md:justify-start">
                     {ABOUT_LINKS.map((s) => (
                       <a
                         key={s.label}
@@ -73,14 +70,14 @@ export default function About() {
               </Reveal>
             </div>
 
-            <div className="space-y-6 max-w-2xl">
+            <div className="space-y-5 max-w-xl mx-auto md:mx-0 md:max-w-none">
               <Reveal delay={0}>
-                <p className="text-base sm:text-[17px] text-foreground leading-relaxed font-medium">
+                <p className="text-[0.9375rem] sm:text-base text-foreground leading-relaxed tracking-[-0.008em]">
                   {aboutParagraphs[0]}
                 </p>
               </Reveal>
               <Reveal delay={0}>
-                <p className="text-sm text-muted-foreground leading-relaxed border-l-2 border-accent pl-4">
+                <p className="text-[0.875rem] text-muted-foreground leading-relaxed border-l-2 border-accent pl-4">
                   {aboutParagraphs[1]}
                 </p>
               </Reveal>
@@ -97,7 +94,7 @@ export default function About() {
                         <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-foreground bg-secondary border border-border px-2 py-1 shrink-0">
                           {item.year}
                         </span>
-                        <p className="text-[13px] text-muted-foreground leading-snug pt-1">
+                        <p className="text-[0.8125rem] text-muted-foreground leading-relaxed pt-1">
                           {item.event}
                         </p>
                       </div>
@@ -108,11 +105,11 @@ export default function About() {
 
               <div>
                 <Kicker className="mb-3 block">Core stack</Kicker>
-                <ul className="flex flex-wrap gap-1.5" aria-label="Core skills">
+                <ul className="flex flex-wrap gap-2" aria-label="Core skills">
                   {coreSkills.map((skill) => (
                     <li
                       key={skill}
-                      className="px-2.5 py-1.5 text-xs font-medium border border-border bg-card text-foreground"
+                      className="px-2.5 py-1.5 text-[0.8125rem] font-medium tracking-[-0.005em] border border-border bg-card text-foreground leading-none"
                     >
                       {skill}
                     </li>

@@ -27,15 +27,15 @@ export default function NotFound() {
             <span className="w-2 h-2 bg-accent" />
             <span className="text-[10px] font-mono uppercase tracking-widest text-foreground">404 — Not found</span>
           </div>
-          <h1 className="font-display font-black text-foreground leading-none tracking-tight" style={{ letterSpacing: "-0.03em" }}>
-            <span className="block text-7xl sm:text-8xl" style={{ lineHeight: 0.9 }}>
+          <h1 className="font-display font-semibold text-foreground leading-none tracking-[-0.02em]">
+            <span className="block text-5xl sm:text-6xl" style={{ lineHeight: 0.95 }}>
               404
             </span>
-            <span className="mt-3 block text-2xl sm:text-3xl font-bold">
+            <span className="mt-3 block text-[1.35rem] sm:text-[1.6rem] leading-tight">
               Page not found<span className="text-accent">.</span>
             </span>
           </h1>
-          <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
+          <p className="mt-4 text-[0.9375rem] text-muted-foreground leading-relaxed max-w-sm mx-auto">
             The page you&apos;re looking for doesn&apos;t exist or has moved. Head back to the portfolio or explore the live work.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

@@ -65,7 +65,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
       return (
         <>
           {headlineParts[0]}
-          <span className="bg-accent text-accent-foreground font-black px-[0.14em] box-decoration-clone">
+          <span className="bg-accent text-accent-foreground font-semibold px-[0.14em] box-decoration-clone">
             automate
           </span>
           {headlineParts[1]}
@@ -80,44 +80,37 @@ export default function Hero({ onCtaClick }: HeroProps) {
       id="home"
       className="relative bg-secondary flex items-center overflow-hidden border-b border-border pt-16"
     >
-      <div className="relative z-10 w-full px-4 sm:px-6 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1160px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-10 xl:gap-14 items-center">
-            <div className="order-1 min-w-0">
-              <div className="mb-6 flex items-center gap-3 hero-kicker">
-                <span className="w-2.5 h-2.5 bg-accent shrink-0" />
-                <p className="text-mono text-muted-foreground text-[11px] sm:text-xs tracking-[0.14em]">
+      <div className="relative z-10 w-full py-9 md:py-12 lg:py-14">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-10 items-center">
+            <div className="order-1 min-w-0 text-center lg:text-left mx-auto lg:mx-0 max-w-[34rem] lg:max-w-none">
+              <div className="mb-5 flex items-center justify-center lg:justify-start gap-3 hero-kicker">
+                <span className="w-2 h-2 bg-accent shrink-0" />
+                <p className="text-mono text-muted-foreground text-[0.6875rem] sm:text-xs">
                   {roleLine}
                 </p>
               </div>
 
-              <h1
-                className="heading-serif font-black tracking-tight max-w-[560px] text-foreground text-balance"
-                style={{
-                  fontSize: "clamp(2.15rem, 5.2vw, 3.4rem)",
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.03em",
-                }}
-              >
+              <h1 className="heading-hero text-foreground text-balance mx-auto lg:mx-0">
                 {renderHeadline()}
               </h1>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Surface className="inline-flex items-center gap-2 px-3 py-2">
+              <div className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                <Surface className="inline-flex items-center gap-2 px-2.5 py-1.5">
                   <span className="live-dot" />
-                  <span className="text-xs font-medium text-foreground whitespace-nowrap">
+                  <span className="text-[11px] font-medium text-foreground whitespace-nowrap">
                     Available for work
                   </span>
-                  <span className="hidden sm:inline text-xs text-muted-foreground">
+                  <span className="hidden sm:inline text-[11px] text-muted-foreground">
                     · Replies within 24h
                   </span>
                 </Surface>
-                <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   {CONTACT.location}
                 </span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 mt-7">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mt-6">
                 <button
                   type="button"
                   onClick={() => onCtaClick("work")}
@@ -136,16 +129,16 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 <BuyMeCoffee />
               </div>
 
-              <div className="mt-10 pt-6 border-t border-border max-w-[520px]">
+              <div className="mt-8 pt-6 border-t border-border max-w-[28rem] mx-auto lg:mx-0">
                 {heroStats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="min-w-0 border-l-2 border-accent pl-3"
+                    className="min-w-0 border-l-2 border-accent pl-4 text-left"
                   >
-                    <div className="font-display font-black text-[1.45rem] md:text-[1.6rem] text-foreground leading-none whitespace-nowrap">
+                    <div className="font-display font-semibold text-[1.5rem] md:text-[1.65rem] text-foreground leading-none whitespace-nowrap tracking-tight">
                       <CountUp value={stat.value} />
                     </div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground leading-snug mt-1.5">
+                    <div className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground leading-snug mt-2">
                       {stat.label}
                     </div>
                   </div>
@@ -153,7 +146,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="order-2 w-full max-w-[520px] mx-auto lg:max-w-none lg:mx-0">
+            <div className="order-2 w-full max-w-[28rem] mx-auto lg:max-w-none lg:mx-0">
               <HeroVisual />
             </div>
           </div>

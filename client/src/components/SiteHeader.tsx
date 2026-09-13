@@ -117,10 +117,10 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           aria-label="Mike Waitindi — home"
           className="flex items-center gap-2.5 group"
         >
-          <span className="w-8 h-8 grid place-items-center bg-foreground text-background font-display font-black text-sm group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+          <span className="w-7 h-7 grid place-items-center bg-foreground text-background font-display font-semibold text-[11px] group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
             MW
           </span>
-          <span className="font-display font-bold text-lg tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
+          <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
             Mike Waitindi
           </span>
         </Link>
@@ -131,7 +131,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               key={link.id}
               type="button"
               onClick={() => handleNav(link.id)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
+              className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
             >
               {link.label}
             </button>
@@ -153,7 +153,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           <button
             type="button"
             onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex btn btn-primary text-sm"
+            className="hidden md:inline-flex btn btn-primary text-xs"
           >
             Work with me
           </button>
@@ -190,7 +190,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                   key={link.id}
                   type="button"
                   onClick={() => handleNav(link.id)}
-                  className="block w-full text-left text-lg font-medium text-foreground hover:opacity-70 transition-opacity"
+                  className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
                 >
                   {link.label}
                 </button>

@@ -31,32 +31,32 @@ export default function SiteFooter() {
       </div>
 
       <div className="relative container py-12 lg:py-14">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[1.35fr_0.85fr_0.9fr] gap-10 lg:gap-8">
-            <div>
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_0.9fr_0.9fr] gap-8 lg:gap-7">
+            <div className="text-center md:text-left">
               <Link
                 href="/"
                 aria-label="Mike Waitindi — home"
-                className="flex items-center gap-2.5 group"
+                className="inline-flex items-center gap-2 group"
               >
-                <span className="w-9 h-9 grid place-items-center bg-accent text-accent-foreground font-display font-black text-sm">
+                <span className="w-7 h-7 grid place-items-center bg-accent text-accent-foreground font-display font-semibold text-[11px]">
                   MW
                 </span>
-                <span className="font-display font-black text-xl tracking-tight text-background group-hover:text-accent transition-colors">
+                <span className="font-display font-semibold text-[1.05rem] tracking-[-0.015em] text-background group-hover:text-accent transition-colors">
                   Mike Waitindi
                 </span>
               </Link>
-              <p className="text-sm text-background/65 mt-3 max-w-sm leading-relaxed">
+              <p className="text-[0.8125rem] text-background/65 mt-3 max-w-sm leading-relaxed mx-auto md:mx-0">
                 Developer & designer in Nairobi — brand direction, web apps,
                 and AI automation. Remote.
               </p>
             </div>
 
-            <div>
+            <div className="text-center md:text-left">
               <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
                 Navigate
               </p>
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-2 items-center md:items-start">
                 {[
                   { id: "work", label: "Work" },
                   { id: "about", label: "About" },
@@ -66,7 +66,7 @@ export default function SiteFooter() {
                     key={link.id}
                     type="button"
                     onClick={() => handleNav(link.id)}
-                    className="text-sm text-left text-background/70 hover:text-accent transition-colors w-fit flex items-center gap-1.5 group"
+                    className="text-xs text-left text-background/70 hover:text-accent transition-colors w-fit flex items-center gap-1.5 group mx-auto md:mx-0"
                   >
                     <span
                       className="w-0 h-[1px] bg-accent group-hover:w-3 transition-all"
@@ -94,14 +94,14 @@ export default function SiteFooter() {
               </div>
             </div>
 
-            <div>
+            <div className="text-center md:text-left">
               <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-4">
                 Connect
               </p>
-              <div className="space-y-3">
+              <div className="space-y-3 inline-flex flex-col items-center md:items-start">
                 <a
                   href={CONTACT.emailHref}
-                  className="flex items-center gap-2.5 text-sm text-background/70 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-xs text-background/70 hover:text-accent transition-colors group"
                 >
                   <span className="w-8 h-8 grid place-items-center border border-background/15 bg-background/5 group-hover:border-accent/40 transition-colors">
                     <Mail size={13} />
@@ -112,7 +112,7 @@ export default function SiteFooter() {
                   href={CONTACT.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 text-sm text-background/70 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-xs text-background/70 hover:text-accent transition-colors group"
                 >
                   <span className="w-8 h-8 grid place-items-center border border-background/15 bg-background/5 group-hover:border-accent/40 transition-colors">
                     <Github size={13} />
@@ -123,7 +123,7 @@ export default function SiteFooter() {
                   href={CONTACT.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 text-sm text-background/70 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-xs text-background/70 hover:text-accent transition-colors group"
                 >
                   <span className="w-8 h-8 grid place-items-center border border-background/15 bg-background/5 group-hover:border-accent/40 transition-colors">
                     <Linkedin size={13} />
@@ -134,7 +134,7 @@ export default function SiteFooter() {
                   href={CONTACT.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 text-sm text-background/70 hover:text-accent transition-colors group"
+                  className="flex items-center gap-2.5 text-xs text-background/70 hover:text-accent transition-colors group"
                 >
                   <span className="w-8 h-8 grid place-items-center border border-background/15 bg-background/5 group-hover:border-accent/40 transition-colors">
                     <MessageCircle size={13} />
@@ -148,7 +148,7 @@ export default function SiteFooter() {
             </div>
           </div>
 
-          <div className="mt-12 pt-6 border-t border-background/10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="mt-10 pt-5 border-t border-background/10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 text-center lg:text-left">
             <p className="text-xs text-background/40">
               © {year} Mike Waitindi · Designed & built from Nairobi
             </p>

@@ -21,19 +21,19 @@ export default function Work() {
       <SiteHeader />
 
       <main id="main" tabIndex={-1} className="outline-none">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-24 pb-20">
+      <div className="container pt-24 pb-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
         >
           ← Home
         </Link>
 
-        <div className="mt-8 mb-10">
-          <h1 className="font-display font-black text-foreground tracking-tight leading-none text-3xl sm:text-4xl">
+        <div className="section-intro mt-7 mb-10">
+          <h1 className="heading-section text-foreground">
             Work
           </h1>
-          <p className="text-muted-foreground text-sm max-w-md leading-relaxed mt-3">
+          <p className="text-muted-foreground text-[0.875rem] leading-relaxed mt-3">
             {liveStudies.length} live products — each with a case study and a
             public URL.
           </p>
