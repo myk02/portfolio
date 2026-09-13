@@ -180,7 +180,7 @@ export default function BuyMeCoffee({
                   <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1">
                     Support the work
                   </p>
-                  <h3 className="font-display font-bold text-2xl text-foreground">
+                  <h3 className="font-display font-semibold text-[1.25rem] tracking-[-0.015em] leading-tight text-foreground">
                     Buy me a coffee
                   </h3>
                 </div>

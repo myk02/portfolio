@@ -39,7 +39,7 @@ export default function ProjectCard({
           </span>
         </div>
       </Link>
-      <div className="p-5 sm:p-6 space-y-3 flex flex-col flex-1">
+        <div className="p-4 sm:p-5 space-y-2.5 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
@@ -54,10 +54,10 @@ export default function ProjectCard({
           </span>
         </div>
 
-        <h3 className="font-display font-black text-[19px] sm:text-[21px] text-foreground leading-none tracking-tight">
+        <h3 className="font-display font-semibold text-[1.15rem] sm:text-[1.25rem] text-foreground leading-[1.15] tracking-[-0.015em]">
           {study.name}
         </h3>
-        <p className="text-sm text-muted-foreground leading-snug line-clamp-2">
+        <p className="text-[0.8125rem] text-muted-foreground leading-relaxed line-clamp-2">
           {study.outcomeTitle}
         </p>
 
@@ -66,7 +66,7 @@ export default function ProjectCard({
           <Chip>{study.role}</Chip>
         </div>
 
-        <div className="pt-3 mt-auto border-t border-border flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
+        <div className="pt-2.5 mt-auto border-t border-border flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-medium">
           <Link
             href={`/work/${study.slug}`}
             className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"

@@ -46,13 +46,13 @@ export function MetricCard({
         : "border-accent bg-accent/25 text-foreground";
 
   return (
-    <Surface className="p-4 sm:p-5 flex flex-col gap-2 h-full">
-      <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+    <Surface className="p-5 sm:p-6 flex flex-col gap-2.5 h-full">
+      <p className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground">
         {label}
       </p>
       <p
-        className={`font-display font-black leading-[1.05] tracking-tight ${toneClass}`}
-        style={{ fontSize: "clamp(1.35rem, 2.6vw, 1.85rem)" }}
+        className={`font-display font-semibold leading-[1.05] tracking-[-0.015em] ${toneClass}`}
+        style={{ fontSize: "clamp(1.4rem, 1.1rem + 1.5vw, 1.8rem)" }}
       >
         {value}
       </p>
@@ -65,7 +65,7 @@ export function MetricCard({
           </span>
         </p>
       )}
-      {note && <p className="text-xs text-muted-foreground leading-snug mt-auto">{note}</p>}
+      {note && <p className="text-[0.8125rem] text-muted-foreground leading-relaxed mt-auto">{note}</p>}
     </Surface>
   );
 }

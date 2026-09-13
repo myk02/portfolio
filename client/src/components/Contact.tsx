@@ -9,8 +9,8 @@ import { SectionLabel } from "@/components/ui/section";
 import { Surface } from "@/components/ui/section";
 
 const inputClass =
-  "w-full bg-card border border-border px-4 min-h-[44px] text-[15px] text-foreground placeholder:text-foreground/50 outline-none transition-colors focus:border-foreground focus:bg-secondary/20";
-const labelClass = "block text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-2";
+  "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/50 outline-none transition-colors focus:border-foreground focus:bg-secondary/20";
+const labelClass = "block text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground mb-2";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -61,13 +61,13 @@ export default function Contact() {
     return (
       <section id="contact" className="section-pad bg-secondary border-t border-border">
         <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <Surface className="p-8 sm:p-10 text-center">
-              <div className="w-14 h-14 mx-auto flex items-center justify-center bg-accent text-accent-foreground mb-5">
-                <CheckCircle2 size={28} />
+          <div className="max-w-xl mx-auto">
+            <Surface className="p-6 sm:p-8 text-center">
+              <div className="w-11 h-11 mx-auto flex items-center justify-center bg-accent text-accent-foreground mb-4">
+                <CheckCircle2 size={22} />
               </div>
-              <h2 className="heading-section text-foreground mb-3" style={{ fontSize: "clamp(1.6rem, 4vw, 2rem)" }}>Message received</h2>
-              <p className="text-muted-foreground text-sm mt-2">
+              <h2 className="heading-section text-foreground mb-2">Message received</h2>
+              <p className="text-muted-foreground text-xs mt-2">
                 Thanks{name.trim() ? `, ${name.trim().split(" ")[0]}` : ""} — I reply within 24 hours (Mon–Sat, EAT).
               </p>
               {!notified && (
@@ -99,23 +99,20 @@ export default function Contact() {
   return (
     <section id="contact" className="section-pad bg-secondary border-t border-border">
       <div className="container">
-        <div className="max-w-6xl mx-auto">
-          <Reveal>
+        <div>
+          <Reveal className="section-intro">
             <SectionLabel>Contact</SectionLabel>
+            <h2 className="heading-section text-foreground">
+              Work with me
+            </h2>
+            <p className="text-muted-foreground text-[0.875rem] leading-relaxed mt-3 mx-auto">
+              {applicationLine}
+            </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.15fr] gap-8 lg:gap-10 mt-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-8 mt-8 items-start max-w-3xl mx-auto lg:max-w-none">
             {/* left — info */}
-            <div className="space-y-6">
-              <Reveal>
-                <h2 className="heading-section text-foreground" style={{ letterSpacing: "-0.03em" }}>
-                  Work with me
-                </h2>
-                <p className="text-muted-foreground text-sm leading-relaxed max-w-md mt-3">
-                  {applicationLine}
-                </p>
-              </Reveal>
-
+            <div className="space-y-5">
               <Reveal delay={1}>
                 <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
                   {[
@@ -123,11 +120,11 @@ export default function Contact() {
                     { icon: ShieldCheck, label: "Timezone", value: "EAT · UTC+3" },
                     { icon: MessageCircle, label: "Prefers", value: "Email · WhatsApp" },
                   ].map((item) => (
-                    <Surface key={item.label} className="p-3 flex items-center gap-3">
+                    <Surface key={item.label} className="p-4 flex items-center gap-3">
                       <item.icon size={16} className="text-accent shrink-0" />
                       <div>
-                        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground leading-none">{item.label}</p>
-                        <p className="text-xs font-medium text-foreground mt-1 leading-none">{item.value}</p>
+                        <p className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground leading-none">{item.label}</p>
+                        <p className="text-[0.8125rem] font-medium text-foreground mt-1.5 leading-none tracking-[-0.005em]">{item.value}</p>
                       </div>
                     </Surface>
                   ))}
@@ -140,7 +137,7 @@ export default function Contact() {
                   <div className="space-y-3">
                     <a
                       href={CONTACT.emailHref}
-                      className="flex items-center gap-3 text-sm text-foreground hover:text-accent transition-colors group"
+                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
                     >
                       <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
                         <Mail size={14} />
@@ -151,7 +148,7 @@ export default function Contact() {
                       href={CONTACT.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-sm text-foreground hover:text-accent transition-colors group"
+                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
                     >
                       <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
                         <MessageCircle size={14} />
@@ -162,7 +159,7 @@ export default function Contact() {
                       href={CONTACT.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <span className="w-8 h-8 grid place-items-center border border-border bg-secondary">
                         <Linkedin size={14} aria-hidden />
@@ -191,9 +188,9 @@ export default function Contact() {
 
             {/* right — form */}
             <Reveal delay={1}>
-              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-6 sm:p-7 space-y-5">
+              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-5 sm:p-6 space-y-4">
                 <div className="flex items-center justify-between gap-3 pb-4 border-b border-border">
-                  <h3 className="font-display font-bold text-foreground text-lg">Send a message</h3>
+                  <h3 className="font-display font-semibold text-foreground text-[1.05rem] tracking-[-0.015em]">Send a message</h3>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1 bg-secondary">
                     Replies in 24h
                   </span>

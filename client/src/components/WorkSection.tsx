@@ -11,25 +11,20 @@ export default function WorkSection() {
     >
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent/40" aria-hidden />
       <div className="container">
-        <div className="max-w-6xl mx-auto">
-          <Reveal as="div" className="mb-10">
+          <Reveal as="div" className="section-intro mb-8">
             <SectionLabel>
               Selected work · 0{liveStudies.length}
             </SectionLabel>
-            <h2
-              className="heading-section text-foreground mt-2"
-              style={{ letterSpacing: "-0.03em" }}
-            >
+            <h2 className="heading-section text-foreground mt-2">
               Shipped products
             </h2>
-            <p className="text-muted-foreground text-sm max-w-[520px] mt-3 leading-relaxed">
+            <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto">
               Live apps — each with stack, role, and the decision that moved the
               work forward.
             </p>
           </Reveal>
 
           <ProjectCardGrid studies={liveStudies} />
-        </div>
       </div>
     </section>
   );

@@ -85,34 +85,28 @@ export default function CaseStudyLayout({
 
       <main id="main" tabIndex={-1} className="outline-none">
       <header className="border-b border-border pt-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-8 sm:pt-14 sm:pb-10">
+        <div className="container pt-8 pb-7 sm:pt-11 sm:pb-9 text-center sm:text-left">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft size={13} aria-hidden /> Work
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-2.5">
+          <div className="mt-5 flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <StatusBadge />
             <span className="px-2 py-1 text-[11px] font-mono uppercase tracking-widest bg-secondary border border-border text-muted-foreground">
               {project.year} · {project.timeline}
             </span>
           </div>
 
-          <p className="mt-5 text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="mt-4 text-[0.6875rem] sm:text-xs font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground">
             {project.outcomeTitle}
           </p>
-          <h1
-            className="mt-2 font-display font-black text-foreground tracking-tight leading-[0.95]"
-            style={{
-              fontSize: "clamp(2.5rem, 7vw, 4.6rem)",
-              letterSpacing: "-0.03em",
-            }}
-          >
+          <h1 className="mt-3 heading-hero text-foreground text-balance">
             {project.name}
           </h1>
-          <p className="mt-3 max-w-2xl text-[17px] sm:text-[19px] text-foreground/80 leading-snug font-medium">
+          <p className="mt-3 max-w-xl text-[0.9375rem] sm:text-base text-foreground/80 leading-relaxed mx-auto sm:mx-0 tracking-[-0.008em]">
             {project.tagline}
           </p>
 
@@ -126,20 +120,20 @@ export default function CaseStudyLayout({
                 <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   {f.label}
                 </dt>
-                <dd className="text-[13px] text-foreground leading-snug mt-2 font-medium">
+                <dd className="text-[0.875rem] text-foreground leading-relaxed mt-2 font-medium tracking-[-0.005em]">
                   {f.value}
                 </dd>
               </Surface>
             ))}
           </dl>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-2.5 justify-center sm:justify-start">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-5 py-3 text-sm font-semibold hover:bg-accent hover:text-accent-foreground border border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                className="inline-flex items-center gap-2 bg-foreground text-background px-4 py-2.5 text-xs font-semibold hover:bg-accent hover:text-accent-foreground border border-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
               >
                 <ExternalLink size={15} aria-hidden /> View live product ↗
               </a>
@@ -149,7 +143,7 @@ export default function CaseStudyLayout({
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground hover:border-foreground transition-colors"
+                className="inline-flex items-center gap-2 border border-border bg-card px-4 py-2.5 text-xs font-semibold text-foreground hover:border-foreground transition-colors"
               >
                 <Github size={15} aria-hidden /> Source
               </a>
@@ -168,16 +162,16 @@ export default function CaseStudyLayout({
       </header>
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+        <div className="container py-10 sm:py-12">
           <Reveal>
             <SectionLabel>What I owned</SectionLabel>
           </Reveal>
-          <ul className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {project.ownership.map((item) => (
               <Reveal key={item}>
-                <li className="border border-border bg-card p-4 text-[13px] text-foreground leading-snug">
+                <li className="border border-border bg-card p-5 text-[0.875rem] text-foreground leading-relaxed tracking-[-0.005em]">
                   <span
-                    className="block w-1.5 h-1.5 bg-accent mb-2"
+                    className="block w-1.5 h-1.5 bg-accent mb-3"
                     aria-hidden
                   />
                   {item}
@@ -189,17 +183,17 @@ export default function CaseStudyLayout({
       </section>
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+        <div className="container py-10 sm:py-12">
           <Reveal>
             <SectionLabel>Problem</SectionLabel>
-            <p className="text-muted-foreground text-sm max-w-2xl">
+            <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-xl mx-auto sm:mx-0">
               {project.context}
             </p>
-            <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl tracking-tight mt-4 mb-3">
+            <h2 className="heading-section text-foreground mt-4 mb-3">
               {project.problemLead}
             </h2>
             {project.researchLead && (
-              <p className="text-muted-foreground text-sm max-w-2xl">
+              <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-xl mx-auto sm:mx-0">
                 {project.researchLead}
               </p>
             )}
@@ -209,7 +203,7 @@ export default function CaseStudyLayout({
               <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
                 What broke the plan
               </p>
-              <p className="text-sm text-foreground leading-snug">
+              <p className="text-[15px] text-foreground leading-relaxed tracking-[-0.005em]">
                 {project.ordeal}
               </p>
             </Surface>
@@ -230,7 +224,7 @@ export default function CaseStudyLayout({
       </section>
 
       <section className="border-b border-border bg-secondary">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+        <div className="container py-10 sm:py-12">
           <Reveal>
             <SectionLabel>Design decisions</SectionLabel>
           </Reveal>
@@ -246,7 +240,7 @@ export default function CaseStudyLayout({
                           {b.label}
                         </p>
                       )}
-                      <p className="text-foreground leading-snug">{b.text}</p>
+                      <p className="text-[0.9375rem] text-foreground leading-relaxed tracking-[-0.005em]">{b.text}</p>
                     </div>
                     {b.shot && (
                       <ShotFigure src={b.shot} alt={b.alt ?? b.text} />
@@ -268,7 +262,7 @@ export default function CaseStudyLayout({
                       {b.label}
                     </p>
                   )}
-                  <p className="text-[13px] text-foreground leading-snug">
+                  <p className="text-[0.875rem] text-foreground leading-relaxed tracking-[-0.005em]">
                     {b.text}
                   </p>
                 </Surface>
@@ -281,7 +275,7 @@ export default function CaseStudyLayout({
               <p className="text-[10px] font-mono uppercase tracking-widest text-destructive mb-2">
                 Before
               </p>
-              <p className="text-sm text-foreground leading-snug">
+              <p className="text-[0.9375rem] text-foreground leading-relaxed">
                 {project.validateBefore}
               </p>
             </Surface>
@@ -289,7 +283,7 @@ export default function CaseStudyLayout({
               <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
                 After
               </p>
-              <p className="text-sm text-foreground leading-snug">
+              <p className="text-[0.9375rem] text-foreground leading-relaxed">
                 {project.validateAfter}
               </p>
             </Surface>
@@ -302,10 +296,10 @@ export default function CaseStudyLayout({
           aria-label={`${project.name} screens`}
           className="border-b border-border"
         >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+          <div className="container py-10 sm:py-12">
             <Reveal>
             <SectionLabel>Shipped screens</SectionLabel>
-              <h2 className="font-display font-bold text-foreground tracking-tight text-2xl mb-6">
+              <h2 className="heading-section text-foreground mb-5">
                 Screens
               </h2>
             </Reveal>
@@ -316,10 +310,10 @@ export default function CaseStudyLayout({
 
       {project.metricCards.length > 0 && (
         <section aria-label="Results" className="border-b border-border bg-secondary">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+          <div className="container py-10 sm:py-12">
             <Reveal>
             <SectionLabel>Results</SectionLabel>
-              <h2 className="font-display font-bold tracking-tight text-2xl mb-6 text-foreground">
+              <h2 className="heading-section mb-5 text-foreground">
                 Results
               </h2>
             </Reveal>
@@ -335,7 +329,7 @@ export default function CaseStudyLayout({
                     {project.lessons.map((l) => (
                       <li
                         key={l}
-                        className="flex items-start gap-2 text-[13px] text-muted-foreground"
+                        className="flex items-start gap-2.5 text-[0.875rem] text-muted-foreground leading-relaxed"
                       >
                         <span
                           className="mt-1.5 w-1 h-1 shrink-0 bg-accent"
@@ -354,7 +348,7 @@ export default function CaseStudyLayout({
 
       {noteGroups.length > 0 && (
         <section className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
+          <div className="container py-10 sm:py-12">
             <Reveal>
             <SectionLabel>Build notes</SectionLabel>
             </Reveal>
@@ -369,7 +363,7 @@ export default function CaseStudyLayout({
                       {group.items!.map((item) => (
                         <li
                           key={item}
-                          className="text-[12px] text-muted-foreground leading-snug"
+                          className="text-[0.8125rem] text-muted-foreground leading-relaxed"
                         >
                           {item}
                         </li>
@@ -385,7 +379,7 @@ export default function CaseStudyLayout({
 
       {(prev || next) && (
         <nav aria-label="More projects" className="border-t border-border">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2">
+          <div className="container grid grid-cols-1 sm:grid-cols-2">
             {prev ? (
               <Link
                 href={`/work/${prev.slug}`}
@@ -400,7 +394,7 @@ export default function CaseStudyLayout({
                   <span className="block text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                     Previous
                   </span>
-                  <span className="block text-sm sm:text-base font-semibold text-foreground truncate">
+                  <span className="block text-xs sm:text-sm font-semibold text-foreground truncate">
                     {prev.name}
                   </span>
                 </span>
@@ -420,7 +414,7 @@ export default function CaseStudyLayout({
                   <span className="block text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                     Next
                   </span>
-                  <span className="block text-sm sm:text-base font-semibold text-foreground truncate">
+                  <span className="block text-xs sm:text-sm font-semibold text-foreground truncate">
                     {next.name}
                   </span>
                 </span>
