@@ -121,7 +121,7 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
-    font-size: 16px;
+    font-size: 15px;
     -webkit-text-size-adjust: 100%;
   }
   body {
@@ -192,35 +192,35 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    max-width: 68rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 56rem;
   }
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
   }
 }
 
 .section-pad {
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 3.75rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.75rem);
 }
 
 .section-intro {
   text-align: center;
   margin-inline: auto;
-  max-width: 36rem;
+  max-width: 30rem;
 }
 
 .section-intro .section-label {
@@ -231,8 +231,8 @@
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.015em;
-  line-height: 1.1;
-  font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.05rem);
+  line-height: 1.12;
+  font-size: clamp(1.35rem, 1.15rem + 1vw, 1.65rem);
   text-wrap: balance;
 }
 
@@ -240,8 +240,8 @@
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 1.06;
-  font-size: clamp(2.1rem, 1.5rem + 3vw, 3rem);
+  line-height: 1.08;
+  font-size: clamp(1.7rem, 1.35rem + 1.8vw, 2.25rem);
   text-wrap: balance;
 }
 
@@ -283,12 +283,12 @@
 
 .btn {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.4;
-  padding: 0.625rem 1.15rem;
-  min-height: 44px;
+  padding: 0.5rem 1rem;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

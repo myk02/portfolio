@@ -80,22 +80,22 @@ export default function Hero({ onCtaClick }: HeroProps) {
       id="home"
       className="relative bg-secondary flex items-center overflow-hidden border-b border-border pt-16"
     >
-      <div className="relative z-10 w-full py-9 md:py-12 lg:py-14">
+      <div className="relative z-10 w-full py-8 md:py-10">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-10 items-center">
-            <div className="order-1 min-w-0 text-center lg:text-left mx-auto lg:mx-0 max-w-[34rem] lg:max-w-none">
-              <div className="mb-5 flex items-center justify-center lg:justify-start gap-3 hero-kicker">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 lg:gap-8 items-center max-w-4xl mx-auto">
+            <div className="order-1 min-w-0 text-center mx-auto max-w-[30rem] lg:max-w-none">
+              <div className="mb-4 flex items-center justify-center gap-3 hero-kicker">
                 <span className="w-2 h-2 bg-accent shrink-0" />
                 <p className="text-mono text-muted-foreground text-[0.6875rem] sm:text-xs">
                   {roleLine}
                 </p>
               </div>
 
-              <h1 className="heading-hero text-foreground text-balance mx-auto lg:mx-0">
+              <h1 className="heading-hero text-foreground text-balance mx-auto">
                 {renderHeadline()}
               </h1>
 
-              <div className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
                 <Surface className="inline-flex items-center gap-2 px-2.5 py-1.5">
                   <span className="live-dot" />
                   <span className="text-[11px] font-medium text-foreground whitespace-nowrap">
@@ -110,7 +110,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 </span>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mt-6">
+              <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
                 <button
                   type="button"
                   onClick={() => onCtaClick("work")}
@@ -129,13 +129,13 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 <BuyMeCoffee />
               </div>
 
-              <div className="mt-8 pt-6 border-t border-border max-w-[28rem] mx-auto lg:mx-0">
+              <div className="mt-6 pt-5 border-t border-border max-w-[24rem] mx-auto">
                 {heroStats.map((stat) => (
                   <div
                     key={stat.label}
                     className="min-w-0 border-l-2 border-accent pl-4 text-left"
                   >
-                    <div className="font-display font-semibold text-[1.5rem] md:text-[1.65rem] text-foreground leading-none whitespace-nowrap tracking-tight">
+                    <div className="font-display font-semibold text-[1.25rem] text-foreground leading-none whitespace-nowrap tracking-tight">
                       <CountUp value={stat.value} />
                     </div>
                     <div className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground leading-snug mt-2">
@@ -146,7 +146,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="order-2 w-full max-w-[28rem] mx-auto lg:max-w-none lg:mx-0">
+            <div className="order-2 w-full max-w-[24rem] mx-auto">
               <HeroVisual />
             </div>
           </div>

@@ -46,13 +46,13 @@ export function MetricCard({
         : "border-accent bg-accent/25 text-foreground";
 
   return (
-    <Surface className="p-5 sm:p-6 flex flex-col gap-2.5 h-full">
+    <Surface className="p-4 flex flex-col gap-2 h-full">
       <p className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground">
         {label}
       </p>
       <p
-        className={`font-display font-semibold leading-[1.05] tracking-[-0.015em] ${toneClass}`}
-        style={{ fontSize: "clamp(1.4rem, 1.1rem + 1.5vw, 1.8rem)" }}
+        className={`font-display font-semibold leading-[1.1] tracking-[-0.015em] ${toneClass}`}
+        style={{ fontSize: "clamp(1.15rem, 1.05rem + 0.8vw, 1.4rem)" }}
       >
         {value}
       </p>

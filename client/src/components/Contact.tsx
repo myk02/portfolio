@@ -110,7 +110,7 @@ export default function Contact() {
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-8 mt-8 items-start max-w-3xl mx-auto lg:max-w-none">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-5 mt-8 items-start max-w-4xl mx-auto">
             {/* left — info */}
             <div className="space-y-5">
               <Reveal delay={1}>
@@ -188,7 +188,7 @@ export default function Contact() {
 
             {/* right — form */}
             <Reveal delay={1}>
-              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-5 sm:p-6 space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="border border-border bg-card p-4 sm:p-5 space-y-4">
                 <div className="flex items-center justify-between gap-3 pb-4 border-b border-border">
                   <h3 className="font-display font-semibold text-foreground text-[1.05rem] tracking-[-0.015em]">Send a message</h3>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground border border-border px-2 py-1 bg-secondary">
