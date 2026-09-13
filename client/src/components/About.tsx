@@ -33,7 +33,7 @@ export default function About() {
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] lg:grid-cols-[240px_1fr] gap-6 lg:gap-8 mt-8 items-start max-w-3xl mx-auto md:max-w-none">
+          <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 mt-8 items-start max-w-3xl mx-auto">
             <div className="space-y-4 mx-auto w-full max-w-[220px] md:max-w-none md:mx-0">
               <Reveal delay={0} scale>
                 <Card className="p-3">

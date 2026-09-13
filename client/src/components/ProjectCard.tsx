@@ -39,7 +39,7 @@ export default function ProjectCard({
           </span>
         </div>
       </Link>
-        <div className="p-4 sm:p-5 space-y-2.5 flex flex-col flex-1">
+        <div className="p-4 space-y-2 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
@@ -54,10 +54,10 @@ export default function ProjectCard({
           </span>
         </div>
 
-        <h3 className="font-display font-semibold text-[1.15rem] sm:text-[1.25rem] text-foreground leading-[1.15] tracking-[-0.015em]">
+        <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
           {study.name}
         </h3>
-        <p className="text-[0.8125rem] text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-[0.8rem] text-muted-foreground leading-relaxed line-clamp-2">
           {study.outcomeTitle}
         </p>
 
@@ -104,7 +104,7 @@ export default function ProjectCard({
 
 export function ProjectCardGrid({ studies }: { studies: Project[] }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[50rem] mx-auto">
       {studies.map((study, i) => (
         <Reveal key={study.slug} delay={i} className="h-full">
           <ProjectCard study={study} index={i} />

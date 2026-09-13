@@ -85,7 +85,7 @@ export default function CaseStudyLayout({
 
       <main id="main" tabIndex={-1} className="outline-none">
       <header className="border-b border-border pt-16">
-        <div className="container pt-8 pb-7 sm:pt-11 sm:pb-9 text-center sm:text-left">
+        <div className="container pt-8 pb-7 sm:pt-9 sm:pb-8 text-center">
           <Link
             href="/work"
             className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
@@ -93,7 +93,7 @@ export default function CaseStudyLayout({
             <ArrowLeft size={13} aria-hidden /> Work
           </Link>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
             <StatusBadge />
             <span className="px-2 py-1 text-[11px] font-mono uppercase tracking-widest bg-secondary border border-border text-muted-foreground">
               {project.year} · {project.timeline}
@@ -106,7 +106,7 @@ export default function CaseStudyLayout({
           <h1 className="mt-3 heading-hero text-foreground text-balance">
             {project.name}
           </h1>
-          <p className="mt-3 max-w-xl text-[0.9375rem] sm:text-base text-foreground/80 leading-relaxed mx-auto sm:mx-0 tracking-[-0.008em]">
+          <p className="mt-3 max-w-xl text-[0.9375rem] sm:text-base text-foreground/80 leading-relaxed mx-auto tracking-[-0.008em]">
             {project.tagline}
           </p>
 
@@ -127,7 +127,7 @@ export default function CaseStudyLayout({
             ))}
           </dl>
 
-          <div className="mt-5 flex flex-wrap gap-2.5 justify-center sm:justify-start">
+          <div className="mt-5 flex flex-wrap gap-2.5 justify-center">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
