@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { Kicker, Card } from "@/components/ui/kicker";
 import { SectionLabel } from "@/components/ui/section";
-import { aboutParagraphs, coreSkills } from "@/data/siteContent";
+import { aboutParagraphs, coreSkills, frontendToolbox, positionTitle } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
@@ -31,6 +31,9 @@ export default function About() {
             <h2 className="heading-section text-foreground">
               Mike Waitindi
             </h2>
+            <p className="mt-2 inline-block text-[11px] font-mono font-medium uppercase tracking-[0.14em] text-accent-foreground bg-accent px-2.5 py-1.5">
+              {positionTitle} — Nairobi · Remote
+            </p>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 mt-8 items-start max-w-3xl mx-auto">
@@ -104,7 +107,30 @@ export default function About() {
               </div>
 
               <div>
-                <Kicker className="mb-3 block">Core stack</Kicker>
+                <Kicker className="mb-3 block">Toolbox — grouped by depth</Kicker>
+                <div className="space-y-3">
+                  {frontendToolbox.map((group) => (
+                    <Card key={group.group} className="p-4 sm:p-5">
+                      <p className="text-[11px] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground mb-3">
+                        {group.group}
+                      </p>
+                      <ul className="flex flex-wrap gap-2" aria-label={group.group}>
+                        {group.skills.map((skill) => (
+                          <li
+                            key={skill}
+                            className="px-2.5 py-1.5 text-[0.8125rem] font-medium tracking-[-0.005em] border border-border bg-secondary text-foreground leading-none"
+                          >
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Kicker className="mb-3 block">Also in the stack</Kicker>
                 <ul className="flex flex-wrap gap-2" aria-label="Core skills">
                   {coreSkills.map((skill) => (
                     <li

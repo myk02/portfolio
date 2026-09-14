@@ -93,6 +93,8 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
 
   const navLinks = [
     { id: "work", label: "Work" },
+    { id: "services", label: "Services" },
+    { id: "expertise", label: "Quality" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];

@@ -47,8 +47,9 @@ export default function SiteFooter() {
                 </span>
               </Link>
               <p className="text-[0.8125rem] text-background/65 mt-3 max-w-sm leading-relaxed mx-auto md:mx-0">
-                Developer & designer in Nairobi — brand direction, web apps,
-                and AI automation. Remote.
+                Developer, designer, project manager & automation specialist in
+                Nairobi — brand direction, web apps, APIs, support, and
+                launch-ready experiences. Remote.
               </p>
             </div>
 
@@ -59,6 +60,8 @@ export default function SiteFooter() {
               <nav className="flex flex-col gap-2 items-center md:items-start">
                 {[
                   { id: "work", label: "Work" },
+                  { id: "services", label: "Services" },
+                  { id: "expertise", label: "Quality" },
                   { id: "about", label: "About" },
                   { id: "contact", label: "Contact" },
                 ].map((link) => (

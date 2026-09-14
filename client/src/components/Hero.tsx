@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { heroStats, roleLine, heroHeadline } from "@/data/siteContent";
+import { heroStats, roleChips, roleLine, heroHeadline, heroSubline, positionTitle } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { liveStudies } from "@/data/projects";
 import { CountUp } from "@/components/CountUp";
@@ -59,22 +59,6 @@ function HeroVisual() {
 }
 
 export default function Hero({ onCtaClick }: HeroProps) {
-  const headlineParts = heroHeadline.split("automate");
-  const renderHeadline = () => {
-    if (headlineParts.length === 2) {
-      return (
-        <>
-          {headlineParts[0]}
-          <span className="bg-accent text-accent-foreground font-semibold px-[0.14em] box-decoration-clone">
-            automate
-          </span>
-          {headlineParts[1]}
-        </>
-      );
-    }
-    return heroHeadline;
-  };
-
   return (
     <section
       id="home"
@@ -92,8 +76,27 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
 
               <h1 className="heading-hero text-foreground text-balance mx-auto">
-                {renderHeadline()}
+                {heroHeadline}
               </h1>
+
+              <p className="mt-3 text-[0.6875rem] sm:text-xs font-mono uppercase tracking-[0.14em] text-muted-foreground">
+                Mike Waitindi — {positionTitle}
+              </p>
+
+              <p className="mt-4 text-[0.875rem] text-muted-foreground leading-relaxed max-w-[26rem] mx-auto">
+                {heroSubline}
+              </p>
+
+              <ul className="mt-4 flex flex-wrap items-center justify-center gap-1.5 max-w-[26rem] mx-auto" aria-label="Roles offered">
+                {roleChips.map((role) => (
+                  <li
+                    key={role}
+                    className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-foreground"
+                  >
+                    {role}
+                  </li>
+                ))}
+              </ul>
 
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
                 <Surface className="inline-flex items-center gap-2 px-2.5 py-1.5">
@@ -130,19 +133,31 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
 
               <div className="mt-6 pt-5 border-t border-border max-w-[24rem] mx-auto">
+                <ul className="flex flex-wrap justify-center gap-2 mb-5" aria-label="Core stack">
+                  {["React", "TypeScript", "Tailwind", "Playwright", "Vite + Vercel"].map((t) => (
+                    <li
+                      key={t}
+                      className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-foreground"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <div className="grid grid-cols-3 gap-3 text-left">
                 {heroStats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="min-w-0 border-l-2 border-accent pl-4 text-left"
+                    className="min-w-0 border-l-2 border-accent pl-3"
                   >
-                    <div className="font-display font-semibold text-[1.25rem] text-foreground leading-none whitespace-nowrap tracking-tight">
+                    <div className="font-display font-semibold text-[1.1rem] text-foreground leading-none whitespace-nowrap tracking-tight">
                       <CountUp value={stat.value} />
                     </div>
-                    <div className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground leading-snug mt-2">
+                    <div className="text-[0.625rem] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground leading-snug mt-2">
                       {stat.label}
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
 

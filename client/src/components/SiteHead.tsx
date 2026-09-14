@@ -94,8 +94,8 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `${OWNER} — Developer, Designer, Tech Support & Automation Specialist`,
+  title: `Mike Waitindi — Developer, Designer, Project Manager & AI Automation Specialist`,
   description:
-    `Nairobi-based developer and designer crafting brand direction, web apps, AI automation, and launch-ready digital experiences. ${liveCount} live products shipped.`,
+    `Developer, designer, project manager & automation specialist in Nairobi — brand direction, web apps (React + TypeScript), APIs, support, and AI workflows. Launch-ready digital experiences. ${liveCount} live products shipped.`,
   canonical: SITE_URL,
 };

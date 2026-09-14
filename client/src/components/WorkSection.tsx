@@ -19,8 +19,8 @@ export default function WorkSection() {
               Shipped products
             </h2>
             <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto">
-              Live apps — each with stack, role, and the decision that moved the
-              work forward.
+              Live web apps — each with a demo, repo, and case study covering
+              the decisions: design, state, accessibility, performance, and testing.
             </p>
           </Reveal>
 
