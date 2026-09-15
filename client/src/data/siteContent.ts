@@ -1,25 +1,27 @@
 import { liveCount } from "@/data/projects";
 
 export const positionTitle =
-  "Developer, Designer, Project Manager & Automation Specialist";
+  "Solution Engineer, Frontend Developer, Designer, APIs, Tech Support & Automation Specialist";
 
 export const roleLine =
-  "Developer · Designer · Project Manager · APIs · Tech Support · AI Automation";
+  "Solution Engineer · Frontend Developer · Designer · APIs · Tech Support · AI Automation";
 
 export const roleChips = [
-  "Software Developer",
+  "Solution Engineer",
   "Frontend Developer",
-  "UI Designer",
-  "Project Manager",
-  "API Integration",
+  "Designer",
+  "APIs",
   "Tech Support",
-  "AI Automation & Workflows",
+  "Automation Specialist",
+  "Data Engineering",
+  "Cloud (GCP)",
+  "AI Solutions",
 ] as const;
 
-export const heroHeadline = "From idea to shipped product — designed, built, managed, and supported.";
+export const heroHeadline = "Brand direction, web apps, AI automation — launch-ready digital experiences.";
 
 export const heroSubline =
-  "I'm Mike Waitindi, in Nairobi — I take products from idea to shipped: design, API-driven UI, design systems, managed delivery, tech support, and automation workflows that remove busywork.";
+  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, AI automation, and launch-ready digital experiences — plus data pipelines (CSV/TSV → queryable datasets), Dockerised services on Google Cloud Run, and AI: semantic search, embeddings, LLM workflows, MCP.";
 
 export const heroStats = [
   { label: "Live products shipped", value: String(liveCount) },
@@ -28,21 +30,34 @@ export const heroStats = [
 ];
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi — developer, designer, project manager, and automation specialist in Nairobi. I take products from brand direction to launch-ready: web apps, API integrations, design systems, managed delivery, tech support, and AI automation workflows.",
+  "I'm Mike Waitindi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist in Nairobi, also working as a Solution Engineer. What I do: brand direction, web apps, AI automation, and launch-ready digital experiences — end to end, from first sketch to shipped product.",
   `${liveCount} live products prove the loop — KenyaTrace (multi-stop trip planner, 6→3 taps), GiGi Energy (accessible storefront, 4→3 checkout, M-Pesa first), and LegalFlow (mobile-first PWA workspace) — each with a live demo, repo, and case study.`,
+  "As a Solution Engineer I design and build robust data ingestion pipelines — raw CSV/TSV into structured, queryable datasets, custom entity modelling and schema mapping — on SQLite, Cloud SQL and BigQuery. I ship Dockerised services (data loading, embedding generation, data-serving) to Google Cloud Run with Redis, VPC, Artifact Registry, Cloud Storage, IAM and ingress controls, automated via GitHub Actions. On top: natural-language querying, semantic search, embeddings, LLM workflows, and agentic/MCP integrations — with strong Python (Pandas), SQL, REST APIs, Flask/Jinja, WSL and Cloud Shell.",
 ];
 
 export const applicationLine =
-  "Hiring across roles — development, design, project delivery, API work, support, or AI automation? Full-time or freelance — clear process, fast feedback, launch-ready delivery.";
+  "Hiring across Frontend Development, Design, APIs, Tech Support, Automation — or a Solution Engineer (data, cloud, AI)? Full-time onsite in Nairobi or remote — brand direction, web apps, AI automation, launch-ready delivery.";
 
 export const frontendToolbox = [
+  {
+    group: "Solution engineering — data",
+    skills: ["Python + Pandas", "SQL (relational + analytical)", "CSV/TSV ingestion pipelines", "Entity modelling + schema mapping", "SQLite", "BigQuery", "Cloud SQL", "Flask + Jinja"],
+  },
+  {
+    group: "Solution engineering — cloud & DevOps",
+    skills: ["Google Cloud Run", "Docker + containerised services", "Redis", "VPC networking + ingress", "Artifact Registry", "Cloud Storage", "Cloud IAM", "GitHub Actions (scheduled ingestion, embeddings, container builds)"],
+  },
+  {
+    group: "Solution engineering — AI",
+    skills: ["Embeddings + Sentence Transformers", "Semantic search", "Natural-language querying", "LLM-powered workflows", "Agentic architectures", "Model Context Protocol (MCP)"],
+  },
   {
     group: "Web build — core",
     skills: ["React 19", "TypeScript", "JavaScript (ES6+)", "HTML5 semantics", "CSS3", "Tailwind CSS v4"],
   },
   {
     group: "Engineering & delivery",
-    skills: ["Responsive design (360px → desktop)", "Component architecture", "State + URL state", "REST API integration", "Forms + validation", "Routing (wouter)"],
+    skills: ["Responsive design (360px → desktop)", "Component architecture", "State + URL state", "REST API design + integration", "Forms + validation", "Routing (wouter)", "WSL + Cloud Shell"],
   },
   {
     group: "Quality & shipping",
@@ -83,6 +98,13 @@ export const frontendPractices = [
 ] as const;
 
 export const services = [
+  {
+    role: "Solution Engineer · Data, Cloud & AI",
+    title: "Data pipelines, cloud & AI solutions",
+    text: "Robust ingestion (CSV/TSV → structured datasets), entity modelling + schema mapping, Dockerised services on Cloud Run, and AI: NL querying, semantic search, embeddings, LLM workflows, MCP.",
+    features: ["Python + Pandas ingestion pipelines", "SQLite · Cloud SQL · BigQuery", "Docker → Cloud Run + Redis, VPC, IAM", "Embeddings, LLM workflows, MCP + GitHub Actions"],
+    proof: "2+ years data / cloud / backend — scalable, reliable, production-ready",
+  },
   {
     role: "Developer · Web Apps",
     title: "Launch-ready web apps",
@@ -135,6 +157,25 @@ export const automationWorkflow = [
 ] as const;
 
 export const coreSkills = [
+  "Solution Engineering",
+  "Python",
+  "Pandas",
+  "SQL",
+  "Docker",
+  "Google Cloud Run",
+  "BigQuery",
+  "Cloud SQL",
+  "SQLite",
+  "Redis",
+  "VPC + IAM",
+  "Artifact Registry",
+  "Cloud Storage",
+  "GitHub Actions",
+  "Embeddings + LLMs",
+  "MCP",
+  "Semantic Search",
+  "REST APIs",
+  "Flask",
   "React 19",
   "TypeScript",
   "JavaScript (ES6+)",
@@ -142,7 +183,6 @@ export const coreSkills = [
   "Tailwind CSS",
   "Responsive UI",
   "Component Systems",
-  "REST APIs",
   "M-Pesa Integration",
   "Playwright E2E",
   "WCAG Accessibility",

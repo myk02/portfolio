@@ -134,7 +134,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
 
               <div className="mt-6 pt-5 border-t border-border max-w-[24rem] mx-auto">
                 <ul className="flex flex-wrap justify-center gap-2 mb-5" aria-label="Core stack">
-                  {["React", "TypeScript", "Tailwind", "Playwright", "Vite + Vercel"].map((t) => (
+                  {["Solution Engineer", "Python + Pandas", "SQL", "Docker + GCP Cloud Run", "BigQuery", "Embeddings + LLMs", "React", "TypeScript"].map((t) => (
                     <li
                       key={t}
                       className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-foreground"

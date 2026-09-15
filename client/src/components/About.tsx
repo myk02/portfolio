@@ -6,9 +6,11 @@ import { CONTACT } from "@/lib/site";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
 const TIMELINE = [
+  { year: "2024", event: "Solution Engineer — data pipelines (Python, Pandas, SQL) + Dockerised services" },
   { year: "2024", event: "KenyaTrace — shipped" },
   { year: "2025", event: "GiGi Energy — shipped" },
   { year: "2025", event: "LegalFlow — shipped" },
+  { year: "2025", event: "Solution Engineer — GCP Cloud Run, BigQuery, embeddings, LLM workflows + MCP" },
 ];
 
 const ABOUT_LINKS = [

@@ -1,14 +1,15 @@
-import { BadgeCheck, Bot, ClipboardList, Code2, LifeBuoy, Palette, Plug } from "lucide-react";
+import { BadgeCheck, Bot, ClipboardList, Code2, Database, LifeBuoy, Palette, Plug } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { automationWorkflow, services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
+const ROLE_ICONS = [Database, Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
 
 /**
- * Multi-role proof section: Developer, Designer/Brand, Project Manager,
- * APIs, Tech Support, AI Automation & Workflows.
+ * Multi-role proof section: Solution Engineer (Data, Cloud & AI),
+ * Developer, Designer/Brand, Project Manager, APIs, Tech Support,
+ * AI Automation & Workflows.
  * Each role explains what it includes + where it's proven — no bare titles.
  */
 export default function Services() {
@@ -22,11 +23,11 @@ export default function Services() {
         <Reveal className="section-intro mb-8">
           <SectionLabel>Roles & services</SectionLabel>
           <h2 id="services-heading" className="heading-section text-foreground mt-2">
-            One partner, six roles — brand to launch
+            One partner, seven roles — data to launch
           </h2>
           <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto max-w-xl">
-            Pick one role or hand me the whole journey — from first sketch to
-            shipped product, with support included.
+            Pick one role or hand me the whole journey — Solution Engineering
+            (pipelines, cloud, AI) through to shipped product, with support included.
           </p>
         </Reveal>
 
