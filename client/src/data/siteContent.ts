@@ -21,7 +21,7 @@ export const roleChips = [
 export const heroHeadline = "Brand direction, web apps, AI automation — launch-ready digital experiences.";
 
 export const heroSubline =
-  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, AI automation, and launch-ready digital experiences — plus data pipelines (CSV/TSV → queryable datasets), Dockerised services on Google Cloud Run, and AI: semantic search, embeddings, LLM workflows, MCP.";
+  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, AI automation, and launch-ready digital experiences.";
 
 export const heroStats = [
   { label: "Live products shipped", value: String(liveCount) },
