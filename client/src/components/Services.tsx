@@ -7,9 +7,9 @@ import { automationWorkflow, services } from "@/data/siteContent";
 const ROLE_ICONS = [Database, Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
 
 /**
- * Multi-role proof section: Solution Engineer (Data, Cloud & AI),
+ * Multi-role proof section: Solution Engineer (Data & Cloud),
  * Developer, Designer/Brand, Project Manager, APIs, Tech Support,
- * AI Automation & Workflows.
+ * Automation & Workflows.
  * Each role explains what it includes + where it's proven — no bare titles.
  */
 export default function Services() {
@@ -27,7 +27,7 @@ export default function Services() {
           </h2>
           <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto max-w-xl">
             Pick one role or hand me the whole journey — Solution Engineering
-            (pipelines, cloud, AI) through to shipped product, with support included.
+            (pipelines and cloud) through to shipped product, with support included.
           </p>
         </Reveal>
 
@@ -82,7 +82,7 @@ export default function Services() {
               </span>
               <div>
                 <p className="text-[11px] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                  AI automation — how a pilot runs
+                  Automation — how a pilot runs
                 </p>
                 <p className="font-display font-semibold text-foreground text-[1rem] tracking-[-0.01em] leading-snug">
                   Fixed scope, human-reviewed, measured weekly

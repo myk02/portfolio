@@ -4,7 +4,7 @@ export const positionTitle =
   "Solution Engineer, Frontend Developer, Designer, APIs, Tech Support & Automation Specialist";
 
 export const roleLine =
-  "Solution Engineer · Frontend Developer · Designer · APIs · Tech Support · AI Automation";
+  "Solution Engineer · Frontend Developer · Designer · APIs · Tech Support · Automation";
 
 export const roleChips = [
   "Solution Engineer",
@@ -15,13 +15,12 @@ export const roleChips = [
   "Automation Specialist",
   "Data Engineering",
   "Cloud (GCP)",
-  "AI Solutions",
 ] as const;
 
-export const heroHeadline = "Brand direction, web apps, AI automation — launch-ready digital experiences.";
+export const heroHeadline = "Brand direction, web apps, automation — launch-ready digital experiences.";
 
 export const heroSubline =
-  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, AI automation, and launch-ready digital experiences.";
+  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, automation, and launch-ready digital experiences.";
 
 export const heroStats = [
   { label: "Live products shipped", value: String(liveCount) },
@@ -30,13 +29,13 @@ export const heroStats = [
 ];
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist in Nairobi, also working as a Solution Engineer. What I do: brand direction, web apps, AI automation, and launch-ready digital experiences — end to end, from first sketch to shipped product.",
+  "I'm Mike Waitindi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist in Nairobi, also working as a Solution Engineer. What I do: brand direction, web apps, automation, and launch-ready digital experiences — end to end, from first sketch to shipped product.",
   `${liveCount} live products prove the loop — KenyaTrace (multi-stop trip planner, 6→3 taps), GiGi Energy (accessible storefront, 4→3 checkout, M-Pesa first), and LegalFlow (mobile-first PWA workspace) — each with a live demo, repo, and case study.`,
-  "As a Solution Engineer I design and build robust data ingestion pipelines — raw CSV/TSV into structured, queryable datasets, custom entity modelling and schema mapping — on SQLite, Cloud SQL and BigQuery. I ship Dockerised services (data loading, embedding generation, data-serving) to Google Cloud Run with Redis, VPC, Artifact Registry, Cloud Storage, IAM and ingress controls, automated via GitHub Actions. On top: natural-language querying, semantic search, embeddings, LLM workflows, and agentic/MCP integrations — with strong Python (Pandas), SQL, REST APIs, Flask/Jinja, WSL and Cloud Shell.",
+  "As a Solution Engineer I design and build robust data ingestion pipelines — raw CSV/TSV into structured, queryable datasets, custom entity modelling and schema mapping — on SQLite, Cloud SQL and BigQuery. I ship Dockerised services (data loading and data-serving) to Google Cloud Run with Redis, VPC, Artifact Registry, Cloud Storage, IAM and ingress controls, automated via GitHub Actions — with strong Python (Pandas), SQL, REST APIs, Flask/Jinja, WSL and Cloud Shell.",
 ];
 
 export const applicationLine =
-  "Hiring across Frontend Development, Design, APIs, Tech Support, Automation — or a Solution Engineer (data, cloud, AI)? Full-time onsite in Nairobi or remote — brand direction, web apps, AI automation, launch-ready delivery.";
+  "Hiring across Frontend Development, Design, APIs, Tech Support, Automation — or a Solution Engineer (data, cloud)? Full-time onsite in Nairobi or remote — brand direction, web apps, automation, launch-ready delivery.";
 
 export const frontendToolbox = [
   {
@@ -45,11 +44,7 @@ export const frontendToolbox = [
   },
   {
     group: "Solution engineering — cloud & DevOps",
-    skills: ["Google Cloud Run", "Docker + containerised services", "Redis", "VPC networking + ingress", "Artifact Registry", "Cloud Storage", "Cloud IAM", "GitHub Actions (scheduled ingestion, embeddings, container builds)"],
-  },
-  {
-    group: "Solution engineering — AI",
-    skills: ["Embeddings + Sentence Transformers", "Semantic search", "Natural-language querying", "LLM-powered workflows", "Agentic architectures", "Model Context Protocol (MCP)"],
+    skills: ["Google Cloud Run", "Docker + containerised services", "Redis", "VPC networking + ingress", "Artifact Registry", "Cloud Storage", "Cloud IAM", "GitHub Actions (scheduled ingestion + container builds)"],
   },
   {
     group: "Web build — core",
@@ -99,10 +94,10 @@ export const frontendPractices = [
 
 export const services = [
   {
-    role: "Solution Engineer · Data, Cloud & AI",
-    title: "Data pipelines, cloud & AI solutions",
-    text: "Robust ingestion (CSV/TSV → structured datasets), entity modelling + schema mapping, Dockerised services on Cloud Run, and AI: NL querying, semantic search, embeddings, LLM workflows, MCP.",
-    features: ["Python + Pandas ingestion pipelines", "SQLite · Cloud SQL · BigQuery", "Docker → Cloud Run + Redis, VPC, IAM", "Embeddings, LLM workflows, MCP + GitHub Actions"],
+    role: "Solution Engineer · Data & Cloud",
+    title: "Data pipelines & cloud solutions",
+    text: "Robust ingestion (CSV/TSV → structured datasets), entity modelling + schema mapping, and Dockerised services on Cloud Run — scalable, reliable, production-ready.",
+    features: ["Python + Pandas ingestion pipelines", "SQLite · Cloud SQL · BigQuery", "Docker → Cloud Run + Redis, VPC, IAM", "Scheduled ingestion + container builds via GitHub Actions"],
     proof: "2+ years data / cloud / backend — scalable, reliable, production-ready",
   },
   {
@@ -141,9 +136,9 @@ export const services = [
     proof: "Every launch ships with support contact + docs",
   },
   {
-    role: "AI Automation · AI Workflows",
-    title: "AI automation & AI workflows",
-    text: "Practical AI workflows that remove busywork: intake triage, content drafts, lead routing, QA checklists — wired into your stack, reviewed by a human.",
+    role: "Automation · Workflows",
+    title: "Automation & workflows",
+    text: "Practical workflows that remove busywork: intake triage, content drafts, lead routing, QA checklists — wired into your stack, reviewed by a human.",
     features: ["Intake → triage → reply drafts", "Content + SEO draft pipelines", "Lead capture → WhatsApp/email routing", "QA + release checklists"],
     proof: "Offered as scoped pilots — fixed outcome, human-reviewed",
   },
@@ -152,7 +147,7 @@ export const services = [
 export const automationWorkflow = [
   "Map: pick one repetitive flow (intake, content, follow-ups)",
   "Wire: connect forms, inbox, WhatsApp/email, and your tools",
-  "Draft: AI prepares the reply, summary, or content — human approves",
+  "Draft: ready-made reply, summary, or content templates — human approves",
   "Measure: time saved + errors caught, reported weekly",
 ] as const;
 
@@ -171,9 +166,6 @@ export const coreSkills = [
   "Artifact Registry",
   "Cloud Storage",
   "GitHub Actions",
-  "Embeddings + LLMs",
-  "MCP",
-  "Semantic Search",
   "REST APIs",
   "Flask",
   "React 19",
@@ -186,7 +178,7 @@ export const coreSkills = [
   "M-Pesa Integration",
   "Playwright E2E",
   "WCAG Accessibility",
-  "AI Workflows",
+  "Automation Workflows",
   "Project Delivery",
   "Tech Support",
   "Vercel + Vite",

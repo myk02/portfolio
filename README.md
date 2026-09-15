@@ -6,7 +6,7 @@
 ![Vercel](https://img.shields.io/badge/hosting-vercel-black)
 
 Developer, designer, tech support & automation specialist based in Nairobi.
-Brand direction, web apps, AI automation, and launch-ready digital experiences.
+Brand direction, web apps, automation, and launch-ready digital experiences.
 
 **Live:** [mikeships.vercel.app](https://mikeships.vercel.app)
 

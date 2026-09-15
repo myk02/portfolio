@@ -10,7 +10,7 @@ const TIMELINE = [
   { year: "2024", event: "KenyaTrace — shipped" },
   { year: "2025", event: "GiGi Energy — shipped" },
   { year: "2025", event: "LegalFlow — shipped" },
-  { year: "2025", event: "Solution Engineer — GCP Cloud Run, BigQuery, embeddings, LLM workflows + MCP" },
+  { year: "2025", event: "Solution Engineer — GCP Cloud Run, BigQuery, Docker + GitHub Actions" },
 ];
 
 const ABOUT_LINKS = [
