@@ -1,13 +1,12 @@
 import { liveCount } from "@/data/projects";
 
 export const positionTitle =
-  "Solution Engineer, Frontend Developer, Designer, APIs, Tech Support & Automation Specialist";
+  "Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer";
 
 export const roleLine =
-  "Solution Engineer · Frontend Developer · Designer · APIs · Tech Support · Automation";
+  "Frontend Developer · Designer · APIs · Tech Support · Automation · Solution Engineer";
 
 export const roleChips = [
-  "Solution Engineer",
   "Frontend Developer",
   "Designer",
   "APIs",
@@ -15,9 +14,11 @@ export const roleChips = [
   "Automation Specialist",
   "Data Engineering",
   "Cloud (GCP)",
+  "Solution Engineer",
 ] as const;
 
-export const heroHeadline = "Brand direction, web apps, automation — launch-ready digital experiences.";
+export const heroTagline =
+  "Brand direction, web apps, automation, and launch-ready digital experiences.";
 
 export const heroSubline =
   "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, automation, and launch-ready digital experiences.";
@@ -29,9 +30,8 @@ export const heroStats = [
 ];
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist in Nairobi, also working as a Solution Engineer. What I do: brand direction, web apps, automation, and launch-ready digital experiences — end to end, from first sketch to shipped product.",
-  `${liveCount} live products prove the loop — KenyaTrace (multi-stop trip planner, 6→3 taps), GiGi Energy (accessible storefront, 4→3 checkout, M-Pesa first), and LegalFlow (mobile-first PWA workspace) — each with a live demo, repo, and case study.`,
-  "As a Solution Engineer I design and build robust data ingestion pipelines — raw CSV/TSV into structured, queryable datasets, custom entity modelling and schema mapping — on SQLite, Cloud SQL and BigQuery. I ship Dockerised services (data loading and data-serving) to Google Cloud Run with Redis, VPC, Artifact Registry, Cloud Storage, IAM and ingress controls, automated via GitHub Actions — with strong Python (Pandas), SQL, REST APIs, Flask/Jinja, WSL and Cloud Shell.",
+  "I'm Mike Waitindi — a Nairobi-based builder working across frontend, brand, APIs, support, and automation, also as a Solution Engineer.",
+  `${liveCount} live products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study.`,
 ];
 
 export const applicationLine =
@@ -63,23 +63,19 @@ export const frontendToolbox = [
 export const frontendServices = [
   {
     title: "Responsive web apps",
-    text: "React + TypeScript apps that work at 360px on 3G phones and scale to desktop — list-first IA, progressive loading, shareable URL state.",
-    proof: "KenyaTrace: 6→3 taps, 100% mobile task parity",
+    text: "React + TypeScript, mobile-first, 360px to desktop.",
   },
   {
     title: "Design-to-code UI systems",
-    text: "Figma-to-production component libraries with variants, disabled / error / loading states, tokens, and docs — pixel-faithful and reusable.",
-    proof: "GiGi Energy: brand remapped to AA contrast",
+    text: "Figma to production components, reusable and consistent.",
   },
   {
     title: "Accessible, tested interfaces",
-    text: "Semantic HTML, keyboard paths, focus management, axe-checked contrast, and Playwright E2E coverage on checkout and core flows.",
-    proof: "GiGi checkout: 4→3 steps, M-Pesa first",
+    text: "Semantic HTML, keyboard paths, Playwright E2E.",
   },
   {
     title: "Performance & PWA delivery",
-    text: "Image optimization (WebP), lazy loading, minimal JS, installable PWAs, and Vercel CI/CD with preview-per-PR.",
-    proof: "LegalFlow: mobile-first installable PWA",
+    text: "Fast loads, installable PWAs, preview-per-PR deploys.",
   },
 ] as const;
 
@@ -95,92 +91,53 @@ export const frontendPractices = [
 export const services = [
   {
     role: "Solution Engineer · Data & Cloud",
-    title: "Data pipelines & cloud solutions",
-    text: "Robust ingestion (CSV/TSV → structured datasets), entity modelling + schema mapping, and Dockerised services on Cloud Run — scalable, reliable, production-ready.",
-    features: ["Python + Pandas ingestion pipelines", "SQLite · Cloud SQL · BigQuery", "Docker → Cloud Run + Redis, VPC, IAM", "Scheduled ingestion + container builds via GitHub Actions"],
-    proof: "2+ years data / cloud / backend — scalable, reliable, production-ready",
+    title: "Data pipelines & cloud",
+    text: "CSV → structured data, Dockerised services on Cloud Run.",
   },
   {
     role: "Developer · Web Apps",
     title: "Launch-ready web apps",
-    text: "Responsive React + TypeScript apps, shipped to Vercel with previews, E2E-tested core flows, and docs — from first commit to production URL.",
-    features: ["React 19 + TypeScript builds", "Responsive 360px → desktop", "E2E-tested releases", "Vercel CI/CD + previews"],
-    proof: "3 live products, each with demo + repo + case study",
+    text: "Responsive React + TypeScript apps, shipped to production.",
   },
   {
     role: "Designer · Brand Direction",
-    title: "Brand direction & UX/UI design",
-    text: "Brand systems, UX flows, and Figma-to-code UI — one visual language from logo and palette to shipped components.",
-    features: ["Brand + palette systems", "UX flows & IA", "Figma-to-code components", "AA-contrast enforcement"],
-    proof: "GiGi Energy: bold brand remapped to WCAG AA, intact",
+    title: "Brand & UI design",
+    text: "Brand systems and Figma-to-code interfaces.",
   },
   {
     role: "Project Manager",
-    title: "Managed delivery, solo to launch",
-    text: "Scoped plans, weekly demos, and honest timelines — KenyaTrace in 5 weeks, GiGi in 4, LegalFlow in 7. You always know what's next.",
-    features: ["Scoped milestones + demos", "Risk-first sequencing", "Field-tested timelines", "Handover docs included"],
-    proof: "3 solo launches: 5, 4, and 7 weeks",
+    title: "Managed delivery",
+    text: "Scoped plans, weekly demos, solo to launch.",
   },
   {
     role: "APIs",
     title: "API design & integration",
-    text: "API-driven UI done right: typed clients, loading / empty / error / retry states, forms with inline validation, and third-party hooks.",
-    features: ["Typed REST integration", "M-Pesa-first payments", "GA4 analytics hooks", "Shareable URL state"],
-    proof: "GiGi: M-Pesa-first checkout · KenyaTrace: 1-link itineraries",
+    text: "Typed REST, M-Pesa payments, third-party hooks.",
   },
   {
     role: "Tech Support",
-    title: "Tech support & care plans",
-    text: "Post-launch support that keeps sites fast and owners confident — triage, fixes, content updates, and plain-language reports.",
-    features: ["<24h response (Mon–Sat, EAT)", "Bug triage + fixes", "Content & data updates", "Handover + docs"],
-    proof: "Every launch ships with support contact + docs",
+    title: "Tech support",
+    text: "Fast fixes, updates, and plain-language reports.",
   },
   {
     role: "Automation · Workflows",
     title: "Automation & workflows",
-    text: "Practical workflows that remove busywork: intake triage, content drafts, lead routing, QA checklists — wired into your stack, reviewed by a human.",
-    features: ["Intake → triage → reply drafts", "Content + SEO draft pipelines", "Lead capture → WhatsApp/email routing", "QA + release checklists"],
-    proof: "Offered as scoped pilots — fixed outcome, human-reviewed",
+    text: "Scoped pilots that remove repetitive busywork.",
   },
 ] as const;
 
-export const automationWorkflow = [
-  "Map: pick one repetitive flow (intake, content, follow-ups)",
-  "Wire: connect forms, inbox, WhatsApp/email, and your tools",
-  "Draft: ready-made reply, summary, or content templates — human approves",
-  "Measure: time saved + errors caught, reported weekly",
-] as const;
-
 export const coreSkills = [
-  "Solution Engineering",
-  "Python",
-  "Pandas",
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "Python + Pandas",
   "SQL",
+  "BigQuery",
   "Docker",
   "Google Cloud Run",
-  "BigQuery",
-  "Cloud SQL",
-  "SQLite",
-  "Redis",
-  "VPC + IAM",
-  "Artifact Registry",
-  "Cloud Storage",
-  "GitHub Actions",
   "REST APIs",
-  "Flask",
-  "React 19",
-  "TypeScript",
-  "JavaScript (ES6+)",
-  "HTML5 + ARIA",
-  "Tailwind CSS",
-  "Responsive UI",
-  "Component Systems",
   "M-Pesa Integration",
   "Playwright E2E",
-  "WCAG Accessibility",
   "Automation Workflows",
-  "Project Delivery",
-  "Tech Support",
-  "Vercel + Vite",
 ];
 

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { CheckCircle2, Linkedin, Mail, MessageCircle, Clock, ShieldCheck } from "lucide-react";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { applicationLine } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
@@ -105,9 +104,6 @@ export default function Contact() {
             <h2 className="heading-section text-foreground">
               Work with me
             </h2>
-            <p className="text-muted-foreground text-[0.875rem] leading-relaxed mt-3 mx-auto">
-              {applicationLine}
-            </p>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-5 mt-8 items-start max-w-4xl mx-auto">

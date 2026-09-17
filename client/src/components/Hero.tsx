@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { heroStats, roleChips, roleLine, heroHeadline, heroSubline, positionTitle } from "@/data/siteContent";
+import { heroStats, heroTagline } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { liveStudies } from "@/data/projects";
 import { CountUp } from "@/components/CountUp";
@@ -64,39 +64,17 @@ export default function Hero({ onCtaClick }: HeroProps) {
       id="home"
       className="relative bg-secondary flex items-center overflow-hidden border-b border-border pt-16"
     >
-      <div className="relative z-10 w-full py-8 md:py-10">
+      <div className="relative z-10 w-full py-16 md:py-24">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 lg:gap-8 items-center max-w-4xl mx-auto">
-            <div className="order-1 min-w-0 text-center mx-auto max-w-[30rem] lg:max-w-none">
-              <div className="mb-4 flex items-center justify-center gap-3 hero-kicker">
-                <span className="w-2 h-2 bg-accent shrink-0" />
-                <p className="text-mono text-muted-foreground text-[0.6875rem] sm:text-xs">
-                  {roleLine}
-                </p>
-              </div>
-
-              <h1 className="heading-hero text-foreground text-balance mx-auto">
-                {heroHeadline}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-12 items-center max-w-5xl mx-auto">
+            <div className="order-1 min-w-0 text-center mx-auto max-w-[32rem] lg:max-w-none">
+              <h1 className="font-display font-semibold text-2xl sm:text-3xl text-foreground tracking-tight">
+                Mike Waitindi
               </h1>
 
-              <p className="mt-3 text-[0.6875rem] sm:text-xs font-mono uppercase tracking-[0.14em] text-muted-foreground">
-                Mike Waitindi — {positionTitle}
+              <p className="mt-3 font-display font-medium text-lg sm:text-xl text-foreground/90 leading-snug text-balance max-w-[28rem] mx-auto">
+                {heroTagline}
               </p>
-
-              <p className="mt-4 text-[0.875rem] text-muted-foreground leading-relaxed max-w-[26rem] mx-auto">
-                {heroSubline}
-              </p>
-
-              <ul className="mt-4 flex flex-wrap items-center justify-center gap-1.5 max-w-[26rem] mx-auto" aria-label="Roles offered">
-                {roleChips.map((role) => (
-                  <li
-                    key={role}
-                    className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-foreground"
-                  >
-                    {role}
-                  </li>
-                ))}
-              </ul>
 
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
                 <Surface className="inline-flex items-center gap-2 px-2.5 py-1.5">
@@ -113,7 +91,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 </span>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
+              <div className="flex flex-wrap items-center justify-center gap-2.5 mt-8">
                 <button
                   type="button"
                   onClick={() => onCtaClick("work")}
@@ -132,27 +110,17 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 <BuyMeCoffee />
               </div>
 
-              <div className="mt-6 pt-5 border-t border-border max-w-[24rem] mx-auto">
-                <ul className="flex flex-wrap justify-center gap-2 mb-5" aria-label="Core stack">
-                  {["Solution Engineer", "Python + Pandas", "SQL", "Docker + GCP Cloud Run", "BigQuery", "React", "TypeScript"].map((t) => (
-                    <li
-                      key={t}
-                      className="px-2 py-1 text-[10px] font-mono uppercase tracking-widest border border-border bg-card text-foreground"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
+              <div className="mt-10 pt-6 border-t border-border max-w-[28rem] mx-auto">
                 <div className="grid grid-cols-3 gap-3 text-left">
                 {heroStats.map((stat) => (
                   <div
                     key={stat.label}
                     className="min-w-0 border-l-2 border-accent pl-3"
                   >
-                    <div className="font-display font-semibold text-[1.1rem] text-foreground leading-none whitespace-nowrap tracking-tight">
+                    <div className="font-display font-semibold text-2xl text-foreground leading-none whitespace-nowrap tracking-tight">
                       <CountUp value={stat.value} />
                     </div>
-                    <div className="text-[0.625rem] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground leading-snug mt-2">
+                    <div className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground leading-snug mt-2">
                       {stat.label}
                     </div>
                   </div>
@@ -161,7 +129,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="order-2 w-full max-w-[24rem] mx-auto">
+            <div className="order-2 w-full max-w-[28rem] mx-auto">
               <HeroVisual />
             </div>
           </div>

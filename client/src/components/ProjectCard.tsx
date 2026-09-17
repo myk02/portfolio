@@ -14,14 +14,14 @@ export default function ProjectCard({
   index: number;
 }) {
   return (
-    <Surface className="group relative h-full flex flex-col overflow-hidden transition-colors duration-200 hover:border-foreground/20">
+    <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity"
         aria-hidden
       />
       <Link
         href={`/work/${study.slug}`}
-        className="block relative aspect-[16/9.2] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
         aria-label={`${study.name} — case study`}
       >
         <img
@@ -30,23 +30,20 @@ export default function ProjectCard({
           loading={index === 0 ? "eager" : "lazy"}
           fetchPriority={index === 0 ? "high" : "auto"}
           decoding="async"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
           <StatusBadge />
-          <span className="px-2 py-1 text-[11px] font-mono tracking-widest uppercase bg-background/90 backdrop-blur border border-border text-foreground">
-            {study.year}
-          </span>
         </div>
       </Link>
-        <div className="p-4 space-y-2 flex flex-col flex-1">
+        <div className="p-5 space-y-2.5 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
               0{index + 1}
             </span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-              {study.timeline} · {study.year}
+              {study.timeline}
             </span>
           </div>
           <span className="hidden sm:inline-flex text-[10px] font-mono uppercase tracking-widest px-2 py-1 border border-border bg-card text-muted-foreground">
@@ -54,10 +51,10 @@ export default function ProjectCard({
           </span>
         </div>
 
-        <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
+        <h3 className="font-display font-semibold text-xl text-foreground leading-[1.2] tracking-[-0.015em]">
           {study.name}
         </h3>
-        <p className="text-[0.8rem] text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
           {study.outcomeTitle}
         </p>
 
@@ -66,7 +63,7 @@ export default function ProjectCard({
           <Chip>{study.role}</Chip>
         </div>
 
-        <div className="pt-2.5 mt-auto border-t border-border flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs font-medium">
+        <div className="pt-3 mt-auto border-t border-border flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm font-medium">
           <Link
             href={`/work/${study.slug}`}
             className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
@@ -104,7 +101,7 @@ export default function ProjectCard({
 
 export function ProjectCardGrid({ studies }: { studies: Project[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[50rem] mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 max-w-[62rem] mx-auto">
       {studies.map((study, i) => (
         <Reveal key={study.slug} delay={i} className="h-full">
           <ProjectCard study={study} index={i} />

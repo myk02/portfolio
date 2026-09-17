@@ -4,12 +4,12 @@ import type { Project } from "@/data/projects";
 import { OWNER, SITE_URL } from "@/lib/site";
 import SiteHead from "@/components/SiteHead";
 import StatusBadge from "@/components/engineering/StatusBadge";
-import { DeviceShots, ShotFigure } from "@/components/artifacts/Screens";
+import { ShotFigure } from "@/components/artifacts/Screens";
 import { MetricCardRow } from "@/components/artifacts/MetricCard";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Reveal } from "@/components/Reveal";
-import { SectionLabel, Surface } from "@/components/ui/section";
+import { SectionLabel } from "@/components/ui/section";
 import { useReveal } from "@/hooks/useReveal";
 
 interface LayoutProps {
@@ -19,19 +19,9 @@ interface LayoutProps {
   moreWork: React.ReactNode;
 }
 
-function uniqueSrcs(project: Project) {
-  const used = new Set<string>([project.hero.src]);
-  const decisionShots =
-    project.decisions.filter((b) => b.shot && !used.has(b.shot)) ?? [];
-  decisionShots.forEach((b) => used.add(b.shot!));
-  const textDecisions = project.decisions.filter((b) => !b.shot);
-  const gallery = (project.screens ?? []).filter((s) => !used.has(s.src));
-  return { decisionShots, textDecisions, gallery };
-}
-
 /**
- * Visual-first case study: outcome + snapshot + one money shot, then
- * ownership → problem → decisions → screens → results → compact build notes.
+ * Concise case study: header + overview + key decisions + results.
+ * One screenshot, no deep-dive sections — the live site carries the detail.
  */
 export default function CaseStudyLayout({
   project,
@@ -40,15 +30,6 @@ export default function CaseStudyLayout({
   moreWork,
 }: LayoutProps) {
   useReveal();
-  const { decisionShots, textDecisions, gallery } = uniqueSrcs(project);
-
-  const noteGroups = project.buildNotes
-    ? [
-        { label: "Architecture", items: project.buildNotes.architecture },
-        { label: "Build", items: project.buildNotes.build },
-        { label: "Quality", items: project.buildNotes.quality },
-      ].filter((g) => g.items && g.items.length > 0)
-    : [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -103,29 +84,16 @@ export default function CaseStudyLayout({
           <p className="mt-4 text-[0.6875rem] sm:text-xs font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground">
             {project.outcomeTitle}
           </p>
-          <h1 className="mt-3 heading-hero text-foreground text-balance">
+          <h1 className="mt-3 font-display font-semibold text-3xl sm:text-4xl text-foreground tracking-tight text-balance">
             {project.name}
           </h1>
           <p className="mt-3 max-w-xl text-[0.9375rem] sm:text-base text-foreground/80 leading-relaxed mx-auto tracking-[-0.008em]">
             {project.tagline}
           </p>
 
-          <dl className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {[
-              { label: "Role", value: project.role },
-              { label: "Stack", value: project.stack.join(" · ") },
-              { label: "Outcome", value: project.outcomeLine },
-            ].map((f) => (
-              <Surface key={f.label} className="p-4">
-                <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                  {f.label}
-                </dt>
-                <dd className="text-[0.875rem] text-foreground leading-relaxed mt-2 font-medium tracking-[-0.005em]">
-                  {f.value}
-                </dd>
-              </Surface>
-            ))}
-          </dl>
+          <p className="mt-5 text-xs font-mono uppercase tracking-widest text-muted-foreground">
+            {project.role} · {project.stack.join(" · ")} · {project.timeline}
+          </p>
 
           <div className="mt-5 flex flex-wrap gap-2.5 justify-center">
             {project.liveUrl && (
@@ -164,61 +132,13 @@ export default function CaseStudyLayout({
       <section className="border-b border-border">
         <div className="container py-10 sm:py-12">
           <Reveal>
-            <SectionLabel>What I owned</SectionLabel>
-          </Reveal>
-            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {project.ownership.map((item) => (
-              <Reveal key={item}>
-                <li className="border border-border bg-card p-5 text-[0.875rem] text-foreground leading-relaxed tracking-[-0.005em]">
-                  <span
-                    className="block w-1.5 h-1.5 bg-accent mb-3"
-                    aria-hidden
-                  />
-                  {item}
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="border-b border-border">
-        <div className="container py-10 sm:py-12">
-          <Reveal>
-            <SectionLabel>Problem</SectionLabel>
-            <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-xl mx-auto sm:mx-0">
-              {project.context}
-            </p>
-            <h2 className="heading-section text-foreground mt-4 mb-3">
+            <SectionLabel>Overview</SectionLabel>
+            <h2 className="heading-section text-foreground mt-2 max-w-2xl">
               {project.problemLead}
             </h2>
-            {project.researchLead && (
-              <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-xl mx-auto sm:mx-0">
-                {project.researchLead}
-              </p>
-            )}
-          </Reveal>
-          <Reveal delay={1}>
-            <Surface className="mt-6 p-5 border-l-4 border-l-accent max-w-2xl">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
-                What broke the plan
-              </p>
-              <p className="text-[15px] text-foreground leading-relaxed tracking-[-0.005em]">
-                {project.ordeal}
-              </p>
-            </Surface>
-          </Reveal>
-          <Reveal delay={1}>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {project.constraints.map((c) => (
-                <span
-                  key={c}
-                  className="px-3 py-1.5 text-[11px] font-mono border border-border bg-card text-muted-foreground"
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
+            <p className="text-muted-foreground text-[0.9375rem] leading-relaxed mt-3 max-w-2xl">
+              {project.ordeal}
+            </p>
           </Reveal>
         </div>
       </section>
@@ -226,153 +146,35 @@ export default function CaseStudyLayout({
       <section className="border-b border-border bg-secondary">
         <div className="container py-10 sm:py-12">
           <Reveal>
-            <SectionLabel>Design decisions</SectionLabel>
+            <SectionLabel>Key decisions</SectionLabel>
           </Reveal>
-
-          {decisionShots.length > 0 && (
-            <div className="grid grid-cols-1 gap-8 mt-6">
-              {decisionShots.map((b) => (
-                <Reveal key={b.text}>
-                  <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-5 items-start">
-                    <div>
-                      {b.label && (
-                        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
-                          {b.label}
-                        </p>
-                      )}
-                      <p className="text-[0.9375rem] text-foreground leading-relaxed tracking-[-0.005em]">{b.text}</p>
-                    </div>
-                    {b.shot && (
-                      <ShotFigure src={b.shot} alt={b.alt ?? b.text} />
+          <ul className="mt-4 space-y-2 max-w-2xl">
+            {project.decisions.map((b) => (
+              <Reveal key={b.text}>
+                <li className="flex items-start gap-2.5 text-[0.9375rem] text-foreground leading-relaxed">
+                  <span className="mt-[9px] w-1.5 h-1.5 bg-accent shrink-0" aria-hidden />
+                  <span>
+                    {b.label && (
+                      <span className="font-semibold">{b.label}: </span>
                     )}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          )}
-
-          {textDecisions.length > 0 && (
-            <div
-              className={`grid grid-cols-1 sm:grid-cols-3 gap-4 ${decisionShots.length > 0 ? "mt-6" : "mt-6"}`}
-            >
-              {textDecisions.map((b) => (
-                <Surface key={b.text} className="p-4">
-                  {b.label && (
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
-                      {b.label}
-                    </p>
-                  )}
-                  <p className="text-[0.875rem] text-foreground leading-relaxed tracking-[-0.005em]">
                     {b.text}
-                  </p>
-                </Surface>
-              ))}
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
-            <Surface className="p-5 border-l-4 border-l-destructive">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-destructive mb-2">
-                Before
-              </p>
-              <p className="text-[0.9375rem] text-foreground leading-relaxed">
-                {project.validateBefore}
-              </p>
-            </Surface>
-            <Surface className="p-5 border-l-4 border-l-accent">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
-                After
-              </p>
-              <p className="text-[0.9375rem] text-foreground leading-relaxed">
-                {project.validateAfter}
-              </p>
-            </Surface>
-          </div>
+                  </span>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {gallery.length > 0 && (
-        <section
-          aria-label={`${project.name} screens`}
-          className="border-b border-border"
-        >
-          <div className="container py-10 sm:py-12">
-            <Reveal>
-            <SectionLabel>Shipped screens</SectionLabel>
-              <h2 className="heading-section text-foreground mb-5">
-                Screens
-              </h2>
-            </Reveal>
-            <DeviceShots shots={gallery} />
-          </div>
-        </section>
-      )}
-
       {project.metricCards.length > 0 && (
-        <section aria-label="Results" className="border-b border-border bg-secondary">
+        <section aria-label="Results" className="border-b border-border">
           <div className="container py-10 sm:py-12">
             <Reveal>
-            <SectionLabel>Results</SectionLabel>
-              <h2 className="heading-section mb-5 text-foreground">
-                Results
-              </h2>
+              <SectionLabel>Results</SectionLabel>
             </Reveal>
-            <MetricCardRow cards={project.metricCards} />
-
-            {project.lessons.length > 0 && (
-              <Reveal delay={2}>
-                <div className="mt-8 pt-6 border-t border-border">
-                  <p className="text-[10px] font-mono uppercase tracking-widest mb-3 text-muted-foreground">
-                    Lessons
-                  </p>
-                  <ul className="space-y-2">
-                    {project.lessons.map((l) => (
-                      <li
-                        key={l}
-                        className="flex items-start gap-2.5 text-[0.875rem] text-muted-foreground leading-relaxed"
-                      >
-                        <span
-                          className="mt-1.5 w-1 h-1 shrink-0 bg-accent"
-                          aria-hidden
-                        />
-                        {l}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            )}
-          </div>
-        </section>
-      )}
-
-      {noteGroups.length > 0 && (
-        <section className="border-b border-border">
-          <div className="container py-10 sm:py-12">
-            <Reveal>
-            <SectionLabel>Build notes</SectionLabel>
-            </Reveal>
-            <dl className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {noteGroups.map((group) => (
-                <Surface key={group.label} className="p-5">
-                  <dt className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
-                    {group.label}
-                  </dt>
-                  <dd>
-                    <ul className="space-y-2">
-                      {group.items!.map((item) => (
-                        <li
-                          key={item}
-                          className="text-[0.8125rem] text-muted-foreground leading-relaxed"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </dd>
-                </Surface>
-              ))}
-            </dl>
+            <div className="mt-4">
+              <MetricCardRow cards={project.metricCards} />
+            </div>
           </div>
         </section>
       )}
