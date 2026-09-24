@@ -1,15 +1,19 @@
 import { liveCount } from "@/data/projects";
 
 export const positionTitle =
-  "Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer";
+  "Full-Stack Developer (Frontend, Backend, APIs & Databases), Designer, Tech Support & Automation Specialist, also working as a Solution Engineer";
 
 export const roleLine =
-  "Frontend Developer · Designer · APIs · Tech Support · Automation · Solution Engineer";
+  "Full-Stack Developer · Frontend · Backend · APIs · Databases · Design · Tech Support · Automation · Solution Engineer";
 
 export const roleChips = [
-  "Frontend Developer",
+  "Full-Stack Developer",
+  "Frontend (React + TypeScript)",
+  "Backend (Node.js)",
+  "REST APIs",
+  "PostgreSQL + Databases",
+  "Docker + API Security",
   "Designer",
-  "APIs",
   "Tech Support",
   "Automation Specialist",
   "Data Engineering",
@@ -18,10 +22,10 @@ export const roleChips = [
 ] as const;
 
 export const heroTagline =
-  "Brand direction, web apps, automation, and launch-ready digital experiences.";
+  "Full-stack web apps — frontend, APIs, databases — brand direction, automation, and launch-ready delivery.";
 
 export const heroSubline =
-  "I'm Mike Waitindi, in Nairobi — Frontend Developer, Designer, APIs, Tech Support & Automation Specialist, also working as a Solution Engineer. Brand direction, web apps, automation, and launch-ready digital experiences.";
+  "I'm Mike Waitindi, in Nairobi — Full-Stack Developer with 2+ years across frontend (React + TypeScript), backend (Node.js), REST APIs, and PostgreSQL databases, plus Docker, auth & API security. Also Designer, Tech Support & Automation Specialist, working as a Solution Engineer. Full-stack web apps, brand direction, automation, and launch-ready delivery.";
 
 export const heroStats = [
   { label: "Live products shipped", value: String(liveCount) },
@@ -30,14 +34,52 @@ export const heroStats = [
 ];
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi — a Nairobi-based builder working across frontend, brand, APIs, support, and automation, also as a Solution Engineer.",
-  `${liveCount} live products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study.`,
+  "I'm Mike Waitindi — a Nairobi-based Full-Stack Developer with 2+ years across frontend, backend, APIs, and databases (React + TypeScript, Node.js, REST APIs, PostgreSQL, Docker, authentication & API security), also working across brand, support, and automation as a Solution Engineer.",
+  `${liveCount} live full-stack products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study.`,
 ];
 
 export const applicationLine =
-  "Hiring across Frontend Development, Design, APIs, Tech Support, Automation — or a Solution Engineer (data, cloud)? Full-time onsite in Nairobi or remote — brand direction, web apps, automation, launch-ready delivery.";
+  "Hiring across Full-Stack Development (frontend, backend, REST APIs, PostgreSQL & databases, Docker, auth & API security), Design, Tech Support, Automation — or a Solution Engineer (data, cloud)? Full-time onsite in Nairobi or remote — full-stack web apps, brand direction, automation, launch-ready delivery.";
+
+export const fullStackHighlights = [
+  {
+    title: "Full-stack delivery, 2+ years",
+    text: "Production projects spanning frontend, backend APIs, and databases — one owner from UI to data.",
+  },
+  {
+    title: "Frontend — React + TypeScript",
+    text: "Responsive, accessible interfaces with typed components, forms + validation, and tested critical paths.",
+  },
+  {
+    title: "Backend APIs + PostgreSQL",
+    text: "Node.js + TypeScript REST APIs, relational modelling, queries, migrations, and performance-minded PostgreSQL.",
+  },
+  {
+    title: "Docker, auth & API security",
+    text: "Dockerised services, JWT/OAuth authentication, rate limiting, input validation, and secure API defaults.",
+  },
+] as const;
+
+export const fullStackToolbox = [
+  "React + TypeScript",
+  "JavaScript (ES6+)",
+  "Node.js + Express",
+  "REST API design",
+  "PostgreSQL",
+  "SQL modelling + migrations",
+  "JWT / OAuth + API security",
+  "Docker",
+  "Input validation + rate limiting",
+  "HTML5 + CSS3 + Tailwind",
+  "Playwright E2E",
+  "Git + code review",
+] as const;
 
 export const frontendToolbox = [
+  {
+    group: "Full-stack build — UI to database",
+    skills: ["React 19 + TypeScript", "Node.js + Express", "REST API design + versioning", "PostgreSQL modelling + migrations", "JWT / OAuth authentication", "API security (validation, rate limiting, OWASP basics)", "Docker + containerised services", "Postman / API testing"],
+  },
   {
     group: "Solution engineering — data",
     skills: ["Python + Pandas", "SQL (relational + analytical)", "CSV/TSV ingestion pipelines", "Entity modelling + schema mapping", "SQLite", "BigQuery", "Cloud SQL", "Flask + Jinja"],
@@ -61,6 +103,14 @@ export const frontendToolbox = [
 ] as const;
 
 export const frontendServices = [
+  {
+    title: "Full-stack web apps",
+    text: "2+ years React frontend to Node.js + PostgreSQL backend — typed end to end, shipped to production.",
+  },
+  {
+    title: "APIs & databases that hold up",
+    text: "Versioned REST, relational modelling + migrations, auth & security, Dockerised services ready for cloud.",
+  },
   {
     title: "Responsive web apps",
     text: "React + TypeScript, mobile-first, 360px to desktop.",
@@ -90,6 +140,11 @@ export const frontendPractices = [
 
 export const services = [
   {
+    role: "Full-Stack Developer",
+    title: "Full-stack apps — UI to database",
+    text: "2+ years frontend, backend APIs & PostgreSQL — React + Node.js + Docker, auth & security.",
+  },
+  {
     role: "Solution Engineer · Data & Cloud",
     title: "Data pipelines & cloud",
     text: "CSV → structured data, Dockerised services on Cloud Run.",
@@ -111,8 +166,8 @@ export const services = [
   },
   {
     role: "APIs",
-    title: "API design & integration",
-    text: "Typed REST, M-Pesa payments, third-party hooks.",
+    title: "API integration & payments",
+    text: "Third-party hooks, typed clients, M-Pesa payments.",
   },
   {
     role: "Tech Support",
@@ -127,15 +182,19 @@ export const services = [
 ] as const;
 
 export const coreSkills = [
-  "React",
+  "Node.js",
   "TypeScript",
+  "Express",
+  "REST APIs",
+  "PostgreSQL",
+  "JWT + API Security",
+  "Docker",
+  "React",
   "Tailwind CSS",
   "Python + Pandas",
   "SQL",
   "BigQuery",
-  "Docker",
   "Google Cloud Run",
-  "REST APIs",
   "M-Pesa Integration",
   "Playwright E2E",
   "Automation Workflows",

@@ -377,38 +377,85 @@
   }
 }
 
+/* ——— Scroll-reveal system (non-motion fallback for raw [data-reveal]) ———
+   Main Reveal component animates with framer-motion whileInView:
+   32px rise + 4px blur + 0.75s expo-out, staggered 100ms. This CSS mirrors
+   that feel for hand-written markup so both paths look identical. */
 [data-reveal] {
   opacity: 1;
   transform: none;
 }
 html.js [data-reveal] {
-  opacity: 1;
-  transform: translateY(16px);
+  opacity: 0;
+  transform: translateY(32px);
+  filter: blur(4px);
   transition:
-    opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--i, 0) * 80ms);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 100ms);
+  will-change: opacity, transform, filter;
 }
 html.js [data-reveal].in-view {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
 }
 html.js [data-reveal].reveal-scale {
-  transform: translateY(16px) scale(0.92);
+  transform: translateY(24px) scale(0.94);
 }
 html.js [data-reveal].reveal-scale.in-view {
   transform: translateY(0) scale(1);
+}
+html.js [data-reveal][data-reveal="left"] {
+  transform: translateX(-36px);
+}
+html.js [data-reveal][data-reveal="right"] {
+  transform: translateX(36px);
+}
+html.js [data-reveal][data-reveal="left"].in-view,
+html.js [data-reveal][data-reveal="right"].in-view {
+  transform: translateX(0);
 }
 @media (prefers-reduced-motion: reduce) {
   html.js [data-reveal] {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
     transition-delay: 0ms;
   }
   html.js [data-reveal].reveal-scale {
     transform: none;
   }
+}
+
+/* ——— Scroll chrome: progress bar, section rhythm, card lift ——— */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  z-index: 60;
+  pointer-events: none;
+}
+
+section[id] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+.card-lift {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
 }
 
 .live-dot {

@@ -1,5 +1,18 @@
+import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { heroStats, heroTagline } from "@/data/siteContent";
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 28, filter: "blur(4px)" },
+  animate: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: EASE, delay },
+  },
+});
 import { CONTACT } from "@/lib/site";
 import { liveStudies } from "@/data/projects";
 import { CountUp } from "@/components/CountUp";
@@ -68,15 +81,33 @@ export default function Hero({ onCtaClick }: HeroProps) {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-12 items-center max-w-5xl mx-auto">
             <div className="order-1 min-w-0 text-center mx-auto max-w-[32rem] lg:max-w-none">
-              <h1 className="font-display font-semibold text-2xl sm:text-3xl text-foreground tracking-tight">
+              <motion.h1
+                className="font-display font-semibold text-2xl sm:text-3xl text-foreground tracking-tight"
+                {...fadeUp(0)}
+              >
                 Mike Waitindi
-              </h1>
+              </motion.h1>
 
-              <p className="mt-3 font-display font-medium text-lg sm:text-xl text-foreground/90 leading-snug text-balance max-w-[28rem] mx-auto">
+              <motion.p
+                className="mt-3 font-display font-medium text-lg sm:text-xl text-foreground/90 leading-snug text-balance max-w-[28rem] mx-auto"
+                {...fadeUp(0.1)}
+              >
                 {heroTagline}
-              </p>
+              </motion.p>
 
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
+              <motion.p
+                className="mt-3 text-[0.8125rem] text-muted-foreground leading-relaxed max-w-[28rem] mx-auto"
+                {...fadeUp(0.18)}
+              >
+                Full-Stack Developer · frontend, backend, APIs &amp; databases —
+                2+ years React + TypeScript, Node.js, REST, PostgreSQL, Docker,
+                auth &amp; security
+              </motion.p>
+
+              <motion.div
+                className="mt-5 flex flex-wrap items-center justify-center gap-2.5"
+                {...fadeUp(0.26)}
+              >
                 <Surface className="inline-flex items-center gap-2 px-2.5 py-1.5">
                   <span className="live-dot" />
                   <span className="text-[11px] font-medium text-foreground whitespace-nowrap">
@@ -89,9 +120,12 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   {CONTACT.location}
                 </span>
-              </div>
+              </motion.div>
 
-              <div className="flex flex-wrap items-center justify-center gap-2.5 mt-8">
+              <motion.div
+                className="flex flex-wrap items-center justify-center gap-2.5 mt-8"
+                {...fadeUp(0.34)}
+              >
                 <button
                   type="button"
                   onClick={() => onCtaClick("work")}
@@ -108,9 +142,12 @@ export default function Hero({ onCtaClick }: HeroProps) {
                   Work with me
                 </button>
                 <BuyMeCoffee />
-              </div>
+              </motion.div>
 
-              <div className="mt-10 pt-6 border-t border-border max-w-[28rem] mx-auto">
+              <motion.div
+                className="mt-10 pt-6 border-t border-border max-w-[28rem] mx-auto"
+                {...fadeUp(0.42)}
+              >
                 <div className="grid grid-cols-3 gap-3 text-left">
                 {heroStats.map((stat) => (
                   <div
@@ -126,12 +163,22 @@ export default function Hero({ onCtaClick }: HeroProps) {
                   </div>
                 ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="order-2 w-full max-w-[28rem] mx-auto">
+            <motion.div
+              className="order-2 w-full max-w-[28rem] mx-auto"
+              initial={{ opacity: 0, y: 32, scale: 0.97, filter: "blur(4px)" }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                transition: { duration: 0.9, ease: EASE, delay: 0.3 },
+              }}
+            >
               <HeroVisual />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

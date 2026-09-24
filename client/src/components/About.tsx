@@ -6,6 +6,7 @@ import { CONTACT } from "@/lib/site";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
 const TIMELINE = [
+  { year: "2023–25", event: "Full-Stack Developer — 2+ years frontend, backend, APIs & databases (React, Node.js, REST, PostgreSQL, Docker, auth & security)" },
   { year: "2024", event: "KenyaTrace — shipped" },
   { year: "2025", event: "GiGi Energy + LegalFlow — shipped" },
   { year: "2024–25", event: "Solution Engineer — data pipelines + cloud" },

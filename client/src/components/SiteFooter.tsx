@@ -47,9 +47,9 @@ export default function SiteFooter() {
                 </span>
               </Link>
               <p className="text-[0.8125rem] text-background/65 mt-3 max-w-sm leading-relaxed mx-auto md:mx-0">
-                Developer, designer, project manager & automation specialist in
-                Nairobi — brand direction, web apps, APIs, support, and
-                launch-ready experiences. Remote.
+                Full-stack developer, designer & automation specialist in
+                Nairobi — frontend to APIs to database, brand direction,
+                support, and launch-ready experiences. Remote.
               </p>
             </div>
 
@@ -61,6 +61,7 @@ export default function SiteFooter() {
                 {[
                   { id: "work", label: "Work" },
                   { id: "services", label: "Services" },
+                  { id: "full-stack", label: "Full-Stack" },
                   { id: "expertise", label: "Quality" },
                   { id: "about", label: "About" },
                   { id: "contact", label: "Contact" },
