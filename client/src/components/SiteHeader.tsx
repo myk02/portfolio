@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useRoute, useLocation, Link } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { handleSiteNav } from "@/lib/navigation";
+import ScrollProgress from "@/components/ScrollProgress";
 
 interface SiteHeaderProps {
   onNavClick?: (id: string) => void;
@@ -94,16 +95,19 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
   const navLinks = [
     { id: "work", label: "Work" },
     { id: "services", label: "Services" },
+    { id: "full-stack", label: "Full-Stack" },
     { id: "expertise", label: "Quality" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];
 
   return (
+    <>
+      <ScrollProgress />
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-secondary/95 border-b border-border"
+          ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
           : "bg-transparent"
       }`}
     >
@@ -209,5 +213,6 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }

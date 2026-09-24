@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
+import FullStackExpertise from "@/components/FullStackExpertise";
 import FrontendExpertise from "@/components/FrontendExpertise";
 import Services from "@/components/Services";
 import About from "@/components/About";
@@ -40,6 +41,7 @@ export default function Home() {
         <Hero onCtaClick={scrollToHomeSection} />
         <WorkSection />
         <Services />
+        <FullStackExpertise />
         <FrontendExpertise />
         <About />
         <Contact />

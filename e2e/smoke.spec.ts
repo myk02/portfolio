@@ -10,7 +10,8 @@ test.describe("home page", () => {
     page.on("pageerror", e => errors.push(e.message));
 
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: /design, automate/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Mike Waitindi" }).first()).toBeVisible();
+    await expect(page.getByText(/Full-Stack Developer/).first()).toBeVisible();
 
     // Hero: hire CTAs + coffee (footer keeps a second instance)
     await expect(
@@ -30,7 +31,7 @@ test.describe("home page", () => {
     ).toBeVisible();
 
     await expect(
-      page.getByRole("link", { name: "github.com/myk02" })
+      page.getByRole("link", { name: "github.com/myk02", exact: true })
     ).toBeVisible();
 
     expect(errors).toEqual([]);
@@ -100,20 +101,19 @@ test.describe("work page", () => {
 });
 
 test.describe("case study pages — lean template", () => {
-  test("each shows three facts, screens, results, and a live link", async ({
+  test("each shows overview, key decisions, results, and a live link", async ({
     page,
   }) => {
     for (const slug of LIVE_SLUGS) {
       await page.goto(`/work/${slug}`);
-      for (const label of ["Role", "Stack", "Outcome"]) {
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      for (const label of ["Overview", "Key decisions"]) {
         await expect(
           page.getByText(label, { exact: true }).first()
         ).toBeVisible();
       }
-      // Real-screenshot gallery + numbers
-      await expect(page.getByRole("heading", { name: "Screens" })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Results" })).toBeVisible();
-      await expect(page.getByText("Design decisions")).toBeVisible();
+      // Results band + decisions list
+      await expect(page.getByRole("region", { name: "Results" })).toBeVisible();
       // Live out-link
       const liveLink = page.getByRole("link", { name: /View live product/ });
       await expect(liveLink.first()).toBeVisible();
@@ -146,7 +146,7 @@ test.describe("case study pages — lean template", () => {
 
   test("document titles reflect positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Developer, Designer/);
+    await expect(page).toHaveTitle(/Full-Stack Developer/);
     await page.goto("/work/kenyatrace");
     await expect(page).toHaveTitle(/live product/);
   });

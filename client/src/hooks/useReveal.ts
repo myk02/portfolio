@@ -1,22 +1,17 @@
 import { useEffect } from "react";
 
+/**
+ * Progressive-enhancement fallback for any raw `[data-reveal]` elements
+ * (non-motion path). The main `Reveal` component now animates with
+ * framer-motion `whileInView`, so this only covers hand-written markup.
+ *
+ * - Triggers slightly before the element enters (rootMargin bottom -8%)
+ * - Staggers via the CSS `--i` custom property
+ * - Watches for late-mounted nodes (lazy routes, filters)
+ * - Respects prefers-reduced-motion via CSS
+ */
 export function useReveal() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    if (els.length === 0) return;
-
-    // Reveal anything already near viewport immediately — prevents blank section on load/scroll
-    const viewportH = window.innerHeight;
-    els.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < viewportH * 1.15 && rect.bottom > -20) {
-        el.classList.add("in-view");
-      }
-    });
-
-    const remaining = els.filter((el) => !el.classList.contains("in-view"));
-    if (remaining.length === 0) return;
-
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -26,18 +21,35 @@ export function useReveal() {
           }
         });
       },
-      { threshold: 0, rootMargin: "0px 0px 0px 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
-    remaining.forEach((el) => io.observe(el));
 
-    // Fast fallback — guarantee visibility even if observer stalls (fixes screenshot blank)
-    const fallback = window.setTimeout(() => {
-      remaining.forEach((el) => el.classList.add("in-view"));
-      io.disconnect();
-    }, 320);
+    const revealImmediatelyIfVisible = (el: HTMLElement) => {
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh * 0.92 && rect.bottom > 0) {
+        el.classList.add("in-view");
+        return true;
+      }
+      return false;
+    };
+
+    const observeAll = () => {
+      document
+        .querySelectorAll<HTMLElement>("[data-reveal]:not(.in-view)")
+        .forEach((el) => {
+          if (!revealImmediatelyIfVisible(el)) io.observe(el);
+        });
+    };
+
+    observeAll();
+
+    const mo = new MutationObserver(() => observeAll());
+    mo.observe(document.body, { childList: true, subtree: true });
+
     return () => {
-      window.clearTimeout(fallback);
       io.disconnect();
+      mo.disconnect();
     };
   }, []);
 }
