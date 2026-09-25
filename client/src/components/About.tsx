@@ -4,6 +4,7 @@ import { SectionLabel } from "@/components/ui/section";
 import { aboutParagraphs, coreSkills } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const TIMELINE = [
   { year: "2023–25", event: "Full-Stack Developer — 2+ years frontend, backend, APIs & databases (React, Node.js, REST, PostgreSQL, Docker, auth & security)" },
@@ -42,16 +43,11 @@ export default function About() {
               <Reveal delay={0} scale>
                 <Card className="p-3">
                   <div
-                    className="relative aspect-square overflow-hidden bg-muted border border-border"
+                    className="relative aspect-square overflow-hidden bg-foreground text-background border border-border grid place-items-center"
                     role="img"
-                    aria-label="Portrait of Mike Waitindi"
+                    aria-label="Mike Waitindi monogram"
                   >
-                    <img
-                      src="/profile.webp"
-                      alt="Portrait of Mike Waitindi"
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
+                    <Logo size={96} className="max-w-[70%] max-h-[70%] w-auto h-auto" />
                   </div>
                   <p className="text-[11px] font-medium text-foreground leading-none mt-3 text-center md:text-left">
                     Mike Waitindi

@@ -6,8 +6,8 @@
  * update refs in client/src/data/projects.ts (.jpg → .webp) and delete
  * the JPGs — every shots/ path in the app lives in that one file.
  *
- * Left alone on purpose: client/public/profile.webp (already WebP),
- * client/public/og-cover.png (social cards want PNG/JPG).
+ * Left alone on purpose: client/public/og-cover.png (social cards want PNG/JPG).
+ * (client/public/profile.webp was removed — the About card now shows the MW monogram.)
  *
  * Run: pnpm images  (or: node scripts/optimize-images.mjs)
  */

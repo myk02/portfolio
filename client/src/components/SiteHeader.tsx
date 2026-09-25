@@ -5,6 +5,7 @@ import { useRoute, useLocation, Link } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { handleSiteNav } from "@/lib/navigation";
 import ScrollProgress from "@/components/ScrollProgress";
+import Logo from "@/components/Logo";
 
 interface SiteHeaderProps {
   onNavClick?: (id: string) => void;
@@ -123,8 +124,8 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           aria-label="Mike Waitindi — home"
           className="flex items-center gap-2.5 group"
         >
-          <span className="w-7 h-7 grid place-items-center bg-foreground text-background font-display font-semibold text-[11px] group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-            MW
+          <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+            <Logo size={20} />
           </span>
           <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
             Mike Waitindi

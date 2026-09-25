@@ -4,6 +4,7 @@ import { CONTACT } from "@/lib/site";
 import { liveStudies } from "@/data/projects";
 import { handleSiteNav, scrollToHomeSection } from "@/lib/navigation";
 import BuyMeCoffee from "./BuyMeCoffee";
+import Logo from "@/components/Logo";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -39,8 +40,8 @@ export default function SiteFooter() {
                 aria-label="Mike Waitindi — home"
                 className="inline-flex items-center gap-2 group"
               >
-                <span className="w-7 h-7 grid place-items-center bg-accent text-accent-foreground font-display font-semibold text-[11px]">
-                  MW
+                <span className="w-7 h-7 grid place-items-center bg-accent text-accent-foreground">
+                  <Logo size={20} />
                 </span>
                 <span className="font-display font-semibold text-[1.05rem] tracking-[-0.015em] text-background group-hover:text-accent transition-colors">
                   Mike Waitindi
