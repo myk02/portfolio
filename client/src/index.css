@@ -379,7 +379,7 @@
 
 /* ——— Scroll-reveal system (non-motion fallback for raw [data-reveal]) ———
    Main Reveal component animates with framer-motion whileInView:
-   32px rise + 4px blur + 0.75s expo-out, staggered 100ms. This CSS mirrors
+   32px rise + 0.75s expo-out, staggered 100ms. This CSS mirrors
    that feel for hand-written markup so both paths look identical. */
 [data-reveal] {
   opacity: 1;
@@ -388,18 +388,15 @@
 html.js [data-reveal] {
   opacity: 0;
   transform: translateY(32px);
-  filter: blur(4px);
   transition:
     opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--i, 0) * 100ms);
-  will-change: opacity, transform, filter;
+  will-change: opacity, transform;
 }
 html.js [data-reveal].in-view {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 html.js [data-reveal].reveal-scale {
   transform: translateY(24px) scale(0.94);
@@ -464,23 +461,7 @@ section[id] {
   border-radius: 9999px !important;
   background: var(--live);
   position: relative;
-}.live-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 9999px !important;
-  border: 1px solid var(--live);
-  animation: livePulse 1.8s ease-out infinite;
-}
-@keyframes livePulse {
-  0% {
-    transform: scale(0.6);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
+  flex-shrink: 0;
 }
 
 /* Lightbox is a deliberate always-dark viewer (works in both themes).

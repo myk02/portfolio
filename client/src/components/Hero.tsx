@@ -1,21 +1,19 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { heroStats, heroTagline } from "@/data/siteContent";
+import { heroTagline } from "@/data/siteContent";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 28, filter: "blur(4px)" },
+  initial: { opacity: 0, y: 28 },
   animate: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.8, ease: EASE, delay },
   },
 });
 import { CONTACT } from "@/lib/site";
 import { liveStudies } from "@/data/projects";
-import { CountUp } from "@/components/CountUp";
 import { Surface } from "@/components/ui/section";
 import BuyMeCoffee from "@/components/BuyMeCoffee";
 
@@ -113,9 +111,6 @@ export default function Hero({ onCtaClick }: HeroProps) {
                   <span className="text-[11px] font-medium text-foreground whitespace-nowrap">
                     Available for work
                   </span>
-                  <span className="hidden sm:inline text-[11px] text-muted-foreground">
-                    · Replies within 24h
-                  </span>
                 </Surface>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                   {CONTACT.location}
@@ -143,37 +138,15 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 </button>
                 <BuyMeCoffee />
               </motion.div>
-
-              <motion.div
-                className="mt-10 pt-6 border-t border-border max-w-[28rem] mx-auto"
-                {...fadeUp(0.42)}
-              >
-                <div className="grid grid-cols-3 gap-3 text-left">
-                {heroStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="min-w-0 border-l-2 border-accent pl-3"
-                  >
-                    <div className="font-display font-semibold text-2xl text-foreground leading-none whitespace-nowrap tracking-tight">
-                      <CountUp value={stat.value} />
-                    </div>
-                    <div className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.1em] text-muted-foreground leading-snug mt-2">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-                </div>
-              </motion.div>
             </div>
 
             <motion.div
               className="order-2 w-full max-w-[28rem] mx-auto"
-              initial={{ opacity: 0, y: 32, scale: 0.97, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 32, scale: 0.97 }}
               animate={{
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                filter: "blur(0px)",
                 transition: { duration: 0.9, ease: EASE, delay: 0.3 },
               }}
             >

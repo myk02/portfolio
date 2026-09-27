@@ -27,12 +27,6 @@ export const heroTagline =
 export const heroSubline =
   "I'm Mike Waitindi, in Nairobi — Full-Stack Developer with 2+ years across frontend (React + TypeScript), backend (Node.js), REST APIs, and PostgreSQL databases, plus Docker, auth & API security. Also Designer, Tech Support & Automation Specialist, working as a Solution Engineer. Full-stack web apps, brand direction, automation, and launch-ready delivery.";
 
-export const heroStats = [
-  { label: "Live products shipped", value: String(liveCount) },
-  { label: "Checkout steps cut (GiGi)", value: "4→3" },
-  { label: "Route-planning taps cut (KenyaTrace)", value: "6→3" },
-];
-
 export const aboutParagraphs = [
   "I'm Mike Waitindi — a Nairobi-based Full-Stack Developer with 2+ years across frontend, backend, APIs, and databases (React + TypeScript, Node.js, REST APIs, PostgreSQL, Docker, authentication & API security), also working across brand, support, and automation as a Solution Engineer.",
   `${liveCount} live full-stack products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study.`,

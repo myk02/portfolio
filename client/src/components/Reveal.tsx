@@ -8,18 +8,18 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 function hiddenState(variant: Variant) {
   switch (variant) {
     case "left":
-      return { opacity: 0, x: -36, y: 0, scale: 1, filter: "blur(4px)" };
+      return { opacity: 0, x: -36, y: 0, scale: 1 };
     case "right":
-      return { opacity: 0, x: 36, y: 0, scale: 1, filter: "blur(4px)" };
+      return { opacity: 0, x: 36, y: 0, scale: 1 };
     case "scale":
-      return { opacity: 0, x: 0, y: 24, scale: 0.94, filter: "blur(4px)" };
+      return { opacity: 0, x: 0, y: 24, scale: 0.94 };
     case "fade":
-      return { opacity: 0, x: 0, y: 0, scale: 1, filter: "blur(4px)" };
+      return { opacity: 0, x: 0, y: 0, scale: 1 };
     case "none":
-      return { opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" };
+      return { opacity: 1, x: 0, y: 0, scale: 1 };
     case "up":
     default:
-      return { opacity: 0, x: 0, y: 32, scale: 1, filter: "blur(4px)" };
+      return { opacity: 0, x: 0, y: 32, scale: 1 };
   }
 }
 
@@ -28,7 +28,6 @@ const shownState = {
   x: 0,
   y: 0,
   scale: 1,
-  filter: "blur(0px)",
 };
 
 /**
