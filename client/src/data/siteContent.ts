@@ -1,12 +1,11 @@
 export const positionTitle =
-  "Full-Stack Developer — AI Apps, Payments, Design, SEO & Hosting";
+  "Full-Stack Developer — Apps, Payments, Design, SEO & Hosting";
 
 export const roleLine =
-  "Full-Stack Developer · AI-Powered Apps · Payments · UI/UX · SEO · Nairobi";
+  "Full-Stack Developer · Web, Mobile & Desktop Apps · Payments · UI/UX · SEO · Nairobi";
 
 export const roleChips = [
   "Full-Stack Developer",
-  "AI-Powered Apps",
   "Payment Integrations",
   "UI/UX Design",
   "SEO",
@@ -16,13 +15,13 @@ export const roleChips = [
 ] as const;
 
 export const heroTagline =
-  "I build AI-powered apps for web, mobile & desktop.";
+  "I build apps for web, mobile & desktop.";
 
 export const heroSubline =
   "I'm Mike Waitindi, Nairobi — apps, payments, design, SEO, testing and hosting. Open to onsite or remote.";
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi, Nairobi-based developer. I build AI-powered web, mobile & desktop apps — payments, design, SEO, testing and hosting covered.",
+  "I'm Mike Waitindi, Nairobi-based developer. I build apps for web, mobile & desktop — payments, design, SEO, testing and hosting covered.",
   "Available full-time onsite or remote.",
 ];
 
@@ -43,8 +42,8 @@ export const qaHighlights = [
 
 export const services = [
   {
-    title: "AI-Powered Apps",
-    text: "Smart features inside real products.",
+    title: "Web, Mobile & Desktop Apps",
+    text: "One developer, every platform.",
   },
   {
     title: "Payment Integrations",

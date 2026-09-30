@@ -48,7 +48,7 @@ export default function SiteFooter() {
                 </span>
               </Link>
               <p className="text-[0.8125rem] text-background/65 mt-3 max-w-sm leading-relaxed mx-auto md:mx-0">
-                Developer in Nairobi — AI apps, payments, design, SEO & hosting. Remote-ready.
+                Developer in Nairobi — apps for web, mobile & desktop: payments, design, SEO & hosting. Remote-ready.
               </p>
             </div>
 
