@@ -1,167 +1,166 @@
 import { liveCount } from "@/data/projects";
 
 export const positionTitle =
-  "Full-Stack Developer (Frontend, Backend, APIs & Databases), Designer, Tech Support & Automation Specialist, also working as a Solution Engineer";
+  "Full-Stack Developer (React + TypeScript, Convex backend), Playwright E2E Tester, Designer, Tech Support & Automation Specialist";
 
 export const roleLine =
-  "Full-Stack Developer · Frontend · Backend · APIs · Databases · Design · Tech Support · Automation · Solution Engineer";
+  "Full-Stack Developer · Playwright E2E Testing · React · Convex · Paystack Tips · Vercel · Design · Tech Support · Automation";
 
 export const roleChips = [
   "Full-Stack Developer",
-  "Frontend (React + TypeScript)",
-  "Backend (Node.js)",
-  "REST APIs",
-  "PostgreSQL + Databases",
-  "Docker + API Security",
+  "React + TypeScript",
+  "Convex Backend",
+  "Playwright E2E",
+  "Paystack Tips Integration",
+  "Vercel Deployment",
+  "Responsive Web Apps",
   "Designer",
   "Tech Support",
   "Automation Specialist",
-  "Data Engineering",
-  "Cloud (GCP)",
-  "Solution Engineer",
 ] as const;
 
 export const heroTagline =
-  "Full-stack web apps — frontend, APIs, databases — brand direction, automation, and launch-ready delivery.";
+  "Web apps with a real backend, payments, and automated tests.";
 
 export const heroSubline =
-  "I'm Mike Waitindi, in Nairobi — Full-Stack Developer with 2+ years across frontend (React + TypeScript), backend (Node.js), REST APIs, and PostgreSQL databases, plus Docker, auth & API security. Also Designer, Tech Support & Automation Specialist, working as a Solution Engineer. Full-stack web apps, brand direction, automation, and launch-ready delivery.";
+  "I'm Mike Waitindi, in Nairobi — I build React + TypeScript frontends on a Convex backend (contact inbox, tips database), with Paystack tips integration, Playwright end-to-end tests, and Vercel hosting. Available full-time onsite in Nairobi or Mombasa, or remote.";
 
 export const aboutParagraphs = [
-  "I'm Mike Waitindi — a Nairobi-based Full-Stack Developer with 2+ years across frontend, backend, APIs, and databases (React + TypeScript, Node.js, REST APIs, PostgreSQL, Docker, authentication & API security), also working across brand, support, and automation as a Solution Engineer.",
-  `${liveCount} live full-stack products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study.`,
+  "I'm Mike Waitindi — a Nairobi-based developer. I build React + TypeScript web apps on a Convex backend, with Paystack tips (initialize, verify, webhook), Playwright end-to-end tests, and Vercel deploys. I also do brand-minded UI, tech support, and small automation.",
+  `${liveCount} live web products: KenyaTrace, GiGi Energy, LegalFlow — each with a demo, repo, and case study. This portfolio itself is my test rig: a Playwright suite guards home, work, case studies, 404, contact validation, and dialogs (see the testing section below).`,
 ];
 
 export const applicationLine =
-  "Hiring across Full-Stack Development (frontend, backend, REST APIs, PostgreSQL & databases, Docker, auth & API security), Design, Tech Support, Automation — or a Solution Engineer (data, cloud)? Full-time onsite in Nairobi or remote — full-stack web apps, brand direction, automation, launch-ready delivery.";
+  "Hiring across web development (React frontend, Convex backend, Paystack tips integration), Playwright end-to-end testing, design, tech support, or automation? Full-time onsite in Nairobi or Mombasa, or remote — tested builds, plain-language delivery.";
 
 export const fullStackHighlights = [
   {
-    title: "Full-stack delivery, 2+ years",
-    text: "Production projects spanning frontend, backend APIs, and databases — one owner from UI to data.",
+    title: "Daily use — React + TypeScript frontend",
+    text: "Typed components, forms + validation, routing, responsive layouts from 360px to desktop.",
   },
   {
-    title: "Frontend — React + TypeScript",
-    text: "Responsive, accessible interfaces with typed components, forms + validation, and tested critical paths.",
+    title: "Daily use — Convex backend",
+    text: "Contact inbox and tips tables, validated actions, idempotent inserts. Proven in this portfolio's code.",
   },
   {
-    title: "Backend APIs + PostgreSQL",
-    text: "Node.js + TypeScript REST APIs, relational modelling, queries, migrations, and performance-minded PostgreSQL.",
+    title: "Comfortable — Paystack tips flow",
+    text: "Transaction initialize, inline popup, server verify, HMAC-signed webhook. Small and real — not a shop checkout.",
   },
   {
-    title: "Docker, auth & API security",
-    text: "Dockerised services, JWT/OAuth authentication, rate limiting, input validation, and secure API defaults.",
+    title: "Comfortable — tests, CI, hosting",
+    text: "Playwright E2E on every push via GitHub Actions, auto-deploy to Vercel. Basic hardening: validation, honeypot, env secrets.",
   },
-] as const;
-
-export const fullStackToolbox = [
-  "React + TypeScript",
-  "JavaScript (ES6+)",
-  "Node.js + Express",
-  "REST API design",
-  "PostgreSQL",
-  "SQL modelling + migrations",
-  "JWT / OAuth + API security",
-  "Docker",
-  "Input validation + rate limiting",
-  "HTML5 + CSS3 + Tailwind",
-  "Playwright E2E",
-  "Git + code review",
 ] as const;
 
 export const frontendToolbox = [
   {
-    group: "Full-stack build — UI to database",
-    skills: ["React 19 + TypeScript", "Node.js + Express", "REST API design + versioning", "PostgreSQL modelling + migrations", "JWT / OAuth authentication", "API security (validation, rate limiting, OWASP basics)", "Docker + containerised services", "Postman / API testing"],
+    group: "Daily use",
+    skills: ["React 19 + TypeScript", "Vite builds", "Tailwind CSS v4", "HTML5 semantics", "CSS3", "JavaScript (ES6+)", "Convex (tables, actions, mutations)", "Wouter routing"],
   },
   {
-    group: "Solution engineering — data",
-    skills: ["Python + Pandas", "SQL (relational + analytical)", "CSV/TSV ingestion pipelines", "Entity modelling + schema mapping", "SQLite", "BigQuery", "Cloud SQL", "Flask + Jinja"],
+    group: "Comfortable",
+    skills: ["Paystack tips (initialize / verify / webhook)", "Playwright E2E + regression suites", "GitHub Actions (typecheck + E2E)", "Vercel deployment + previews", "Responsive design (360px → desktop)", "Forms + validation", "Accessibility basics (labels, focus, contrast)", "Git + code review"],
   },
   {
-    group: "Solution engineering — cloud & DevOps",
-    skills: ["Google Cloud Run", "Docker + containerised services", "Redis", "VPC networking + ingress", "Artifact Registry", "Cloud Storage", "Cloud IAM", "GitHub Actions (scheduled ingestion + container builds)"],
+    group: "Learning",
+    skills: ["Python", "SQL", "API hardening beyond basics", "SEO measurement (Lighthouse, sitemap)"],
+  },
+] as const;
+
+export const qaHighlights = [
+  {
+    title: "Playwright E2E, TypeScript",
+    text: "This portfolio is the system under test — contact validation, every route rendering cleanly, landmarks, alt text, 360px overflow checks.",
   },
   {
-    group: "Web build — core",
-    skills: ["React 19", "TypeScript", "JavaScript (ES6+)", "HTML5 semantics", "CSS3", "Tailwind CSS v4"],
+    title: "Regression on every push",
+    text: "GitHub Actions runs typecheck plus the Playwright suite on push and PR, so broken routes or forms get caught before merge.",
   },
   {
-    group: "Engineering & delivery",
-    skills: ["Responsive design (360px → desktop)", "Component architecture", "State + URL state", "REST API design + integration", "Forms + validation", "Routing (wouter)", "WSL + Cloud Shell"],
+    title: "UI checks with a designer's eye",
+    text: "Layout, alt text, keyboard paths (Esc closes dialogs), focus states, and 360px viewports — asserted in code, not by hand-waving.",
   },
   {
-    group: "Quality & shipping",
-    skills: ["Accessibility (WCAG AA)", "Core Web Vitals", "Playwright E2E testing", "Vite builds", "Vercel deployment + previews", "Git + code review"],
+    title: "What this does not cover",
+    text: "No SQL assertions, no API contract tests, no Docker test envs here. Those stay in Learning until a project proves them.",
+  },
+] as const;
+
+export const qaWorkflow = [
+  {
+    step: "01 · Plan",
+    text: "Pick the critical paths: contact form, all routes, dialogs, mobile overflow.",
+  },
+  {
+    step: "02 · Automate",
+    text: "Playwright + TypeScript specs in e2e/, committed next to the code.",
+  },
+  {
+    step: "03 · Execute",
+    text: "CI runs the suite per push; failures block with traces on retry.",
+  },
+  {
+    step: "04 · Report",
+    text: "Failures show repro steps in the spec and trace — then fix, rerun, close.",
   },
 ] as const;
 
 export const frontendServices = [
   {
-    title: "Full-stack web apps",
-    text: "2+ years React frontend to Node.js + PostgreSQL backend — typed end to end, shipped to production.",
+    title: "Web apps with a real backend",
+    text: "React + TypeScript on Convex — contact inbox and tips tables, validated actions.",
   },
   {
-    title: "APIs & databases that hold up",
-    text: "Versioned REST, relational modelling + migrations, auth & security, Dockerised services ready for cloud.",
+    title: "Tips payments that reconcile",
+    text: "Paystack initialize → popup → server verify → idempotent insert + signed webhook.",
   },
   {
     title: "Responsive web apps",
     text: "React + TypeScript, mobile-first, 360px to desktop.",
   },
   {
-    title: "Design-to-code UI systems",
-    text: "Figma to production components, reusable and consistent.",
+    title: "Design-to-code UI",
+    text: "Brand-minded layouts shipped as reusable components.",
   },
   {
-    title: "Accessible, tested interfaces",
-    text: "Semantic HTML, keyboard paths, Playwright E2E.",
+    title: "Tested interfaces",
+    text: "Playwright E2E guards forms, routes, and dialogs on every push.",
   },
   {
-    title: "Performance & PWA delivery",
-    text: "Fast loads, installable PWAs, preview-per-PR deploys.",
+    title: "Honest limits",
+    text: "No mobile/desktop native apps, no shop checkouts, no Python/SQL here yet — see Learning.",
   },
 ] as const;
 
 export const frontendPractices = [
-  "Mobile-first, verified on real 360–390px viewports",
-  "Semantic landmarks, labels, focus states, AA contrast",
-  "Loading / empty / error / retry states on every async UI",
-  "Type-safe props, small components, documented APIs",
-  "E2E tests for money and mission-critical paths",
+  "Mobile-first, checked at 360–390px viewports",
+  "Semantic landmarks, labels, focus states",
+  "Loading / error states on async UI (contact, tips)",
+  "Type-safe props, small components",
+  "E2E tests for contact + tips paths",
   "Live demo + repo + case study for every project",
 ] as const;
 
 export const services = [
   {
-    role: "Full-Stack Developer",
-    title: "Full-stack apps — UI to database",
-    text: "2+ years frontend, backend APIs & PostgreSQL — React + Node.js + Docker, auth & security.",
-  },
-  {
-    role: "Solution Engineer · Data & Cloud",
-    title: "Data pipelines & cloud",
-    text: "CSV → structured data, Dockerised services on Cloud Run.",
-  },
-  {
     role: "Developer · Web Apps",
-    title: "Launch-ready web apps",
-    text: "Responsive React + TypeScript apps, shipped to production.",
+    title: "Web apps — React + Convex",
+    text: "Typed frontend, validated backend actions, Vercel deploys.",
+  },
+  {
+    role: "Payments",
+    title: "Tips integration — Paystack",
+    text: "Small, reconciled tips flow. Not a full shop checkout.",
+  },
+  {
+    role: "Testing",
+    title: "E2E tests — Playwright",
+    text: "Functional + regression suites for this portfolio, run in CI.",
   },
   {
     role: "Designer · Brand Direction",
     title: "Brand & UI design",
-    text: "Brand systems and Figma-to-code interfaces.",
-  },
-  {
-    role: "Project Manager",
-    title: "Managed delivery",
-    text: "Scoped plans, weekly demos, solo to launch.",
-  },
-  {
-    role: "APIs",
-    title: "API integration & payments",
-    text: "Third-party hooks, typed clients, M-Pesa payments.",
+    text: "Layouts and component systems, Figma-to-code where it exists.",
   },
   {
     role: "Tech Support",
@@ -174,23 +173,4 @@ export const services = [
     text: "Scoped pilots that remove repetitive busywork.",
   },
 ] as const;
-
-export const coreSkills = [
-  "Node.js",
-  "TypeScript",
-  "Express",
-  "REST APIs",
-  "PostgreSQL",
-  "JWT + API Security",
-  "Docker",
-  "React",
-  "Tailwind CSS",
-  "Python + Pandas",
-  "SQL",
-  "BigQuery",
-  "Google Cloud Run",
-  "M-Pesa Integration",
-  "Playwright E2E",
-  "Automation Workflows",
-];
 
