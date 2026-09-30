@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
 import FullStackExpertise from "@/components/FullStackExpertise";
+import QAAutomationExpertise from "@/components/QAAutomationExpertise";
 import FrontendExpertise from "@/components/FrontendExpertise";
 import Services from "@/components/Services";
 import About from "@/components/About";
@@ -42,6 +43,7 @@ export default function Home() {
         <WorkSection />
         <Services />
         <FullStackExpertise />
+        <QAAutomationExpertise />
         <FrontendExpertise />
         <About />
         <Contact />

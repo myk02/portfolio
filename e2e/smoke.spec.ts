@@ -11,7 +11,7 @@ test.describe("home page", () => {
 
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Mike Waitindi" }).first()).toBeVisible();
-    await expect(page.getByText(/Full-Stack Developer/).first()).toBeVisible();
+    await expect(page.getByText(/React \+ TypeScript/).first()).toBeVisible();
 
     // Hero: hire CTAs + coffee (footer keeps a second instance)
     await expect(
@@ -27,7 +27,7 @@ test.describe("home page", () => {
     await expect(page.getByRole("button", { name: "Download CV" })).toHaveCount(0);
 
     await expect(
-      page.getByText(/Live products/).first()
+      page.getByText("Available for work").first()
     ).toBeVisible();
 
     await expect(

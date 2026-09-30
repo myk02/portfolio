@@ -2,7 +2,7 @@ import { Container, KeyRound, LayoutGrid, Network } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
-import { fullStackHighlights, fullStackToolbox } from "@/data/siteContent";
+import { fullStackHighlights } from "@/data/siteContent";
 
 const ICONS = [LayoutGrid, Container, Network, KeyRound] as const;
 
@@ -16,14 +16,13 @@ export default function FullStackExpertise() {
     >
       <div className="container">
         <Reveal className="section-intro mb-8" variant="up">
-          <SectionLabel>Full-stack development · 2+ years</SectionLabel>
+          <SectionLabel>Full-stack development · React + Convex</SectionLabel>
           <h2 id="full-stack-heading" className="heading-section text-foreground mt-2">
-            Frontend to database — all rounded
+            Frontend to database — what I actually ship
           </h2>
           <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto max-w-xl">
-            2+ years building full-stack projects — React + TypeScript frontend,
-            Node.js REST APIs, PostgreSQL databases, secured with auth &amp; API
-            security and shipped with Docker.
+            React + TypeScript frontend, Convex backend (contact inbox, tips
+            tables), Paystack tips flow, Playwright tests, Vercel deploys.
           </p>
         </Reveal>
 
@@ -56,24 +55,6 @@ export default function FullStackExpertise() {
             );
           })}
         </div>
-
-        <Reveal delay={1} variant="up" className="mt-4 max-w-4xl mx-auto">
-          <Card className="p-4">
-            <p className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground mb-3">
-              Full-stack toolbox
-            </p>
-            <ul className="flex flex-wrap gap-2" aria-label="Full-stack skills">
-              {fullStackToolbox.map((skill) => (
-                <li
-                  key={skill}
-                  className="px-2.5 py-1.5 text-[0.8125rem] font-medium tracking-[-0.005em] border border-border bg-secondary text-foreground leading-none"
-                >
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </Reveal>
       </div>
     </section>
   );

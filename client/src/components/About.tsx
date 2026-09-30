@@ -1,16 +1,15 @@
 import { Reveal } from "@/components/Reveal";
 import { Kicker, Card } from "@/components/ui/kicker";
 import { SectionLabel } from "@/components/ui/section";
-import { aboutParagraphs, coreSkills } from "@/data/siteContent";
+import { aboutParagraphs } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const TIMELINE = [
-  { year: "2023–25", event: "Full-Stack Developer — 2+ years frontend, backend, APIs & databases (React, Node.js, REST, PostgreSQL, Docker, auth & security)" },
-  { year: "2024", event: "KenyaTrace — shipped" },
-  { year: "2025", event: "GiGi Energy + LegalFlow — shipped" },
-  { year: "2024–25", event: "Solution Engineer — data pipelines + cloud" },
+  { year: "2024", event: "KenyaTrace — designed and built, shipped to Vercel" },
+  { year: "2025", event: "GiGi Energy + LegalFlow — designed and built, shipped to Vercel" },
+  { year: "2025", event: "This portfolio — React + Convex backend, Paystack tips, Playwright E2E in CI" },
 ];
 
 const ABOUT_LINKS = [
@@ -101,20 +100,6 @@ export default function About() {
                     ))}
                   </div>
                 </Card>
-              </div>
-
-              <div>
-                <Kicker className="mb-3 block">Core stack</Kicker>
-                <ul className="flex flex-wrap gap-2" aria-label="Core skills">
-                  {coreSkills.map((skill) => (
-                    <li
-                      key={skill}
-                      className="px-2.5 py-1.5 text-[0.8125rem] font-medium tracking-[-0.005em] border border-border bg-card text-foreground leading-none"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>

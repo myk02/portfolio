@@ -97,9 +97,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 className="mt-3 text-[0.8125rem] text-muted-foreground leading-relaxed max-w-[28rem] mx-auto"
                 {...fadeUp(0.18)}
               >
-                Full-Stack Developer · frontend, backend, APIs &amp; databases —
-                2+ years React + TypeScript, Node.js, REST, PostgreSQL, Docker,
-                auth &amp; security
+                React + TypeScript frontends on a Convex backend — Paystack tips,
+                Playwright E2E, Vercel hosting
               </motion.p>
 
               <motion.div

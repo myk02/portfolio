@@ -1,10 +1,10 @@
-import { Bot, ClipboardList, Code2, Database, Layers, LifeBuoy, Palette, Plug } from "lucide-react";
+import { Bot, ClipboardList, Code2, Database, FlaskConical, Layers, LifeBuoy, Palette, Plug } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Layers, Database, Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
+const ROLE_ICONS = [FlaskConical, Layers, Database, Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
 
 /** Concise role map: one line per role, no bullets or workflow detail. */
 export default function Services() {
