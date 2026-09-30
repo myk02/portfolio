@@ -94,8 +94,8 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Full-Stack Developer (React + Convex) & Playwright E2E`,
+  title: `Mike Waitindi — Full-Stack Developer, AI Apps & Hosting`,
   description:
-    `I'm Mike Waitindi, in Nairobi — I build React + TypeScript web apps on a Convex backend, with Paystack tips, Playwright end-to-end tests, and Vercel hosting. ${liveCount} live web products plus this tested portfolio. Available full-time in Nairobi/Mombasa or remote.`,
+    `Mike Waitindi, Nairobi — AI-powered web, mobile & desktop apps: payments, UI/UX, SEO, testing and hosting. ${liveCount} live sites. Open to onsite or remote.`,
   canonical: SITE_URL,
 };

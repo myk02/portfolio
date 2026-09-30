@@ -1,10 +1,10 @@
-import { Bot, ClipboardList, Code2, Database, FlaskConical, Layers, LifeBuoy, Palette, Plug } from "lucide-react";
+import { Bot, CreditCard, Palette, TrendingUp, ShieldCheck, Rocket } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [FlaskConical, Layers, Database, Code2, Palette, ClipboardList, Plug, LifeBuoy, Bot] as const;
+const ROLE_ICONS = [Bot, CreditCard, Palette, TrendingUp, ShieldCheck, Rocket] as const;
 
 /** Concise role map: one line per role, no bullets or workflow detail. */
 export default function Services() {
@@ -20,9 +20,6 @@ export default function Services() {
           <h2 id="services-heading" className="heading-section text-foreground mt-2">
             What I do
           </h2>
-          <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto max-w-xl">
-            Pick one role or hand me the whole journey — data to launch, with support included.
-          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">

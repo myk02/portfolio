@@ -7,9 +7,9 @@ import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const TIMELINE = [
-  { year: "2024", event: "KenyaTrace — designed and built, shipped to Vercel" },
-  { year: "2025", event: "GiGi Energy + LegalFlow — designed and built, shipped to Vercel" },
-  { year: "2025", event: "This portfolio — React + Convex backend, Paystack tips, Playwright E2E in CI" },
+  { year: "2024", event: "KenyaTrace — shipped live" },
+  { year: "2025", event: "GiGi Energy + LegalFlow — shipped live" },
+  { year: "2025", event: "This portfolio — designed, tested & hosted end to end" },
 ];
 
 const ABOUT_LINKS = [

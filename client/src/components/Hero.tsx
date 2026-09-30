@@ -97,8 +97,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
                 className="mt-3 text-[0.8125rem] text-muted-foreground leading-relaxed max-w-[28rem] mx-auto"
                 {...fadeUp(0.18)}
               >
-                React + TypeScript frontends on a Convex backend — Paystack tips,
-                Playwright E2E, Vercel hosting
+                Nairobi · Onsite or remote
               </motion.p>
 
               <motion.div

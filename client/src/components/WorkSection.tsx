@@ -16,15 +16,8 @@ export default function WorkSection() {
               Selected work · 0{liveStudies.length}
             </SectionLabel>
             <h2 className="heading-section text-foreground mt-2">
-              Shipped products
+              Live work
             </h2>
-            <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto">
-              Live web apps — click any card to open the live site in a new
-              tab. The backend, payments, testing, and CI proof below
-              refers to this portfolio itself (React + Convex + Paystack tips +
-              Playwright + Actions), not to these three frontends. Every release of this
-              portfolio passes the regression gate in <a href="#qa-automation" className="underline underline-offset-2 hover:text-foreground">End-to-end testing</a>.
-            </p>
           </Reveal>
 
           <ProjectCardGrid studies={liveStudies} />

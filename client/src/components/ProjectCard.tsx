@@ -38,7 +38,7 @@ export default function ProjectCard({
         </div>
       </a>
         <div className="p-4 space-y-2 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
               0{index + 1}
@@ -47,9 +47,6 @@ export default function ProjectCard({
               {study.timeline}
             </span>
           </div>
-          <span className="hidden sm:inline-flex text-[10px] font-mono uppercase tracking-widest px-2 py-1 border border-border bg-card text-muted-foreground">
-            {study.stack[0]}
-          </span>
         </div>
 
         <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">

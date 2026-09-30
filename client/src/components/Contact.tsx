@@ -71,9 +71,7 @@ export default function Contact() {
               </p>
               {!notified && (
                 <p className="text-muted-foreground text-xs mt-3 border border-border bg-secondary px-3 py-2">
-                  Note: email relay isn't configured on this deployment, so your
-                  message is stored in the inbox dashboard only — I still review
-                  every inquiry within 24 hours.
+                  Saved to inbox — I review every message within 24 hours.
                 </p>
               )}
               <button

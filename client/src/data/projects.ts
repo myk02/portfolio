@@ -73,7 +73,7 @@ export const projects: Project[] = [
     name: "KenyaTrace",
     year: "2024",
     tagline: "Tourism explorer — multi-stop trip planning, list-first for slow networks.",
-    outcomeTitle: "Multi-stop trip planning with a simpler inline flow.",
+    outcomeTitle: "Kenya trip planner — all stops on one screen.",
     tileBadge: "Live · web app",
     role: "Research · Design · Build",
     timeline: "5 weeks",

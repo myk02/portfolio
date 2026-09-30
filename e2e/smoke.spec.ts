@@ -11,7 +11,7 @@ test.describe("home page", () => {
 
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Mike Waitindi" }).first()).toBeVisible();
-    await expect(page.getByText(/React \+ TypeScript/).first()).toBeVisible();
+    await expect(page.getByText(/AI-powered apps/).first()).toBeVisible();
 
     // Hero: hire CTAs + coffee (footer keeps a second instance)
     await expect(

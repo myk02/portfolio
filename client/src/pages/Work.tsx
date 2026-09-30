@@ -33,10 +33,6 @@ export default function Work() {
           <h1 className="heading-section text-foreground">
             Work
           </h1>
-          <p className="text-muted-foreground text-[0.875rem] leading-relaxed mt-3">
-            {liveStudies.length} live products — click any card to open the
-            live site.
-          </p>
         </div>
 
         <ProjectCardGrid studies={liveStudies} />
