@@ -16,9 +16,9 @@ Brand direction, web apps, automation, and launch-ready digital experiences.
 
 | Product | What it is | Live |
 |---------|------------|------|
-| **KenyaTrace** | Kenya-first travel companion — itinerary planning, M-Pesa bookings, live GPS trace, trip recaps | [kenyatrace.vercel.app](https://kenyatrace.vercel.app) |
-| **GiGi Energy Drink** | Bold Gen Z energy-drink landing page with smooth-scroll motion design | [gigiflavours.vercel.app](https://gigiflavours.vercel.app) |
-| **LegalFlow** | Legal practice management platform — cases, billing, documents, e-signatures, client portal | [law-ten-iota.vercel.app](https://law-ten-iota.vercel.app) |
+| **KenyaTrace** | Tourism explorer — multi-stop trip planning, list-first for slow networks (frontend only; no live payments/GPS in this build) | [kenyatrace.vercel.app](https://kenyatrace.vercel.app) |
+| **GiGi Energy Drink** | Energy-drink storefront concept — simplified checkout, readable contrast (frontend only; no live checkout in this build) | [gigiflavours.vercel.app](https://gigiflavours.vercel.app) |
+| **LegalFlow** | Law-firm workspace concept — matters, billing explained in one place (frontend only; no live billing/payments in this build) | [law-ten-iota.vercel.app](https://law-ten-iota.vercel.app) |
 
 Each product has a full case study at [/work](https://mikeships.vercel.app/work) covering
 role, stack, constraints, and the decisions behind the build.
@@ -31,7 +31,8 @@ role, stack, constraints, and the decisions behind the build.
 |-------|--------|
 | App | React 19 + Vite 7 + Tailwind CSS 4 |
 | Backend | Convex (contact inbox, tips) |
-| Payments | Paystack (M-Pesa, cards) |
+| Payments | Paystack tips on this portfolio (initialize / verify / webhook). Product sites are frontend-only |
+| Tests | Playwright E2E for this portfolio, run in CI |
 | Hosting | Vercel |
 
 ---
