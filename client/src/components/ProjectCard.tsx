@@ -1,5 +1,4 @@
-import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
-import { Link } from "wouter";
+import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { Reveal } from "@/components/Reveal";
 import { Chip, ChipAccent } from "@/components/ui/kicker";
@@ -19,10 +18,12 @@ export default function ProjectCard({
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity"
         aria-hidden
       />
-      <Link
-        href={`/work/${study.slug}`}
+      <a
+        href={study.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-        aria-label={`${study.name} — case study`}
+        aria-label={`${study.name} — live site (opens in a new tab)`}
       >
         <img
           src={study.tileShot}
@@ -35,7 +36,7 @@ export default function ProjectCard({
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
           <StatusBadge />
         </div>
-      </Link>
+      </a>
         <div className="p-4 space-y-2 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -64,19 +65,12 @@ export default function ProjectCard({
         </div>
 
         <div className="pt-2.5 mt-auto border-t border-border flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[0.8125rem] font-medium">
-          <Link
-            href={`/work/${study.slug}`}
-            className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
-          >
-            Case study
-            <ArrowUpRight size={14} aria-hidden />
-          </Link>
           {study.liveUrl && (
             <a
               href={study.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
             >
               <ExternalLink size={13} aria-hidden />
               Live site

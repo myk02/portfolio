@@ -37,7 +37,7 @@ test.describe("home page", () => {
     expect(errors).toEqual([]);
   });
 
-  test("shows three live products with real screenshots", async ({
+  test("shows three live products linking straight to their sites", async ({
     page,
   }) => {
     await page.goto("/");
@@ -46,14 +46,17 @@ test.describe("home page", () => {
     await expect(page.getByText("Concept study")).toHaveCount(0);
 
     const workGrid = page.locator("#work");
+    // Cards link out to the live product sites — no internal case-study pages.
     const hrefs = await workGrid
-      .locator('a[href^="/work/"]')
+      .locator('a[href^="https://"]')
       .evaluateAll(els =>
         Array.from(new Set(els.map(el => el.getAttribute("href"))))
       );
-    expect(hrefs.sort()).toEqual(LIVE_SLUGS.map(s => `/work/${s}`).sort());
+    for (const p of projects) {
+      if (p.liveUrl) expect(hrefs).toContain(p.liveUrl);
+    }
 
-    const tileImages = workGrid.locator('a[href^="/work/"] img');
+    const tileImages = workGrid.locator('a[href^="https://"] img');
     await expect(tileImages).toHaveCount(3);
   });
 
@@ -83,16 +86,17 @@ test.describe("project data — single source, unique screens", () => {
 });
 
 test.describe("work page", () => {
-  test("lists only the live projects with distinct links", async ({ page }) => {
+  test("lists the live projects linking straight out", async ({ page }) => {
     await page.goto("/work");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Work");
 
-    const hrefs = await page
-      .locator('a[href^="/work/"]')
-      .evaluateAll(els =>
-        Array.from(new Set(els.map(el => el.getAttribute("href"))))
-      );
-    expect(hrefs.sort()).toEqual(LIVE_SLUGS.map(s => `/work/${s}`).sort());
+    for (const p of projects) {
+      if (p.liveUrl) {
+        await expect(
+          page.getByRole("link", { name: new RegExp(p.name) }).first()
+        ).toBeVisible();
+      }
+    }
 
     await expect(
       page.getByRole("link", { name: /^Live site/ }).first()
@@ -100,40 +104,17 @@ test.describe("work page", () => {
   });
 });
 
-test.describe("case study pages — lean template", () => {
-  test("each shows overview, key decisions, results, and a live link", async ({
+test.describe("removed case-study pages", () => {
+  test("per-project subpages no longer exist — cards link out instead", async ({
     page,
   }) => {
     for (const slug of LIVE_SLUGS) {
       await page.goto(`/work/${slug}`);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-      for (const label of ["Overview", "Key decisions"]) {
-        await expect(
-          page.getByText(label, { exact: true }).first()
-        ).toBeVisible();
-      }
-      // Results band + decisions list
-      await expect(page.getByRole("region", { name: "Results" })).toBeVisible();
-      // Live out-link
-      const liveLink = page.getByRole("link", { name: /View live product/ });
-      await expect(liveLink.first()).toBeVisible();
-      // Structured data for the shipped product
-      const jsonLd = page.locator(
-        'script[type="application/ld+json"][data-jsonld^="creative-work-"]',
-      );
-      await expect(jsonLd).toHaveCount(1);
-      expect(await jsonLd.textContent()).toContain("WebApplication");
+      await expect(page.getByText("404").first()).toBeVisible();
     }
   });
 
-  test("kenyatrace links to its shipped product", async ({ page }) => {
-    await page.goto("/work/kenyatrace");
-    await expect(
-      page.getByRole("link", { name: /View live product/ }).first()
-    ).toHaveAttribute("href", "https://kenyatrace.vercel.app");
-  });
-
-  test("removed conceptual studies no longer resolve", async ({ page }) => {
+  test("removed conceptual studies still 404", async ({ page }) => {
     for (const slug of [
       "mobile-banking-redesign",
       "dashboard-ui-system",
@@ -144,27 +125,9 @@ test.describe("case study pages — lean template", () => {
     }
   });
 
-  test("document titles reflect positioning", async ({ page }) => {
+  test("document title reflects positioning", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Full-Stack Developer/);
-    await page.goto("/work/kenyatrace");
-    await expect(page).toHaveTitle(/live product/);
-  });
-});
-
-test.describe("image lightbox", () => {
-  test("device screenshots open full-size and close with Esc", async ({
-    page,
-  }) => {
-    await page.goto("/work/kenyatrace");
-    const zoom = page.getByRole("button", { name: /View full size/ });
-    await expect(zoom.first()).toBeVisible();
-    await zoom.first().click();
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible();
-    await expect(dialog.locator("img")).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(dialog).toBeHidden();
   });
 });
 

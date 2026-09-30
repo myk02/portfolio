@@ -19,8 +19,8 @@ export default function WorkSection() {
               Shipped products
             </h2>
             <p className="text-muted-foreground text-[0.875rem] mt-3 leading-relaxed mx-auto">
-              Live web apps — each with a demo, repo, and case study covering
-              the decisions. The backend, payments, testing, and CI proof below
+              Live web apps — click any card to open the live site in a new
+              tab. The backend, payments, testing, and CI proof below
               refers to this portfolio itself (React + Convex + Paystack tips +
               Playwright + Actions), not to these three frontends. Every release of this
               portfolio passes the regression gate in <a href="#qa-automation" className="underline underline-offset-2 hover:text-foreground">End-to-end testing</a>.

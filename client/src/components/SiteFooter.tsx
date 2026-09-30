@@ -87,14 +87,16 @@ export default function SiteFooter() {
               </p>
               <div className="space-y-2">
                 {liveStudies.map((study) => (
-                  <Link
+                  <a
                     key={study.slug}
-                    href={`/work/${study.slug}`}
+                    href={study.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-between gap-2 border border-background/10 bg-background/5 px-3 py-2 hover:border-background/20 hover:bg-background/10 transition-colors"
                   >
                     <span className="text-xs text-background">{study.name}</span>
                     <ArrowUpRight size={12} className="text-background/40" />
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>

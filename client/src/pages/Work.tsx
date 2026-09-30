@@ -34,8 +34,8 @@ export default function Work() {
             Work
           </h1>
           <p className="text-muted-foreground text-[0.875rem] leading-relaxed mt-3">
-            {liveStudies.length} live products — each with a case study and a
-            public URL.
+            {liveStudies.length} live products — click any card to open the
+            live site.
           </p>
         </div>
 

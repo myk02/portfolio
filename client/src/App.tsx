@@ -11,7 +11,6 @@ import { registerNavigator } from "./lib/navigation";
 import Home from "./pages/Home";
 
 const Work = lazy(() => import("./pages/Work"));
-const CaseStudyPage = lazy(() => import("./pages/CaseStudyPage"));
 
 function NavigateBridge() {
   const [, navigate] = useLocation();
@@ -49,7 +48,6 @@ function Router() {
       <Switch>
         <Route path={"/"} component={Home} />
         <Route path={"/work"} component={Work} />
-        <Route path={"/work/:slug"} component={CaseStudyPage} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>

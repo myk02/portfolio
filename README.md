@@ -20,8 +20,8 @@ Brand direction, web apps, automation, and launch-ready digital experiences.
 | **GiGi Energy Drink** | Energy-drink storefront concept — simplified checkout, readable contrast (frontend only; no live checkout in this build) | [gigiflavours.vercel.app](https://gigiflavours.vercel.app) |
 | **LegalFlow** | Law-firm workspace concept — matters, billing explained in one place (frontend only; no live billing/payments in this build) | [law-ten-iota.vercel.app](https://law-ten-iota.vercel.app) |
 
-Each product has a full case study at [/work](https://mikeships.vercel.app/work) covering
-role, stack, constraints, and the decisions behind the build.
+Each product card links straight to its live site. This portfolio has no
+per-project subpages.
 
 ---
 

@@ -1,14 +1,16 @@
 import { expect, test } from "@playwright/test";
-import { projects } from "../client/src/data/projects";
 
 /**
- * QA Automation demonstration suite — this portfolio is the system under test.
+ * End-to-end demonstration suite — this portfolio is the system under test.
  * Mirrors a real release gate: functional cases, regression sweep, UI-consistency
  * checks, accessibility basics, and a 360px viewport pass. Referenced from the
  * #qa-automation section on the home page. Run with: pnpm test
+ *
+ * Project cards link straight out to the live product sites, so the only
+ * routes under test are the portfolio's own pages.
  */
 
-const ROUTES = ["/", "/work", ...projects.map((p) => `/work/${p.slug}`)];
+const ROUTES = ["/", "/work"];
 
 test.describe("QA gate — functional: contact form validation", () => {
   test("empty submission is rejected with inline errors (no network call)", async ({
@@ -80,7 +82,7 @@ test.describe("QA gate — UI consistency across viewports", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 360, height: 800 });
-    for (const route of ["/", "/work", "/work/kenyatrace"]) {
+    for (const route of ["/", "/work"]) {
       await page.goto(route);
       const overflow = await page.evaluate(() => {
         const el = document.scrollingElement ?? document.documentElement;
@@ -95,7 +97,7 @@ test.describe("QA gate — UI consistency across viewports", () => {
   }) => {
     await page.goto("/");
     const alts = await page
-      .locator('#work a[href^="/work/"] img')
+      .locator('#work a[href^="https://"] img')
       .evaluateAll((els) => els.map((el) => el.getAttribute("alt")));
     expect(alts.length).toBeGreaterThan(0);
     for (const alt of alts) expect(alt?.trim().length).toBeGreaterThan(0);
