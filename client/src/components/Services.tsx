@@ -1,28 +1,28 @@
-import { Bot, CreditCard, Palette, TrendingUp, ShieldCheck, Rocket } from "lucide-react";
+import { Code2, CreditCard, Database } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Bot, CreditCard, Palette, TrendingUp, ShieldCheck, Rocket] as const;
+const ROLE_ICONS = [Code2, CreditCard, Database] as const;
 
 /** Concise role map: one line per role, no bullets or workflow detail. */
 export default function Services() {
   return (
     <section
-      id="services"
-      aria-labelledby="services-heading"
+      id="skills"
+      aria-labelledby="skills-heading"
       className="section-pad bg-secondary border-t border-border"
     >
       <div className="container">
         <Reveal className="section-intro mb-8">
-          <SectionLabel>Roles & services</SectionLabel>
-          <h2 id="services-heading" className="heading-section text-foreground mt-2">
-            What I do
+          <SectionLabel>Strengths</SectionLabel>
+          <h2 id="skills-heading" className="heading-section text-foreground mt-2">
+            How I build
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {services.map((service, i) => {
             const Icon = ROLE_ICONS[i % ROLE_ICONS.length];
             return (

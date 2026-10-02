@@ -95,8 +95,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
 
   const navLinks = [
     { id: "work", label: "Work" },
-    { id: "services", label: "Services" },
-    { id: "qa-automation", label: "Testing" },
+    { id: "skills", label: "Approach" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ];
@@ -161,7 +160,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
             onClick={() => handleNav("contact")}
             className="hidden md:inline-flex btn btn-primary text-xs"
           >
-            Work with me
+            Contact
           </button>
 
           <button
@@ -206,7 +205,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                 onClick={() => handleNav("contact")}
                 className="btn btn-primary w-full text-center"
               >
-                Work with me
+                Contact
               </button>
             </div>
           </motion.nav>

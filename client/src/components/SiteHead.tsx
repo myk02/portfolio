@@ -94,8 +94,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Full-Stack Developer, Apps & Hosting`,
-  description:
-    `Mike Waitindi, Nairobi — apps for web, mobile & desktop: payments, UI/UX, SEO, testing and hosting. ${liveCount} live sites. Open to onsite or remote.`,
+  title: `Mike Waitindi — Software Developer in Nairobi`,
+  description: `Nairobi-based software developer working across frontend, backend, databases, APIs, AI and third-party payment integrations. Explore ${liveCount} product demos.`,
   canonical: SITE_URL,
 };

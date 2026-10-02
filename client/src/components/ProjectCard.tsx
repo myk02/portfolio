@@ -23,7 +23,7 @@ export default function ProjectCard({
         target="_blank"
         rel="noopener noreferrer"
         className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-        aria-label={`${study.name} — live site (opens in a new tab)`}
+        aria-label={`${study.name} — open demo (opens in a new tab)`}
       >
         <img
           src={study.tileShot}
@@ -70,7 +70,7 @@ export default function ProjectCard({
               className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
             >
               <ExternalLink size={13} aria-hidden />
-              Live site
+              Open demo
             </a>
           )}
           {study.repoUrl && (

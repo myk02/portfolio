@@ -12,8 +12,8 @@ export default function Work() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHead
-        title="Work — live products | Mike Waitindi"
-        description="Live production web apps with stack, role, constraints, and the decisions behind each."
+        title="Selected Projects — Mike Waitindi"
+        description="Three deployed frontend product demos by Mike Waitindi, a Nairobi-based full-stack web developer."
         canonical="/work"
         type="website"
       />
@@ -31,8 +31,9 @@ export default function Work() {
 
         <div className="section-intro mt-7 mb-10">
           <h1 className="heading-section text-foreground">
-            Work
+            Selected projects
           </h1>
+          <p className="mt-3 text-sm text-muted-foreground">Frontend product concepts built to explore clear, practical user flows.</p>
         </div>
 
         <ProjectCardGrid studies={liveStudies} />

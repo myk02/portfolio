@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
-import QAAutomationExpertise from "@/components/QAAutomationExpertise";
 import Services from "@/components/Services";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
@@ -40,7 +39,6 @@ export default function Home() {
         <Hero onCtaClick={scrollToHomeSection} />
         <WorkSection />
         <Services />
-        <QAAutomationExpertise />
         <About />
         <Contact />
       </main>

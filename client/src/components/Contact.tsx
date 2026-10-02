@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Linkedin, Mail, MessageCircle, Clock, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Linkedin, Mail, MessageCircle, Github } from "lucide-react";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { CONTACT } from "@/lib/site";
@@ -100,34 +100,17 @@ export default function Contact() {
           <Reveal className="section-intro">
             <SectionLabel>Contact</SectionLabel>
             <h2 className="heading-section text-foreground">
-              Work with me
+              Let’s talk
             </h2>
+            <p className="mt-3 text-sm text-muted-foreground">Interested in my work? Send me a note.</p>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-5 mt-8 items-start max-w-4xl mx-auto">
             {/* left — info */}
             <div className="space-y-5">
               <Reveal delay={1}>
-                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-3">
-                  {[
-                    { icon: Clock, label: "Response", value: "< 24 hours" },
-                    { icon: ShieldCheck, label: "Timezone", value: "EAT · UTC+3" },
-                    { icon: MessageCircle, label: "Prefers", value: "Email · WhatsApp" },
-                  ].map((item) => (
-                    <Surface key={item.label} className="p-4 flex items-center gap-3">
-                      <item.icon size={16} className="text-accent shrink-0" />
-                      <div>
-                        <p className="text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground leading-none">{item.label}</p>
-                        <p className="text-[0.8125rem] font-medium text-foreground mt-1.5 leading-none tracking-[-0.005em]">{item.value}</p>
-                      </div>
-                    </Surface>
-                  ))}
-                </div>
-              </Reveal>
-
-              <Reveal delay={2}>
                 <Surface className="p-5 space-y-4">
-                  <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">Direct</p>
+                  <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">Contact & profiles</p>
                   <div className="space-y-3">
                     <a
                       href={CONTACT.emailHref}
@@ -160,19 +143,17 @@ export default function Contact() {
                       </span>
                       linkedin.com/in/mikeships
                     </a>
-                  </div>
-                  <div className="pt-4 border-t border-border flex flex-col gap-2">
                     <a
-                      href={CONTACT.whatsappChat}
+                      href={CONTACT.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-primary w-full justify-center"
+                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      Book a 15-min chat
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary">
+                        <Github size={14} aria-hidden />
+                      </span>
+                      github.com/myk02
                     </a>
-                    <p className="text-[11px] text-muted-foreground text-center">
-                      WhatsApp, or email — no form required.
-                    </p>
                   </div>
                 </Surface>
               </Reveal>
