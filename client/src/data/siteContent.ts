@@ -1,14 +1,14 @@
-export const positionTitle = "Software Developer";
+export const positionTitle = "Fullstack Software Engineer";
 
-export const roleLine = "Software Developer · Full stack · AI · APIs · Payment integrations · Nairobi";
+export const roleLine = "Fullstack Software Engineer · AI · APIs · Payment integrations · Nairobi";
 
-export const heroTagline = "Software Developer.";
+export const heroTagline = "Fullstack Software Engineer.";
 
 export const heroSubline =
   "I build across the frontend and backend, connecting databases, APIs, AI services and third-party payment providers.";
 
 export const aboutParagraph =
-  "I’m a Nairobi-based software developer building clear, reliable products across the frontend and backend, with AI, database, API and payment integrations.";
+  "I’m a Nairobi-based fullstack software engineer building clear, reliable products across the frontend and backend, with AI, database, API and payment integrations.";
 
 export const services = [
   { title: "Frontend & backend", text: "Build product interfaces, server logic and data-backed features." },

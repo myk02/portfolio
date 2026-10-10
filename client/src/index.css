@@ -3,8 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  /* Anthropic-style serif: custom Anthropic Serif → Tiempos/Copernicus → Fraunces (closest free match) → Source Serif 4 → Georgia */
+  --font-sans: "Anthropic Serif", "Tiempos Text", "Tiempos Headline", "Copernicus", "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-display: "Anthropic Serif", "Tiempos Headline", "Tiempos Text", "Copernicus", "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -137,10 +138,11 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-size: 1rem;
-    line-height: 1.65;
-    letter-spacing: -0.011em;
-    font-feature-settings: "kern" on, "liga" on;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    letter-spacing: 0;
+    font-feature-settings: "kern" on, "liga" on, "onum" on;
+    font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -154,7 +156,8 @@
   .font-display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    font-feature-settings: "kern" on, "liga" on;
+    font-feature-settings: "kern" on, "liga" on, "onum" on;
+    font-weight: 400;
     text-wrap: balance;
   }
   p {
@@ -231,18 +234,18 @@
 
 .heading-section {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   font-size: clamp(1.6rem, 1.2rem + 2vw, 2.25rem);
   text-wrap: balance;
 }
 
 .heading-hero {
   font-family: var(--font-display);
-  font-weight: 650;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   font-size: clamp(2.25rem, 1.4rem + 4.5vw, 4.25rem);
   text-wrap: balance;
 }
@@ -271,9 +274,9 @@
 
 .heading-serif {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .text-mono {
