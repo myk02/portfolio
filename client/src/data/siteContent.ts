@@ -26,7 +26,7 @@ export const services = [
   {
     title: "AI Automation",
     bracket: "Checked AI Tools",
-    skills: ["Sourced outputs", "Human approval", "Evals + safe fail"],
-    proof: "Proposal demo · mock mode, $0.",
+    skills: ["Sourced outputs", "Manual review", "Evals + safe fail"],
+    proof: "Since 2025 · workflows for small businesses.",
   },
 ] as const;

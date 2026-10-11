@@ -18,7 +18,7 @@ export default function Services() {
         <Reveal className="section-intro mb-8">
           <SectionLabel>Why I qualify</SectionLabel>
           <h2 id="skills-heading" className="heading-section text-foreground mt-2">
-            Three titles, clear proof
+            What I do
           </h2>
         </Reveal>
 

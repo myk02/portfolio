@@ -6,7 +6,7 @@ const ROWS = [
   { role: "Software Engineer", where: "Upwork · Sep 2024 – Jan 2025 · Remote", proof: "Sites, mobile + desktop apps for clients." },
   { role: "IT Clerk (ICT Officer)", where: "IEBC · Jul – Oct 2022 · On-site", proof: "Hardware, software + network support; staff training." },
   { role: "Junior Software Engineer", where: "Freelancer.com · Jul 2021 – Feb 2022 · Remote", proof: "Web apps for clients." },
-  { role: "AI Automation", where: "Demo build", proof: "Sourced summaries · human approves · $0 mock." },
+  { role: "AI Automation", where: "Self-practice · Since 2025", proof: "Workflows + automations for small businesses." },
 ] as const;
 
 /** Proof at a glance: short rows, no paragraphs. */

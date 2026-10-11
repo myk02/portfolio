@@ -16,7 +16,7 @@ export default function WorkSection() {
               Proof · 0{liveStudies.length} live demos
             </SectionLabel>
             <h2 className="heading-section text-foreground mt-2">
-              Open and click
+              Selected work
             </h2>
             <p className="mt-3 text-sm text-muted-foreground">Each card opens the live site. That is the proof.</p>
           </Reveal>
