@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { liveCount } from "@/data/projects";
 import { absoluteUrl, OWNER, SITE_URL } from "@/lib/site";
 
 interface SiteHeadProps {
@@ -94,7 +93,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Software Developer in Nairobi`,
-  description: `Nairobi-based software developer working across frontend, backend, databases, APIs, AI and third-party payment integrations. Explore ${liveCount} product demos.`,
+  title: `Mike Waitindi — Software Developer (Full-Stack) · ICT Officer · AI Engineer`,
+  description: `Mike Waitindi, Nairobi: full-stack web apps, ICT support, checked AI tools. 3 live demos.`,
   canonical: SITE_URL,
 };

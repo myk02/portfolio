@@ -94,10 +94,10 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
   };
 
   const navLinks = [
-    { id: "work", label: "Work" },
-    { id: "skills", label: "Approach" },
+    { id: "work", label: "Proof" },
+    { id: "skills", label: "Roles" },
+    { id: "experience", label: "Experience" },
     { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
   ];
 
   return (
@@ -141,18 +141,6 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               {link.label}
             </button>
           ))}
-          <Link
-            href="/ai-solutions"
-            className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
-          >
-            AI Solutions
-          </Link>
-          <Link
-            href="/it-security"
-            className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
-          >
-            IT Security
-          </Link>
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -212,18 +200,6 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                   {link.label}
                 </button>
               ))}
-              <Link
-                href="/ai-solutions"
-                className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
-              >
-                AI Solutions
-              </Link>
-              <Link
-                href="/it-security"
-                className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
-              >
-                IT Security
-              </Link>
               <button
                 type="button"
                 onClick={() => handleNav("contact")}

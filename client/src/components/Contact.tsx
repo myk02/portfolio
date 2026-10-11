@@ -102,7 +102,7 @@ export default function Contact() {
             <h2 className="heading-section text-foreground">
               Let’s talk
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground">Interested in my work? Send me a note.</p>
+            <p className="mt-3 text-sm text-muted-foreground">One message. I reply in 24h.</p>
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-5 mt-8 items-start max-w-4xl mx-auto">

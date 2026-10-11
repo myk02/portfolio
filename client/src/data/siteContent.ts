@@ -1,17 +1,32 @@
-export const positionTitle = "Software Developer";
+export const positionTitle = "Software Developer · ICT Officer · AI Engineer";
 
-export const roleLine = "Software Developer · AI · APIs · Payment integrations · Nairobi";
+export const roleLine = "Software Developer · ICT Officer · AI Engineer · Nairobi";
 
-export const heroTagline = "Software Developer.";
+export const heroTagline = "Software Developer. ICT Officer. AI Engineer.";
 
 export const heroSubline =
-  "I build across the frontend and backend, connecting databases, APIs, AI services and third-party payment providers.";
+  "Full-stack web apps, reliable IT support, checked AI tools.";
 
 export const aboutParagraph =
-  "I’m a Nairobi-based software developer building clear, reliable products across the frontend and backend, with AI, database, API and payment integrations.";
+  "I’m Mike Waitindi from Nairobi. I build full-stack web apps, keep IT systems running, and ship checked AI tools.";
 
 export const services = [
-  { title: "Frontend & backend", text: "Build product interfaces, server logic and data-backed features." },
-  { title: "AI, APIs & payments", text: "Integrate AI services, external APIs and third-party payment providers." },
-  { title: "Databases & delivery", text: "Design database-backed products and ship responsive applications." },
+  {
+    title: "Software Developer",
+    bracket: "Full-Stack Web App Developer",
+    skills: ["React + TypeScript", "APIs + Convex", "M-Pesa / Paystack"],
+    proof: "3 live demos below.",
+  },
+  {
+    title: "ICT Officer",
+    bracket: "Support + Systems",
+    skills: ["First-line support", "Devices + networks", "Records + access care"],
+    proof: "CLE 30+/wk · 2,000+ records · IEBC 20+ stations.",
+  },
+  {
+    title: "AI Engineer",
+    bracket: "Checked AI Tools",
+    skills: ["Sourced outputs", "Human approval", "Evals + safe fail"],
+    proof: "Proposal demo · mock mode, $0.",
+  },
 ] as const;
