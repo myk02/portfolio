@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { heroSubline } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
+import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface HeroProps {
   onCtaClick: (id: string) => void;
@@ -27,7 +28,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             <span className="section-label-line" /> Mike Waitindi — Nairobi
           </motion.p>
           <motion.h1
-            className="heading-hero text-foreground"
+            className="heading-section text-foreground"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.06 }}
@@ -73,6 +74,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             <a href={CONTACT.emailHref} className="btn btn-secondary gap-2">
               Get in touch <ArrowUpRight size={14} />
             </a>
+            <BuyMeCoffee />
           </motion.div>
         </div>
       </div>
