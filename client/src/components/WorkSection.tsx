@@ -13,12 +13,12 @@ export default function WorkSection() {
       <div className="container">
           <Reveal as="div" className="section-intro mb-8">
             <SectionLabel>
-              Selected projects · 0{liveStudies.length}
+              Proof · 0{liveStudies.length} live demos
             </SectionLabel>
             <h2 className="heading-section text-foreground mt-2">
-              Product demos
+              Open and click
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground">Three frontend concepts, each built around a clear product problem.</p>
+            <p className="mt-3 text-sm text-muted-foreground">Each card opens the live site. That is the proof.</p>
           </Reveal>
 
           <ProjectCardGrid studies={liveStudies} />

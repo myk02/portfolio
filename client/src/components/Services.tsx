@@ -1,12 +1,12 @@
-import { Code2, CreditCard, Database } from "lucide-react";
+import { Code2, MonitorCog, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Code2, CreditCard, Database] as const;
+const ROLE_ICONS = [Code2, MonitorCog, Sparkles] as const;
 
-/** Concise role map: one line per role, no bullets or workflow detail. */
+/** Why I qualify: 3 roles, skills as chips, one proof line each. */
 export default function Services() {
   return (
     <section
@@ -16,9 +16,9 @@ export default function Services() {
     >
       <div className="container">
         <Reveal className="section-intro mb-8">
-          <SectionLabel>Strengths</SectionLabel>
+          <SectionLabel>Why I qualify</SectionLabel>
           <h2 id="skills-heading" className="heading-section text-foreground mt-2">
-            How I build
+            Three titles, clear proof
           </h2>
         </Reveal>
 
@@ -35,8 +35,18 @@ export default function Services() {
                     <h3 className="font-display font-semibold text-foreground text-[1rem] tracking-[-0.015em] leading-snug">
                       {service.title}
                     </h3>
-                    <p className="text-[0.8375rem] text-muted-foreground leading-relaxed mt-1">
-                      {service.text}
+                    <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mt-0.5">
+                      {service.bracket}
+                    </p>
+                    <ul className="mt-2 flex flex-wrap gap-1.5 list-none p-0" aria-label={`${service.title} skills`}>
+                      {service.skills.map((s) => (
+                        <li key={s} className="text-[11px] border border-border bg-secondary px-2 py-1 text-foreground">
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-[0.8125rem] text-muted-foreground leading-relaxed mt-2">
+                      ✓ {service.proof}
                     </p>
                   </div>
                 </Card>
