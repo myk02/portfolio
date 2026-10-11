@@ -53,6 +53,13 @@ describe("redactPII", () => {
     expect(count).toBeGreaterThanOrEqual(3);
     expect(types).toContain("EMAIL");
   });
+  test("leaves ISO dates untouched", () => {
+    const { redacted } = redactPII(
+      "Deadline: 2026-11-20. Call deborah@example.com."
+    );
+    expect(redacted).toContain("2026-11-20");
+    expect(redacted).not.toContain("deborah@example.com");
+  });
 });
 
 describe("detectInjection", () => {

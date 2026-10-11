@@ -130,7 +130,17 @@ export function redactPII(text: string): Redaction {
     }
   };
   apply(EMAIL_RE, "EMAIL");
-  apply(PHONE_RE, "PHONE");
+  // Phone scan must not eat ISO dates like 2026-11-20 — return those untouched.
+  let phoneCount = 0;
+  redacted = redacted.replace(PHONE_RE, (m) => {
+    if (/^\d{4}[-.]\d{1,2}[-.]\d{1,2}$/.test(m.replace(/\s/g, ""))) return m;
+    phoneCount += 1;
+    return "[REDACTED PHONE]";
+  });
+  if (phoneCount > 0) {
+    count += phoneCount;
+    types.push("PHONE");
+  }
   apply(ID_RE, "ID-LIKE");
   return { redacted, count, types };
 }
