@@ -2,13 +2,14 @@ import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 
 const ROWS = [
-  { role: "Software Developer", where: "Independent", proof: "3 live demos — open and click." },
-  { role: "ICT Officer", where: "CLE · Jan 24 – Jan 25", proof: "30+/wk support · 2,000+ records kept safe." },
-  { role: "ICT Officer", where: "IEBC · Jul – Oct 22", proof: "20+ stations · 50+ staff trained · 500+ voters." },
+  { role: "Software Engineer", where: "Freelancer.com · Jan 2024 – Present · Remote", proof: "Full-stack web apps + third-party payments." },
+  { role: "Software Engineer", where: "Upwork · Sep 2024 – Jan 2025 · Remote", proof: "Sites, mobile + desktop apps for clients." },
+  { role: "IT Clerk (ICT Officer)", where: "IEBC · Jul – Oct 2022 · On-site", proof: "Hardware, software + network support; staff training." },
+  { role: "Junior Software Engineer", where: "Freelancer.com · Jul 2021 – Feb 2022 · Remote", proof: "Web apps for clients." },
   { role: "AI Automation", where: "Demo build", proof: "Sourced summaries · human approves · $0 mock." },
 ] as const;
 
-/** Proof at a glance: 4 short rows, no paragraphs. */
+/** Proof at a glance: short rows, no paragraphs. */
 export default function Experience() {
   return (
     <section
@@ -20,8 +21,9 @@ export default function Experience() {
         <Reveal className="section-intro mb-8">
           <SectionLabel>Proof</SectionLabel>
           <h2 id="experience-heading" className="heading-section text-foreground mt-2">
-            Experience in 30 seconds
+            Experience
           </h2>
+          <p className="mt-3 text-sm text-muted-foreground">Freelance software engineer since 2021 · IEBC electoral IT support 2022.</p>
         </Reveal>
 
         <Reveal>

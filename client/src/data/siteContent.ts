@@ -15,13 +15,13 @@ export const services = [
     title: "Software Developer",
     bracket: "Full-Stack Web App Developer",
     skills: ["React + TypeScript", "APIs + Convex", "M-Pesa / Paystack"],
-    proof: "3 live demos below.",
+    proof: "Freelance since 2021 · full-stack apps + payments.",
   },
   {
     title: "ICT Officer",
     bracket: "Support + Systems",
     skills: ["First-line support", "Devices + networks", "Records + access care"],
-    proof: "CLE 30+/wk · 2,000+ records · IEBC 20+ stations.",
+    proof: "IEBC 2022 · hardware, software + network support.",
   },
   {
     title: "AI Automation",
