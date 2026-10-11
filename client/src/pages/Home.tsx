@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
@@ -38,6 +38,17 @@ export default function Home() {
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero onCtaClick={scrollToHomeSection} />
         <WorkSection />
+        <section aria-label="AI Solutions" className="section-pad bg-secondary border-t border-border">
+          <div className="container max-w-3xl text-center">
+            <p className="text-sm text-muted-foreground">
+              New: checked AI tools that show their sources —{" "}
+              <Link href="/ai-solutions" className="underline underline-offset-4 text-foreground">
+                try the Partner &amp; Proposal demo
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
         <Services />
         <About />
         <Contact />

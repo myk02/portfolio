@@ -10,6 +10,8 @@
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "test": "playwright test",
+    "test:unit": "vitest run",
+    "eval": "vitest run client/src/ai-solutions/eval/eval.test.ts",
     "images": "node scripts/optimize-images.mjs",
     "format": "prettier --write .",
     "convex:dev": "convex dev",
@@ -24,7 +26,8 @@
     "react-dom": "^19.2.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
-    "wouter": "^3.3.5"
+    "wouter": "^3.3.5",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
@@ -38,7 +41,8 @@
     "sharp": "^0.35.3",
     "tailwindcss": "^4.1.14",
     "typescript": "5.6.3",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vitest": "^5.0.3"
   },
   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }
