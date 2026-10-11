@@ -5,7 +5,7 @@ const ROWS = [
   { role: "Software Developer", where: "Independent", proof: "3 live demos — open and click." },
   { role: "ICT Officer", where: "CLE · Jan 24 – Jan 25", proof: "30+/wk support · 2,000+ records kept safe." },
   { role: "ICT Officer", where: "IEBC · Jul – Oct 22", proof: "20+ stations · 50+ staff trained · 500+ voters." },
-  { role: "AI Engineer", where: "Demo build", proof: "Sourced summaries · human approves · $0 mock." },
+  { role: "AI Automation", where: "Demo build", proof: "Sourced summaries · human approves · $0 mock." },
 ] as const;
 
 /** Proof at a glance: 4 short rows, no paragraphs. */

@@ -1,8 +1,8 @@
-export const positionTitle = "Software Developer · ICT Officer · AI Engineer";
+export const positionTitle = "Software Developer · ICT Officer · AI Automation";
 
-export const roleLine = "Software Developer · ICT Officer · AI Engineer · Nairobi";
+export const roleLine = "Software Developer · ICT Officer · AI Automation · Nairobi";
 
-export const heroTagline = "Software Developer. ICT Officer. AI Engineer.";
+export const heroTagline = "Software Developer. ICT Officer. AI Automation.";
 
 export const heroSubline =
   "Full-stack web apps, reliable IT support, checked AI tools.";
@@ -24,7 +24,7 @@ export const services = [
     proof: "CLE 30+/wk · 2,000+ records · IEBC 20+ stations.",
   },
   {
-    title: "AI Engineer",
+    title: "AI Automation",
     bracket: "Checked AI Tools",
     skills: ["Sourced outputs", "Human approval", "Evals + safe fail"],
     proof: "Proposal demo · mock mode, $0.",

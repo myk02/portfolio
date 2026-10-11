@@ -10,7 +10,7 @@ interface HeroProps {
 const TITLES = [
   "Software Developer",
   "ICT Officer",
-  "AI Engineer",
+  "AI Automation",
 ] as const;
 
 export default function Hero({ onCtaClick }: HeroProps) {
@@ -34,7 +34,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
           >
             Software Developer
             <span className="block mt-1 text-[0.55em] font-medium text-muted-foreground tracking-normal">
-              (Full-Stack Web App Developer) · ICT Officer · AI Engineer
+              (Full-Stack Web App Developer) · ICT Officer · AI Automation
             </span>
           </motion.h1>
           <motion.p
