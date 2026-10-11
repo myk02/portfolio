@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { liveStudies } from "@/data/projects";
+import DemoWorkStrip from "@/ai-solutions/components/DemoWorkStrip";
 import SiteHead from "@/components/SiteHead";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -37,6 +38,7 @@ export default function Work() {
         </div>
 
         <ProjectCardGrid studies={liveStudies} />
+        <DemoWorkStrip />
       </div>
       </main>
 

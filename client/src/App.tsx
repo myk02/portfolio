@@ -11,6 +11,7 @@ import { registerNavigator } from "./lib/navigation";
 import Home from "./pages/Home";
 
 const Work = lazy(() => import("./pages/Work"));
+const AiSolutions = lazy(() => import("./pages/AiSolutions"));
 
 function NavigateBridge() {
   const [, navigate] = useLocation();
@@ -48,6 +49,7 @@ function Router() {
       <Switch>
         <Route path={"/"} component={Home} />
         <Route path={"/work"} component={Work} />
+        <Route path={"/ai-solutions"} component={AiSolutions} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>
