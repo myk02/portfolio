@@ -47,6 +47,13 @@ export default function Home() {
               </Link>
               .
             </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Also new: IT support &amp; security experience and templates —{" "}
+              <Link href="/it-security" className="underline underline-offset-4 text-foreground">
+                open the IT Security page
+              </Link>
+              .
+            </p>
           </div>
         </section>
         <Services />

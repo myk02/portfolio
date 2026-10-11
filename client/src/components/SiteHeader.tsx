@@ -147,6 +147,12 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           >
             AI Solutions
           </Link>
+          <Link
+            href="/it-security"
+            className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
+          >
+            IT Security
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -211,6 +217,12 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                 className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
               >
                 AI Solutions
+              </Link>
+              <Link
+                href="/it-security"
+                className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
+              >
+                IT Security
               </Link>
               <button
                 type="button"
