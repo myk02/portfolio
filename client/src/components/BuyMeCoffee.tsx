@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Coffee, X } from "lucide-react";
@@ -40,6 +40,7 @@ export default function BuyMeCoffee({
   const [status, setStatus] = useState<"idle" | "working" | "verifying">("idle");
   const [error, setError] = useState("");
   const dialogRef = useRef<HTMLDivElement>(null);
+  const emailId = useId();
 
   const initializePayment = useAction(api.donations.initialize);
   const verifyPayment = useAction(api.donations.verify);
@@ -47,6 +48,16 @@ export default function BuyMeCoffee({
   const customAmount = Number(custom);
   const amount = preset ?? (custom.trim() === "" ? NaN : customAmount);
   const amountMinor = Math.round(amount * 100);
+
+  const close = () => {
+    setOpen(false);
+    setError("");
+    setStatus("idle");
+    // Clear PII on close — prevents next visitor seeing previous email/amount
+    setEmail("");
+    setCustom("");
+    setPreset(null);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -63,16 +74,6 @@ export default function BuyMeCoffee({
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
-
-  const close = () => {
-    setOpen(false);
-    setError("");
-    setStatus("idle");
-    // Clear PII on close — prevents next visitor seeing previous email/amount
-    setEmail("");
-    setCustom("");
-    setPreset(null);
-  };
 
   const handleSuccess = async (transaction: PaystackTransaction) => {
     setStatus("verifying");
@@ -149,6 +150,11 @@ export default function BuyMeCoffee({
     }
   };
 
+  // NOTE: AnimatePresence must live *inside* the portal. A portal object as a
+  // direct child of AnimatePresence breaks its child tracking and the dialog
+  // never appears — that was the "click does nothing" bug.
+  const canPortal = typeof document !== "undefined";
+
   return (
     <>
       <button
@@ -160,154 +166,155 @@ export default function BuyMeCoffee({
         {label}
       </button>
 
-      <AnimatePresence>
-        {open &&
-          typeof document !== "undefined" &&
-          createPortal(
-            <motion.div
-              className="fixed inset-0 z-[100] flex overflow-y-auto bg-black/60 p-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={close}
-            >
+      {canPortal &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
               <motion.div
-                ref={dialogRef}
-                role="dialog"
-                aria-modal="true"
-                aria-label="Buy Mike a coffee"
-                tabIndex={-1}
-                className="m-auto w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain bg-card border border-border text-foreground shadow-xl outline-none"
-                initial={{ opacity: 0, y: 16, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 16, scale: 0.98 }}
-                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                onClick={(e) => e.stopPropagation()}
+                className="fixed inset-0 z-[100] flex overflow-y-auto bg-black/60 p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={close}
               >
-              <div className="flex items-start justify-between border-b border-border px-6 py-5">
-                <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1">
-                    Support the work
-                  </p>
-                  <h3 className="font-display font-semibold text-[1.25rem] tracking-[-0.015em] leading-tight text-foreground">
-                    Buy me a coffee
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={close}
-                  className="p-2 -m-2 text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Close"
+                <motion.div
+                  ref={dialogRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Buy Mike a coffee"
+                  tabIndex={-1}
+                  className="m-auto w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain bg-card border border-border text-foreground shadow-xl outline-none"
+                  initial={{ opacity: 0, y: 16, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 16, scale: 0.98 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <X size={18} />
-                </button>
-              </div>
-
-              <div className="p-6 space-y-5">
-                <div className="grid grid-cols-2 gap-2">
-                  {(Object.keys(PRESETS) as Currency[]).map((c) => (
+                  <div className="flex items-start justify-between border-b border-border px-6 py-5">
+                    <div>
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1">
+                        Support the work
+                      </p>
+                      <h3 className="font-display font-semibold text-[1.25rem] tracking-[-0.015em] leading-tight text-foreground">
+                        Buy me a coffee
+                      </h3>
+                    </div>
                     <button
-                      key={c}
                       type="button"
-                      onClick={() => {
-                        setCurrency(c);
-                        setPreset(null);
-                      }}
-                      className={cn(
-                        "px-3 py-2 text-sm font-medium border transition-colors",
-                        currency === c
-                          ? "bg-foreground text-background border-foreground"
-                          : "border-border text-muted-foreground hover:text-foreground"
-                      )}
+                      onClick={close}
+                      className="p-2 -m-2 text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label="Close"
                     >
-                      {c}
+                      <X size={18} />
                     </button>
-                  ))}
-                </div>
-
-                <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
-                    Amount
-                  </p>
-                  <div className="grid grid-cols-3 gap-2">
-                    {PRESETS[currency].map((value) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => {
-                          setPreset(value);
-                          setCustom("");
-                        }}
-                        className={cn(
-                          "px-3 py-2.5 text-sm font-medium border transition-colors",
-                          preset === value
-                            ? "bg-foreground text-background border-foreground"
-                            : "border-border text-foreground hover:border-foreground"
-                        )}
-                      >
-                        {CURRENCY_SYMBOL[currency]} {value}
-                      </button>
-                    ))}
                   </div>
-                  <input
-                    type="number"
-                    min={1}
-                    value={custom}
-                    onChange={(e) => {
-                      setCustom(e.target.value);
-                      setPreset(null);
-                    }}
-                    placeholder={`Custom amount (${CURRENCY_SYMBOL[currency]})`}
-                    className={cn(inputClass, "mt-2")}
-                  />
-                </div>
 
-                <div>
-                  <label
-                    htmlFor="coffee-email"
-                    className="block text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="coffee-email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    className={inputClass}
-                    placeholder="you@example.com"
-                  />
-                </div>
+                  <div className="p-6 space-y-5">
+                    <div className="grid grid-cols-2 gap-2">
+                      {(Object.keys(PRESETS) as Currency[]).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => {
+                            setCurrency(c);
+                            setPreset(null);
+                          }}
+                          className={cn(
+                            "px-3 py-2 text-sm font-medium border transition-colors",
+                            currency === c
+                              ? "bg-foreground text-background border-foreground"
+                              : "border-border text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
 
-                {error && (
-                  <p role="alert" className="text-sm text-destructive">
-                    {error}
-                  </p>
-                )}
+                    <div>
+                      <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                        Amount
+                      </p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {PRESETS[currency].map((value) => (
+                          <button
+                            key={value}
+                            type="button"
+                            onClick={() => {
+                              setPreset(value);
+                              setCustom("");
+                            }}
+                            className={cn(
+                              "px-3 py-2.5 text-sm font-medium border transition-colors",
+                              preset === value
+                                ? "bg-foreground text-background border-foreground"
+                                : "border-border text-foreground hover:border-foreground"
+                            )}
+                          >
+                            {CURRENCY_SYMBOL[currency]} {value}
+                          </button>
+                        ))}
+                      </div>
+                      <input
+                        type="number"
+                        min={1}
+                        value={custom}
+                        onChange={(e) => {
+                          setCustom(e.target.value);
+                          setPreset(null);
+                        }}
+                        placeholder={`Custom amount (${CURRENCY_SYMBOL[currency]})`}
+                        className={cn(inputClass, "mt-2")}
+                      />
+                    </div>
 
-                <button
-                  type="button"
-                  disabled={status !== "idle"}
-                  onClick={handlePay}
-                  className="btn btn-primary w-full"
-                >
-                  {status === "working"
-                    ? "Preparing payment..."
-                    : status === "verifying"
-                      ? "Confirming..."
-                      : "Pay with Paystack"}
-                </button>
+                    <div>
+                      <label
+                        htmlFor={emailId}
+                        className="block text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id={emailId}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="email"
+                        className={inputClass}
+                        placeholder="you@example.com"
+                      />
+                    </div>
 
-                <p className="text-xs text-muted-foreground text-center">
-                  Paystack · Card / M-Pesa / Bank
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>,
+                    {error && (
+                      <p role="alert" className="text-sm text-destructive">
+                        {error}
+                      </p>
+                    )}
+
+                    <button
+                      type="button"
+                      disabled={status !== "idle"}
+                      onClick={handlePay}
+                      className="btn btn-primary w-full"
+                    >
+                      {status === "working"
+                        ? "Preparing payment..."
+                        : status === "verifying"
+                          ? "Confirming..."
+                          : "Pay with Paystack"}
+                    </button>
+
+                    <p className="text-xs text-muted-foreground text-center">
+                      Paystack · Card / M-Pesa / Bank
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
           document.body
         )}
-      </AnimatePresence>
     </>
   );
 }
