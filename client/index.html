@@ -1,32 +1,55 @@
 <!doctype html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Mike Waitindi — Software Developer & QA Engineer · ICT Officer · AI
+      Automation
+    </title>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1" />
-    <title>Mike Waitindi — Software Developer (Full-Stack) · ICT Officer · AI Automation</title>
-    <meta name="description" content="Mike Waitindi, Nairobi: full-stack web apps, ICT support, checked AI tools. 3 live demos." />
+      name="description"
+      content="Mike Waitindi, Nairobi: full-stack web apps, ICT support, QA automation. 3 live demos."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Mike Waitindi — Software Developer (Full-Stack) · ICT Officer · AI Automation" />
-    <meta property="og:description" content="Full-stack web apps, ICT support, checked AI tools — 3 live demos by Mike Waitindi." />
+    <meta
+      property="og:title"
+      content="Mike Waitindi — Software Developer & QA Engineer · ICT Officer · AI Automation"
+    />
+    <meta
+      property="og:description"
+      content="Full-stack web apps, ICT support, QA automation — 3 live demos by Mike Waitindi."
+    />
     <meta property="og:url" content="https://mikeships.vercel.app/" />
-    <meta property="og:image" content="https://mikeships.vercel.app/og-cover.png" />
+    <meta
+      property="og:image"
+      content="https://mikeships.vercel.app/og-cover.png"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap"
+      rel="stylesheet"
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mike Waitindi",
         "url": "https://mikeships.vercel.app",
-        "jobTitle": "Software Developer (Full-Stack Web App Developer), ICT Officer, AI Automation",
-        "description": "Mike Waitindi, Nairobi: full-stack web apps, ICT support, checked AI tools. 3 live demos.",
-        "knowsAbout": ["Full-Stack Web Development", "ICT Support", "AI Automation", "React", "TypeScript"],
+        "jobTitle": "Software Developer (Full-Stack Web App Developer), QA Engineer, ICT Officer, AI Automation",
+        "description": "Mike Waitindi, Nairobi: full-stack web apps, ICT support, QA automation. 3 live demos.",
+        "knowsAbout": [
+          "Full-Stack Web Development",
+          "QA Automation",
+          "Playwright",
+          "ICT Support",
+          "AI Automation",
+          "React",
+          "TypeScript"
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Nairobi",
@@ -43,7 +66,9 @@
       document.documentElement.classList.add("js");
       (function () {
         var stored = null;
-        try { stored = localStorage.getItem("theme"); } catch (e) {}
+        try {
+          stored = localStorage.getItem("theme");
+        } catch (e) {}
         /* Dark identity is the default; light is opt-in via the toggle. */
         document.documentElement.classList.toggle("dark", stored !== "light");
       })();
@@ -54,5 +79,4 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
-
 </html>

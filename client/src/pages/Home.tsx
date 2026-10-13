@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
 import Services from "@/components/Services";
 import Experience from "@/components/Experience";
-import About from "@/components/About";
 import Contact from "@/components/Contact";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHead, { DEFAULT_HEAD } from "@/components/SiteHead";
@@ -20,7 +19,9 @@ export default function Home() {
     const pending = consumePendingSection();
     if (pending && pending !== "home") {
       const t = window.setTimeout(() => {
-        document.getElementById(pending)?.scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById(pending)
+          ?.scrollIntoView({ behavior: "smooth" });
       }, 200);
       return () => window.clearTimeout(t);
     }
@@ -41,7 +42,6 @@ export default function Home() {
         <WorkSection />
         <Services />
         <Experience />
-        <About />
         <Contact />
       </main>
 

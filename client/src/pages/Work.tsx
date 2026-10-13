@@ -21,23 +21,28 @@ export default function Work() {
       <SiteHeader />
 
       <main id="main" tabIndex={-1} className="outline-none">
-      <div className="container pt-24 pb-16">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
-        >
-          ← Home
-        </Link>
+        <div className="container pt-24 pb-16">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ← Home
+          </Link>
 
-        <div className="section-intro mt-7 mb-10">
-          <h1 className="heading-section text-foreground">
-            Selected projects
-          </h1>
-          <p className="mt-3 text-sm text-muted-foreground">Frontend product concepts built to explore clear, practical user flows.</p>
+          <div className="section-head mt-7 mb-6">
+            <span className="section-label">
+              <span className="section-label-line" aria-hidden /> Work index
+            </span>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h1 className="heading-section text-foreground">
+                Selected projects
+              </h1>
+              <p className="section-note">Each card opens the live site</p>
+            </div>
+          </div>
+
+          <ProjectCardGrid studies={liveStudies} />
         </div>
-
-        <ProjectCardGrid studies={liveStudies} />
-      </div>
       </main>
 
       <SiteFooter />

@@ -3,8 +3,8 @@ import { expect, test } from "@playwright/test";
 /**
  * End-to-end demonstration suite — this portfolio is the system under test.
  * Mirrors a real release gate: functional cases, regression sweep, UI-consistency
- * checks, accessibility basics, and a 360px viewport pass. Referenced from the
- * #qa-automation section on the home page. Run with: pnpm test
+ * checks, accessibility basics, and a 360px viewport pass. It doubles as living
+ * proof for the QA Engineer role on the home page. Run with: pnpm test
  *
  * Project cards link straight out to the live product sites, so the only
  * routes under test are the portfolio's own pages.
@@ -43,25 +43,30 @@ test.describe("QA gate — functional: contact form validation", () => {
 test.describe("QA gate — regression: every route resolves cleanly", () => {
   test("all routes render h1 with zero page errors", async ({ page }) => {
     const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
+    page.on("pageerror", e => errors.push(e.message));
     for (const route of ROUTES) {
       await page.goto(route);
-      await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 1 }).first()
+      ).toBeVisible();
     }
     expect(errors).toEqual([]);
   });
 
-  test("testing section is reachable from the header nav", async ({
+  test("roles section is reachable from the header nav and shows QA", async ({
     page,
   }) => {
     await page.goto("/");
     await page
       .getByRole("navigation", { name: "Primary" })
-      .getByRole("button", { name: "Testing" })
+      .getByRole("button", { name: "Roles" })
       .click();
-    await expect(page.locator("#qa-automation")).toBeInViewport();
+    await expect(page.locator("#skills")).toBeInViewport();
     await expect(
-      page.getByRole("heading", { name: "Quality you can rerun" })
+      page.getByRole("heading", { name: "What I do" })
+    ).toBeVisible();
+    await expect(
+      page.locator("#skills").getByRole("heading", { name: "QA Engineer" })
     ).toBeVisible();
   });
 });
@@ -98,7 +103,7 @@ test.describe("QA gate — UI consistency across viewports", () => {
     await page.goto("/");
     const alts = await page
       .locator('#work a[href^="https://"] img')
-      .evaluateAll((els) => els.map((el) => el.getAttribute("alt")));
+      .evaluateAll(els => els.map(el => el.getAttribute("alt")));
     expect(alts.length).toBeGreaterThan(0);
     for (const alt of alts) expect(alt?.trim().length).toBeGreaterThan(0);
   });
@@ -107,10 +112,10 @@ test.describe("QA gate — UI consistency across viewports", () => {
 test.describe("QA gate — external contracts (API-link reliability)", () => {
   test("live product out-links are absolute https URLs", async ({ page }) => {
     await page.goto("/work");
-    const liveLinks = page.getByRole("link", { name: /Live site/ });
+    const liveLinks = page.getByRole("link", { name: /Open demo/ });
     await expect(liveLinks.first()).toBeVisible();
-    const hrefs = await liveLinks.evaluateAll((els) =>
-      els.map((el) => el.getAttribute("href"))
+    const hrefs = await liveLinks.evaluateAll(els =>
+      els.map(el => el.getAttribute("href"))
     );
     expect(hrefs.length).toBeGreaterThan(0);
     for (const href of hrefs) expect(href).toMatch(/^https:\/\//);

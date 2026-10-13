@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 // Single source of truth: slugs live in client/src/data/projects.ts
 import { projects } from "../client/src/data/projects";
 
-const LIVE_SLUGS = projects.map((s) => s.slug);
+const LIVE_SLUGS = projects.map(s => s.slug);
 
 test.describe("home page", () => {
   test("renders engineering-led hero with primary CTAs", async ({ page }) => {
@@ -10,8 +10,14 @@ test.describe("home page", () => {
     page.on("pageerror", e => errors.push(e.message));
 
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Mike Waitindi" }).first()).toBeVisible();
-    await expect(page.getByText(/apps for web, mobile & desktop/).first()).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Software Developer"
+    );
+    await expect(
+      page
+        .getByText(/Full-stack web apps, IT support, and QA automation/)
+        .first()
+    ).toBeVisible();
 
     // Hero: hire CTAs + coffee (footer keeps a second instance)
     await expect(
@@ -21,13 +27,18 @@ test.describe("home page", () => {
       page.locator("#home").getByRole("button", { name: "View live work" })
     ).toBeVisible();
     await expect(
-      page.locator("#home").getByRole("button", { name: "Work with me" })
+      page.locator("#home").getByRole("link", { name: "Work with me" })
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Download CV" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Download CV" })).toHaveCount(
+      0
+    );
+    await expect(page.getByRole("button", { name: "Download CV" })).toHaveCount(
+      0
+    );
 
+    // QA Engineer is a headline role: hero h1 names it, #skills shows the card
     await expect(
-      page.getByText("Available for work").first()
+      page.locator("#skills").getByRole("heading", { name: "QA Engineer" })
     ).toBeVisible();
 
     await expect(
@@ -42,7 +53,9 @@ test.describe("home page", () => {
   }) => {
     await page.goto("/");
 
-    await expect(page.getByText("Live production", { exact: true })).toHaveCount(3);
+    await expect(page.getByText("Deployed demo", { exact: true })).toHaveCount(
+      3
+    );
     await expect(page.getByText("Concept study")).toHaveCount(0);
 
     const workGrid = page.locator("#work");
@@ -59,7 +72,6 @@ test.describe("home page", () => {
     const tileImages = workGrid.locator('a[href^="https://"] img');
     await expect(tileImages).toHaveCount(3);
   });
-
 });
 
 test.describe("project data — single source, unique screens", () => {
@@ -68,8 +80,8 @@ test.describe("project data — single source, unique screens", () => {
       const srcs = [
         p.tileShot,
         p.hero.src,
-        ...p.decisions.filter((d) => d.shot).map((d) => d.shot as string),
-        ...p.screens.map((s) => s.src),
+        ...p.decisions.filter(d => d.shot).map(d => d.shot as string),
+        ...p.screens.map(s => s.src),
       ];
       expect(new Set(srcs).size).toBe(srcs.length);
     }
@@ -88,7 +100,9 @@ test.describe("project data — single source, unique screens", () => {
 test.describe("work page", () => {
   test("lists the live projects linking straight out", async ({ page }) => {
     await page.goto("/work");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Work");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Selected projects"
+    );
 
     for (const p of projects) {
       if (p.liveUrl) {
@@ -99,7 +113,7 @@ test.describe("work page", () => {
     }
 
     await expect(
-      page.getByRole("link", { name: /^Live site/ }).first()
+      page.getByRole("link", { name: /^Open demo/ }).first()
     ).toHaveAttribute("href", "https://kenyatrace.vercel.app");
   });
 });
@@ -127,7 +141,7 @@ test.describe("removed case-study pages", () => {
 
   test("document title reflects positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Full-Stack Developer/);
+    await expect(page).toHaveTitle(/Software Developer.*QA Engineer/);
   });
 });
 

@@ -1,6 +1,6 @@
 type NavigateFn = (
   to: string | URL,
-  options?: { replace?: boolean; state?: unknown },
+  options?: { replace?: boolean; state?: unknown }
 ) => void;
 
 let navigateRef: NavigateFn | null = null;
@@ -31,8 +31,8 @@ export function consumePendingSection(): string | null {
 
 /**
  * Header/footer nav:
- * - On `/`, Work/About/Contact scroll to section ids.
- * - Off home, Work goes to `/work` (shareable index). About/Contact return home then scroll.
+ * - On `/`, Work/Roles/Experience/Contact scroll to section ids.
+ * - Off home, Work goes to `/work` (shareable index). Other sections return home then scroll.
  */
 export function handleSiteNav(
   id: string,
@@ -40,7 +40,7 @@ export function handleSiteNav(
     location: string;
     onHomeSection?: (id: string) => void;
     navigate: (to: string) => void;
-  },
+  }
 ) {
   const isHome = ctx.location === "/" || ctx.location === "";
   const isWorkIndex = ctx.location === "/work";

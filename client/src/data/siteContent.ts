@@ -1,14 +1,18 @@
-export const positionTitle = "Software Developer · ICT Officer · AI Automation";
+export const positionTitle =
+  "Software Developer · ICT Officer · QA Engineer · AI Automation";
 
-export const roleLine = "Software Developer · ICT Officer · AI Automation · Nairobi";
+export const roleLine =
+  "Software Developer · ICT Officer · QA Engineer · AI Automation · Nairobi";
 
-export const heroTagline = "Software Developer. ICT Officer. AI Automation.";
+export const heroTitle = "Software Developer";
+
+export const heroPairing = "QA Engineer";
 
 export const heroSubline =
-  "Full-stack web apps, reliable IT support, checked AI tools.";
+  "Full-stack web apps, IT support, and QA automation.";
 
-export const aboutParagraph =
-  "I’m Mike Waitindi from Nairobi. I build full-stack web apps, keep IT systems running, and ship checked AI tools.";
+export const bioLine =
+  "Mike Waitindi, Nairobi — full-stack developer, ICT officer and QA engineer.";
 
 export const services = [
   {
@@ -20,8 +24,22 @@ export const services = [
   {
     title: "ICT Officer",
     bracket: "Support + Systems",
-    skills: ["First-line support", "Devices + networks", "Records + access care"],
+    skills: [
+      "First-line support",
+      "Devices + networks",
+      "Records + access care",
+    ],
     proof: "IEBC 2022 · hardware, software + network support.",
+  },
+  {
+    title: "QA Engineer",
+    bracket: "Test Automation",
+    skills: [
+      "Test cases + bug reports",
+      "Playwright e2e",
+      "Regression + UI checks",
+    ],
+    proof: "Manual + automated QA on every release.",
   },
   {
     title: "AI Automation",

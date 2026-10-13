@@ -9,19 +9,20 @@ export default function WorkSection() {
       id="work"
       className="section-pad bg-secondary border-t border-border relative"
     >
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-accent/40" aria-hidden />
+      <div
+        className="absolute top-0 left-0 right-0 h-[1px] bg-accent/40"
+        aria-hidden
+      />
       <div className="container">
-          <Reveal as="div" className="section-intro mb-8">
-            <SectionLabel>
-              Proof · 0{liveStudies.length} live demos
-            </SectionLabel>
-            <h2 className="heading-section text-foreground mt-2">
-              Selected work
-            </h2>
-            <p className="mt-3 text-sm text-muted-foreground">Each card opens the live site. That is the proof.</p>
-          </Reveal>
+        <Reveal className="section-head">
+          <SectionLabel>Proof · 0{liveStudies.length} live demos</SectionLabel>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 className="heading-section text-foreground">Selected work</h2>
+            <p className="section-note">Each card opens the live site</p>
+          </div>
+        </Reveal>
 
-          <ProjectCardGrid studies={liveStudies} />
+        <ProjectCardGrid studies={liveStudies} />
       </div>
     </section>
   );

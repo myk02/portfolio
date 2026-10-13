@@ -4,8 +4,12 @@
 
 @theme inline {
   /* Anthropic-style serif: custom Anthropic Serif → Tiempos/Copernicus → Fraunces (closest free match) → Source Serif 4 → Georgia */
-  --font-sans: "Anthropic Serif", "Tiempos Text", "Tiempos Headline", "Copernicus", "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-display: "Anthropic Serif", "Tiempos Headline", "Tiempos Text", "Copernicus", "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans:
+    "Anthropic Serif", "Tiempos Text", "Tiempos Headline", "Copernicus",
+    "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-display:
+    "Anthropic Serif", "Tiempos Headline", "Tiempos Text", "Copernicus",
+    "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -138,10 +142,13 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-size: 1.0625rem;
+    line-height: 1.55;
     letter-spacing: 0;
-    font-feature-settings: "kern" on, "liga" on, "onum" on;
+    font-feature-settings:
+      "kern" on,
+      "liga" on,
+      "onum" on;
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -156,7 +163,10 @@
   .font-display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    font-feature-settings: "kern" on, "liga" on, "onum" on;
+    font-feature-settings:
+      "kern" on,
+      "liga" on,
+      "onum" on;
     font-weight: 400;
     text-wrap: balance;
   }
@@ -218,18 +228,56 @@
 }
 
 .section-pad {
-  padding-top: clamp(3.5rem, 7vw, 5.5rem);
-  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  padding-top: clamp(2.5rem, 4.5vw, 3.5rem);
+  padding-bottom: clamp(2.5rem, 4.5vw, 3.5rem);
 }
 
 .section-intro {
   text-align: center;
   margin-inline: auto;
-  max-width: 30rem;
+  max-width: 34rem;
 }
 
 .section-intro .section-label {
   justify-content: center;
+}
+
+/* Ruled heading row: kicker on the left, heading on the right. Replaces the
+   tall centred label/stack pattern with one compact band per section. */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-head .section-label {
+  margin-bottom: 0;
+}
+
+.section-head .section-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Faint dot grid behind the hero — texture without weight. */
+.hero-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--border) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
 }
 
 .heading-section {
@@ -237,7 +285,7 @@
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
-  font-size: clamp(1.6rem, 1.2rem + 2vw, 2.25rem);
+  font-size: clamp(1.45rem, 1.1rem + 1.6vw, 1.9rem);
   text-wrap: balance;
 }
 
@@ -481,7 +529,9 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

@@ -13,7 +13,12 @@ interface SiteHeadProps {
   jsonLd?: { id: string; data: Record<string, unknown> };
 }
 
-function upsertMeta(selector: string, attr: "name" | "property", key: string, content: string) {
+function upsertMeta(
+  selector: string,
+  attr: "name" | "property",
+  key: string,
+  content: string
+) {
   let el = document.head.querySelector<HTMLMetaElement>(selector);
   if (!el) {
     el = document.createElement("meta");
@@ -25,7 +30,7 @@ function upsertMeta(selector: string, attr: "name" | "property", key: string, co
 
 function upsertJsonLd(id: string, data: Record<string, unknown>) {
   let el = document.head.querySelector<HTMLScriptElement>(
-    `script[data-jsonld="${id}"]`,
+    `script[data-jsonld="${id}"]`
   );
   if (!el) {
     el = document.createElement("script");
@@ -37,9 +42,7 @@ function upsertJsonLd(id: string, data: Record<string, unknown>) {
 }
 
 function removeJsonLd(id: string) {
-  document.head
-    .querySelector(`script[data-jsonld="${id}"]`)
-    ?.remove();
+  document.head.querySelector(`script[data-jsonld="${id}"]`)?.remove();
 }
 
 function upsertLink(rel: string, href: string) {
@@ -72,17 +75,42 @@ export default function SiteHead({
     document.title = title;
     upsertMeta('meta[name="description"]', "name", "description", description);
     upsertMeta('meta[property="og:title"]', "property", "og:title", title);
-    upsertMeta('meta[property="og:description"]', "property", "og:description", description);
+    upsertMeta(
+      'meta[property="og:description"]',
+      "property",
+      "og:description",
+      description
+    );
     upsertMeta('meta[property="og:url"]', "property", "og:url", url);
     upsertMeta('meta[property="og:image"]', "property", "og:image", img);
     upsertMeta('meta[property="og:type"]', "property", "og:type", type);
-    upsertMeta('meta[property="og:site_name"]', "property", "og:site_name", `${OWNER} — Portfolio`);
-    upsertMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
+    upsertMeta(
+      'meta[property="og:site_name"]',
+      "property",
+      "og:site_name",
+      `${OWNER} — Portfolio`
+    );
+    upsertMeta(
+      'meta[name="twitter:card"]',
+      "name",
+      "twitter:card",
+      "summary_large_image"
+    );
     upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
-    upsertMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
+    upsertMeta(
+      'meta[name="twitter:description"]',
+      "name",
+      "twitter:description",
+      description
+    );
     upsertMeta('meta[name="twitter:image"]', "name", "twitter:image", img);
     upsertLink("canonical", url);
-    upsertMeta('meta[name="robots"]', "name", "robots", noindex ? "noindex, nofollow" : "index, follow");
+    upsertMeta(
+      'meta[name="robots"]',
+      "name",
+      "robots",
+      noindex ? "noindex, nofollow" : "index, follow"
+    );
     if (jsonLd) upsertJsonLd(jsonLd.id, jsonLd.data);
     return () => {
       if (jsonLd) removeJsonLd(jsonLd.id);
@@ -93,7 +121,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Software Developer (Full-Stack) · ICT Officer · AI Automation`,
-  description: `Mike Waitindi, Nairobi: full-stack web apps, ICT support, checked AI tools. 3 live demos.`,
+  title: `Mike Waitindi — Software Developer & QA Engineer · ICT Officer · AI Automation`,
+  description: `Mike Waitindi, Nairobi: full-stack web apps, ICT support, QA automation. 3 live demos.`,
   canonical: SITE_URL,
 };

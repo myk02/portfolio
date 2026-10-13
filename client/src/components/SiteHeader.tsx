@@ -63,7 +63,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
         menu.querySelectorAll<HTMLElement>(
           'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )
-      ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+      ).filter(el => !el.hasAttribute("disabled") && el.offsetParent !== null);
     const items = focusables();
     items[0]?.focus();
     const onKeyDown = (e: KeyboardEvent) => {
@@ -97,121 +97,127 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
     { id: "work", label: "Proof" },
     { id: "skills", label: "Roles" },
     { id: "experience", label: "Experience" },
-    { id: "about", label: "About" },
   ];
 
   return (
     <>
       <ScrollProgress />
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container h-16 flex items-center justify-between">
-        <Link
-          href="/"
-          onClick={(e) => {
-            if (isHome) {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          aria-label="Mike Waitindi — home"
-          className="flex items-center gap-2.5 group"
-        >
-          <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-            <Logo size={20} />
-          </span>
-          <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
-            Mike Waitindi
-          </span>
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-6 xl:gap-8" aria-label="Primary">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              type="button"
-              onClick={() => handleNav(link.id)}
-              className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
-            >
-              {link.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2 sm:gap-3">
-          {toggleTheme && (
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-            >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          )}
-
-          <button
-            type="button"
-            onClick={() => handleNav("contact")}
-            className="hidden md:inline-flex btn btn-primary text-xs"
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container h-16 flex items-center justify-between">
+          <Link
+            href="/"
+            onClick={e => {
+              if (isHome) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            aria-label="Mike Waitindi — home"
+            className="flex items-center gap-2.5 group"
           >
-            Contact
-          </button>
+            <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+              <Logo size={20} />
+            </span>
+            <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
+              Mike Waitindi
+            </span>
+          </Link>
 
-          <button
-            ref={menuButtonRef}
-            type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav"
+          <nav
+            className="hidden md:flex items-center gap-6 xl:gap-8"
+            aria-label="Primary"
           >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
+            {navLinks.map(link => (
+              <button
+                key={link.id}
+                type="button"
+                onClick={() => handleNav(link.id)}
+                className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
-            ref={menuRef}
-            id="mobile-nav"
-            aria-label="Mobile"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden bg-secondary border-b border-border overflow-hidden"
-          >
-            <div className="container py-4 space-y-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  type="button"
-                  onClick={() => handleNav(link.id)}
-                  className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
-                >
-                  {link.label}
-                </button>
-              ))}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {toggleTheme && (
               <button
                 type="button"
-                onClick={() => handleNav("contact")}
-                className="btn btn-primary w-full text-center"
+                onClick={toggleTheme}
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to light theme"
+                    : "Switch to dark theme"
+                }
               >
-                Contact
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
-            </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
+            )}
+
+            <button
+              type="button"
+              onClick={() => handleNav("contact")}
+              className="hidden md:inline-flex btn btn-primary text-xs"
+            >
+              Contact
+            </button>
+
+            <button
+              ref={menuButtonRef}
+              type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav"
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.nav
+              ref={menuRef}
+              id="mobile-nav"
+              aria-label="Mobile"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden bg-secondary border-b border-border overflow-hidden"
+            >
+              <div className="container py-4 space-y-4">
+                {navLinks.map(link => (
+                  <button
+                    key={link.id}
+                    type="button"
+                    onClick={() => handleNav(link.id)}
+                    className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => handleNav("contact")}
+                  className="btn btn-primary w-full text-center"
+                >
+                  Contact
+                </button>
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </header>
     </>
   );
 }
