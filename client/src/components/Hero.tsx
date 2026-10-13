@@ -33,7 +33,6 @@ export default function Hero({ onCtaClick }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.06 }}
           >
             {heroTitle}
-            <span className="text-muted-foreground"> · QA Engineer</span>
           </motion.h1>
           <motion.p
             className="mt-3 text-[0.95rem] text-muted-foreground leading-relaxed"
@@ -49,7 +48,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            ICT Officer · AI Automation · Full-Stack · React + TypeScript
+            QA Engineer · ICT Officer · AI Automation · Full-Stack
           </motion.p>
           <motion.div
             className="mt-7 flex flex-wrap justify-center items-center gap-2.5"
