@@ -35,9 +35,10 @@ export default function NotFound() {
               Page not found<span className="text-accent">.</span>
             </span>
           </h1>
-          <p className="mt-4 text-[0.9375rem] text-muted-foreground leading-relaxed max-w-sm mx-auto">
-            The page you&apos;re looking for doesn&apos;t exist or has moved. Head back to the portfolio or explore the live work.
-          </p>
+          <ul className="mt-4 text-[0.9375rem] text-muted-foreground leading-relaxed max-w-sm mx-auto list-disc list-inside space-y-1 text-left">
+            <li>Page moved or missing</li>
+            <li>Back home or view live work</li>
+          </ul>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/" className="btn btn-primary justify-center">
               ← Back home

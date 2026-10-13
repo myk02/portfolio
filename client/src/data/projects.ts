@@ -94,7 +94,7 @@ export const projects: Project[] = [
     problemLead: "Explore how a multi-stop Kenya trip could be planned in one place.",
     researchLead: "Concept build · frontend only.",
     ordeal:
-      "The first instinct was map-first. On slow phones it struggled, so the plan moved to list-first with progressive loading — and the route builder moved inline so adding a stop keeps context on one screen.",
+      "Map-first failed on slow phones — switched to list-first with inline add-stop.",
     decisions: [
       {
         label: "Kept",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
     problemLead: "Explore a clearer mobile storefront and shorter checkout.",
     researchLead: "Concept build · checkout is not connected to payment processing.",
     ordeal:
-      "Two problems stacked: low-contrast text that was hard to read, and a multi-step checkout that lost people at address and payment. The fix merged address and delivery into one form and ordered payment options for how shoppers actually pay.",
+      "Low contrast + multi-step checkout — merged address/delivery, M-Pesa first.",
     decisions: [
       {
         label: "Palette",
@@ -301,14 +301,14 @@ export const projects: Project[] = [
     problemLead: "Explore how a small legal practice might connect client work and billing.",
     researchLead: "Concept build · no live matter data, billing or payments.",
     ordeal:
-      "Disconnected tools meant billing trailed the work and context lived in chat threads. The response was a single workspace concept where invoices and payments follow matter status — usable on the phone in the field.",
+      "Billing trailed the work across chats — one workspace linking matter to billing.",
     decisions: [
       { label: "Kept", text: "Unified matter + client record." },
       { label: "Kept", text: "Billing tied to matter status." },
       { label: "Cut", text: "Separate doc/email silos." },
     ],
     validateBefore: "Disconnected tools — billing trails the work",
-    validateAfter: "One workspace story — intake, matter, billing linked",
+    validateAfter: "Intake, matter, billing linked",
     metricCards: [
       {
         label: "Tools",
@@ -352,7 +352,7 @@ export const projects: Project[] = [
       {
         name: "Workspace",
         alt: "LegalFlow workspace bands",
-        caption: "Product story on the live site — matters, tasks, and deadlines together.",
+        caption: "Live site — matters, tasks, and deadlines together.",
         src: "/shots/legalflow/home-scroll-desktop.webp",
       },
     ],

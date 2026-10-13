@@ -496,6 +496,14 @@ section[id] {
   contain-intrinsic-size: auto 600px;
 }
 
+/* Overlays must never be contained by section rendering optimisations.
+   BuyMeCoffee now portals to document.body, but this guarantees any
+   fixed dialog stays bound to the viewport, not a section. */
+[role="dialog"] {
+  content-visibility: visible;
+  contain: none;
+}
+
 .card-lift {
   transition:
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
