@@ -3,8 +3,8 @@ import { expect, test } from "@playwright/test";
 /**
  * End-to-end demonstration suite — this portfolio is the system under test.
  * Mirrors a real release gate: functional cases, regression sweep, UI-consistency
- * checks, accessibility basics, and a 360px viewport pass. It doubles as living
- * proof for the QA Engineer role on the home page. Run with: pnpm test
+ * checks, accessibility basics, and a 360px viewport pass. The portfolio itself
+ * ships production-grade quality gates. Run with: pnpm test
  *
  * Project cards link straight out to the live product sites, so the only
  * routes under test are the portfolio's own pages.
@@ -53,7 +53,7 @@ test.describe("QA gate — regression: every route resolves cleanly", () => {
     expect(errors).toEqual([]);
   });
 
-  test("roles section is reachable from the header nav and shows QA", async ({
+  test("roles section is reachable from the header nav", async ({
     page,
   }) => {
     await page.goto("/");
@@ -66,7 +66,9 @@ test.describe("QA gate — regression: every route resolves cleanly", () => {
       page.getByRole("heading", { name: "What I do" })
     ).toBeVisible();
     await expect(
-      page.locator("#skills").getByRole("heading", { name: "QA Engineer" })
+      page
+        .locator("#skills")
+        .getByRole("heading", { name: "Full-Stack Software Engineer" })
     ).toBeVisible();
   });
 });

@@ -98,7 +98,7 @@ let y = 800;
 
 textLine("MIKE WAITINDI", { font: "F2", size: 25, y, color: [0.05, 0.05, 0.05] });
 y -= 22;
-textLine("Web Developer & Frontend Engineer", { size: 12.5, y, color: [0.3, 0.3, 0.3] });
+textLine("Full-Stack Software Engineer \u2014 Connecting Dots in Tech", { size: 12.5, y, color: [0.3, 0.3, 0.3] });
 y -= 15;
 textLine("Nairobi, Kenya \u00B7 Remote", { size: 9, y, color: [0.4, 0.4, 0.4] });
 y -= 12.5;
@@ -111,34 +111,34 @@ y -= 26;
 
 y = sectionHeader("PROFESSIONAL SUMMARY", y);
 y = paragraph(
-  "Web developer focused on turning designs and requirements into reliable, accessible, responsive production interfaces. Shipped live products include a mobile-first tourism trip planner (KenyaTrace) and an e-commerce storefront (GiGi Energy Drink). Builds and maintains full frontend systems in React, TypeScript and Tailwind against typed backend APIs, with end-to-end tests and Git-to-Vercel deployment. A background in UX research and design means requirements are read accurately, designers get a collaborator who speaks their language, and handoff ambiguity is designed out.",
+  "Full-stack software engineer who connects dots across building, running and selling technology. Builds full-stack web, mobile and desktop apps for clients and integrates them with third-party payment systems (M-Pesa, Paystack). Uses AI and imaging technologies in the daily build workflow. IT professional with hands-on technical support experience - troubleshooting hardware, software and network systems to keep operations smooth. An outspoken communicator who explains complex technology simply; communication is treated as the ultimate skill. Currently venturing into marketing with AI - building apps and automations that are tested against one question: do they actually win customers? Shipped live products include a mobile-first tourism trip planner (KenyaTrace), an e-commerce storefront (GiGi Energy Drink) and a legal practice workspace concept (LegalFlow).",
   y,
 );
 y -= 18;
 
 y = sectionHeader("ENGINEERING HIGHLIGHTS", y);
-y = bullet("Built and shipped KenyaTrace (kenyatrace.vercel.app), a live mobile-first tourism planner for 3G conditions - list-first architecture, client-side route-builder state, progressive loading, and every planning task verified usable at a 360px viewport.", y);
-y = bullet("Rebuilt the GiGi Energy Drink storefront (gigiflavours.vercel.app): merged checkout from 4 steps to 3, lifted text contrast from 2.1:1 to WCAG AA across the brand palette, and ordered payment options M-Pesa first to match real purchase behavior.", y);
-y = bullet("Engineered this portfolio end-to-end: React + TypeScript application with typed Convex backend functions powering the contact form and Paystack donations, verified server-side before confirming success.", y);
-y = bullet("Quality practice in daily use: Playwright end-to-end suite covering routes, CTAs, dialogs, form validation and the 404 path; tsc typecheck gates; Prettier formatting; fixes traced to root cause in browser DevTools rather than patched symptoms.", y);
-y = bullet("Delivery workflow: feature branches and reviewed pull requests in Git/GitHub, automatic deployment to Vercel on merge, canonical URLs and per-route metadata kept healthy.", y);
+y = bullet("Ships full-stack apps end to end: React + TypeScript frontends against typed Convex backend APIs, with Git-to-Vercel deployment.", y);
+y = bullet("Integrates third-party payment systems into client apps - M-Pesa-first ordering and Paystack tips with server-side transaction verification and webhook reconciliation.", y);
+y = bullet("Builds and ships live products: KenyaTrace (kenyatrace.vercel.app), a list-first tourism trip planner built for 3G conditions; GiGi Energy Drink storefront (gigiflavours.vercel.app) with a shortened mobile checkout; LegalFlow (law-ten-iota.vercel.app), a matter-and-billing workspace for small law firms.", y);
+y = bullet("Uses AI and imaging technologies in the build workflow - sourced outputs held to manual review, with evals and safe-fail patterns.", y);
+y = bullet("Quality in daily use: Playwright end-to-end suite covering routes, CTAs, dialogs, form validation and the 404 path; tsc typecheck gates; fixes traced to root cause in browser DevTools.", y);
+y = bullet("Marketing in progress: applying AI tooling to position, explain and sell shipped apps - testing whether products actually win customers, not just whether they run.", y);
 y -= 18;
 
-y = sectionHeader("EXPERIENCE & DESIGN BACKGROUND", y);
-y = bullet("Led end-to-end UI/UX design for e-commerce, tourism and banking platforms, including youth-focused mobile banking concepts validated in moderated testing.", y);
-y = bullet("Conducted user research, stakeholder interviews, competitive analysis and usability testing to ground interface decisions in evidence.", y);
-y = bullet("Built scalable design systems - tokens, typography scales, reusable component libraries - documented with states and edge cases for developer handoff.", y);
-y = bullet("Created wireframes, user flows and high-fidelity prototypes in Figma with build-ready specs, reducing back-and-forth during implementation.", y);
-y = bullet("Collaborated across business, technology and creative stakeholders to scope, estimate and prioritize features on tight deadlines.", y);
+y = sectionHeader("EXPERIENCE", y);
+y = bullet("Freelancer & Full-Stack Software Engineer - Self-employed, Nairobi / Remote (Feb 2025 - Present). Web, mobile and desktop apps for clients with third-party payments; currently venturing into marketing with AI.", y);
+y = bullet("ICT Intern - Council of Legal Education, Kenya (Jan 2024 - Feb 2025). Technical support and ICT operations for the council.", y);
+y = bullet("IT Clerk - IEBC, Kenya (Jul 2022 - Oct 2022). Hardware, software and network support; staff training.", y);
+y = bullet("Junior Software Engineer - Freelancer.com (Jul 2021 - Feb 2022). Web apps for clients.", y);
 y -= 18;
 
 y = sectionHeader("KEY SKILLS", y);
-y = bullet("Frontend - JavaScript/ES6+, TypeScript, React, Next.js, semantic HTML, CSS/Tailwind, responsive layouts.", y);
-y = bullet("Quality & testing - Playwright e2e, accessibility (WCAG AA contrast, keyboard/focus states), form validation, loading/error/empty states, cross-browser and viewport testing.", y);
-y = bullet("Systems & data - component architecture, design tokens, state modeling (hooks/context), REST-style API integration, typed data contracts.", y);
-y = bullet("Delivery - Git/GitHub, code review via pull requests, Vercel deployment, browser DevTools debugging, performance basics (image pipelines, lazy loading).", y);
-y = bullet("Design & research - Figma, FigJam/Miro, wireframing, prototyping, information architecture, usability testing.", y);
-y = bullet("Tools - GA4, Jira.  Languages - English (fluent), Kiswahili (fluent).", y);
+y = bullet("Engineering - TypeScript, React, Next.js, semantic HTML, CSS/Tailwind, REST-style API integration, typed data contracts, responsive layouts.", y);
+y = bullet("Full-stack delivery - Convex APIs, third-party payment integration (M-Pesa / Paystack), mobile and desktop app builds, Git/GitHub, Vercel deployment.", y);
+y = bullet("IT & operations - technical support, hardware/software/network troubleshooting, device setup, staff training, smooth-systems operations.", y);
+y = bullet("AI + imaging - AI-assisted building with manual review, imaging technologies in the workflow, automation for small businesses.", y);
+y = bullet("Marketing & communication - explaining complex technology simply, customer-fit testing, AI-assisted marketing.", y);
+y = bullet("Tools - Playwright, GA4, Git, Figma.  Languages - English (fluent), Kiswahili (fluent).", y);
 y -= 18;
 
 y = sectionHeader("EDUCATION", y);

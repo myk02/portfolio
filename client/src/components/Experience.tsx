@@ -3,34 +3,25 @@ import { SectionLabel } from "@/components/ui/section";
 
 const ROWS = [
   {
-    role: "Software Engineer",
-    where: "Freelancer.com · 2024 – Present · Remote",
-    proof: "Full-stack web apps + third-party payments.",
+    role: "Freelancer · Full-Stack Software Engineer",
+    where: "Self-employed · Feb 2025 – Present · Nairobi / Remote",
+    proof:
+      "Web, mobile + desktop apps for clients with third-party payments — now venturing into marketing with AI.",
   },
   {
-    role: "QA Engineer",
-    where: "Freelance · Remote",
-    proof: "Manual test cases + Playwright automation on shipped releases.",
+    role: "ICT Intern",
+    where: "Council of Legal Education · Jan 2024 – Feb 2025 · On-site",
+    proof: "Technical support + ICT operations for the council.",
   },
   {
-    role: "Software Engineer",
-    where: "Upwork · Sep 2024 – Jan 2025 · Remote",
-    proof: "Sites, mobile + desktop apps for clients.",
-  },
-  {
-    role: "IT Clerk (ICT Officer)",
-    where: "IEBC · Jul – Oct 2022 · On-site",
+    role: "IT Clerk",
+    where: "IEBC · Jul 2022 – Oct 2022 · On-site",
     proof: "Hardware, software + network support; staff training.",
   },
   {
     role: "Junior Software Engineer",
     where: "Freelancer.com · Jul 2021 – Feb 2022 · Remote",
     proof: "Web apps for clients.",
-  },
-  {
-    role: "AI Automation",
-    where: "Self-practice · Since 2025",
-    proof: "Workflows + automations for small businesses.",
   },
 ] as const;
 

@@ -1,0 +1,113 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 8017 >>
+stream
+BT /F2 25 Tf 0.05 0.05 0.05 rg 0 Tw 55 800 Td (MIKE WAITINDI) Tj ET
+BT /F1 12.5 Tf 0.3 0.3 0.3 rg 0 Tw 55 778 Td (Full-Stack Software Engineer  Connecting Dots in Tech) Tj ET
+BT /F1 9 Tf 0.4 0.4 0.4 rg 0 Tw 55 763 Td (Nairobi, Kenya Â· Remote) Tj ET
+BT /F1 9 Tf 0.4 0.4 0.4 rg 0 Tw 55 750.5 Td (mikegary201@gmail.com  Â·  +254 792 618 156  Â·  linkedin.com/in/mike-waitindi-654bb2344) Tj ET
+BT /F1 9 Tf 0.4 0.4 0.4 rg 0 Tw 55 738 Td (Portfolio: mikeships.vercel.app) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 724 m 540.28 724 l S Q
+BT /F2 11 Tf 0.05 0.05 0.05 rg 0 Tw 55 698 Td (PROFESSIONAL SUMMARY) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 694.5 m 540.28 694.5 l S Q
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 682 Td (Full-stack software engineer who connects dots across building, running and selling technology. Builds) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 669 Td (full-stack web, mobile and desktop apps for clients and integrates them with third-party payment) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 656 Td (systems (M-Pesa, Paystack). Uses AI and imaging technologies in the daily build workflow. IT) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 643 Td (professional with hands-on technical support experience - troubleshooting hardware, software and) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 630 Td (network systems to keep operations smooth. An outspoken communicator who explains complex technology) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 617 Td (simply; communication is treated as the ultimate skill. Currently venturing into marketing with AI -) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 604 Td (building apps and automations that are tested against one question: do they actually win customers?) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 591 Td (Shipped live products include a mobile-first tourism trip planner (KenyaTrace), an e-commerce) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 578 Td (storefront (GiGi Energy Drink) and a legal practice workspace concept (LegalFlow).) Tj ET
+BT /F2 11 Tf 0.05 0.05 0.05 rg 0 Tw 55 547 Td (ENGINEERING HIGHLIGHTS) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 543.5 m 540.28 543.5 l S Q
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 531 Td (Ships full-stack apps end to end: React + TypeScript frontends against typed Convex backend APIs,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 518 Td (with Git-to-Vercel deployment.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 530.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 505 Td (Integrates third-party payment systems into client apps - M-Pesa-first ordering and Paystack tips) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 492 Td (with server-side transaction verification and webhook reconciliation.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 504.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 479 Td (Builds and ships live products: KenyaTrace (kenyatrace.vercel.app), a list-first tourism trip) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 466 Td (planner built for 3G conditions; GiGi Energy Drink storefront (gigiflavours.vercel.app) with a) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 453 Td (shortened mobile checkout; LegalFlow (law-ten-iota.vercel.app), a matter-and-billing workspace for) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 440 Td (small law firms.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 478.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 427 Td (Uses AI and imaging technologies in the build workflow - sourced outputs held to manual review,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 414 Td (with evals and safe-fail patterns.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 426.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 401 Td (Quality in daily use: Playwright end-to-end suite covering routes, CTAs, dialogs, form validation) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 388 Td (and the 404 path; tsc typecheck gates; fixes traced to root cause in browser DevTools.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 400.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 375 Td (Marketing in progress: applying AI tooling to position, explain and sell shipped apps - testing) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 362 Td (whether products actually win customers, not just whether they run.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 374.5 Td (") Tj ET
+BT /F2 11 Tf 0.05 0.05 0.05 rg 0 Tw 55 331 Td (EXPERIENCE) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 327.5 m 540.28 327.5 l S Q
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 315 Td (Freelancer & Full-Stack Software Engineer - Self-employed, Nairobi / Remote (Feb 2025 - Present).) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 302 Td (Web, mobile and desktop apps for clients with third-party payments; currently venturing into) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 289 Td (marketing with AI.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 314.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 276 Td (ICT Intern - Council of Legal Education, Kenya (Jan 2024 - Feb 2025). Technical support and ICT) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 263 Td (operations for the council.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 275.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 250 Td (IT Clerk - IEBC, Kenya (Jul 2022 - Oct 2022). Hardware, software and network support; staff) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 237 Td (training.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 249.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 224 Td (Junior Software Engineer - Freelancer.com (Jul 2021 - Feb 2022). Web apps for clients.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 223.5 Td (") Tj ET
+BT /F2 11 Tf 0.05 0.05 0.05 rg 0 Tw 55 193 Td (KEY SKILLS) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 189.5 m 540.28 189.5 l S Q
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 177 Td (Engineering - TypeScript, React, Next.js, semantic HTML, CSS/Tailwind, REST-style API integration,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 164 Td (typed data contracts, responsive layouts.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 176.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 151 Td (Full-stack delivery - Convex APIs, third-party payment integration (M-Pesa / Paystack), mobile and) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 138 Td (desktop app builds, Git/GitHub, Vercel deployment.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 150.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 125 Td (IT & operations - technical support, hardware/software/network troubleshooting, device setup, staff) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 112 Td (training, smooth-systems operations.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 124.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 99 Td (AI + imaging - AI-assisted building with manual review, imaging technologies in the workflow,) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 86 Td (automation for small businesses.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 98.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 73 Td (Marketing & communication - explaining complex technology simply, customer-fit testing, AI-assisted) Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg -0.15 Tw 67 60 Td (marketing.) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 72.5 Td (") Tj ET
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 47 Td (Tools - Playwright, GA4, Git, Figma. Languages - English (fluent), Kiswahili (fluent).) Tj ET
+BT /F1 10.5 Tf 0.15 0.15 0.15 rg 0 Tw 58 46.5 Td (") Tj ET
+BT /F2 11 Tf 0.05 0.05 0.05 rg 0 Tw 55 16 Td (EDUCATION) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 12.5 m 540.28 12.5 l S Q
+BT /F1 9.5 Tf 0.15 0.15 0.15 rg 0 Tw 55 0 Td (Bachelor of Information Technology  South Eastern Kenya University (SEKU), Kitui, Kenya (20152020)) Tj ET
+q 0.8 w 0.1 0.1 0.1 RG 55 -35 m 540.28 -35 l S Q
+BT /F1 8.5 Tf 0.45 0.45 0.45 rg 0 Tw 55 -49 Td (Available for roles in Nairobi or remote. References available on request.) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000017 00000 n 
+0000000066 00000 n 
+0000000123 00000 n 
+0000000265 00000 n 
+0000000362 00000 n 
+0000000464 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+8536
+%%EOF

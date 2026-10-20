@@ -121,7 +121,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Software Developer & QA Engineer · ICT Officer · AI Automation`,
-  description: `Mike Waitindi, Nairobi: full-stack web apps, ICT support, QA automation. 3 live demos.`,
+  title: `Mike Waitindi — Connecting Dots in Tech · Full-Stack Software Engineer`,
+  description: `Mike Waitindi, Nairobi: full-stack web, mobile + desktop apps with payments, IT support, and marketing with AI. 3 live demos.`,
   canonical: SITE_URL,
 };

@@ -1,6 +1,6 @@
 # Mike Waitindi — Portfolio
 
-Portfolio for Mike Waitindi, a Nairobi-based software developer. It presents three deployed frontend product demos, the implementation decisions behind them, and direct contact and support options.
+Portfolio for Mike Waitindi, a Nairobi-based full-stack software engineer — "Connecting Dots in Tech." He builds web, mobile and desktop apps with third-party payments, keeps IT running, and is venturing into marketing with AI. The portfolio presents three deployed product demos, the decisions behind them, and direct contact and support options.
 
 **Live site:** [mikeships.vercel.app](https://mikeships.vercel.app)
 

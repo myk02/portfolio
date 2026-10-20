@@ -1,50 +1,58 @@
 export const positionTitle =
-  "Software Developer · ICT Officer · QA Engineer · AI Automation";
+  "Connecting Dots in Tech · Full-Stack Software Engineer";
 
 export const roleLine =
-  "Software Developer · ICT Officer · QA Engineer · AI Automation · Nairobi";
+  "Full-Stack Software Engineer · IT Support · AI + Imaging · Marketing · Nairobi";
 
-export const heroTitle = "Software Developer";
-
-export const heroPairing = "QA Engineer";
+export const heroTitle = "Connecting Dots in Tech";
 
 export const heroSubline =
-  "Full-stack web apps, IT support, and QA automation.";
+  "Full-stack software engineer — web, mobile + desktop apps, payments integration, IT support, and AI-powered marketing.";
 
 export const bioLine =
-  "Mike Waitindi, Nairobi — full-stack developer, ICT officer and QA engineer.";
+  "Mike Waitindi, Nairobi — full-stack software engineer. Builds web, mobile and desktop apps with payments integration, keeps IT running, and is venturing into marketing with AI.";
 
 export const services = [
   {
-    title: "Software Developer",
-    bracket: "Full-Stack Web App Developer",
-    skills: ["React + TypeScript", "APIs + Convex", "M-Pesa / Paystack"],
-    proof: "Freelance since 2021 · full-stack apps + payments.",
-  },
-  {
-    title: "ICT Officer",
-    bracket: "Support + Systems",
+    title: "Full-Stack Software Engineer",
+    bracket: "Web · Mobile · Desktop Apps",
     skills: [
-      "First-line support",
-      "Devices + networks",
-      "Records + access care",
+      "React + TypeScript",
+      "APIs + Convex",
+      "M-Pesa / Paystack",
+      "Mobility + desktop builds",
     ],
-    proof: "IEBC 2022 · hardware, software + network support.",
+    proof: "Freelancer — apps for clients, integrated with third-party payments.",
   },
   {
-    title: "QA Engineer",
-    bracket: "Test Automation",
+    title: "IT Professional",
+    bracket: "Support + Operations",
     skills: [
-      "Test cases + bug reports",
-      "Playwright e2e",
-      "Regression + UI checks",
+      "Technical support",
+      "Hardware, software + networks",
+      "Troubleshooting",
+      "Smooth daily operations",
     ],
-    proof: "Manual + automated QA on every release.",
+    proof: "ICT intern + IT clerk background — keeps systems running in any setting.",
   },
   {
-    title: "AI Automation",
-    bracket: "Checked AI Tools",
-    skills: ["Sourced outputs", "Manual review", "Evals + safe fail"],
-    proof: "Since 2025 · workflows for small businesses.",
+    title: "AI + Imaging Workflow",
+    bracket: "AI in the Build",
+    skills: [
+      "AI-assisted building",
+      "Imaging technologies",
+      "Manual review",
+    ],
+    proof: "AI and imaging tools woven into how apps get designed, built and shipped.",
+  },
+  {
+    title: "Marketing + Communication",
+    bracket: "Say It Simply, Sell It Clearly",
+    skills: [
+      "Explaining complex tech simply",
+      "Marketing with AI",
+      "Customer-fit tests",
+    ],
+    proof: "Communication is the ultimate skill — apps + automation that prove they win customers.",
   },
 ] as const;

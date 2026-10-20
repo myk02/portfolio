@@ -48,7 +48,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            QA Engineer · ICT Officer · AI Automation · Full-Stack
+            Full-Stack · Apps + Payments · IT Support · AI + Imaging · Marketing
           </motion.p>
           <motion.div
             className="mt-7 flex flex-wrap justify-center items-center gap-2.5"

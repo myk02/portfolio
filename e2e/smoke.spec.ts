@@ -11,11 +11,13 @@ test.describe("home page", () => {
 
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Software Developer"
+      "Connecting Dots in Tech"
     );
     await expect(
       page
-        .getByText(/Full-stack web apps, IT support, and QA automation/)
+        .getByText(
+          /Full-stack software engineer — web, mobile \+ desktop apps, payments integration, IT support, and AI-powered marketing/
+        )
         .first()
     ).toBeVisible();
 
@@ -36,9 +38,14 @@ test.describe("home page", () => {
       0
     );
 
-    // QA Engineer is a headline role: hero h1 names it, #skills shows the card
+    // Headline roles live in #skills: full-stack engineering + IT support cards
     await expect(
-      page.locator("#skills").getByRole("heading", { name: "QA Engineer" })
+      page
+        .locator("#skills")
+        .getByRole("heading", { name: "Full-Stack Software Engineer" })
+    ).toBeVisible();
+    await expect(
+      page.locator("#skills").getByRole("heading", { name: "IT Professional" })
     ).toBeVisible();
 
     await expect(
@@ -141,7 +148,7 @@ test.describe("removed case-study pages", () => {
 
   test("document title reflects positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Software Developer.*QA Engineer/);
+    await expect(page).toHaveTitle(/Connecting Dots in Tech/);
   });
 });
 
