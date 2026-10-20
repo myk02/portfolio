@@ -9,7 +9,6 @@ import {
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { CONTACT } from "@/lib/site";
-import { bioLine } from "@/data/siteContent";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Surface } from "@/components/ui/section";
@@ -130,8 +129,8 @@ export default function Contact() {
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
                     Contact & profiles
                   </p>
-                  <p className="text-[0.82rem] text-muted-foreground leading-snug">
-                    {bioLine}
+                  <p className="text-[0.82rem] text-foreground font-medium leading-snug">
+                    Nairobi · Replies within 24h
                   </p>
                   <div className="space-y-2.5">
                     <a

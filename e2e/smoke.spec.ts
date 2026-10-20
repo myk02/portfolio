@@ -16,15 +16,15 @@ test.describe("home page", () => {
     await expect(
       page
         .getByText(
-          /Full-stack software engineer — web, mobile \+ desktop apps, payments integration, IT support, and AI-powered marketing/
+          /Full-stack software engineer — apps, payments, and marketing that wins customers/
         )
         .first()
     ).toBeVisible();
 
-    // Hero: hire CTAs + coffee (footer keeps a second instance)
+    // Hero: exactly two CTAs — coffee lives in the footer only
     await expect(
       page.locator("#home").getByRole("button", { name: /buy me a coffee/i })
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(
       page.locator("#home").getByRole("button", { name: "View live work" })
     ).toBeVisible();

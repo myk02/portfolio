@@ -1,7 +1,7 @@
 import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { Reveal } from "@/components/Reveal";
-import { Chip, ChipAccent } from "@/components/ui/kicker";
+import { ChipAccent } from "@/components/ui/kicker";
 import { Surface } from "@/components/ui/section";
 import StatusBadge from "@/components/engineering/StatusBadge";
 
@@ -37,7 +37,7 @@ export default function ProjectCard({
           <StatusBadge />
         </div>
       </a>
-        <div className="p-4 space-y-2 flex flex-col flex-1">
+        <div className="p-4.5 space-y-2.5 flex flex-col flex-1">
         <div className="flex items-start gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
@@ -58,7 +58,6 @@ export default function ProjectCard({
 
         <div className="flex flex-wrap gap-1.5">
           <ChipAccent>{study.tileBadge}</ChipAccent>
-          <Chip>{study.role}</Chip>
         </div>
 
         <div className="pt-2.5 mt-auto border-t border-border flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[0.8125rem] font-medium">

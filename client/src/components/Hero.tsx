@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { heroSubline, heroTitle } from "@/data/siteContent";
 import { CONTACT } from "@/lib/site";
-import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface HeroProps {
   onCtaClick: (id: string) => void;
 }
 
-/** Name, two headline roles, everything else in one mono line. No filler. */
+/** Name, one concise line, two CTAs. No filler. */
 export default function Hero({ onCtaClick }: HeroProps) {
   return (
     <section id="home" className="relative bg-secondary border-b border-border">
@@ -16,8 +15,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
         className="hero-grid absolute inset-0 pointer-events-none"
         aria-hidden
       />
-      <div className="container relative py-10 md:py-14">
-        <div className="max-w-2xl mx-auto text-center">
+      <div className="container relative pt-14 pb-16 md:pt-20 md:pb-24">
+        <div className="max-w-xl mx-auto text-center">
           <motion.p
             className="section-label justify-center"
             initial={{ opacity: 0, y: 12 }}
@@ -42,16 +41,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
           >
             {heroSubline}
           </motion.p>
-          <motion.p
-            className="mt-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/80"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            Full-Stack · Apps + Payments · IT Support · AI + Imaging · Marketing
-          </motion.p>
           <motion.div
-            className="mt-7 flex flex-wrap justify-center items-center gap-2.5"
+            className="mt-8 flex flex-wrap justify-center items-center gap-2.5"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
@@ -64,9 +55,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
               View live work <ArrowDown size={14} />
             </button>
             <a href={CONTACT.emailHref} className="btn btn-secondary gap-2">
-              Work with me <ArrowUpRight size={14} />
+              Work with me
             </a>
-            <BuyMeCoffee />
           </motion.div>
         </div>
       </div>

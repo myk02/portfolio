@@ -13,7 +13,7 @@ export default function Work() {
     <div className="min-h-screen bg-background">
       <SiteHead
         title="Selected Projects — Mike Waitindi"
-        description="Three deployed frontend product demos by Mike Waitindi, a Nairobi-based software developer."
+        description="Deployed product demos by Mike Waitindi."
         canonical="/work"
         type="website"
       />

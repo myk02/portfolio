@@ -6,7 +6,7 @@ import { services } from "@/data/siteContent";
 
 const ROLE_ICONS = [Code2, MonitorCog, ShieldCheck, Sparkles] as const;
 
-/** Why I qualify: 4 roles, skills as chips, one proof line each. */
+/** Four roles, skills as chips, one short line each. Minimal. */
 export default function Services() {
   return (
     <section
@@ -16,18 +16,18 @@ export default function Services() {
     >
       <div className="container">
         <Reveal className="section-head">
-          <SectionLabel>Why I qualify</SectionLabel>
+          <SectionLabel>Skills</SectionLabel>
           <h2 id="skills-heading" className="heading-section text-foreground">
             What I do
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">
           {services.map((service, i) => {
             const Icon = ROLE_ICONS[i % ROLE_ICONS.length];
             return (
               <Reveal key={service.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <Card className="p-3.5 h-full flex flex-col">
+                <Card className="p-4.5 h-full flex flex-col">
                   <div className="flex items-center gap-2.5">
                     <span
                       className="w-7 h-7 grid place-items-center border border-border bg-secondary text-foreground shrink-0"
@@ -43,7 +43,7 @@ export default function Services() {
                     {service.bracket}
                   </p>
                   <ul
-                    className="mt-2.5 flex flex-wrap gap-1.5 list-none p-0"
+                    className="mt-3 flex flex-wrap gap-1.5 list-none p-0"
                     aria-label={`${service.title} skills`}
                   >
                     {service.skills.map(s => (
@@ -55,7 +55,7 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <p className="text-[0.78rem] text-muted-foreground leading-snug mt-auto pt-2.5">
+                  <p className="text-[0.8rem] text-muted-foreground leading-snug mt-auto pt-3.5 border-t border-border/60">
                     {service.proof}
                   </p>
                 </Card>

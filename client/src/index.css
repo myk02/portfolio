@@ -74,8 +74,8 @@
   --accent-foreground: #0a0a0a;
   --destructive: #c81e1e;
   --destructive-foreground: #f2ede6;
-  --border: rgba(10, 10, 10, 0.12);
-  --input: rgba(10, 10, 10, 0.12);
+  --border: rgba(10, 10, 10, 0.11);
+  --input: rgba(10, 10, 10, 0.11);
   --ring: #e8ff47;
   --sidebar: #f2ede6;
   --sidebar-foreground: #0a0a0a;
@@ -111,8 +111,8 @@
   --accent-foreground: #141310;
   --destructive: #ef4444;
   --destructive-foreground: #f2ede6;
-  --border: rgba(242, 237, 230, 0.14);
-  --input: rgba(242, 237, 230, 0.14);
+  --border: rgba(242, 237, 230, 0.13);
+  --input: rgba(242, 237, 230, 0.13);
   --ring: #e8ff47;
   --sidebar: #1b1917;
   --sidebar-foreground: #f2ede6;
@@ -228,8 +228,19 @@
 }
 
 .section-pad {
-  padding-top: clamp(2.5rem, 4.5vw, 3.5rem);
-  padding-bottom: clamp(2.5rem, 4.5vw, 3.5rem);
+  padding-top: clamp(3.25rem, 5.5vw, 5rem);
+  padding-bottom: clamp(3.25rem, 5.5vw, 5rem);
+}
+
+.section-note {
+  text-underline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .section-head {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .section-intro {
@@ -336,12 +347,12 @@
 
 .btn {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   line-height: 1.4;
-  padding: 0.5rem 1rem;
-  min-height: 40px;
+  padding: 0.6rem 1.2rem;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -512,6 +523,11 @@ section[id] {
 }
 .card-lift:hover {
   transform: translateY(-4px);
+}
+
+/* Image treatment: cards feel editorial, screenshots sit in a soft frame */
+#work img {
+  filter: saturate(0.96) contrast(1.02);
 }
 
 .live-dot {
