@@ -1,12 +1,12 @@
-import { Code2, MonitorCog, ShieldCheck, Sparkles } from "lucide-react";
+import { Code2, MonitorCog, Cpu, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Code2, MonitorCog, ShieldCheck, Sparkles] as const;
+const ROLE_ICONS = [Cpu, Sparkles, Code2, MonitorCog] as const;
 
-/** Four roles, skills as chips, one short line each. Minimal. */
+/** Four disciplines, skills as chips, one tight proof line each. */
 export default function Services() {
   return (
     <section
@@ -16,7 +16,7 @@ export default function Services() {
     >
       <div className="container">
         <Reveal className="section-head">
-          <SectionLabel>Skills</SectionLabel>
+          <SectionLabel>Capabilities</SectionLabel>
           <h2 id="skills-heading" className="heading-section text-foreground">
             What I do
           </h2>

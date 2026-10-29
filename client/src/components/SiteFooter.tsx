@@ -1,7 +1,12 @@
-import { Github, Linkedin, Mail } from "lucide-react";
 import { CONTACT } from "@/lib/site";
 import { positionTitle } from "@/data/siteContent";
 import BuyMeCoffee from "@/components/BuyMeCoffee";
+import {
+  TikTokBrandIcon,
+  LinkedInBrandIcon,
+  GitHubBrandIcon,
+  GmailBrandIcon,
+} from "@/components/BrandIcons";
 
 export default function SiteFooter() {
   return (
@@ -17,39 +22,61 @@ export default function SiteFooter() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-          <nav aria-label="Footer links" className="flex items-center gap-4">
+          <nav aria-label="Footer links" className="flex items-center gap-3">
+            <a
+              href={CONTACT.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok @bytedefend"
+              title="TikTok @bytedefend"
+              className="p-1.5 rounded transition-transform hover:scale-110"
+            >
+              <TikTokBrandIcon size={18} />
+            </a>
             <a
               href={CONTACT.emailHref}
               aria-label="Email"
-              className="text-background/65 hover:text-accent"
+              title="Email Mike"
+              className="p-1.5 rounded transition-transform hover:scale-110"
             >
-              <Mail size={17} />
+              <GmailBrandIcon size={18} />
             </a>
             <a
               href={CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="text-background/65 hover:text-accent"
+              title="GitHub profile"
+              className="p-1.5 rounded transition-transform hover:scale-110"
             >
-              <Github size={17} />
+              <GitHubBrandIcon size={18} />
             </a>
             <a
               href={CONTACT.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="text-background/65 hover:text-accent"
+              title="LinkedIn profile"
+              className="p-1.5 rounded transition-transform hover:scale-110"
             >
-              <Linkedin size={17} />
+              <LinkedInBrandIcon size={18} />
             </a>
           </nav>
           <BuyMeCoffee buttonClassName="bg-accent text-accent-foreground border border-accent hover:bg-background hover:text-foreground hover:border-background text-xs px-3 py-2" />
         </div>
       </div>
-      <div className="container pb-6">
-        <p className="text-xs text-background/50">
-          © {new Date().getFullYear()} · Built in Nairobi
+      <div className="container pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-background/50">
+        <p>© {new Date().getFullYear()} · Built in Nairobi</p>
+        <p className="font-mono text-[11px]">
+          Bytedefend:{" "}
+          <a
+            href={CONTACT.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline-offset-4 hover:underline"
+          >
+            tiktok.com/@bytedefend
+          </a>
         </p>
       </div>
     </footer>

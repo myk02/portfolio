@@ -1,9 +1,7 @@
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { Reveal } from "@/components/Reveal";
-import { ChipAccent } from "@/components/ui/kicker";
 import { Surface } from "@/components/ui/section";
-import StatusBadge from "@/components/engineering/StatusBadge";
 
 export default function ProjectCard({
   study,
@@ -18,72 +16,44 @@ export default function ProjectCard({
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity"
         aria-hidden
       />
-      <a
-        href={study.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-        aria-label={`${study.name} — open demo (opens in a new tab)`}
-      >
-        <img
-          src={study.tileShot}
-          alt={study.tileShotAlt}
-          loading={index === 0 ? "eager" : "lazy"}
-          fetchPriority={index === 0 ? "high" : "auto"}
-          decoding="async"
-          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-        />
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-          <StatusBadge />
-        </div>
-      </a>
-        <div className="p-4.5 space-y-2.5 flex flex-col flex-1">
-        <div className="flex items-start gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono font-bold tracking-widest px-1.5 py-1 bg-foreground text-background">
-              0{index + 1}
-            </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-              {study.timeline}
-            </span>
-          </div>
-        </div>
-
+      {study.liveUrl && (
+        <a
+          href={study.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+          aria-label={`${study.name} — open demo (opens in a new tab)`}
+        >
+          <img
+            src={study.tileShot}
+            alt={study.tileShotAlt}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : "auto"}
+            decoding="async"
+            className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          />
+        </a>
+      )}
+      <div className="p-4.5 flex flex-col flex-1">
         <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
           {study.name}
         </h3>
-        <p className="text-[0.8125rem] text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="mt-2 text-[0.85rem] text-muted-foreground leading-relaxed">
           {study.outcomeTitle}
         </p>
 
-        <div className="flex flex-wrap gap-1.5">
-          <ChipAccent>{study.tileBadge}</ChipAccent>
-        </div>
-
-        <div className="pt-2.5 mt-auto border-t border-border flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[0.8125rem] font-medium">
-          {study.liveUrl && (
+        {study.liveUrl && (
+          <div className="pt-3.5 mt-auto border-t border-border">
             <a
               href={study.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-foreground underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
             >
-              <ExternalLink size={13} aria-hidden />
-              Open demo
+              Visit site <ExternalLink size={13} aria-hidden />
             </a>
-          )}
-          {study.repoUrl && (
-            <a
-              href={study.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground underline-offset-4 hover:underline"
-            >
-              <Github size={13} aria-hidden />
-              Source
-            </a>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Surface>
   );

@@ -4,7 +4,6 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useRoute, useLocation, Link } from "wouter";
 import { useTheme } from "@/contexts/ThemeContext";
 import { handleSiteNav } from "@/lib/navigation";
-import ScrollProgress from "@/components/ScrollProgress";
 import Logo from "@/components/Logo";
 
 interface SiteHeaderProps {
@@ -94,43 +93,46 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
   };
 
   const navLinks = [
-    { id: "work", label: "Proof" },
-    { id: "skills", label: "Roles" },
+    { id: "work", label: "Work" },
+    { id: "skills", label: "Capabilities" },
     { id: "experience", label: "Experience" },
   ];
 
   return (
-    <>
-      <ScrollProgress />
-      <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="container h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            onClick={e => {
-              if (isHome) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-            }}
-            aria-label="Mike Waitindi — home"
-            className="flex items-center gap-2.5 group"
-          >
-            <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-              <Logo size={20} />
-            </span>
-            <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground hidden sm:inline group-hover:opacity-70 transition-opacity">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container h-16 flex items-center justify-between">
+        <Link
+          href="/"
+          onClick={e => {
+            if (isHome) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          aria-label="Mike Waitindi — home"
+          className="flex items-center gap-2.5 group"
+        >
+          <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+            <Logo size={20} />
+          </span>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground group-hover:opacity-70 transition-opacity">
               Mike Waitindi
             </span>
-          </Link>
+            <span className="hidden lg:inline text-[10px] font-mono uppercase tracking-widest text-muted-foreground border-l border-border pl-2">
+              AI Engineer · Cybersecurity · Automation
+            </span>
+          </div>
+        </Link>
 
           <nav
-            className="hidden md:flex items-center gap-6 xl:gap-8"
+            className="hidden md:flex items-center gap-6 lg:gap-8"
             aria-label="Primary"
           >
             {navLinks.map(link => (
@@ -218,6 +220,5 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           )}
         </AnimatePresence>
       </header>
-    </>
-  );
-}
+    );
+  }

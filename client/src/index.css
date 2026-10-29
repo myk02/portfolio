@@ -3,12 +3,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Anthropic-style serif: custom Anthropic Serif → Tiempos/Copernicus → Fraunces (closest free match) → Source Serif 4 → Georgia */
+  /* Anthropic-style serif stack — unchanged from original */
   --font-sans:
-    "Anthropic Serif", "Tiempos Text", "Tiempos Headline", "Copernicus",
     "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-display:
-    "Anthropic Serif", "Tiempos Headline", "Tiempos Text", "Copernicus",
     "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   --radius-sm: calc(var(--radius) - 4px);
@@ -49,6 +47,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ---- LIGHT THEME (original cream palette) ---- */
 :root {
   --primary: #0a0a0a;
   --primary-foreground: #f2ede6;
@@ -87,6 +86,7 @@
   --band: #eae3d8;
 }
 
+/* ---- DARK THEME (original near-black) ---- */
 .dark {
   --primary: #f2ede6;
   --primary-foreground: #141310;
@@ -234,6 +234,12 @@
 
 .section-note {
   text-underline-offset: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
 @media (min-width: 768px) {
@@ -253,8 +259,6 @@
   justify-content: center;
 }
 
-/* Ruled heading row: kicker on the left, heading on the right. Replaces the
-   tall centred label/stack pattern with one compact band per section. */
 .section-head {
   display: flex;
   flex-wrap: wrap;
@@ -279,7 +283,7 @@
   color: var(--muted-foreground);
 }
 
-/* Faint dot grid behind the hero — texture without weight. */
+/* Faint dot grid behind the hero */
 .hero-grid {
   background-image: radial-gradient(
     circle at 1px 1px,
@@ -345,6 +349,7 @@
   text-transform: uppercase;
 }
 
+/* ---- Buttons (original) ---- */
 .btn {
   font-family: var(--font-sans);
   font-size: 0.82rem;
@@ -405,7 +410,7 @@
   color: var(--accent);
 }
 
-/* ——— Resume-grade readability polish (no layout / behaviour change) ——— */
+/* Resume-grade readability */
 @layer base {
   img {
     text-rendering: auto;
@@ -418,7 +423,6 @@
 }
 
 @layer components {
-  /* Soften the brutalist cards just enough to read as premium print */
   .card-lift {
     box-shadow: 0 1px 0 rgb(0 0 0 / 0.04);
   }
@@ -427,22 +431,7 @@
   }
 }
 
-.hero-kicker {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: heroIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@keyframes heroIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ——— Scroll-reveal system (non-motion fallback for raw [data-reveal]) ———
-   Main Reveal component animates with framer-motion whileInView:
-   32px rise + 0.75s expo-out, staggered 100ms. This CSS mirrors
-   that feel for hand-written markup so both paths look identical. */
+/* Scroll-reveal */
 [data-reveal] {
   opacity: 1;
   transform: none;
@@ -489,7 +478,7 @@ html.js [data-reveal][data-reveal="right"].in-view {
   }
 }
 
-/* ——— Scroll chrome: progress bar, section rhythm, card lift ——— */
+/* Scroll progress bar */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -507,9 +496,6 @@ section[id] {
   contain-intrinsic-size: auto 600px;
 }
 
-/* Overlays must never be contained by section rendering optimisations.
-   BuyMeCoffee now portals to document.body, but this guarantees any
-   fixed dialog stays bound to the viewport, not a section. */
 [role="dialog"] {
   content-visibility: visible;
   contain: none;
@@ -525,11 +511,11 @@ section[id] {
   transform: translateY(-4px);
 }
 
-/* Image treatment: cards feel editorial, screenshots sit in a soft frame */
 #work img {
   filter: saturate(0.96) contrast(1.02);
 }
 
+/* Live dot */
 .live-dot {
   width: 8px;
   height: 8px;
@@ -537,10 +523,10 @@ section[id] {
   background: var(--live);
   position: relative;
   flex-shrink: 0;
+  display: inline-block;
 }
 
-/* Lightbox is a deliberate always-dark viewer (works in both themes).
-   All hex lives here — no literals in Lightbox.tsx. */
+/* Lightbox */
 .lightbox {
   --lightbox-bg: #0b0a08;
   --lightbox-fg: #f2ede6;

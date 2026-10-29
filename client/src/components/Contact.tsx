@@ -1,17 +1,18 @@
 import { useState } from "react";
-import {
-  CheckCircle2,
-  Linkedin,
-  Mail,
-  MessageCircle,
-  Github,
-} from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { CONTACT } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Surface } from "@/components/ui/section";
+import {
+  TikTokBrandIcon,
+  LinkedInBrandIcon,
+  GitHubBrandIcon,
+  GmailBrandIcon,
+  WhatsAppBrandIcon,
+} from "@/components/BrandIcons";
 
 const inputClass =
   "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/50 outline-none transition-colors focus:border-foreground focus:bg-secondary/20";
@@ -116,7 +117,7 @@ export default function Contact() {
           <Reveal className="section-head">
             <SectionLabel>Contact</SectionLabel>
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h2 className="heading-section text-foreground">Let’s talk</h2>
+              <h2 className="heading-section text-foreground">Let's talk</h2>
               <p className="section-note">Replies in 24h · Mon–Sat, EAT</p>
             </div>
           </Reveal>
@@ -127,20 +128,31 @@ export default function Contact() {
               <Reveal delay={1}>
                 <Surface className="p-4 space-y-3">
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-                    Contact & profiles
+                    Contact &amp; profiles
                   </p>
                   <p className="text-[0.82rem] text-foreground font-medium leading-snug">
                     Nairobi · Replies within 24h
                   </p>
                   <div className="space-y-2.5">
                     <a
+                      href={CONTACT.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
+                    >
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                        <TikTokBrandIcon size={16} />
+                      </span>
+                      <span>TikTok · @bytedefend</span>
+                    </a>
+                    <a
                       href={CONTACT.emailHref}
                       className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
-                        <Mail size={14} />
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                        <GmailBrandIcon size={16} />
                       </span>
-                      {CONTACT.email}
+                      <span>{CONTACT.email}</span>
                     </a>
                     <a
                       href={CONTACT.whatsapp}
@@ -148,32 +160,32 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary group-hover:border-foreground transition-colors">
-                        <MessageCircle size={14} />
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                        <WhatsAppBrandIcon size={16} />
                       </span>
-                      WhatsApp · {CONTACT.phone}
+                      <span>WhatsApp · {CONTACT.phone}</span>
                     </a>
                     <a
                       href={CONTACT.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary">
-                        <Linkedin size={14} aria-hidden />
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                        <LinkedInBrandIcon size={16} />
                       </span>
-                      linkedin.com/in/mikeships
+                      <span>linkedin.com/in/mikeships</span>
                     </a>
                     <a
                       href={CONTACT.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-secondary">
-                        <Github size={14} aria-hidden />
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                        <GitHubBrandIcon size={16} />
                       </span>
-                      github.com/myk02
+                      <span>github.com/myk02</span>
                     </a>
                   </div>
                 </Surface>
@@ -207,13 +219,11 @@ export default function Contact() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
                     <label htmlFor="name" className={labelClass}>
                       Name{" "}
-                      <span aria-hidden className="text-destructive">
-                        *
-                      </span>
+                      <span aria-hidden className="text-destructive">*</span>
                     </label>
                     <input
                       type="text"
@@ -224,10 +234,6 @@ export default function Contact() {
                       onChange={e => setName(e.target.value)}
                       autoComplete="name"
                       aria-required="true"
-                      aria-invalid={Boolean(error && !name.trim())}
-                      aria-describedby={
-                        error ? "contact-form-error" : undefined
-                      }
                       className={inputClass}
                       placeholder="Your full name"
                     />
@@ -235,9 +241,7 @@ export default function Contact() {
                   <div>
                     <label htmlFor="email" className={labelClass}>
                       Email{" "}
-                      <span aria-hidden className="text-destructive">
-                        *
-                      </span>
+                      <span aria-hidden className="text-destructive">*</span>
                     </label>
                     <input
                       type="email"
@@ -248,13 +252,6 @@ export default function Contact() {
                       onChange={e => setEmail(e.target.value)}
                       autoComplete="email"
                       aria-required="true"
-                      aria-invalid={Boolean(
-                        error &&
-                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
-                      )}
-                      aria-describedby={
-                        error ? "contact-form-error" : undefined
-                      }
                       className={inputClass}
                       placeholder="you@company.com"
                     />
@@ -264,9 +261,7 @@ export default function Contact() {
                 <div>
                   <label htmlFor="message" className={labelClass}>
                     Message{" "}
-                    <span aria-hidden className="text-destructive">
-                      *
-                    </span>
+                    <span aria-hidden className="text-destructive">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -276,8 +271,6 @@ export default function Contact() {
                     onChange={e => setMessage(e.target.value)}
                     rows={4}
                     aria-required="true"
-                    aria-invalid={Boolean(error && !message.trim())}
-                    aria-describedby={error ? "contact-form-error" : undefined}
                     className={`${inputClass} min-h-28 resize-none py-3`}
                     placeholder="Project, goals, timeline..."
                   />

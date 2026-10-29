@@ -220,7 +220,7 @@ export default function BuyMeCoffee({
                             setPreset(null);
                           }}
                           className={cn(
-                            "px-3 py-2 text-sm font-medium border transition-colors",
+                            "px-3 py-2 text-sm font-medium rounded-lg border transition-colors",
                             currency === c
                               ? "bg-foreground text-background border-foreground"
                               : "border-border text-muted-foreground hover:text-foreground"
@@ -245,7 +245,7 @@ export default function BuyMeCoffee({
                               setCustom("");
                             }}
                             className={cn(
-                              "px-3 py-2.5 text-sm font-medium border transition-colors",
+                              "px-3 py-2.5 text-sm font-medium rounded-lg border transition-colors",
                               preset === value
                                 ? "bg-foreground text-background border-foreground"
                                 : "border-border text-foreground hover:border-foreground"

@@ -18,7 +18,6 @@ export default function WorkSection() {
           <SectionLabel>Proof · 0{liveStudies.length} live demos</SectionLabel>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 className="heading-section text-foreground">Selected work</h2>
-            <p className="section-note">Each card opens the live site</p>
           </div>
         </Reveal>
 

@@ -1,48 +1,67 @@
 export const positionTitle =
-  "Connecting Dots in Tech · Full-Stack Software Engineer";
+  "Founder, Bytedefend · AI Engineer · Marketing Lead · Payments";
 
 export const roleLine =
-  "Full-Stack Software Engineer · IT Support · AI + Imaging · Marketing · Nairobi";
+  "Founder, Bytedefend · AI Engineer · Cybersecurity Education · Payments · Nairobi";
 
-export const heroTitle = "Connecting Dots in Tech";
+export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Full-stack software engineer — apps, payments, and marketing that wins customers.";
+  "Founder at Bytedefend. Teaching cybersecurity via explainer videos. Building AI automations and payment flows.";
 
 export const bioLine =
-  "Mike Waitindi, Nairobi — full-stack software engineer. Builds web, mobile and desktop apps with payments integration, keeps IT running, and is venturing into marketing with AI.";
+  "Mike Waitindi — Nairobi, Kenya. Founder at Bytedefend Labs. Creating explainer videos to expose scammer and hacker tactics, while building AI workflows and FinTech payment flows.";
+
+export const keyMetrics = [
+  { value: "Bytedefend", label: "Security Videos", note: "TikTok @bytedefend" },
+  { value: "Beg → Expert", label: "Cyber Course", note: "Explainer Series" },
+  { value: "AI + Flows", label: "Automations", note: "Workflows & APIs" },
+  { value: "FinTech", label: "Payments", note: "M-Pesa / Paystack" },
+] as const;
 
 export const services = [
   {
-    title: "Full-Stack Software Engineer",
-    bracket: "Web · Mobile · Desktop",
-    skills: ["React + TypeScript", "APIs + Convex", "M-Pesa / Paystack"],
-    proof: "Apps for clients, payments included.",
-  },
-  {
-    title: "IT Professional",
-    bracket: "Support · Operations",
+    title: "Cybersecurity Education",
+    bracket: "Bytedefend · Beginner to Expert",
     skills: [
-      "Technical support",
-      "Hardware, software + networks",
-      "Troubleshooting",
+      "Hacker & Scammer Tactics",
+      "Explainer Videos",
+      "Cybersecurity Course",
+      "Defense & Prevention",
     ],
-    proof: "Systems kept running smoothly.",
+    proof: "Simple video guides helping users protect themselves against real-world bad actors.",
   },
   {
-    title: "AI + Imaging",
-    bracket: "Workflow ingredients",
-    skills: ["AI-assisted builds", "Imaging technologies", "Manual review"],
-    proof: "Woven into how apps ship.",
-  },
-  {
-    title: "Marketing + Communication",
-    bracket: "Explain simply · Sell clearly",
+    title: "AI & Emerging Tech",
+    bracket: "Automation · LLMs · Workflows",
     skills: [
-      "Complex tech, explained",
-      "Marketing with AI",
-      "Customer-fit tests",
+      "AI Automations",
+      "LLM Pipelines",
+      "Agent Workflows",
+      "Prompt Guardrails",
     ],
-    proof: "Built to actually win customers.",
+    proof: "Practical AI workflows and automations embedded directly into operations.",
+  },
+  {
+    title: "FinTech & Payments",
+    bracket: "M-Pesa · Paystack · Gateways",
+    skills: [
+      "Payments Integration",
+      "M-Pesa STK / APIs",
+      "Paystack Checkout",
+      "Checkout Optimization",
+    ],
+    proof: "Frictionless checkout experiences tailored to African and global payment habits.",
+  },
+  {
+    title: "Marketing & Strategy",
+    bracket: "Leads · Video · Growth",
+    skills: [
+      "Explainer Content",
+      "Product Selling Points",
+      "Tech Communication",
+      "Customer Conversion",
+    ],
+    proof: "Designing content and marketing funnels that educate and convert.",
   },
 ] as const;

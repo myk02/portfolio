@@ -13,7 +13,7 @@ export default function Work() {
     <div className="min-h-screen bg-background">
       <SiteHead
         title="Selected Projects — Mike Waitindi"
-        description="Deployed product demos by Mike Waitindi."
+        description="Deployed web, AI and automation applications by Mike Waitindi."
         canonical="/work"
         type="website"
       />
@@ -37,7 +37,6 @@ export default function Work() {
               <h1 className="heading-section text-foreground">
                 Selected projects
               </h1>
-              <p className="section-note">Each card opens the live site</p>
             </div>
           </div>
 
