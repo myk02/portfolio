@@ -143,7 +143,7 @@ export default function Contact() {
                       <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
                         <TikTokBrandIcon size={16} />
                       </span>
-                      <span>TikTok · @bytedefend</span>
+                      <span>TikTok · @aiwithmike1</span>
                     </a>
                     <a
                       href={CONTACT.emailHref}

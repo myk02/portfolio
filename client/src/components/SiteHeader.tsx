@@ -126,7 +126,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               Mike Waitindi
             </span>
             <span className="hidden lg:inline text-[10px] font-mono uppercase tracking-widest text-muted-foreground border-l border-border pl-2">
-              AI Engineer · Cybersecurity · Automation
+              Software Developer · Cybersecurity · Automation
             </span>
           </div>
         </Link>

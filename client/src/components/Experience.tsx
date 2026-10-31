@@ -6,11 +6,11 @@ import { CONTACT } from "@/lib/site";
 const ROWS = [
   {
     role: "Founder",
-    where: "Bytedefend Â· Oct 2026 â€“ Present Â· Remote",
+    where: "AI with Mike · Oct 2026 – Present · Remote",
     proof:
-      "Teaching cybersecurity from beginner to expert via explainer videos. Exposing hacker and scammer methods to protect users and businesses.",
+      "Teaching cybersecurity from beginner to expert via explainer videos on AI with Mike. Exposing hacker and scammer methods to protect users and businesses.",
     link: CONTACT.tiktok,
-    linkLabel: "TikTok @bytedefend",
+    linkLabel: "TikTok @aiwithmike1",
   },
   {
     role: "Software Developer",

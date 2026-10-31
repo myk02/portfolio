@@ -121,7 +121,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — AI Engineer · Marketing Lead · Cybersecurity`,
-  description: `Mike Waitindi, Nairobi: Founder of Bytedefend Labs. AI integrations, automations, payments architecture, and cybersecurity education.`,
+  title: `Mike Waitindi — Software Developer · Marketing Lead · Cybersecurity`,
+  description: `Mike Waitindi, Nairobi: Founder & Software Developer. AI integrations, automations, payments architecture, and cybersecurity education.`,
   canonical: SITE_URL,
 };

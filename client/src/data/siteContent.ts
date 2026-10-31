@@ -1,19 +1,19 @@
 export const positionTitle =
-  "Founder, Bytedefend · AI Engineer · Marketing Lead · Payments";
+  "Founder · Software Developer · Marketing Lead · Payments";
 
 export const roleLine =
-  "Founder, Bytedefend · AI Engineer · Cybersecurity Education · Payments · Nairobi";
+  "Founder · Software Developer · Cybersecurity Education · Payments · Nairobi";
 
 export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Founder at Bytedefend. Teaching cybersecurity via explainer videos. Building AI automations and payment flows.";
+  "Mike — Founder & Software Developer. Teaching cybersecurity via explainer videos on AI with Mike. Building AI automations and payment flows.";
 
 export const bioLine =
-  "Mike Waitindi — Nairobi, Kenya. Founder at Bytedefend Labs. Creating explainer videos to expose scammer and hacker tactics, while building AI workflows and FinTech payment flows.";
+  "Mike Waitindi — Nairobi, Kenya. Founder & Software Developer. Creating explainer videos on TikTok @aiwithmike1 to expose scammer and hacker tactics, while building AI workflows and FinTech payment flows.";
 
 export const keyMetrics = [
-  { value: "Bytedefend", label: "Security Videos", note: "TikTok @bytedefend" },
+  { value: "AI with Mike", label: "Security Videos", note: "TikTok @aiwithmike1" },
   { value: "Beg → Expert", label: "Cyber Course", note: "Explainer Series" },
   { value: "AI + Flows", label: "Automations", note: "Workflows & APIs" },
   { value: "FinTech", label: "Payments", note: "M-Pesa / Paystack" },
@@ -22,7 +22,7 @@ export const keyMetrics = [
 export const services = [
   {
     title: "Cybersecurity Education",
-    bracket: "Bytedefend · Beginner to Expert",
+    bracket: "AI with Mike · Beginner to Expert",
     skills: [
       "Hacker & Scammer Tactics",
       "Explainer Videos",

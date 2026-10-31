@@ -14,7 +14,7 @@ export const CONTACT = {
     "https://wa.me/254792618156?text=Hi%20Mike%2C%20I'd%20like%20to%20book%20a%2015-min%20chat.",
   linkedin: "https://www.linkedin.com/in/mikeships",
   github: "https://github.com/myk02",
-  tiktok: "https://www.tiktok.com/@bytedefend",
+  tiktok: "https://www.tiktok.com/@aiwithmike1",
   location: "Nairobi, Kenya · Remote",
 } as const;
 

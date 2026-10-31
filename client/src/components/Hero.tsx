@@ -42,7 +42,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Founder, Bytedefend · AI Engineer · Payments · Marketing
+            Founder · Software Developer · Payments · Marketing
           </motion.p>
 
           <motion.p
@@ -51,8 +51,9 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Founder at Bytedefend. Teaching cybersecurity via explainer videos.
-            Building AI automations and payment flows.
+            Mike — Founder & Software Developer. Teaching cybersecurity via
+            explainer videos on TikTok @aiwithmike1. Building AI automations and
+            payment flows.
           </motion.p>
 
           <motion.div
@@ -90,7 +91,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             transition={{ duration: 0.5, delay: 0.25 }}
           >
             {[
-              { value: "Bytedefend Videos", sub: "TikTok @bytedefend" },
+                { value: "AI with Mike", sub: "TikTok @aiwithmike1" },
               { value: "Cyber Course", sub: "Beginner to Expert" },
               { value: "AI + FinTech", sub: "Automations & Payments" },
             ].map(item => (

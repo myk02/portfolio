@@ -27,8 +27,8 @@ export default function SiteFooter() {
               href={CONTACT.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="TikTok @bytedefend"
-              title="TikTok @bytedefend"
+                aria-label="TikTok @aiwithmike1"
+                title="TikTok @aiwithmike1"
               className="p-1.5 rounded transition-transform hover:scale-110"
             >
               <TikTokBrandIcon size={18} />
@@ -68,14 +68,14 @@ export default function SiteFooter() {
       <div className="container pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-background/50">
         <p>© {new Date().getFullYear()} · Built in Nairobi</p>
         <p className="font-mono text-[11px]">
-          Bytedefend:{" "}
+          AI with Mike:{" "}
           <a
             href={CONTACT.tiktok}
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent underline-offset-4 hover:underline"
           >
-            tiktok.com/@bytedefend
+            tiktok.com/@aiwithmike1
           </a>
         </p>
       </div>
