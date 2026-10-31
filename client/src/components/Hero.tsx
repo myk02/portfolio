@@ -51,8 +51,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Mike — Founder & Software Developer. Teaching cybersecurity via
-            explainer videos on TikTok @aiwithmike1. Building AI automations and
+            Mike — Founder & Software Developer. Building AI automations and
             payment flows.
           </motion.p>
 

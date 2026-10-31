@@ -7,10 +7,10 @@ export const roleLine =
 export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Mike — Founder & Software Developer. Teaching cybersecurity via explainer videos on AI with Mike. Building AI automations and payment flows.";
+  "Mike — Founder & Software Developer. Building AI automations and payment flows.";
 
 export const bioLine =
-  "Mike Waitindi — Nairobi, Kenya. Founder & Software Developer. Creating explainer videos on TikTok @aiwithmike1 to expose scammer and hacker tactics, while building AI workflows and FinTech payment flows.";
+  "Mike Waitindi — Nairobi, Kenya. Founder & Software Developer. Building AI workflows and FinTech payment flows.";
 
 export const keyMetrics = [
   { value: "AI with Mike", label: "Security Videos", note: "TikTok @aiwithmike1" },

@@ -8,7 +8,7 @@ const ROWS = [
     role: "Founder",
     where: "AI with Mike · Oct 2026 – Present · Remote",
     proof:
-      "Teaching cybersecurity from beginner to expert via explainer videos on AI with Mike. Exposing hacker and scammer methods to protect users and businesses.",
+      "Creating and sharing cybersecurity explainer content. Exposing hacker and scammer methods to protect users and businesses.",
     link: CONTACT.tiktok,
     linkLabel: "TikTok @aiwithmike1",
   },
