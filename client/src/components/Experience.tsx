@@ -6,26 +6,32 @@ import { CONTACT } from "@/lib/site";
 const ROWS = [
   {
     role: "Founder",
-    where: "Bytedefend · Oct 2026 – Present · Remote",
+    where: "Bytedefend Â· Oct 2026 â€“ Present Â· Remote",
     proof:
       "Teaching cybersecurity from beginner to expert via explainer videos. Exposing hacker and scammer methods to protect users and businesses.",
     link: CONTACT.tiktok,
     linkLabel: "TikTok @bytedefend",
   },
   {
+    role: "Software Developer",
+    where: "2023 – 2024",
+    proof:
+      "Developed and maintained web applications using Laravel, React, Next.js, and C#. Designed and optimized databases with MySQL and MongoDB. Built and integrated APIs.",
+  },
+  {
     role: "Marketing Lead",
-    where: "Freelancer.com · Jan 2024 – Oct 2026 · Remote",
+    where: "Freelancer.com Â· Jan 2024 â€“ Oct 2026 Â· Remote",
     proof:
       "Premium marketing campaigns, product selling points, AI & emerging technology research.",
   },
   {
     role: "ICT Intern",
-    where: "Council of Legal Education · Jan 2024 – Feb 2025",
+    where: "Council of Legal Education Â· Jan 2024 â€“ Feb 2025",
     proof: "Systems automation, technical support, and ICT operations.",
   },
   {
     role: "IT Clerk",
-    where: "IEBC · Jul 2022 – Oct 2022",
+    where: "IEBC Â· Jul 2022 â€“ Oct 2022",
     proof: "Hardware, software, and secure network infrastructure under strict SLAs.",
   },
 ] as const;
