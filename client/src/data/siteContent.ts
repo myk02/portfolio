@@ -21,15 +21,15 @@ export const keyMetrics = [
 
 export const services = [
   {
-    title: "Cybersecurity Education",
-    bracket: "AI with Mike · Beginner to Expert",
+    title: "Software Development",
+    bracket: "Laravel · React · Next.js · C#",
     skills: [
-      "Hacker & Scammer Tactics",
-      "Explainer Videos",
-      "Cybersecurity Course",
-      "Defense & Prevention",
+      "Web Applications",
+      "REST APIs",
+      "MySQL & MongoDB",
+      "Scalable Architecture",
     ],
-    proof: "Simple video guides helping users protect themselves against real-world bad actors.",
+    proof: "Building and maintaining robust web applications with clean, efficient code.",
   },
   {
     title: "AI & Emerging Tech",
