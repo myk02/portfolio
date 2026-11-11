@@ -365,6 +365,231 @@ export const projects: Project[] = [
       quality: ["Verified at 390px; PWA installable."],
     },
   },
+  {
+    slug: "broken-repo-kit",
+    name: "Broken Repo Kit",
+    year: "2026",
+    tagline:
+      "Five seeded coding challenges, scored by a verifier that only accepts a real fix.",
+    outcomeTitle:
+      "A reproducible coding score that cannot be decided by editing the tests.",
+    tileBadge: "Developer tooling",
+    role: "Design · Build · Verification",
+    timeline: "Solo build",
+    repoUrl: "https://github.com/myk02/broken-repo-kit",
+    stack: ["Python 3.12", "pytest", "Docker", "GitHub Actions"],
+    constraints: [
+      "One small shop library",
+      "No network during verification",
+      "Solo build",
+    ],
+    outcomeLine:
+      "Five challenges, each with a golden patch and a verifier that rejects plausible wrong fixes.",
+    tileShot: "/shots/broken-repo-kit/how-it-works-desktop.webp",
+    tileShotAlt:
+      "Broken Repo Kit infographic: 'A bug goes in. A fair score comes out.' above the five-step challenge loop",
+    context:
+      "Coding challenges usually grade whatever tests the solver can edit, so a plausible wrong fix can look correct. The scoring tests live outside the solver's reach here.",
+    ownership: [
+      "Built five seeded challenges on one small shop library, each with a golden patch",
+      "Wrote the verifier that copies only the solver's code into a clean temporary folder and runs the kit's own 152 tests",
+      "Proved the verifier with 10 accepted alternative fixes and 26 rejected wrong fixes",
+    ],
+    problemLead:
+      "Explore how a coding challenge could be scored without trusting the solver's tests or environment.",
+    researchLead: "Repo build · Python 3.12 and pytest · no hosted demo.",
+    ordeal:
+      "The shortcut is to grade the tests the solver can see, which rewards edits to the test config. Broken Repo Kit rebuilds the room instead: only the library code is copied, the kit's fail-to-pass and pass-to-pass groups run, and tampering is reported before pytest starts.",
+    decisions: [
+      {
+        label: "Clean room",
+        text: "Only library code goes in; the solver's tests never run.",
+        shot: "/shots/broken-repo-kit/clean-room-desktop.webp",
+        alt: "Why the clean room contains only minishop library code, and what is left outside and checked for tampering",
+      },
+      {
+        label: "Two groups",
+        text: "A fix scores only when the bug is fixed and nothing else breaks.",
+        shot: "/shots/broken-repo-kit/test-groups-desktop.webp",
+        alt: "Fail-to-pass and pass-to-pass test groups, both green for a real fix",
+      },
+      {
+        label: "Repeatable",
+        text: "No clock, no network, no randomness — selftest --repeat 3 gives 5/5.",
+      },
+    ],
+    validateBefore: "A solver-editable test suite could decide the score",
+    validateAfter: "A clean-room verifier decides from the kit's own tests",
+    metricCards: [
+      {
+        label: "Challenges",
+        value: "5",
+        baseline: "one shop library",
+        result: "five seeded bugs",
+        direction: "flat",
+        tone: "neutral",
+        note: "Each challenge ships a golden patch and its own deterministic verifier",
+      },
+      {
+        label: "Verifier tests",
+        value: "152",
+        baseline: "visible tests only",
+        result: "hidden checks included",
+        direction: "up",
+        tone: "neutral",
+        note: "Fail-to-pass and pass-to-pass groups must both stay green",
+      },
+      {
+        label: "Wrong fixes",
+        value: "26 rejected",
+        baseline: "plausible patches",
+        result: "0 accepted",
+        direction: "down",
+        tone: "neutral",
+        note: "10 valid alternative fixes were accepted, so a pass is not golden-patch-only",
+      },
+    ],
+    lessons: [
+      "Score behaviour, not tests the solver can edit.",
+      "Two test groups catch both the fix and the collateral damage.",
+      "A verifier needs its own traps: 26 wrong fixes, 10 valid variants.",
+    ],
+    hero: {
+      src: "/shots/broken-repo-kit/how-it-works-wide-desktop.webp",
+      alt: "Broken Repo Kit header: a bug goes in, a fair score comes out — 5 challenges, 152 tests, 26 wrong fixes rejected, 0 network calls",
+      caption:
+        "How it works — broken-repo-kit docs (repo only, no hosted demo)",
+    },
+    screens: [
+      {
+        name: "Five fixes",
+        alt: "The five seeded challenges: discount stacking, cache recency, path traversal, slow duplicates and coupons",
+        caption:
+          "Five seeded bugs on one shop library — one per engineering area.",
+        src: "/shots/broken-repo-kit/five-fixes-desktop.webp",
+      },
+    ],
+    buildNotes: {
+      architecture: [
+        "One small shop library (minishop/) seeded with five separate bugs.",
+        "Verifier copies solver code into a clean temporary folder and deletes it afterwards.",
+      ],
+      build: [
+        "10 valid alternative fixes accepted alongside the golden patches.",
+        "26 plausible wrong fixes rejected; solver tests cannot decide the score.",
+      ],
+      quality: [
+        "152 tests; python -m kit selftest --repeat 3 gives 5/5.",
+        "0 network calls during verification; Docker and GitHub Actions runs.",
+      ],
+    },
+  },
+  {
+    slug: "cacheproxy",
+    name: "CacheProxy",
+    year: "2026",
+    tagline:
+      "An HTTP caching reverse proxy in Rust that serves repeat requests from memory.",
+    outcomeTitle:
+      "Repeat GETs answered from memory, in front of an API that stays untouched.",
+    tileBadge: "Systems / backend",
+    role: "Design · Rust implementation",
+    timeline: "Solo build",
+    repoUrl: "https://github.com/myk02/cacheproxy",
+    stack: ["Rust", "HTTP/1.1", "Zero dependencies"],
+    constraints: [
+      "Zero runtime dependencies",
+      "HTTP shared-cache rules",
+      "Solo build",
+    ],
+    outcomeLine:
+      "One small proxy that caches GETs, revalidates stale entries and coalesces concurrent misses.",
+    tileShot: "/shots/cacheproxy/banner-tile-desktop.webp",
+    tileShotAlt:
+      "CacheProxy diagram: clients sending GETs to a Rust proxy with an in-memory byte-capped LRU, request coalescing and ETag revalidation",
+    context:
+      "Every client that calls an API directly repeats the same origin work for identical GETs. CacheProxy sits in front of the API and answers what it can from memory.",
+    ownership: [
+      "Designed the proxy around shared-cache rules: Cache-Control, Expires, Vary and Age",
+      "Implemented request coalescing, conditional revalidation and a byte-capped LRU with O(1) get, insert and remove",
+      "Exposed live counters at /__stats and X-Cache labels, and rejected conflicting Content-Length / Transfer-Encoding requests",
+    ],
+    problemLead:
+      "Explore how far a small, dependency-free proxy can take HTTP caching in front of an API.",
+    researchLead: "Repo build · Rust, no hosted demo, no benchmark run.",
+    ordeal:
+      "A URL-keyed cache is wrong as soon as Vary, Age and revalidation matter. CacheProxy keeps freshness and revalidation tied to the response headers, and lets concurrent misses share a single origin fetch.",
+    decisions: [
+      {
+        label: "Storage",
+        text: "Byte-capped LRU with O(1) get, insert and remove.",
+      },
+      {
+        label: "Misses",
+        text: "Request coalescing: concurrent misses wait on one origin fetch.",
+      },
+      {
+        label: "Visible state",
+        text: "Live counters at /__stats and an X-Cache label on each response.",
+      },
+    ],
+    validateBefore: "Repeat GETs reach the origin every time",
+    validateAfter: "Repeat GETs answered from memory with an X-Cache label",
+    metricCards: [
+      {
+        label: "Runtime deps",
+        value: "Zero",
+        baseline: "third-party crates",
+        result: "std only",
+        direction: "down",
+        tone: "neutral",
+        note: "No crate dependency in the proxy",
+      },
+      {
+        label: "Cache store",
+        value: "Byte-capped LRU",
+        baseline: "unbounded map",
+        result: "O(1) get / insert / remove",
+        direction: "flat",
+        tone: "neutral",
+        note: "The cap bounds memory; eviction is least-recently-used",
+      },
+      {
+        label: "HTTP rules",
+        value: "Shared-cache",
+        baseline: "URL-only caching",
+        result: "Cache-Control · Expires · ETag · Vary · Age",
+        direction: "up",
+        tone: "neutral",
+        note: "ETag and Last-Modified drive conditional revalidation; Age is reported",
+      },
+    ],
+    lessons: [
+      "Caching is a rules problem before it is a data-structure problem.",
+      "Coalescing turns a thundering herd into one origin fetch.",
+      "Counters on the proxy make cache behaviour debuggable from the client.",
+    ],
+    hero: {
+      src: "/shots/cacheproxy/banner-desktop.webp",
+      alt: "CacheProxy architecture banner: clients, the proxy's LRU, coalescing and revalidation, and an origin API",
+      caption: "Architecture banner — cacheproxy repo (no hosted demo)",
+    },
+    screens: [],
+    buildNotes: {
+      architecture: [
+        "Thread per connection with keep-alive; one cache keyed by URL and Vary.",
+        "Byte-capped LRU held in memory; no crate dependencies.",
+      ],
+      build: [
+        "Request coalescing shares one origin fetch across concurrent misses.",
+        "ETag and Last-Modified revalidation; Age reported on hits.",
+      ],
+      quality: [
+        "Conflicting Content-Length / Transfer-Encoding requests are rejected.",
+        "Live counters at /__stats and X-Cache labels on responses.",
+      ],
+    },
+  },
 ];
 
 export const liveStudies = projects;

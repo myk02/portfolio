@@ -15,7 +15,7 @@ export default function WorkSection() {
       />
       <div className="container">
         <Reveal className="section-head">
-          <SectionLabel>Proof · 0{liveStudies.length} live demos</SectionLabel>
+          <SectionLabel>Proof · 0{liveStudies.length} projects</SectionLabel>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 className="heading-section text-foreground">Selected work</h2>
           </div>

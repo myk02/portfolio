@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { Code2, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { Reveal } from "@/components/Reveal";
 import { Surface } from "@/components/ui/section";
@@ -10,30 +10,45 @@ export default function ProjectCard({
   study: Project;
   index: number;
 }) {
+  const tile = (
+    <img
+      src={study.tileShot}
+      alt={study.tileShotAlt}
+      loading={index === 0 ? "eager" : "lazy"}
+      fetchPriority={index === 0 ? "high" : "auto"}
+      decoding="async"
+      className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+    />
+  );
+
+  const link = study.liveUrl
+    ? { href: study.liveUrl, label: "Visit site", Icon: ExternalLink }
+    : study.repoUrl
+      ? { href: study.repoUrl, label: "View code", Icon: Code2 }
+      : null;
+
   return (
     <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity"
         aria-hidden
       />
-      {study.liveUrl && (
-        <a
-          href={study.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-          aria-label={`${study.name} — open demo (opens in a new tab)`}
-        >
-          <img
-            src={study.tileShot}
-            alt={study.tileShotAlt}
-            loading={index === 0 ? "eager" : "lazy"}
-            fetchPriority={index === 0 ? "high" : "auto"}
-            decoding="async"
-            className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-          />
-        </a>
-      )}
+      {study.tileShot &&
+        (study.liveUrl ? (
+          <a
+            href={study.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+            aria-label={`${study.name} — open demo (opens in a new tab)`}
+          >
+            {tile}
+          </a>
+        ) : (
+          <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+            {tile}
+          </div>
+        ))}
       <div className="p-4.5 flex flex-col flex-1">
         <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
           {study.name}
@@ -42,15 +57,15 @@ export default function ProjectCard({
           {study.outcomeTitle}
         </p>
 
-        {study.liveUrl && (
+        {link && (
           <div className="pt-3.5 mt-auto border-t border-border">
             <a
-              href={study.liveUrl}
+              href={link.href}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
             >
-              Visit site <ExternalLink size={13} aria-hidden />
+              {link.label} <link.Icon size={13} aria-hidden />
             </a>
           </div>
         )}
