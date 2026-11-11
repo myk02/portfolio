@@ -42,7 +42,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Founder · Software Developer · Payments · Marketing
+            AI Automation · Payments Integration · Marketing · Software Testing
           </motion.p>
 
           <motion.p
