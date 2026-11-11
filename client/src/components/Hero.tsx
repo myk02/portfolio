@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { ArrowDown, ExternalLink } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { CONTACT } from "@/lib/site";
-import { TikTokBrandIcon } from "@/components/BrandIcons";
+import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface HeroProps {
   onCtaClick: (id: string) => void;
 }
 
-/** Name, clean tagline, two CTAs. Compact and punchy. */
+/** Name, clean tagline, compact CTA row. Punchy. */
 export default function Hero({ onCtaClick }: HeroProps) {
   return (
     <section id="home" className="relative bg-secondary border-b border-border">
@@ -61,22 +61,14 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <a
-              href={CONTACT.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary gap-2"
-            >
-              <TikTokBrandIcon size={16} />
-              Watch on TikTok <ExternalLink size={13} aria-hidden />
-            </a>
             <button
               type="button"
               onClick={() => onCtaClick("work")}
-              className="btn btn-secondary gap-2"
+              className="btn btn-primary gap-2"
             >
               View work <ArrowDown size={14} />
             </button>
+            <BuyMeCoffee buttonClassName="gap-2" />
             <a href={CONTACT.emailHref} className="btn btn-secondary gap-2">
               Contact
             </a>
@@ -90,7 +82,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             transition={{ duration: 0.5, delay: 0.25 }}
           >
             {[
-                { value: "AI with Mike", sub: "TikTok @aiwithmike1" },
+                { value: "AI with Mike", sub: "TikTok channel I run" },
               { value: "Cyber Course", sub: "Beginner to Expert" },
               { value: "AI + FinTech", sub: "Automations & Payments" },
             ].map(item => (
