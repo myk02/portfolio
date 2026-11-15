@@ -20,18 +20,18 @@ const ROWS = [
   },
   {
     role: "Marketing Lead",
-    where: "Freelancer.com Â· Jan 2024 â€“ Oct 2026 Â· Remote",
+    where: "Freelancer.com · Jan 2024 – Oct 2026 · Remote",
     proof:
       "Premium marketing campaigns, product selling points, AI & emerging technology research.",
   },
   {
     role: "ICT Intern",
-    where: "Council of Legal Education Â· Jan 2024 â€“ Feb 2025",
+    where: "Council of Legal Education · Jan 2024 – Feb 2025",
     proof: "Systems automation, technical support, and ICT operations.",
   },
   {
     role: "IT Clerk",
-    where: "IEBC Â· Jul 2022 â€“ Oct 2022",
+    where: "IEBC · Jul 2022 – Oct 2022",
     proof: "Hardware, software, and secure network infrastructure under strict SLAs.",
   },
 ] as const;

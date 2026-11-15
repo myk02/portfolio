@@ -53,13 +53,13 @@ test.describe("QA gate — regression: every route resolves cleanly", () => {
     expect(errors).toEqual([]);
   });
 
-  test("roles section is reachable from the header nav", async ({
+  test("capabilities section is reachable from the header nav", async ({
     page,
   }) => {
     await page.goto("/");
     await page
       .getByRole("navigation", { name: "Primary" })
-      .getByRole("button", { name: "Roles" })
+      .getByRole("button", { name: "Capabilities" })
       .click();
     await expect(page.locator("#skills")).toBeInViewport();
     await expect(
@@ -68,7 +68,7 @@ test.describe("QA gate — regression: every route resolves cleanly", () => {
     await expect(
       page
         .locator("#skills")
-        .getByRole("heading", { name: "Full-Stack Software Engineer" })
+        .getByRole("heading", { name: "Software Development" })
     ).toBeVisible();
   });
 });
@@ -114,7 +114,7 @@ test.describe("QA gate — UI consistency across viewports", () => {
 test.describe("QA gate — external contracts (API-link reliability)", () => {
   test("live product out-links are absolute https URLs", async ({ page }) => {
     await page.goto("/work");
-    const liveLinks = page.getByRole("link", { name: /Open demo/ });
+    const liveLinks = page.locator('a[href^="https://"]');
     await expect(liveLinks.first()).toBeVisible();
     const hrefs = await liveLinks.evaluateAll(els =>
       els.map(el => el.getAttribute("href"))

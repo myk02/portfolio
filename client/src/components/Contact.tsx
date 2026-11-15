@@ -28,6 +28,16 @@ export default function Contact() {
   const [notified, setNotified] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [invalid, setInvalid] = useState({
+    name: false,
+    email: false,
+    message: false,
+  });
+
+  const clearFieldError = (field: keyof typeof invalid) => {
+    setInvalid(prev => ({ ...prev, [field]: false }));
+    if (error) setError("");
+  };
 
   const submitRequest = useAction(api.serviceRequests.submit);
 
@@ -38,14 +48,21 @@ export default function Contact() {
     const trimmedMessage = message.trim();
 
     if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setInvalid({
+        name: !trimmedName,
+        email: !trimmedEmail,
+        message: !trimmedMessage,
+      });
       setError("Please fill in all fields before sending.");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setInvalid({ name: false, email: true, message: false });
       setError("Please enter a valid email address.");
       return;
     }
 
+    setInvalid({ name: false, email: false, message: false });
     setSubmitting(true);
     setError("");
     try {
@@ -95,6 +112,7 @@ export default function Contact() {
                   setName("");
                   setEmail("");
                   setMessage("");
+                  setInvalid({ name: false, email: false, message: false });
                 }}
                 className="btn btn-ghost mt-6"
               >
@@ -231,9 +249,14 @@ export default function Contact() {
                       name="name"
                       required
                       value={name}
-                      onChange={e => setName(e.target.value)}
+                      onChange={e => {
+                        setName(e.target.value);
+                        clearFieldError("name");
+                      }}
                       autoComplete="name"
                       aria-required="true"
+                      aria-invalid={invalid.name ? "true" : undefined}
+                      aria-describedby={error ? "contact-form-error" : undefined}
                       className={inputClass}
                       placeholder="Your full name"
                     />
@@ -249,9 +272,14 @@ export default function Contact() {
                       name="email"
                       required
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={e => {
+                        setEmail(e.target.value);
+                        clearFieldError("email");
+                      }}
                       autoComplete="email"
                       aria-required="true"
+                      aria-invalid={invalid.email ? "true" : undefined}
+                      aria-describedby={error ? "contact-form-error" : undefined}
                       className={inputClass}
                       placeholder="you@company.com"
                     />
@@ -268,9 +296,14 @@ export default function Contact() {
                     name="message"
                     required
                     value={message}
-                    onChange={e => setMessage(e.target.value)}
+                    onChange={e => {
+                      setMessage(e.target.value);
+                      clearFieldError("message");
+                    }}
                     rows={4}
                     aria-required="true"
+                    aria-invalid={invalid.message ? "true" : undefined}
+                    aria-describedby={error ? "contact-form-error" : undefined}
                     className={`${inputClass} min-h-28 resize-none py-3`}
                     placeholder="Project, goals, timeline..."
                   />
