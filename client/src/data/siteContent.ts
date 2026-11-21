@@ -1,16 +1,14 @@
-export const positionTitle =
-  "Founder · Software Developer · Marketing Lead · Payments";
+export const positionTitle = "Founder · Cybersecurity · Marketing · Sales";
 
-export const roleLine =
-  "Founder · Software Developer · Cybersecurity Education · Payments · Nairobi";
+export const roleLine = "Founder · Cybersecurity · Marketing · Sales · Nairobi";
 
 export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Mike — Founder & Software Developer. Building AI automations and payment flows.";
+  "Mike — Founder. Cybersecurity, marketing and sales. Building AI automations and payment flows.";
 
 export const bioLine =
-  "Mike Waitindi — Nairobi, Kenya. Founder & Software Developer. Building AI workflows and FinTech payment flows.";
+  "Mike Waitindi — Nairobi, Kenya. Founder. Cybersecurity, marketing and sales. Building AI workflows and FinTech payment flows.";
 
 export const keyMetrics = [
   { value: "AI with Mike", label: "Security Videos", note: "TikTok @aiwithmike1" },

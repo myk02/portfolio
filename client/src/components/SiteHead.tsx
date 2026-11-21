@@ -121,7 +121,7 @@ export default function SiteHead({
 }
 
 export const DEFAULT_HEAD = {
-  title: `Mike Waitindi — Software Developer · Marketing Lead · Cybersecurity`,
-  description: `Mike Waitindi, Nairobi: Founder & Software Developer. AI integrations, automations, payments architecture, and cybersecurity education.`,
+  title: `Mike Waitindi — Founder · Cybersecurity · Marketing · Sales`,
+  description: `Mike Waitindi, Nairobi: Founder. Cybersecurity, marketing and sales, plus AI integrations, automations, and payments architecture.`,
   canonical: SITE_URL,
 };

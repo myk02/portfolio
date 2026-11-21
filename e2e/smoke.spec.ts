@@ -16,7 +16,7 @@ test.describe("home page", () => {
     );
     await expect(
       page.getByText(
-        "AI Automation · Payments Integration · Marketing · Software Testing"
+        "Founder · Cybersecurity · Marketing · Sales"
       )
     ).toBeVisible();
 
@@ -148,7 +148,7 @@ test.describe("removed case-study pages", () => {
 
   test("document title reflects current positioning", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Software Developer/);
+    await expect(page).toHaveTitle(/Founder · Cybersecurity/);
   });
 });
 

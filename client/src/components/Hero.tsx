@@ -42,7 +42,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            AI Automation · Payments Integration · Marketing · Software Testing
+            Founder · Cybersecurity · Marketing · Sales
           </motion.p>
 
           <motion.p
@@ -51,8 +51,8 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Mike — Founder & Software Developer. Building AI automations and
-            payment flows.
+            Mike — Founder. Cybersecurity, marketing and sales. Building AI
+            automations and payment flows.
           </motion.p>
 
           <motion.div
