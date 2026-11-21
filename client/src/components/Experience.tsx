@@ -1,42 +1,183 @@
-import { ExternalLink } from "lucide-react";
+import type { ReactNode } from "react";
+import { Gem, Pencil, Plus } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
-import { CONTACT } from "@/lib/site";
 
-const ROWS = [
+function LottsLogo() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-full w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="48" height="48" fill="#f1f1ef" />
+      <path d="M11 12h11v24H11z" fill="#8f9aa5" />
+      <path d="M22 12h15v8H22z" fill="#c3ccd4" />
+      <path d="M22 20h15v8H22z" fill="#aeb9c3" />
+      <path d="M22 28h15v8H22z" fill="#d7dee4" />
+    </svg>
+  );
+}
+
+function CleLogo() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-full w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="48" height="48" fill="#ffffff" />
+      <circle
+        cx="24"
+        cy="24"
+        r="17.5"
+        fill="#faf7ee"
+        stroke="#c8a951"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="24"
+        cy="24"
+        r="14"
+        fill="none"
+        stroke="#2f5d3a"
+        strokeWidth="0.8"
+        strokeDasharray="1.5 1.5"
+      />
+      <path
+        d="M24 13v21M16.5 17h15"
+        stroke="#2f5d3a"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16.5 17l-4.5 8h9zM31.5 17l-4.5 8h9z"
+        fill="none"
+        stroke="#2f5d3a"
+        strokeWidth="1.1"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 34.5h16"
+        stroke="#c8a951"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function WhopLogo() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-full w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="48" height="48" fill="#ff4d1f" />
+      <path
+        d="M8 15l6 19 5-13 5 13 6-19"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="4.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function FreelancerLogo() {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      className="h-full w-full"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect width="48" height="48" fill="#0b0b0b" />
+      <path d="M11 35 36 11 26 36 21 27z" fill="#29b2fe" />
+      <path
+        d="M21 27 36 11"
+        stroke="#ffffff"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        opacity="0.9"
+      />
+    </svg>
+  );
+}
+
+type Job = {
+  role: string;
+  company: string;
+  employment: string;
+  period: string;
+  duration: string;
+  location: string;
+  workType: string;
+  description?: string;
+  skills?: string;
+  current?: boolean;
+  logo: ReactNode;
+};
+
+const JOBS: Job[] = [
   {
     role: "Founder",
-    where: "AI with Mike · Oct 2026 – Present · Remote",
-    proof:
-      "Creating and sharing cybersecurity explainer content. Exposing hacker and scammer methods to protect users and businesses.",
-    link: CONTACT.tiktok,
-    linkLabel: "TikTok @aiwithmike1",
+    company: "Lotts",
+    employment: "Full-time",
+    period: "Oct 2026 – Present",
+    duration: "2 mos",
+    location: "Eastern Africa",
+    workType: "Remote",
+    description: "My AI startup.",
+    skills: "Cybersecurity and Start-up Ventures",
+    current: true,
+    logo: <LottsLogo />,
   },
   {
-    role: "Software Developer",
-    where: "2023 – 2024",
-    proof:
-      "Developed and maintained web applications using Laravel, React, Next.js, and C#. Designed and optimized databases with MySQL and MongoDB. Built and integrated APIs.",
+    role: "Information Technology Officer",
+    company: "Council Of Legal Education (CLE)",
+    employment: "Full-time",
+    period: "Jan 2024 – Present",
+    duration: "2 yrs 11 mos",
+    location: "Karen ward, Nairobi County, Kenya",
+    workType: "On-site",
+    current: true,
+    logo: <CleLogo />,
   },
   {
-    role: "Marketing Lead",
-    where: "Freelancer.com · Jan 2024 – Oct 2026 · Remote",
-    proof:
-      "Premium marketing campaigns, product selling points, AI & emerging technology research.",
+    role: "UGC Marketing Lead",
+    company: "Whop",
+    employment: "Contract",
+    period: "Jul 2025 – Aug 2026",
+    duration: "1 yr 2 mos",
+    location: "United States",
+    workType: "Remote",
+    description:
+      "Making premium marketing campaigns to maximize product selling points.",
+    skills: "AI & Emerging Technologies and Research Collaboration",
+    logo: <WhopLogo />,
   },
   {
-    role: "ICT Intern",
-    where: "Council of Legal Education · Jan 2024 – Feb 2025",
-    proof: "Systems automation, technical support, and ICT operations.",
+    role: "Junior Software Engineer",
+    company: "Freelancer.com",
+    employment: "Freelance",
+    period: "Jul 2021 – Feb 2022",
+    duration: "8 mos",
+    location: "Remote",
+    workType: "Remote",
+    description: "Responsible for creating web apps for clients.",
+    skills: "Software Development, Full-Stack Development and +5 skills",
+    logo: <FreelancerLogo />,
   },
-  {
-    role: "IT Clerk",
-    where: "IEBC · Jul 2022 – Oct 2022",
-    proof: "Hardware, software, and secure network infrastructure under strict SLAs.",
-  },
-] as const;
+];
 
-/** Proof at a glance: short rows, no paragraphs. */
+/** LinkedIn-style track record: logo, role, dates, location, and skills. */
 export default function Experience() {
   return (
     <section
@@ -45,45 +186,79 @@ export default function Experience() {
       className="section-pad bg-secondary border-t border-border"
     >
       <div className="container">
-        <Reveal className="section-head">
-          <SectionLabel>Track record</SectionLabel>
-          <h2
-            id="experience-heading"
-            className="heading-section text-foreground"
+        <Reveal className="section-head items-start">
+          <div>
+            <SectionLabel>Track record</SectionLabel>
+            <h2
+              id="experience-heading"
+              className="heading-section text-foreground"
+            >
+              Experience
+            </h2>
+          </div>
+          <span
+            aria-hidden
+            className="flex items-center gap-4 pt-1 text-muted-foreground/70"
           >
-            Experience
-          </h2>
+            <Plus size={18} strokeWidth={1.75} />
+            <Pencil size={16} strokeWidth={1.75} />
+          </span>
         </Reveal>
 
         <Reveal>
-          <dl className="max-w-3xl border border-border bg-card divide-y divide-border">
-            {ROWS.map(r => (
-              <div
-                key={`${r.role}-${r.where}`}
-                className="px-4 py-3 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4"
+          <ol className="max-w-3xl list-none divide-y divide-border border-y border-border p-0">
+            {JOBS.map(job => (
+              <li
+                key={`${job.role}-${job.company}`}
+                className="flex gap-3.5 py-5 sm:gap-4 sm:py-6"
               >
-                <dt className="text-[11px] font-mono uppercase tracking-widest text-foreground shrink-0 sm:w-44 font-semibold">
-                  {r.role}
-                </dt>
-                <dd className="min-w-0 flex-1 text-[0.82rem] leading-snug">
-                  <span className="text-muted-foreground">{r.where} — </span>
-                  <span className="text-foreground">{r.proof}</span>
-                  {"link" in r && r.link && (
-                    <span className="block mt-1">
-                      <a
-                        href={r.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-mono text-accent hover:underline"
-                      >
-                        {r.linkLabel} <ExternalLink size={11} aria-hidden />
-                      </a>
+                <div className="h-11 w-11 shrink-0 overflow-hidden rounded-[3px] border border-border/70 sm:h-12 sm:w-12">
+                  {job.logo}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-display text-[0.98rem] font-semibold leading-snug text-foreground">
+                      {job.role}
+                    </h3>
+                    {job.current && (
+                      <span className="shrink-0 rounded-[2px] bg-foreground/10 px-1.5 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/75">
+                        Present
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-0.5 text-[0.84rem] leading-snug text-foreground">
+                    {job.company}
+                    <span className="text-muted-foreground">
+                      {" "}
+                      · {job.employment}
                     </span>
+                  </p>
+                  <p className="mt-1 text-[0.78rem] leading-snug text-muted-foreground">
+                    {job.period} · {job.duration}
+                  </p>
+                  <p className="text-[0.78rem] leading-snug text-muted-foreground">
+                    {job.location}
+                    {job.workType !== job.location && ` · ${job.workType}`}
+                  </p>
+                  {job.description && (
+                    <p className="mt-2.5 text-[0.84rem] leading-relaxed text-foreground/90">
+                      {job.description}
+                    </p>
                   )}
-                </dd>
-              </div>
+                  {job.skills && (
+                    <p className="mt-2 flex items-start gap-1.5 text-[0.78rem] leading-snug text-muted-foreground">
+                      <Gem
+                        size={12}
+                        className="mt-[0.2rem] shrink-0"
+                        aria-hidden
+                      />
+                      <span>{job.skills}</span>
+                    </p>
+                  )}
+                </div>
+              </li>
             ))}
-          </dl>
+          </ol>
         </Reveal>
       </div>
     </section>
