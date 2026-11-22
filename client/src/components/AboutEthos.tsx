@@ -49,24 +49,23 @@ export default function AboutEthos() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: Personal narrative */}
           <Reveal className="lg:col-span-5 space-y-4">
-            <div className="p-6 bg-secondary/50 border border-border space-y-3.5">
+            <div className="p-6 sm:p-7 bg-card border border-border border-l-2 border-l-accent shadow-xs space-y-4 relative">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                <HeartHandshake size={14} className="text-accent" aria-hidden />
+                <HeartHandshake size={15} className="text-accent" aria-hidden />
                 <span>The Human Philosophy</span>
               </div>
               <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground leading-snug">
                 "Cybersecurity is human before it is technical."
               </h3>
               <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
-                I founded <strong className="text-foreground font-medium">Lotts</strong> because I saw too many creators, founders, and small teams lose their channels, databases, and intellectual property to preventable attacks.
+                I founded <strong className="text-foreground font-semibold">Lotts</strong> because I saw too many creators, founders, and small teams lose their channels, databases, and intellectual property to preventable attacks.
               </p>
               <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
                 Security shouldn't be locked behind enterprise walls or esoteric jargon. When people understand <em>why</em> a threat works, they intuitively know how to defend against it.
               </p>
-              <div className="pt-2 border-t border-border flex items-center gap-3 text-xs font-mono text-foreground/70">
-                <span>Mike Waitindi</span>
-                <span>·</span>
-                <span className="text-muted-foreground">Founder @ Lotts</span>
+              <div className="pt-3 border-t border-border/80 flex items-center justify-between text-xs font-mono text-foreground/80">
+                <span className="font-medium text-foreground">Mike Waitindi</span>
+                <span className="text-muted-foreground">Founder @ Lotts · Nairobi</span>
               </div>
             </div>
           </Reveal>
@@ -77,24 +76,27 @@ export default function AboutEthos() {
               const Icon = pillar.icon;
               return (
                 <Reveal key={pillar.title} delay={(i % 3) as 0 | 1 | 2}>
-                  <div className="p-5 bg-card border border-border group hover:border-foreground/30 transition-all hover:shadow-[3px_3px_0_rgba(10,10,10,0.05)]">
+                  <div className="p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.06)] relative">
                     <div className="flex items-start gap-4">
                       <span
-                        className="w-9 h-9 grid place-items-center border border-border bg-secondary text-foreground shrink-0 group-hover:bg-accent group-hover:text-accent-foreground transition-colors"
+                        className="w-10 h-10 grid place-items-center border border-border bg-secondary text-foreground shrink-0 group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-colors"
                         aria-hidden
                       >
-                        <Icon size={16} />
+                        <Icon size={17} />
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-2">
-                          <h4 className="font-display font-semibold text-foreground text-[1rem] tracking-tight">
+                          <h4 className="font-display font-semibold text-foreground text-[1.02rem] tracking-tight group-hover:text-foreground">
                             {pillar.title}
                           </h4>
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground shrink-0">
-                            {pillar.subtitle}
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground shrink-0 border border-border/60 bg-secondary/50 px-2 py-0.5">
+                            0{i + 1}
                           </span>
                         </div>
-                        <p className="mt-1.5 text-[0.84rem] text-muted-foreground leading-relaxed">
+                        <p className="text-[11px] font-mono text-foreground/60 uppercase tracking-wider mt-0.5">
+                          {pillar.subtitle}
+                        </p>
+                        <p className="mt-2 text-[0.85rem] text-muted-foreground leading-relaxed">
                           {pillar.description}
                         </p>
                       </div>

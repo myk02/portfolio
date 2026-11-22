@@ -103,41 +103,44 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.28 }}
           >
-            <div className="p-3.5 bg-card/60 border border-border group hover:border-foreground/30 transition-colors">
-              <div className="flex items-center gap-2 mb-1">
-                <Shield size={14} className="text-accent shrink-0" aria-hidden />
+            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
+              <div className="flex items-center gap-2 mb-1.5">
+                <Shield size={15} className="text-accent shrink-0" aria-hidden />
                 <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">Lotts Brand</span>
               </div>
-              <div className="text-[0.92rem] font-display font-semibold text-foreground">
+              <div className="text-[0.95rem] font-display font-semibold text-foreground">
                 Systems &amp; IP Protection
               </div>
-              <div className="text-[0.78rem] text-muted-foreground mt-0.5">
+              <div className="text-[0.8rem] text-muted-foreground mt-1 leading-snug">
                 Sensitizing users against scams &amp; breaches.
               </div>
             </div>
 
-            <div className="p-3.5 bg-card/60 border border-border group hover:border-foreground/30 transition-colors">
-              <div className="flex items-center gap-2 mb-1">
-                <Sparkles size={14} className="text-accent shrink-0" aria-hidden />
+            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
+              <div className="flex items-center gap-2 mb-1.5">
+                <Sparkles size={15} className="text-accent shrink-0" aria-hidden />
                 <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">Awareness</span>
               </div>
-              <div className="text-[0.92rem] font-display font-semibold text-foreground">
+              <div className="text-[0.95rem] font-display font-semibold text-foreground">
                 AI with Mike Channel
               </div>
-              <div className="text-[0.78rem] text-muted-foreground mt-0.5">
+              <div className="text-[0.8rem] text-muted-foreground mt-1 leading-snug">
                 Practical, visual explainers on TikTok.
               </div>
             </div>
 
-            <div className="p-3.5 bg-card/60 border border-border group hover:border-foreground/30 transition-colors">
-              <div className="flex items-center gap-2 mb-1">
-                <TrendingUp size={14} className="text-accent shrink-0" aria-hidden />
+            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
+              <div className="flex items-center gap-2 mb-1.5">
+                <TrendingUp size={15} className="text-accent shrink-0" aria-hidden />
                 <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">Growth</span>
               </div>
-              <div className="text-[0.92rem] font-display font-semibold text-foreground">
+              <div className="text-[0.95rem] font-display font-semibold text-foreground">
                 Marketing &amp; Sales
               </div>
-              <div className="text-[0.78rem] text-muted-foreground mt-0.5">
+              <div className="text-[0.8rem] text-muted-foreground mt-1 leading-snug">
                 Campaigns and funnels that convert.
               </div>
             </div>

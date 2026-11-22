@@ -156,45 +156,45 @@ export default function Contact() {
                   <p className="text-[0.82rem] text-foreground font-medium leading-snug pt-1 border-t border-border/60">
                     Nairobi · Replies within 24h
                   </p>
-                  <div className="space-y-2.5">
+                  <div className="space-y-1.5 pt-1">
                     <a
                       href={CONTACT.tiktok}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
+                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
                         <TikTokBrandIcon size={16} />
                       </span>
-                      <span>TikTok · @aiwithmike1</span>
+                      <span className="font-medium">TikTok · @aiwithmike1</span>
                     </a>
                     <a
                       href={CONTACT.emailHref}
-                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
+                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
                         <GmailBrandIcon size={16} />
                       </span>
-                      <span>{CONTACT.email}</span>
+                      <span className="font-medium">{CONTACT.email}</span>
                     </a>
                     <a
                       href={CONTACT.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-foreground hover:text-accent transition-colors group"
+                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
                         <WhatsAppBrandIcon size={16} />
                       </span>
-                      <span>WhatsApp · {CONTACT.phone}</span>
+                      <span className="font-medium">WhatsApp · {CONTACT.phone}</span>
                     </a>
                     <a
                       href={CONTACT.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors group"
+                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 transition-colors shrink-0">
                         <LinkedInBrandIcon size={16} />
                       </span>
                       <span>linkedin.com/in/mikeships</span>
@@ -203,9 +203,9 @@ export default function Contact() {
                       href={CONTACT.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-xs text-muted-foreground hover:text-foreground transition-colors group"
+                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-all group"
                     >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground transition-colors shrink-0">
+                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 transition-colors shrink-0">
                         <GitHubBrandIcon size={16} />
                       </span>
                       <span>github.com/myk02</span>

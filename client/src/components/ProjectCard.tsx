@@ -29,9 +29,9 @@ export default function ProjectCard({
       : null;
 
   return (
-    <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)]">
+    <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-300 hover:border-foreground/30 hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.12)]">
       <div
-        className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
       />
       {study.tileShot &&
@@ -40,26 +40,27 @@ export default function ProjectCard({
             href={study.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="block relative aspect-[16/10] overflow-hidden bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+            className="block relative aspect-[16/10] overflow-hidden bg-muted border-b border-border/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             aria-label={`${study.name} — open demo (opens in a new tab)`}
           >
             {tile}
           </a>
         ) : (
-          <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+          <div className="relative aspect-[16/10] overflow-hidden bg-muted border-b border-border/80">
             {tile}
           </div>
         ))}
       <div className="p-4.5 flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2 mb-2">
-          <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 bg-secondary text-foreground/80 border border-border">
+          <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 bg-secondary text-foreground/80 border border-border">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden />
             {study.tileBadge}
           </span>
           <span className="font-mono text-[11px] text-muted-foreground">
             {study.year}
           </span>
         </div>
-        <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
+        <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em] group-hover:text-foreground">
           {study.name}
         </h3>
         <p className="mt-1.5 text-[0.85rem] text-muted-foreground leading-relaxed">
@@ -85,9 +86,9 @@ export default function ProjectCard({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline group-hover:text-accent-foreground transition-colors"
             >
-              {link.label} <link.Icon size={13} aria-hidden />
+              {link.label} <link.Icon size={13} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         )}

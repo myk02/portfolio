@@ -5,6 +5,7 @@ import {
   LinkedInBrandIcon,
   GitHubBrandIcon,
   GmailBrandIcon,
+  WhatsAppBrandIcon,
 } from "@/components/BrandIcons";
 
 export default function SiteFooter() {
@@ -31,6 +32,16 @@ export default function SiteFooter() {
               className="p-2 text-background/60 hover:text-background transition-colors"
             >
               <TikTokBrandIcon size={18} />
+            </a>
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              title="WhatsApp Mike"
+              className="p-2 text-background/60 hover:text-background transition-colors"
+            >
+              <WhatsAppBrandIcon size={18} />
             </a>
             <a
               href={CONTACT.emailHref}

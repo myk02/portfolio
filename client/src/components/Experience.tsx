@@ -223,7 +223,8 @@ export default function Experience() {
                         {job.role}
                       </h3>
                       {job.current && (
-                        <span className="shrink-0 rounded-[2px] bg-foreground/10 px-1.5 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/75 lg:hidden">
+                        <span className="shrink-0 rounded-[2px] bg-foreground/10 px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/80 inline-flex items-center gap-1.5 lg:hidden">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
                           Present
                         </span>
                       )}
@@ -238,7 +239,8 @@ export default function Experience() {
                     <p className="mt-1 flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-muted-foreground">
                       {job.period}
                       {job.current && (
-                        <span className="hidden rounded-[2px] bg-accent/25 px-1.5 py-0.5 text-foreground/80 lg:inline-block">
+                        <span className="hidden rounded-[2px] bg-accent/25 px-2 py-0.5 text-foreground/90 lg:inline-flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
                           Present
                         </span>
                       )}
