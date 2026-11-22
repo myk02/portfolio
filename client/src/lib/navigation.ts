@@ -58,6 +58,11 @@ export function handleSiteNav(
     return;
   }
 
+  if (id === "proof" && isWorkIndex) {
+    document.getElementById("proof")?.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
   if (isHome) {
     ctx.onHomeSection?.(id);
     return;

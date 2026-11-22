@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 // Single source of truth: slugs live in client/src/data/projects.ts
 import { projects } from "../client/src/data/projects";
+import { proofVideos } from "../client/src/data/videos";
 
 const LIVE_SLUGS = projects.map(s => s.slug);
 const LIVE_PROJECTS = projects.filter(p => p.liveUrl);
@@ -14,16 +17,12 @@ test.describe("home page", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Mike Waitindi"
     );
-    await expect(
-      page.getByText(
-        "Founder · Cybersecurity · Marketing · Sales"
-      )
-    ).toBeVisible();
-
     const hero = page.locator("#home");
     await expect(
-      hero.getByRole("button", { name: "View work" })
+      hero.getByText("Founder · Cybersecurity · Marketing · Sales")
     ).toBeVisible();
+
+    await expect(hero.getByRole("button", { name: "View work" })).toBeVisible();
     await expect(
       hero.getByRole("button", { name: /buy me a coffee/i })
     ).toHaveCount(0);
@@ -82,6 +81,52 @@ test.describe("home page", () => {
   });
 });
 
+test.describe("proof videos", () => {
+  test("renders every proof video with a local source and poster", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const section = page.locator("#proof");
+    await expect(
+      section.getByRole("heading", { name: "Watch the work" })
+    ).toBeVisible();
+
+    const videos = section.locator("video");
+    await expect(videos).toHaveCount(proofVideos.length);
+
+    const rendered = await videos.evaluateAll(els =>
+      els.map(el => ({
+        src: el.querySelector("source")?.getAttribute("src"),
+        poster: el.getAttribute("poster"),
+        controls: el.hasAttribute("controls"),
+        playsInline: el.hasAttribute("playsinline"),
+      }))
+    );
+    expect(rendered).toEqual(
+      proofVideos.map(video => ({
+        src: video.src,
+        poster: video.poster,
+        controls: true,
+        playsInline: true,
+      }))
+    );
+  });
+
+  test("video files and posters exist in public assets", () => {
+    for (const video of proofVideos) {
+      for (const asset of [video.src, video.poster]) {
+        const file = path.join(
+          process.cwd(),
+          "client",
+          "public",
+          asset.replace(/^\//, "")
+        );
+        expect(fs.existsSync(file), `${asset} should exist`).toBe(true);
+      }
+    }
+  });
+});
+
 test.describe("project data — single source, unique screens", () => {
   test("tile, hero, decisions, and gallery never repeat a src", async () => {
     for (const p of projects) {
@@ -113,9 +158,7 @@ test.describe("work page", () => {
     );
 
     for (const p of projects) {
-      await expect(
-        page.getByRole("heading", { name: p.name })
-      ).toBeVisible();
+      await expect(page.getByRole("heading", { name: p.name })).toBeVisible();
     }
 
     await expect(
@@ -183,7 +226,9 @@ test.describe("contact form", () => {
     );
   });
 
-  test("clears the invalid state once the field is edited", async ({ page }) => {
+  test("clears the invalid state once the field is edited", async ({
+    page,
+  }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Send message" }).click();
     await expect(page.locator("#name")).toHaveAttribute("aria-invalid", "true");

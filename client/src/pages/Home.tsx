@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
+import VideoProof from "@/components/VideoProof";
 import Services from "@/components/Services";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
@@ -40,6 +41,7 @@ export default function Home() {
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero onCtaClick={scrollToHomeSection} />
         <WorkSection />
+        <VideoProof />
         <Services />
         <Experience />
         <Contact />

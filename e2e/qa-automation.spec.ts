@@ -68,7 +68,7 @@ test.describe("QA gate — regression: every route resolves cleanly", () => {
     await expect(
       page
         .locator("#skills")
-        .getByRole("heading", { name: "Software Development" })
+        .getByRole("heading", { name: "Cybersecurity & Systems Protection" })
     ).toBeVisible();
   });
 });

@@ -4,6 +4,7 @@ import SiteHead from "@/components/SiteHead";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { ProjectCardGrid } from "@/components/ProjectCard";
+import VideoProof from "@/components/VideoProof";
 import { useReveal } from "@/hooks/useReveal";
 
 export default function Work() {
@@ -42,6 +43,8 @@ export default function Work() {
 
           <ProjectCardGrid studies={liveStudies} />
         </div>
+
+        <VideoProof />
       </main>
 
       <SiteFooter />
