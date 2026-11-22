@@ -5,15 +5,7 @@ import { proofVideos, type ProofVideo } from "@/data/videos";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel, Surface } from "@/components/ui/section";
 
-function VideoCard({
-  video,
-  index,
-  duplicate = false,
-}: {
-  video: ProofVideo;
-  index: number;
-  duplicate?: boolean;
-}) {
+function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -46,7 +38,6 @@ function VideoCard({
           <button
             type="button"
             onClick={start}
-            tabIndex={duplicate ? -1 : undefined}
             aria-label={`Play ${video.title}`}
             className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors hover:bg-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
@@ -78,7 +69,6 @@ function VideoCard({
             href={CONTACT.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            tabIndex={duplicate ? -1 : undefined}
             className="inline-flex items-center gap-1.5 text-[0.78rem] font-medium text-foreground underline-offset-4 hover:underline"
           >
             Watch on TikTok <ExternalLink size={12} aria-hidden />
@@ -108,31 +98,18 @@ export default function VideoProof() {
         </Reveal>
 
         <p className="mx-auto mb-8 max-w-xl text-center text-[0.92rem] leading-relaxed text-muted-foreground">
-          Short cybersecurity explainers from the AI with Mike channel —
-          breaking down how common scams work so they are easier to spot.
+          Cybersecurity explainers from the <strong className="text-foreground font-medium">AI with Mike</strong> channel —
+          breaking down how common scams, threats, and attacks work so they're easier to spot and stop.
         </p>
 
         <Reveal>
-          <div className="proof-marquee relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
-            <div className="proof-marquee-track flex w-max">
-              {[0, 1, 2].map((copy) => (
-                <div
-                  key={copy}
-                  className="flex shrink-0 gap-4 pr-4"
-                  aria-hidden={copy > 0 || undefined}
-                >
-                  {proofVideos.map((video, i) => (
-                    <VideoCard
-                      key={`${copy}-${video.slug}`}
-                      video={video}
-                      index={i}
-                      duplicate={copy > 0}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+          <ul className="flex gap-4 overflow-x-auto pb-2 sm:justify-center">
+            {proofVideos.map((video, i) => (
+              <li key={video.slug} className="flex shrink-0">
+                <VideoCard video={video} index={i} />
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
