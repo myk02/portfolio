@@ -30,4 +30,14 @@ export const proofVideos: ProofVideo[] = [
     src: "/videos/how-hackers-fake-urgent-alerts.mp4",
     poster: "/videos/fake-urgent-alerts-poster.webp",
   },
+  {
+    slug: "fake-job-scams",
+    title: "How fake job scams trap you",
+    description:
+      "A too-good-to-be-true job offer uses fabricated urgency and effortless rewards to rush you past the warning signs. The video shows where the trap closes and how to verify an opportunity first.",
+    tag: "Job fraud",
+    duration: "1:07",
+    src: "/videos/how-fake-job-scams-trap-you.mp4",
+    poster: "/videos/fake-job-scams-poster.webp",
+  },
 ];
