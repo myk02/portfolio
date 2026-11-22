@@ -1,5 +1,6 @@
-import { Code2, ExternalLink } from "lucide-react";
+import { ArrowUpRight, Code2, ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { CONTACT } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { Surface } from "@/components/ui/section";
 
@@ -95,6 +96,36 @@ export default function ProjectCard({
   );
 }
 
+/** Fills a partial final row with a route to the rest of the work. */
+function GitHubTile() {
+  return (
+    <Surface className="group relative flex h-full min-h-56 flex-col items-center justify-center gap-3 border-dashed p-6 text-center transition-colors hover:border-foreground/30 hover:bg-card/60">
+      <span
+        className="grid h-11 w-11 place-items-center border border-border text-foreground transition-colors group-hover:border-foreground/30"
+        aria-hidden
+      >
+        <Github size={18} />
+      </span>
+      <div>
+        <p className="font-display font-semibold text-[1.05rem] leading-[1.2] tracking-[-0.015em] text-foreground">
+          More repositories
+        </p>
+        <p className="mx-auto mt-1.5 max-w-[24ch] text-[0.85rem] leading-relaxed text-muted-foreground">
+          Experiments, scripts and prototypes that have not made it into the grid.
+        </p>
+      </div>
+      <a
+        href={CONTACT.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1 inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
+      >
+        Browse GitHub <ArrowUpRight size={13} aria-hidden />
+      </a>
+    </Surface>
+  );
+}
+
 export function ProjectCardGrid({ studies }: { studies: Project[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
@@ -103,6 +134,11 @@ export function ProjectCardGrid({ studies }: { studies: Project[] }) {
           <ProjectCard study={study} index={i} />
         </Reveal>
       ))}
+      {studies.length % 3 !== 0 && (
+        <Reveal delay={studies.length % 3} className="h-full">
+          <GitHubTile />
+        </Reveal>
+      )}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 interface IconProps {
   size?: number;
   className?: string;
+  /** Use the page foreground as the mark so the badge reads on an inverted (foreground) background. */
+  adaptive?: boolean;
 }
 
 /**
@@ -64,7 +66,11 @@ export function LinkedInBrandIcon({ size = 18, className = "" }: IconProps) {
 /**
  * Authentic GitHub Octocat logo (GitHub Purple/Indigo or dark fill #24292F / #EA4AAA)
  */
-export function GitHubBrandIcon({ size = 18, className = "" }: IconProps) {
+export function GitHubBrandIcon({
+  size = 18,
+  className = "",
+  adaptive = false,
+}: IconProps) {
   return (
     <svg
       width={size}
@@ -75,12 +81,17 @@ export function GitHubBrandIcon({ size = 18, className = "" }: IconProps) {
       focusable="false"
       className={className}
     >
-      <circle cx="12" cy="12" r="11" fill="#24292F" />
+      <circle
+        cx="12"
+        cy="12"
+        r="11"
+        fill={adaptive ? "currentColor" : "#24292F"}
+      />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M12 3C7.03 3 3 7.03 3 12c0 3.98 2.58 7.35 6.16 8.54.45.08.62-.2.62-.43 0-.21-.01-.78-.01-1.53-2.5.54-3.03-1.21-3.03-1.21-.41-1.04-1-1.32-1-1.32-.82-.56.06-.55.06-.55.9.06 1.38.93 1.38.93.8 1.38 2.11.98 2.62.75.08-.58.31-.98.57-1.21-2-.23-4.1-1-4.1-4.45 0-.98.35-1.79.93-2.42-.09-.23-.4-1.15.09-2.39 0 0 .76-.24 2.48.93A8.62 8.62 0 0 1 12 7.07c.77 0 1.55.1 2.27.31 1.72-1.17 2.48-.93 2.48-.93.49 1.24.18 2.16.09 2.39.58.63.93 1.44.93 2.42 0 3.46-2.1 4.22-4.11 4.44.32.28.61.83.61 1.67 0 1.21-.01 2.18-.01 2.48 0 .24.16.52.62.43A9.01 9.01 0 0 0 21 12c0-4.97-4.03-9-9-9z"
-        fill="#FFFFFF"
+        fill={adaptive ? "var(--foreground)" : "#FFFFFF"}
       />
     </svg>
   );

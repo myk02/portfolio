@@ -15,7 +15,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
   };
 
   return (
-    <Surface className="group relative flex w-[180px] shrink-0 flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)] sm:w-[200px]">
+    <Surface className="group relative flex h-full w-[180px] shrink-0 flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)] sm:w-[200px]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -108,7 +108,7 @@ export default function VideoProof() {
         <Reveal>
           <ul className="flex gap-4 overflow-x-auto pb-2 sm:justify-center">
             {proofVideos.map((video, i) => (
-              <li key={video.slug} className="flex shrink-0">
+              <li key={video.slug} className="flex shrink-0 self-stretch">
                 <VideoCard video={video} index={i} />
               </li>
             ))}

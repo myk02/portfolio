@@ -48,7 +48,7 @@ export default function SiteFooter() {
               title="GitHub profile"
               className="p-2 text-background/60 hover:text-background transition-colors"
             >
-              <GitHubBrandIcon size={18} />
+              <GitHubBrandIcon size={18} adaptive />
             </a>
             <a
               href={CONTACT.linkedin}
