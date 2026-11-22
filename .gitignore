@@ -44,7 +44,7 @@ pids
 *.pid
 *.seed
 *.pid.lock
-videos/
+/videos/
 
 # Coverage directory used by tools like istanbul
 coverage/

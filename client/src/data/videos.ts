@@ -50,4 +50,14 @@ export const proofVideos: ProofVideo[] = [
     src: "/videos/how-fake-job-scams-trap-you.mp4",
     poster: "/videos/fake-job-scams-poster.webp",
   },
+  {
+    slug: "fake-wifi-hotspots",
+    title: "How fake Wi-Fi hotspots steal passwords",
+    description:
+      "A rogue hotspot mimics a coffee shop or hotel network without a password. The video breaks down how attackers intercept credentials and traffic in transit, and why a VPN or cellular data keeps you safe.",
+    tag: "Network security",
+    duration: "0:33",
+    src: "/videos/how-fake-wifi-hotspots-steal-passwords.mp4",
+    poster: "/videos/fake-wifi-hotspots-poster.webp",
+  },
 ];
