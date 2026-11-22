@@ -15,7 +15,7 @@ import {
 } from "@/components/BrandIcons";
 
 const inputClass =
-  "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/50 outline-none transition-colors focus:border-foreground focus:bg-secondary/20";
+  "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/35 outline-none transition-all focus:border-foreground focus:bg-card focus:shadow-[0_0_0_3px_rgba(10,10,10,0.06)]";
 const labelClass =
   "block text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground mb-2";
 

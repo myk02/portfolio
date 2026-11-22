@@ -103,7 +103,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-secondary/95 border-b border-border backdrop-blur-sm"
+          ? "bg-background/95 border-b border-border backdrop-blur-md shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -141,7 +141,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                 key={link.id}
                 type="button"
                 onClick={() => handleNav(link.id)}
-                className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
+                className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-foreground hover:after:w-full after:transition-all"
               >
                 {link.label}
               </button>

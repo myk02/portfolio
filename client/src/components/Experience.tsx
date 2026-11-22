@@ -215,9 +215,9 @@ export default function Experience() {
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className="flex gap-3.5 py-5 sm:gap-4 sm:py-6"
+                className={`flex gap-3.5 py-5 sm:gap-4 sm:py-6 relative ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
               >
-                <div className="h-11 w-11 shrink-0 overflow-hidden rounded-[3px] border border-border/70 sm:h-12 sm:w-12">
+                <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 sm:h-12 sm:w-12 bg-card">
                   {job.logo}
                 </div>
                 <div className="min-w-0 flex-1">

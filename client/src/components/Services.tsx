@@ -1,10 +1,10 @@
-import { Code2, MonitorCog, Cpu, Sparkles } from "lucide-react";
+import { Shield, Rocket, Megaphone, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 import { Card } from "@/components/ui/kicker";
 import { services } from "@/data/siteContent";
 
-const ROLE_ICONS = [Cpu, Sparkles, Code2, MonitorCog] as const;
+const ROLE_ICONS = [Shield, Rocket, Megaphone, TrendingUp] as const;
 
 /** Four disciplines, skills as chips, one tight proof line each. */
 export default function Services() {
@@ -27,13 +27,13 @@ export default function Services() {
             const Icon = ROLE_ICONS[i % ROLE_ICONS.length];
             return (
               <Reveal key={service.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <Card className="p-4.5 h-full flex flex-col">
+                <Card className="p-4.5 h-full flex flex-col group hover:border-foreground/20 transition-colors hover:shadow-[4px_4px_0_rgba(10,10,10,0.06)]">
                   <div className="flex items-center gap-2.5">
                     <span
-                      className="w-7 h-7 grid place-items-center border border-border bg-secondary text-foreground shrink-0"
+                      className="w-8 h-8 grid place-items-center border border-border bg-card text-foreground shrink-0 group-hover:border-foreground/40 group-hover:bg-foreground/5 transition-colors"
                       aria-hidden
                     >
-                      <Icon size={14} />
+                      <Icon size={15} />
                     </span>
                     <h3 className="font-display font-semibold text-foreground text-[0.95rem] tracking-[-0.015em] leading-snug">
                       {service.title}
@@ -49,7 +49,7 @@ export default function Services() {
                     {service.skills.map(s => (
                       <li
                         key={s}
-                        className="text-[11px] leading-tight border border-border bg-secondary px-1.5 py-1 text-foreground"
+                        className="text-[11px] leading-tight border border-border bg-secondary px-1.5 py-1 text-foreground hover:border-foreground/30 hover:bg-card transition-colors cursor-default"
                       >
                         {s}
                       </li>

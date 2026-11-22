@@ -20,7 +20,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
       />
-      <div className="relative aspect-[9/16] overflow-hidden bg-muted">
+      <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         <video
           ref={videoRef}
           playsInline
@@ -61,7 +61,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
         <h3 className="mt-2 font-display font-semibold text-[0.95rem] leading-[1.2] tracking-[-0.015em] text-foreground">
           {video.title}
         </h3>
-        <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground line-clamp-3">
+        <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground line-clamp-2">
           {video.description}
         </p>
         <div className="pt-3 mt-auto border-t border-border">
