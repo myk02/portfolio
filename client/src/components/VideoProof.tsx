@@ -5,7 +5,13 @@ import { proofVideos, type ProofVideo } from "@/data/videos";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel, Surface } from "@/components/ui/section";
 
-function VideoCard({ video }: { video: ProofVideo }) {
+function VideoCard({
+  video,
+  duplicate = false,
+}: {
+  video: ProofVideo;
+  duplicate?: boolean;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -15,7 +21,7 @@ function VideoCard({ video }: { video: ProofVideo }) {
   };
 
   return (
-    <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)]">
+    <Surface className="group relative flex w-[180px] shrink-0 flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_rgba(10,10,10,0.08)] sm:w-[200px]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -38,34 +44,36 @@ function VideoCard({ video }: { video: ProofVideo }) {
           <button
             type="button"
             onClick={start}
+            tabIndex={duplicate ? -1 : undefined}
             aria-label={`Play ${video.title}`}
             className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors hover:bg-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
           >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-sm transition-transform duration-200 group-hover:scale-105">
-              <Play size={22} fill="currentColor" aria-hidden />
+            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-sm transition-transform duration-200 group-hover:scale-105">
+              <Play size={18} fill="currentColor" aria-hidden />
             </span>
           </button>
         )}
       </div>
-      <div className="p-4.5 flex flex-col flex-1">
-        <div className="flex items-center justify-between gap-2 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+      <div className="p-4 flex flex-col flex-1">
+        <div className="flex items-center justify-between gap-2 font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
           <span>{video.tag}</span>
           <span>{video.duration}</span>
         </div>
-        <h3 className="mt-2 font-display font-semibold text-[1.05rem] leading-[1.2] tracking-[-0.015em] text-foreground">
+        <h3 className="mt-2 font-display font-semibold text-[0.95rem] leading-[1.2] tracking-[-0.015em] text-foreground">
           {video.title}
         </h3>
-        <p className="mt-2 text-[0.85rem] leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground line-clamp-3">
           {video.description}
         </p>
-        <div className="pt-3.5 mt-auto border-t border-border">
+        <div className="pt-3 mt-auto border-t border-border">
           <a
             href={CONTACT.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
+            tabIndex={duplicate ? -1 : undefined}
+            className="inline-flex items-center gap-1.5 text-[0.78rem] font-medium text-foreground underline-offset-4 hover:underline"
           >
-            Watch on TikTok <ExternalLink size={13} aria-hidden />
+            Watch on TikTok <ExternalLink size={12} aria-hidden />
           </a>
         </div>
       </div>
@@ -96,13 +104,27 @@ export default function VideoProof() {
           breaking down how common scams work so they are easier to spot.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-          {proofVideos.map((video, i) => (
-            <Reveal key={video.slug} delay={i} className="h-full">
-              <VideoCard video={video} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div className="proof-marquee relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
+            <div className="proof-marquee-track flex w-max">
+              {[0, 1, 2].map((copy) => (
+                <div
+                  key={copy}
+                  className="flex shrink-0 gap-4 pr-4"
+                  aria-hidden={copy > 0 || undefined}
+                >
+                  {proofVideos.map((video) => (
+                    <VideoCard
+                      key={`${copy}-${video.slug}`}
+                      video={video}
+                      duplicate={copy > 0}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
           More explainers on{" "}

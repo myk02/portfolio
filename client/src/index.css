@@ -546,4 +546,33 @@ section[id] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .proof-marquee {
+    overflow-x: auto;
+  }
+
+  .proof-marquee-track {
+    animation: none;
+  }
+}
+
+/* Video proof: continuous right-to-left marquee. Three copies, so the loop
+   point is a third of the track and the row always covers the container. */
+@keyframes proof-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.3333%);
+  }
+}
+
+.proof-marquee-track {
+  animation: proof-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.proof-marquee:hover .proof-marquee-track,
+.proof-marquee:focus-within .proof-marquee-track {
+  animation-play-state: paused;
 }
