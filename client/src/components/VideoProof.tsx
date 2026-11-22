@@ -26,7 +26,7 @@ export default function VideoProof() {
           breaking down how common scams work so they are easier to spot.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
           {proofVideos.map((video, i) => (
             <Reveal key={video.slug} delay={i} className="h-full">
               <Surface className="h-full flex flex-col overflow-hidden transition-all duration-200 hover:border-foreground/20">

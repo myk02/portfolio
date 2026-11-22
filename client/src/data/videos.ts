@@ -31,6 +31,16 @@ export const proofVideos: ProofVideo[] = [
     poster: "/videos/fake-urgent-alerts-poster.webp",
   },
   {
+    slug: "verification-code-scams",
+    title: "How verification code scams work",
+    description:
+      "A message arrives asking you to read back the one-time code that just landed on your phone. The video shows how that code becomes the key to your account, and why the only safe answer is to never share it.",
+    tag: "Account takeover",
+    duration: "1:11",
+    src: "/videos/how-verification-code-scams-work.mp4",
+    poster: "/videos/verification-code-scams-poster.webp",
+  },
+  {
     slug: "fake-job-scams",
     title: "How fake job scams trap you",
     description:
