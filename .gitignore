@@ -125,3 +125,4 @@ playwright-report/
 .freebuff/
 .manus/
 .manus-logs/
+*PAT*.txt

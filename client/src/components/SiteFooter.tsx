@@ -1,6 +1,5 @@
 import { CONTACT } from "@/lib/site";
 import { positionTitle } from "@/data/siteContent";
-import BuyMeCoffee from "@/components/BuyMeCoffee";
 import {
   TikTokBrandIcon,
   LinkedInBrandIcon,
@@ -62,13 +61,12 @@ export default function SiteFooter() {
               <LinkedInBrandIcon size={18} />
             </a>
           </nav>
-          <BuyMeCoffee buttonClassName="bg-accent text-accent-foreground border border-accent hover:bg-background hover:text-foreground hover:border-background text-xs px-3 py-2" />
         </div>
       </div>
       <div className="container pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-background/50">
         <p>© {new Date().getFullYear()} · Built in Nairobi</p>
         <p className="font-mono text-[11px]">
-          AI with Mike:{" "}
+          Lotts · AI with Mike:{" "}
           <a
             href={CONTACT.tiktok}
             target="_blank"

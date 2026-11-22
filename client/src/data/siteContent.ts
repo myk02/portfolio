@@ -5,61 +5,61 @@ export const roleLine = "Founder · Cybersecurity · Marketing · Sales · Nairo
 export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Mike — Founder. Cybersecurity, marketing and sales. Building AI automations and payment flows.";
+  "Founder of Lotts. Sensitizing people on how to protect their systems and intellectual property through impactful content, and crafting high-converting marketing campaigns to promote tech products.";
 
 export const bioLine =
-  "Mike Waitindi — Nairobi, Kenya. Founder. Cybersecurity, marketing and sales. Building AI workflows and FinTech payment flows.";
+  "Mike Waitindi — Nairobi, Kenya. Founder of Lotts · Cybersecurity · Marketing · Sales. Educating audiences on digital systems and IP protection, and producing marketing content that drives growth.";
 
 export const keyMetrics = [
-  { value: "AI with Mike", label: "Security Videos", note: "TikTok @aiwithmike1" },
-  { value: "Beg → Expert", label: "Cyber Course", note: "Explainer Series" },
-  { value: "AI + Flows", label: "Automations", note: "Workflows & APIs" },
-  { value: "FinTech", label: "Payments", note: "M-Pesa / Paystack" },
+  { value: "Lotts", label: "Cybersecurity Brand", note: "Systems & IP Defense" },
+  { value: "AI with Mike", label: "Awareness Content", note: "TikTok @aiwithmike1" },
+  { value: "Marketing Lead", label: "Campaigns & UGC", note: "Product Promotion & Sales" },
+  { value: "IT & Systems", label: "CLE & Web Sec", note: "Infrastructure Defense" },
 ] as const;
 
 export const services = [
   {
-    title: "Software Development",
-    bracket: "Laravel · React · Next.js · C#",
+    title: "Cybersecurity & Systems Protection",
+    bracket: "Lotts · Defense · Systems · IP Protection",
     skills: [
-      "Web Applications",
-      "REST APIs",
-      "MySQL & MongoDB",
-      "Scalable Architecture",
+      "Systems Protection",
+      "IP & Asset Defense",
+      "Security Sensitization",
+      "Access & Vulnerability Control",
     ],
-    proof: "Building and maintaining robust web applications with clean, efficient code.",
+    proof: "Educating people and organizations to protect their digital systems, data, and intellectual property.",
   },
   {
-    title: "AI & Emerging Tech",
-    bracket: "Automation · LLMs · Workflows",
+    title: "Founder & Venture Building",
+    bracket: "Lotts · Vision · Strategy · Execution",
     skills: [
-      "AI Automations",
-      "LLM Pipelines",
-      "Agent Workflows",
-      "Prompt Guardrails",
+      "Brand Building",
+      "Product Strategy",
+      "Content Channels",
+      "Tech Entrepreneurship",
     ],
-    proof: "Practical AI workflows and automations embedded directly into operations.",
+    proof: "Founded Lotts from the ground up, turning cybersecurity knowledge into an impactful, educational brand.",
   },
   {
-    title: "FinTech & Payments",
-    bracket: "M-Pesa · Paystack · Gateways",
+    title: "Marketing & Content Creation",
+    bracket: "UGC · Video · Campaigns · Tech Storytelling",
     skills: [
-      "Payments Integration",
-      "M-Pesa STK / APIs",
-      "Paystack Checkout",
-      "Checkout Optimization",
-    ],
-    proof: "Frictionless checkout experiences tailored to African and global payment habits.",
-  },
-  {
-    title: "Marketing & Strategy",
-    bracket: "Leads · Video · Growth",
-    skills: [
-      "Explainer Content",
+      "Marketing Campaigns",
       "Product Selling Points",
-      "Tech Communication",
-      "Customer Conversion",
+      "Explainer Video Content",
+      "Audience Engagement",
     ],
-    proof: "Designing content and marketing funnels that educate and convert.",
+    proof: "Crafting marketing content and UGC campaigns that spotlight core product value and maximize selling points.",
+  },
+  {
+    title: "Sales & Conversion",
+    bracket: "Funnels · Client Acquisition · Conversion",
+    skills: [
+      "Customer Acquisition",
+      "Conversion Funnels",
+      "Value Proposition",
+      "Retention & Onboarding",
+    ],
+    proof: "Designing sales funnels and growth strategies that transform viewer attention into paying customers.",
   },
 ] as const;

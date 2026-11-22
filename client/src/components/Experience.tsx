@@ -134,8 +134,9 @@ const JOBS: Job[] = [
     duration: "2 mos",
     location: "Eastern Africa",
     workType: "Remote",
-    description: "My AI startup.",
-    skills: "Cybersecurity and Start-up Ventures",
+    description:
+      "Founded Lotts as a dedicated cybersecurity brand and channel that sensitizes businesses and creators on how to protect their systems and intellectual property through high-impact content. Also spearheading marketing content creation and product promotion.",
+    skills: "Cybersecurity, Intellectual Property Protection, Marketing Content Creation & Startup Ventures",
     current: true,
     logo: <LottsLogo />,
   },
@@ -147,6 +148,9 @@ const JOBS: Job[] = [
     duration: "2 yrs 11 mos",
     location: "Karen ward, Nairobi County, Kenya",
     workType: "On-site",
+    description:
+      "Administering IT infrastructure, network security, and user support for 30+ staff and students weekly while safeguarding sensitive institutional records and student portal integrity.",
+    skills: "IT Systems, Cybersecurity, Network Administration & Access Control",
     current: true,
     logo: <CleLogo />,
   },
@@ -159,8 +163,8 @@ const JOBS: Job[] = [
     location: "United States",
     workType: "Remote",
     description:
-      "Making premium marketing campaigns to maximize product selling points.",
-    skills: "AI & Emerging Technologies and Research Collaboration",
+      "Produced and scaled high-converting UGC marketing campaigns designed to highlight product selling points, build trust, and drive user acquisition and sales.",
+    skills: "Marketing Campaigns, UGC Content, Product Promotion & Sales Conversion",
     logo: <WhopLogo />,
   },
   {
@@ -171,8 +175,9 @@ const JOBS: Job[] = [
     duration: "8 mos",
     location: "Remote",
     workType: "Remote",
-    description: "Responsible for creating web apps for clients.",
-    skills: "Software Development, Full-Stack Development and +5 skills",
+    description:
+      "Engineered secure, responsive web applications for international clients with clean architecture, robust APIs, and performant user experiences.",
+    skills: "Software Development, Full-Stack Development & Web Security",
     logo: <FreelancerLogo />,
   },
 ];

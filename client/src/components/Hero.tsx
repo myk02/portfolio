@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { CONTACT } from "@/lib/site";
-import BuyMeCoffee from "@/components/BuyMeCoffee";
 
 interface HeroProps {
   onCtaClick: (id: string) => void;
@@ -51,8 +50,9 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Mike — Founder. Cybersecurity, marketing and sales. Building AI
-            automations and payment flows.
+            Founder of Lotts. Sensitizing people on how to protect their systems
+            and intellectual property through engaging content, and creating
+            marketing campaigns that promote and sell tech products.
           </motion.p>
 
           <motion.div
@@ -68,7 +68,6 @@ export default function Hero({ onCtaClick }: HeroProps) {
             >
               View work <ArrowDown size={14} />
             </button>
-            <BuyMeCoffee buttonClassName="gap-2" />
             <a href={CONTACT.emailHref} className="btn btn-secondary gap-2">
               Contact
             </a>
@@ -82,9 +81,9 @@ export default function Hero({ onCtaClick }: HeroProps) {
             transition={{ duration: 0.5, delay: 0.25 }}
           >
             {[
-                { value: "AI with Mike", sub: "TikTok channel I run" },
-              { value: "Cyber Course", sub: "Beginner to Expert" },
-              { value: "AI + FinTech", sub: "Automations & Payments" },
+              { value: "Lotts", sub: "Cybersecurity Brand" },
+              { value: "Systems & IP", sub: "Protection & Awareness" },
+              { value: "Marketing & Sales", sub: "Campaigns & Growth" },
             ].map(item => (
               <div key={item.value}>
                 <div className="text-[0.82rem] font-display font-semibold text-foreground">

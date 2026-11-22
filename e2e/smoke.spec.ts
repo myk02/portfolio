@@ -26,7 +26,7 @@ test.describe("home page", () => {
     ).toBeVisible();
     await expect(
       hero.getByRole("button", { name: /buy me a coffee/i })
-    ).toBeVisible();
+    ).toHaveCount(0);
     await expect(hero.getByRole("link", { name: "Contact" })).toHaveAttribute(
       "href",
       "mailto:mikegary201@gmail.com"
@@ -42,10 +42,12 @@ test.describe("home page", () => {
     await expect(
       page
         .locator("#skills")
-        .getByRole("heading", { name: "Software Development" })
+        .getByRole("heading", { name: "Cybersecurity & Systems Protection" })
     ).toBeVisible();
     await expect(
-      page.locator("#skills").getByRole("heading", { name: "FinTech & Payments" })
+      page
+        .locator("#skills")
+        .getByRole("heading", { name: "Marketing & Content Creation" })
     ).toBeVisible();
 
     await expect(
@@ -194,17 +196,13 @@ test.describe("contact form", () => {
   });
 });
 
-test.describe("buy me a coffee", () => {
-  test("footer shows buy-me-a-coffee and opens the tip dialog", async ({
+test.describe("buy me a coffee button removed", () => {
+  test("footer and hero do not render buy-me-a-coffee button", async ({
     page,
   }) => {
     await page.goto("/");
-    const footer = page.locator("footer");
     await expect(
-      footer.getByRole("button", { name: /buy me a coffee/i })
-    ).toBeVisible();
-    await footer.getByRole("button", { name: /buy me a coffee/i }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.keyboard.press("Escape");
+      page.getByRole("button", { name: /buy me a coffee/i })
+    ).toHaveCount(0);
   });
 });
