@@ -14,6 +14,10 @@ export default function Hero({ onCtaClick }: HeroProps) {
         className="hero-grid absolute inset-0 pointer-events-none opacity-60"
         aria-hidden
       />
+      <div
+        className="hero-spotlight absolute inset-0 pointer-events-none"
+        aria-hidden
+      />
       {/* Sleek top accent line */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" aria-hidden />
 

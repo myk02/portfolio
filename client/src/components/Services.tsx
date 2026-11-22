@@ -32,7 +32,8 @@ export default function Services() {
             const Icon = ROLE_ICONS[i % ROLE_ICONS.length];
             return (
               <Reveal key={service.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <Card className="p-4.5 h-full flex flex-col group hover:border-foreground/30 transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_rgba(10,10,10,0.06)] relative">
+                <Card className="p-4.5 h-full flex flex-col group hover:border-foreground/30 transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_rgba(10,10,10,0.06)] relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
                   <div className="flex items-center justify-between gap-2">
                     <span
                       className="w-8 h-8 grid place-items-center border border-border bg-card text-foreground shrink-0 group-hover:bg-accent group-hover:text-accent-foreground transition-colors"

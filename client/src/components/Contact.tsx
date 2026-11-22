@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Copy, Check } from "lucide-react";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { CONTACT } from "@/lib/site";
@@ -28,11 +28,20 @@ export default function Contact() {
   const [notified, setNotified] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
   const [invalid, setInvalid] = useState({
     name: false,
     email: false,
     message: false,
   });
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    void navigator.clipboard?.writeText(CONTACT.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const clearFieldError = (field: keyof typeof invalid) => {
     setInvalid(prev => ({ ...prev, [field]: false }));
@@ -168,15 +177,36 @@ export default function Contact() {
                       </span>
                       <span className="font-medium">TikTok · @aiwithmike1</span>
                     </a>
-                    <a
-                      href={CONTACT.emailHref}
-                      className="flex items-center gap-3 p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group"
-                    >
-                      <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
-                        <GmailBrandIcon size={16} />
-                      </span>
-                      <span className="font-medium">{CONTACT.email}</span>
-                    </a>
+                    <div className="flex items-center justify-between p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group">
+                      <a
+                        href={CONTACT.emailHref}
+                        className="flex items-center gap-3 flex-1 min-w-0"
+                      >
+                        <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
+                          <GmailBrandIcon size={16} />
+                        </span>
+                        <span className="font-medium truncate">{CONTACT.email}</span>
+                      </a>
+                      <button
+                        type="button"
+                        onClick={handleCopyEmail}
+                        title={copied ? "Copied!" : "Copy email address"}
+                        aria-label="Copy email"
+                        className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-card border border-transparent hover:border-border transition-colors flex items-center gap-1 shrink-0"
+                      >
+                        {copied ? (
+                          <>
+                            <Check size={13} className="text-emerald-500" />
+                            <span className="text-emerald-500 font-medium">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={13} />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                     <a
                       href={CONTACT.whatsapp}
                       target="_blank"

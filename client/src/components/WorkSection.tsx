@@ -27,6 +27,10 @@ export default function WorkSection() {
           </span>
         </Reveal>
 
+        <p className="mx-auto mb-8 max-w-xl text-center text-[0.92rem] leading-relaxed text-muted-foreground">
+          Digital products and web applications built for performance, security, and responsive architecture.
+        </p>
+
         <ProjectCardGrid studies={liveStudies} />
       </div>
     </section>
