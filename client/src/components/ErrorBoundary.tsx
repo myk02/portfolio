@@ -42,8 +42,8 @@ class ErrorBoundary extends Component<Props, State> {
             ) : (
               <p className="text-sm text-muted-foreground mb-6 text-center">
                 Please refresh the page. If this persists, contact{" "}
-                <a href="mailto:mikegary201@gmail.com" className="underline">
-                  mikegary201@gmail.com
+                <a href="mailto:mikekagera1@gmail.com" className="underline">
+                  mikekagera1@gmail.com
                 </a>
                 .
               </p>

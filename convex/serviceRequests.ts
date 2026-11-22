@@ -50,7 +50,7 @@ async function notifyOwner(args: {
     return false;
   }
 
-  const to = process.env.CONTACT_TO_EMAIL ?? "mikegary201@gmail.com";
+  const to = process.env.CONTACT_TO_EMAIL ?? "mikekagera1@gmail.com";
   const from =
     process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>";
 

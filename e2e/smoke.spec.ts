@@ -29,7 +29,7 @@ test.describe("home page", () => {
     ).toHaveCount(0);
     await expect(hero.getByRole("link", { name: "Contact" })).toHaveAttribute(
       "href",
-      "mailto:mikegary201@gmail.com"
+      "mailto:mikekagera1@gmail.com"
     );
     await expect(page.getByRole("button", { name: "Download CV" })).toHaveCount(
       0

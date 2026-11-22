@@ -102,7 +102,7 @@ textLine("Full-Stack Software Engineer \u2014 Connecting Dots in Tech", { size: 
 y -= 15;
 textLine("Nairobi, Kenya \u00B7 Remote", { size: 9, y, color: [0.4, 0.4, 0.4] });
 y -= 12.5;
-textLine("mikegary201@gmail.com  \u00B7  +254 792 618 156  \u00B7  linkedin.com/in/mike-waitindi-654bb2344", { size: 9, y, color: [0.4, 0.4, 0.4] });
+textLine("mikekagera1@gmail.com  \u00B7  +254 792 618 156  \u00B7  linkedin.com/in/mike-waitindi-654bb2344", { size: 9, y, color: [0.4, 0.4, 0.4] });
 y -= 12.5;
 textLine("Portfolio: mikeships.vercel.app", { size: 9, y, color: [0.4, 0.4, 0.4] });
 y -= 14;

@@ -5,8 +5,8 @@ export const SITE_URL = "https://mikeships.vercel.app";
 export const OWNER = "Mike Waitindi";
 
 export const CONTACT = {
-  email: "mikegary201@gmail.com",
-  emailHref: "mailto:mikegary201@gmail.com",
+  email: "mikekagera1@gmail.com",
+  emailHref: "mailto:mikekagera1@gmail.com",
   /** canonical phone format — used everywhere on the site */
   phone: "+254 792 618 156",
   whatsapp: "https://wa.me/254792618156",
