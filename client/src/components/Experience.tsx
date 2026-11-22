@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Gem, Pencil, Plus } from "lucide-react";
+import { Gem } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 
@@ -201,12 +201,8 @@ export default function Experience() {
               Experience
             </h2>
           </div>
-          <span
-            aria-hidden
-            className="flex items-center gap-4 pt-1 text-muted-foreground/70"
-          >
-            <Plus size={18} strokeWidth={1.75} />
-            <Pencil size={16} strokeWidth={1.75} />
+          <span className="section-note hidden sm:inline-block">
+            Career &amp; Leadership
           </span>
         </Reveal>
 

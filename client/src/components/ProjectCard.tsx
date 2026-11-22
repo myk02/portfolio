@@ -50,12 +50,33 @@ export default function ProjectCard({
           </div>
         ))}
       <div className="p-4.5 flex flex-col flex-1">
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <span className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 bg-secondary text-foreground/80 border border-border">
+            {study.tileBadge}
+          </span>
+          <span className="font-mono text-[11px] text-muted-foreground">
+            {study.year}
+          </span>
+        </div>
         <h3 className="font-display font-semibold text-[1.05rem] text-foreground leading-[1.2] tracking-[-0.015em]">
           {study.name}
         </h3>
-        <p className="mt-2 text-[0.85rem] text-muted-foreground leading-relaxed">
+        <p className="mt-1.5 text-[0.85rem] text-muted-foreground leading-relaxed">
           {study.outcomeTitle}
         </p>
+
+        {study.stack && study.stack.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-3">
+            {study.stack.map(tech => (
+              <span
+                key={tech}
+                className="font-mono text-[10px] text-muted-foreground/80 bg-secondary/60 px-1.5 py-0.5 border border-border/50"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
 
         {link && (
           <div className="pt-3.5 mt-auto border-t border-border">

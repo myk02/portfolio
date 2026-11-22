@@ -146,9 +146,12 @@ export default function Contact() {
               <Reveal delay={1}>
                 <Surface className="p-4 space-y-3">
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-                    Contact &amp; profiles
+                    Direct Contact
                   </p>
-                  <p className="text-[0.82rem] text-foreground font-medium leading-snug">
+                  <p className="text-[0.85rem] text-muted-foreground leading-relaxed">
+                    Have an idea, want to collaborate on cybersecurity awareness, or need high-converting marketing campaigns? Reach out below — I read and reply to every message personally.
+                  </p>
+                  <p className="text-[0.82rem] text-foreground font-medium leading-snug pt-1 border-t border-border/60">
                     Nairobi · Replies within 24h
                   </p>
                   <div className="space-y-2.5">

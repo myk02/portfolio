@@ -27,18 +27,21 @@ export default function Services() {
             const Icon = ROLE_ICONS[i % ROLE_ICONS.length];
             return (
               <Reveal key={service.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <Card className="p-4.5 h-full flex flex-col group hover:border-foreground/20 transition-colors hover:shadow-[4px_4px_0_rgba(10,10,10,0.06)]">
-                  <div className="flex items-center gap-2.5">
+                <Card className="p-4.5 h-full flex flex-col group hover:border-foreground/30 transition-all hover:-translate-y-0.5 hover:shadow-[4px_4px_0_rgba(10,10,10,0.06)] relative">
+                  <div className="flex items-center justify-between gap-2">
                     <span
-                      className="w-8 h-8 grid place-items-center border border-border bg-card text-foreground shrink-0 group-hover:border-foreground/40 group-hover:bg-foreground/5 transition-colors"
+                      className="w-8 h-8 grid place-items-center border border-border bg-card text-foreground shrink-0 group-hover:bg-accent group-hover:text-accent-foreground transition-colors"
                       aria-hidden
                     >
                       <Icon size={15} />
                     </span>
-                    <h3 className="font-display font-semibold text-foreground text-[0.95rem] tracking-[-0.015em] leading-snug">
-                      {service.title}
-                    </h3>
+                    <span className="font-mono text-[10px] text-muted-foreground/60 tracking-wider">
+                      0{i + 1}
+                    </span>
                   </div>
+                  <h3 className="mt-3 font-display font-semibold text-foreground text-[0.98rem] tracking-[-0.015em] leading-snug">
+                    {service.title}
+                  </h3>
                   <p className="mt-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                     {service.bracket}
                   </p>

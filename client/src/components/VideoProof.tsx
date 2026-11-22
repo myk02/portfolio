@@ -24,8 +24,8 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
         <video
           ref={videoRef}
           playsInline
+          controls
           preload="none"
-          controls={playing}
           poster={video.poster}
           aria-label={`${video.title} (${video.duration})`}
           onEnded={() => setPlaying(false)}

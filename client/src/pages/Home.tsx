@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/Hero";
+import AboutEthos from "@/components/AboutEthos";
 import WorkSection from "@/components/WorkSection";
 import VideoProof from "@/components/VideoProof";
 import Services from "@/components/Services";
@@ -40,6 +41,7 @@ export default function Home() {
 
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero onCtaClick={scrollToHomeSection} />
+        <AboutEthos />
         <WorkSection />
         <VideoProof />
         <Services />
