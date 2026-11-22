@@ -95,6 +95,9 @@ export default function VideoProof() {
               Watch the work
             </h2>
           </div>
+          <span className="section-note hidden sm:inline-block">
+            Short-form · TikTok
+          </span>
         </Reveal>
 
         <p className="mx-auto mb-8 max-w-xl text-center text-[0.92rem] leading-relaxed text-muted-foreground">

@@ -207,47 +207,58 @@ export default function Experience() {
         </Reveal>
 
         <Reveal>
-          <ol className="max-w-3xl list-none divide-y divide-border border-y border-border p-0">
+          <ol className="max-w-5xl list-none divide-y divide-border border-y border-border p-0">
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className={`flex gap-3.5 py-5 sm:gap-4 sm:py-6 relative ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
+                className={`relative py-5 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-10 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
               >
-                <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 sm:h-12 sm:w-12 bg-card">
-                  {job.logo}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-display text-[0.98rem] font-semibold leading-snug text-foreground">
-                      {job.role}
-                    </h3>
-                    {job.current && (
-                      <span className="shrink-0 rounded-[2px] bg-foreground/10 px-1.5 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/75">
-                        Present
-                      </span>
-                    )}
+                <div className="flex gap-3.5 sm:gap-4 lg:block">
+                  <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 sm:h-12 sm:w-12 bg-card">
+                    {job.logo}
                   </div>
-                  <p className="mt-0.5 text-[0.84rem] leading-snug text-foreground">
-                    {job.company}
-                    <span className="text-muted-foreground">
-                      {" "}
-                      · {job.employment}
-                    </span>
-                  </p>
-                  <p className="mt-1 text-[0.78rem] leading-snug text-muted-foreground">
-                    {job.period} · {job.duration}
-                  </p>
+                  <div className="min-w-0 flex-1 lg:mt-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-[1.02rem] font-semibold leading-snug text-foreground">
+                        {job.role}
+                      </h3>
+                      {job.current && (
+                        <span className="shrink-0 rounded-[2px] bg-foreground/10 px-1.5 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/75 lg:hidden">
+                          Present
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-0.5 text-[0.84rem] leading-snug text-foreground">
+                      {job.company}
+                      <span className="text-muted-foreground">
+                        {" "}
+                        · {job.employment}
+                      </span>
+                    </p>
+                    <p className="mt-1 flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-muted-foreground">
+                      {job.period}
+                      {job.current && (
+                        <span className="hidden rounded-[2px] bg-accent/25 px-1.5 py-0.5 text-foreground/80 lg:inline-block">
+                          Present
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-3 min-w-0 lg:mt-0">
                   <p className="text-[0.78rem] leading-snug text-muted-foreground">
                     {job.location}
                     {job.workType !== job.location && ` · ${job.workType}`}
+                    {" · "}
+                    {job.duration}
                   </p>
                   {job.description && (
-                    <p className="mt-2.5 text-[0.84rem] leading-relaxed text-foreground/90">
+                    <p className="mt-2.5 text-[0.86rem] leading-relaxed text-foreground/90">
                       {job.description}
                     </p>
                   )}
                   {job.skills && (
-                    <p className="mt-2 flex items-start gap-1.5 text-[0.78rem] leading-snug text-muted-foreground">
+                    <p className="mt-2.5 flex items-start gap-1.5 text-[0.78rem] leading-snug text-muted-foreground">
                       <Gem
                         size={12}
                         className="mt-[0.2rem] shrink-0"

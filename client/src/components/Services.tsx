@@ -16,10 +16,15 @@ export default function Services() {
     >
       <div className="container">
         <Reveal className="section-head">
-          <SectionLabel>Capabilities</SectionLabel>
-          <h2 id="skills-heading" className="heading-section text-foreground">
-            What I do
-          </h2>
+          <div>
+            <SectionLabel>Capabilities</SectionLabel>
+            <h2 id="skills-heading" className="heading-section text-foreground">
+              What I do
+            </h2>
+          </div>
+          <span className="section-note hidden sm:inline-block">
+            Four disciplines · One operator
+          </span>
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">

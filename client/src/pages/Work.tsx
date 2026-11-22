@@ -31,14 +31,17 @@ export default function Work() {
           </Link>
 
           <div className="section-head mt-7 mb-6">
-            <span className="section-label">
-              <span className="section-label-line" aria-hidden /> Work index
-            </span>
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <div>
+              <span className="section-label">
+                <span className="section-label-line" aria-hidden /> Work index
+              </span>
               <h1 className="heading-section text-foreground">
                 Selected projects
               </h1>
             </div>
+            <span className="section-note hidden sm:inline-block">
+              0{liveStudies.length} shipped builds
+            </span>
           </div>
 
           <ProjectCardGrid studies={liveStudies} />

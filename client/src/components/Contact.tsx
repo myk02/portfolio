@@ -133,14 +133,16 @@ export default function Contact() {
       <div className="container">
         <div>
           <Reveal className="section-head">
-            <SectionLabel>Contact</SectionLabel>
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <div>
+              <SectionLabel>Contact</SectionLabel>
               <h2 className="heading-section text-foreground">Let's talk</h2>
-              <p className="section-note">Replies in 24h · Mon–Sat, EAT</p>
             </div>
+            <p className="section-note hidden sm:block">
+              Replies in 24h · Mon–Sat, EAT
+            </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4 items-start max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4 items-start max-w-4xl">
             {/* left — info */}
             <div className="space-y-4">
               <Reveal delay={1}>

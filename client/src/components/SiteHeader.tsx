@@ -15,6 +15,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
   const [isHome] = useRoute("/");
   const [location, setLocation] = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -33,6 +34,27 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  /* Highlight the section currently under the header (home only) */
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection("");
+      return;
+    }
+    const ids = ["about", "work", "proof", "skills", "experience", "contact"];
+    const onScroll = () => {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= marker) current = id;
+      }
+      setActiveSection(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   useEffect(() => {
     const onResize = () => {
@@ -142,7 +164,12 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                 key={link.id}
                 type="button"
                 onClick={() => handleNav(link.id)}
-                className="text-[0.8125rem] font-medium tracking-[-0.005em] text-muted-foreground hover:text-foreground transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-foreground hover:after:w-full after:transition-all"
+                aria-current={activeSection === link.id ? "true" : undefined}
+                className={`text-[0.8125rem] font-medium tracking-[-0.005em] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-accent after:transition-all ${
+                  activeSection === link.id
+                    ? "text-foreground after:w-full"
+                    : "text-muted-foreground hover:text-foreground after:w-0 hover:after:w-full"
+                }`}
               >
                 {link.label}
               </button>
@@ -205,7 +232,12 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
                     key={link.id}
                     type="button"
                     onClick={() => handleNav(link.id)}
-                    className="block w-full text-left text-sm font-medium text-foreground hover:opacity-70 transition-opacity"
+                    aria-current={activeSection === link.id ? "true" : undefined}
+                    className={`block w-full text-left text-sm font-medium transition-opacity hover:opacity-70 ${
+                      activeSection === link.id
+                        ? "text-foreground border-l-2 border-accent pl-2"
+                        : "text-foreground"
+                    }`}
                   >
                     {link.label}
                   </button>

@@ -7,6 +7,7 @@ export default function WorkSection() {
   return (
     <section
       id="work"
+      aria-labelledby="work-heading"
       className="section-pad bg-secondary border-t border-border relative"
     >
       <div
@@ -15,10 +16,15 @@ export default function WorkSection() {
       />
       <div className="container">
         <Reveal className="section-head">
-          <SectionLabel>Proof · 0{liveStudies.length} projects</SectionLabel>
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h2 className="heading-section text-foreground">Selected work</h2>
+          <div>
+            <SectionLabel>Portfolio</SectionLabel>
+            <h2 id="work-heading" className="heading-section text-foreground">
+              Selected work
+            </h2>
           </div>
+          <span className="section-note hidden sm:inline-block">
+            0{liveStudies.length} shipped builds
+          </span>
         </Reveal>
 
         <ProjectCardGrid studies={liveStudies} />
