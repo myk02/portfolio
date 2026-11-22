@@ -7,9 +7,11 @@ import { SectionLabel, Surface } from "@/components/ui/section";
 
 function VideoCard({
   video,
+  index,
   duplicate = false,
 }: {
   video: ProofVideo;
+  index: number;
   duplicate?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -56,8 +58,14 @@ function VideoCard({
       </div>
       <div className="p-4 flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2 font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
-          <span>{video.tag}</span>
-          <span>{video.duration}</span>
+          <span className="flex items-center gap-1.5 truncate">
+            <span className="text-foreground">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span aria-hidden>·</span>
+            <span className="truncate">{video.tag}</span>
+          </span>
+          <span className="shrink-0">{video.duration}</span>
         </div>
         <h3 className="mt-2 font-display font-semibold text-[0.95rem] leading-[1.2] tracking-[-0.015em] text-foreground">
           {video.title}
@@ -113,10 +121,11 @@ export default function VideoProof() {
                   className="flex shrink-0 gap-4 pr-4"
                   aria-hidden={copy > 0 || undefined}
                 >
-                  {proofVideos.map((video) => (
+                  {proofVideos.map((video, i) => (
                     <VideoCard
                       key={`${copy}-${video.slug}`}
                       video={video}
+                      index={i}
                       duplicate={copy > 0}
                     />
                   ))}
