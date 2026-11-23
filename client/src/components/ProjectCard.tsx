@@ -96,7 +96,7 @@ export default function ProjectCard({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline group-hover:text-accent-foreground transition-colors"
+              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
             >
               {link.label} <link.Icon size={13} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>

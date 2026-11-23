@@ -29,7 +29,7 @@ export default function Videos() {
             ← Home
           </Link>
 
-          <div className="section-head mt-7 mb-6">
+          <div className="section-head mt-7">
             <div>
               <span className="section-label">
                 <span className="section-label-line" aria-hidden /> Video proof
@@ -37,17 +37,16 @@ export default function Videos() {
               <h1 className="heading-section text-foreground">
                 Watch the work
               </h1>
+              <p className="mt-2 max-w-xl text-[0.92rem] leading-relaxed text-muted-foreground">
+                Short scam breakdowns from the AI with Mike channel.
+              </p>
             </div>
             <span className="section-note hidden sm:inline-block">
               {proofVideos.length} clips · AI with Mike
             </span>
           </div>
 
-          <p className="mb-8 max-w-xl text-[0.92rem] leading-relaxed text-muted-foreground">
-            Short scam breakdowns from the AI with Mike channel.
-          </p>
-
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {proofVideos.map((video, i) => (
               <li key={video.slug} className="flex self-stretch">
                 <VideoCard video={video} index={i} />

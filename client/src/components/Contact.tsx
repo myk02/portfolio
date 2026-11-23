@@ -15,7 +15,7 @@ import {
 } from "@/components/BrandIcons";
 
 const inputClass =
-  "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/35 outline-none transition-all focus:border-foreground focus:bg-card focus:shadow-[0_0_0_3px_rgba(10,10,10,0.06)]";
+  "w-full bg-card border border-border px-3.5 min-h-[46px] text-[0.9375rem] text-foreground placeholder:text-foreground/35 outline-none transition-all hover:border-foreground/25 focus:border-accent focus:bg-card focus:ring-1 focus:ring-accent/40";
 const labelClass =
   "block text-[0.6875rem] font-mono font-medium uppercase tracking-[0.12em] text-muted-foreground mb-2";
 
@@ -137,21 +137,24 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="section-pad bg-secondary border-t border-border"
     >
       <div className="container">
-        <div>
+        <div className="max-w-4xl">
           <Reveal className="section-head">
             <div>
               <SectionLabel>Contact</SectionLabel>
-              <h2 className="heading-section text-foreground">Let's talk</h2>
+              <h2 id="contact-heading" className="heading-section text-foreground">
+                Let's talk
+              </h2>
             </div>
             <p className="section-note hidden sm:block">
               Replies in 24h · Mon–Sat, EAT
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4 items-start max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-4 items-start">
             {/* left — info */}
             <div className="space-y-4">
               <Reveal delay={1}>

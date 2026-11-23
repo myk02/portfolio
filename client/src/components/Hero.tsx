@@ -22,7 +22,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" aria-hidden />
 
       <div className="container relative pt-16 pb-16 md:pt-24 md:pb-28">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Live status badge */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -49,7 +49,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
 
           {/* Title line */}
           <motion.p
-            className="mt-3 text-xs sm:text-sm font-mono uppercase tracking-[0.14em] text-foreground/60"
+            className="mt-3 text-[0.68rem] sm:text-xs font-mono uppercase tracking-[0.12em] sm:tracking-[0.16em] text-foreground/60 text-balance"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -106,7 +106,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.28 }}
           >
-            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <Shield size={15} className="text-accent shrink-0" aria-hidden />
@@ -120,7 +120,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <Sparkles size={15} className="text-accent shrink-0" aria-hidden />
@@ -134,7 +134,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="p-4 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <TrendingUp size={15} className="text-accent shrink-0" aria-hidden />

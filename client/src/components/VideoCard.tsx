@@ -42,7 +42,11 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
               alt=""
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            />
+            <span
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0"
+              aria-hidden
             />
             <button
               type="button"
@@ -79,7 +83,7 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
             href={CONTACT.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[0.8rem] font-medium text-foreground underline-offset-4 hover:underline group-hover:text-accent-foreground transition-colors"
+            className="inline-flex items-center gap-1.5 text-[0.8rem] font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
           >
             Watch on TikTok <ExternalLink size={12} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>

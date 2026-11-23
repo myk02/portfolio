@@ -11,7 +11,7 @@ export default function VideoProof() {
     <section
       id="proof"
       aria-labelledby="proof-heading"
-      className="section-pad bg-secondary border-t border-border"
+      className="section-pad bg-background border-t border-border"
     >
       <div className="container">
         <Reveal className="section-head">

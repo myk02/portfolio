@@ -30,7 +30,7 @@ export default function Work() {
             ← Home
           </Link>
 
-          <div className="section-head mt-7 mb-6">
+          <div className="section-head mt-7">
             <div>
               <span className="section-label">
                 <span className="section-label-line" aria-hidden /> Work index
@@ -44,7 +44,9 @@ export default function Work() {
             </span>
           </div>
 
-          <ProjectCardGrid studies={liveStudies} />
+          <div className="mt-8">
+            <ProjectCardGrid studies={liveStudies} />
+          </div>
         </div>
 
         <VideoProof />

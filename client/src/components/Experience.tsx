@@ -186,7 +186,7 @@ export default function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="section-pad bg-secondary border-t border-border"
+      className="section-pad bg-background border-t border-border"
     >
       <div className="container">
         <Reveal className="section-head items-start">
@@ -209,7 +209,7 @@ export default function Experience() {
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className={`group relative py-5 transition-colors hover:bg-card/30 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-10 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
+                className={`group relative py-5 transition-colors hover:bg-card/30 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-12 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
               >
                 <div className="flex gap-3.5 sm:gap-4 lg:block">
                   <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 bg-card transition-colors group-hover:border-foreground/30 sm:h-12 sm:w-12">
@@ -221,7 +221,7 @@ export default function Experience() {
                         {job.role}
                       </h3>
                       {job.current && (
-                        <span className="shrink-0 rounded-[2px] bg-foreground/10 px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/80 inline-flex items-center gap-1.5 lg:hidden">
+                        <span className="shrink-0 bg-foreground/10 px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/80 inline-flex items-center gap-1.5 lg:hidden">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
                           Present
                         </span>
@@ -237,7 +237,7 @@ export default function Experience() {
                     <p className="mt-1 flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-muted-foreground">
                       {job.period}
                       {job.current && (
-                        <span className="hidden rounded-[2px] bg-accent/25 px-2 py-0.5 text-foreground/90 lg:inline-flex items-center gap-1.5">
+                        <span className="hidden bg-accent/25 px-2 py-0.5 text-foreground/90 lg:inline-flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
                           Present
                         </span>
@@ -253,7 +253,7 @@ export default function Experience() {
                     {job.duration}
                   </p>
                   {job.description && (
-                    <p className="mt-2.5 text-[0.86rem] leading-relaxed text-foreground/90">
+                    <p className="mt-2.5 text-[0.9rem] leading-relaxed text-foreground/90">
                       {job.description}
                     </p>
                   )}

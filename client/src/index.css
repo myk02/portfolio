@@ -227,6 +227,9 @@
   }
 }
 
+/* Component classes live in the components layer so Tailwind utilities
+   (hidden, text-xs, spacing…) can still override them where they are used. */
+@layer components {
 .section-pad {
   padding-top: clamp(3.25rem, 5.5vw, 5rem);
   padding-bottom: clamp(3.25rem, 5.5vw, 5rem);
@@ -453,7 +456,13 @@
 }
 
 .btn-ghost:hover {
-  color: var(--accent);
+  background: var(--secondary);
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
 }
 
 /* Resume-grade readability */

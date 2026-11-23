@@ -10,10 +10,6 @@ export default function WorkSection() {
       aria-labelledby="work-heading"
       className="section-pad bg-secondary border-t border-border relative"
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-[1px] bg-accent/40"
-        aria-hidden
-      />
       <div className="container">
         <Reveal className="section-head">
           <div>

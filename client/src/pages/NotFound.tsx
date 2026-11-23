@@ -13,14 +13,14 @@ export default function NotFound() {
       />
       <div className="absolute inset-0 pointer-events-none opacity-[0.04]" aria-hidden>
         <div
-        className="w-full h-full text-foreground"
-        style={{
-          backgroundImage:
-            "linear-gradient(color-mix(in srgb, currentColor 80%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, currentColor 80%, transparent) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-    </div>
+          className="w-full h-full text-foreground"
+          style={{
+            backgroundImage:
+              "linear-gradient(color-mix(in srgb, currentColor 80%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, currentColor 80%, transparent) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
       <div className="relative max-w-lg w-full">
         <Surface className="p-8 sm:p-10 text-center">
           <div className="inline-flex items-center gap-2 border border-accent bg-accent/10 px-3 py-1.5 mb-6">
