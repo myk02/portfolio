@@ -175,7 +175,7 @@ export default function Contact() {
                       <span className="w-8 h-8 grid place-items-center border border-border bg-card group-hover:border-foreground/50 group-hover:bg-accent group-hover:text-accent-foreground transition-colors shrink-0">
                         <TikTokBrandIcon size={16} />
                       </span>
-                      <span className="font-medium">TikTok · @aiwithmike1</span>
+                      <span className="font-medium">TikTok · @littlabs</span>
                     </a>
                     <div className="flex items-center justify-between p-1.5 -mx-1.5 text-xs text-foreground hover:bg-secondary/60 transition-all group">
                       <a

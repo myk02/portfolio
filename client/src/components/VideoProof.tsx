@@ -127,7 +127,7 @@ export default function VideoProof() {
             rel="noopener noreferrer"
             className="font-medium text-foreground underline-offset-4 hover:underline"
           >
-            TikTok @aiwithmike1
+            TikTok @littlabs
           </a>
         </p>
       </div>

@@ -27,8 +27,8 @@ export default function SiteFooter() {
               href={CONTACT.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-                aria-label="TikTok @aiwithmike1"
-                title="TikTok @aiwithmike1"
+                aria-label="TikTok @littlabs"
+                title="TikTok @littlabs"
               className="p-2 text-background/60 hover:text-background transition-colors"
             >
               <TikTokBrandIcon size={18} />
@@ -84,7 +84,7 @@ export default function SiteFooter() {
             rel="noopener noreferrer"
             className="text-accent underline-offset-4 hover:underline"
           >
-            tiktok.com/@aiwithmike1
+            tiktok.com/@littlabs
           </a>
         </p>
       </div>

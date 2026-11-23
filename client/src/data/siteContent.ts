@@ -12,7 +12,7 @@ export const bioLine =
 
 export const keyMetrics = [
   { value: "Lotts", label: "Cybersecurity Brand", note: "Systems & IP Defense" },
-  { value: "AI with Mike", label: "Awareness Content", note: "TikTok @aiwithmike1" },
+  { value: "AI with Mike", label: "Awareness Content", note: "TikTok @littlabs" },
   { value: "Marketing Lead", label: "Campaigns & UGC", note: "Product Promotion & Sales" },
   { value: "IT & Systems", label: "CLE & Web Sec", note: "Infrastructure Defense" },
 ] as const;
