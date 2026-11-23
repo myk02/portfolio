@@ -14,7 +14,7 @@ export const proofVideos: ProofVideo[] = [
     slug: "fake-payment-scams",
     title: "How fake payment scams trap you",
     description:
-      "A fake 'payment received' alert that ends in a refund request.",
+      "A fake payment alert that ends in a refund request.",
     tag: "Payment fraud",
     duration: "1:14",
     src: "/videos/how-fake-payment-scams-trap-you.mp4",
@@ -24,7 +24,7 @@ export const proofVideos: ProofVideo[] = [
     slug: "fake-urgent-alerts",
     title: "How hackers fake urgent alerts",
     description:
-      "A spoofed countdown and a lookalike URL that creates panic.",
+      "A spoofed countdown and a lookalike URL.",
     tag: "Phishing",
     duration: "1:04",
     src: "/videos/how-hackers-fake-urgent-alerts.mp4",
@@ -34,7 +34,7 @@ export const proofVideos: ProofVideo[] = [
     slug: "verification-code-scams",
     title: "How verification code scams work",
     description:
-      "Someone asks you to read back the one-time code on your phone.",
+      "Someone asks for the one-time code on your phone.",
     tag: "Account takeover",
     duration: "1:11",
     src: "/videos/how-verification-code-scams-work.mp4",
@@ -44,7 +44,7 @@ export const proofVideos: ProofVideo[] = [
     slug: "fake-job-scams",
     title: "How fake job scams trap you",
     description:
-      "A too-good-to-be-true offer that rushes you past the warning signs.",
+      "A too-good offer that rushes you past the warning signs.",
     tag: "Job fraud",
     duration: "1:07",
     src: "/videos/how-fake-job-scams-trap-you.mp4",
@@ -54,7 +54,7 @@ export const proofVideos: ProofVideo[] = [
     slug: "fake-wifi-hotspots",
     title: "How fake Wi-Fi hotspots steal passwords",
     description:
-      "A rogue hotspot that harvests the passwords you type into it.",
+      "A rogue hotspot that harvests your passwords.",
     tag: "Network security",
     duration: "0:33",
     src: "/videos/how-fake-wifi-hotspots-steal-passwords.mp4",

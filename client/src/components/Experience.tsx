@@ -133,8 +133,8 @@ const JOBS: Job[] = [
     location: "Eastern Africa",
     workType: "Remote",
     description:
-      "Founded Lotts as a dedicated cybersecurity brand and channel that sensitizes businesses and creators on how to protect their systems and intellectual property through high-impact content. Also spearheading marketing content creation and product promotion.",
-    skills: "Cybersecurity, Intellectual Property Protection, Marketing Content Creation & Startup Ventures",
+      "Founded Lotts, a cybersecurity brand protecting systems and IP through content and product marketing.",
+    skills: "Cybersecurity · IP Protection · Marketing · Startups",
     current: true,
     logo: <LottsLogo />,
   },
@@ -147,8 +147,8 @@ const JOBS: Job[] = [
     location: "Karen ward, Nairobi County, Kenya",
     workType: "On-site",
     description:
-      "Administering IT infrastructure, network security, and user support for 30+ staff and students weekly while safeguarding sensitive institutional records and student portal integrity.",
-    skills: "IT Systems, Cybersecurity, Network Administration & Access Control",
+      "Runs IT infrastructure, network security, and support for 30+ staff and students weekly.",
+    skills: "IT Systems · Cybersecurity · Networking",
     current: true,
     logo: <CleLogo />,
   },
@@ -161,8 +161,8 @@ const JOBS: Job[] = [
     location: "United States",
     workType: "Remote",
     description:
-      "Produced and scaled high-converting UGC marketing campaigns designed to highlight product selling points, build trust, and drive user acquisition and sales.",
-    skills: "Marketing Campaigns, UGC Content, Product Promotion & Sales Conversion",
+      "Built UGC campaigns that highlighted product value and drove user acquisition.",
+    skills: "Marketing · UGC · Product Promotion",
     logo: <WhopLogo />,
   },
   {
@@ -174,8 +174,8 @@ const JOBS: Job[] = [
     location: "Remote",
     workType: "Remote",
     description:
-      "Engineered secure, responsive web applications for international clients with clean architecture, robust APIs, and performant user experiences.",
-    skills: "Software Development, Full-Stack Development & Web Security",
+      "Built secure, responsive web apps for international clients.",
+    skills: "Full-Stack Development · Web Security",
     logo: <FreelancerLogo />,
   },
 ];

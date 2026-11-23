@@ -35,10 +35,6 @@ export default function NotFound() {
               Page not found<span className="text-accent">.</span>
             </span>
           </h1>
-          <ul className="mt-4 text-[0.9375rem] text-muted-foreground leading-relaxed max-w-sm mx-auto list-disc list-inside space-y-1 text-left">
-            <li>Page moved or missing</li>
-            <li>Back home or view live work</li>
-          </ul>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/" className="btn btn-primary justify-center">
               ← Back home
@@ -48,9 +44,6 @@ export default function NotFound() {
             </Link>
           </div>
         </Surface>
-        <p className="text-center text-[11px] font-mono uppercase tracking-widest text-muted-foreground mt-4">
-          If you typed the URL, check the spelling — case matters.
-        </p>
       </div>
     </main>
   );

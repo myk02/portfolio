@@ -8,21 +8,21 @@ const PILLARS = [
     title: "Proactive Sensitization",
     subtitle: "Security without fear",
     description:
-      "Most digital attacks prey on confusion, not complex exploits. I break down real attack vectors — verification scams, session hijacks, social engineering — so people and businesses recognize threats instantly.",
+      "Attacks exploit confusion, not code. I break down real scams so you spot them fast.",
   },
   {
     icon: Target,
     title: "IP & Systems Protection",
     subtitle: "Safeguarding what you build",
     description:
-      "From safeguarding institutional records at the Council of Legal Education to protecting proprietary assets at Lotts, I focus on solid access boundaries, least-privilege security, and resilient workflows.",
+      "From legal records at CLE to Lotts assets: tight access and least-privilege security.",
   },
   {
     icon: Sparkles,
     title: "Marketing & Sales Clarity",
     subtitle: "Stories that convert",
     description:
-      "Technical mastery alone doesn't build a business. I create engaging UGC campaigns and clear conversion funnels that translate sophisticated tech into compelling reasons for customers to say yes.",
+      "UGC campaigns and clear funnels that turn complex tech into reasons to buy.",
   },
 ];
 
@@ -58,10 +58,10 @@ export default function AboutEthos() {
                 "Cybersecurity is human before it is technical."
               </h3>
               <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
-                I founded <strong className="text-foreground font-semibold">Lotts</strong> because I saw too many creators, founders, and small teams lose their channels, databases, and intellectual property to preventable attacks.
+                I founded <strong className="text-foreground font-semibold">Lotts</strong> because too many creators and small teams lose data and IP to attacks they could have seen coming.
               </p>
               <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
-                Security shouldn't be locked behind enterprise walls or esoteric jargon. When people understand <em>why</em> a threat works, they intuitively know how to defend against it.
+                Security shouldn't need jargon. Show people <em>why</em> a threat works and they know how to stop it.
               </p>
               <div className="pt-3 border-t border-border/80 flex items-center justify-between text-xs font-mono text-foreground/80">
                 <span className="font-medium text-foreground">Mike Waitindi</span>

@@ -64,10 +64,9 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            I founded <strong className="font-semibold text-foreground">Lotts</strong> to
-            take the fear and complexity out of cybersecurity — sensitizing people on how to
-            protect their digital systems and intellectual property through high-impact content,
-            and creating marketing campaigns that promote and sell tech products.
+            I founded <strong className="font-semibold text-foreground">Lotts</strong> to make
+            cybersecurity simple — protecting systems and IP through clear content, and marketing
+            tech products that sell.
           </motion.p>
 
           {/* Action CTAs */}

@@ -20,7 +20,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
       />
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+      <div className="relative aspect-[16/9] overflow-hidden bg-muted">
         <video
           ref={videoRef}
           playsInline
@@ -52,7 +52,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
           </>
         )}
       </div>
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-3.5 flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
           <span className="flex items-center gap-1.5 truncate">
             <span className="text-foreground font-semibold">
@@ -66,7 +66,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
         <h3 className="mt-2 font-display font-semibold text-[0.98rem] leading-[1.25] tracking-[-0.015em] text-foreground group-hover:text-foreground/90">
           {video.title}
         </h3>
-        <p className="mt-2 text-[0.82rem] leading-relaxed text-muted-foreground line-clamp-3">
+        <p className="mt-2 text-[0.82rem] leading-relaxed text-muted-foreground line-clamp-2">
           {video.description}
         </p>
         <div className="pt-3 mt-auto border-t border-border/80">
@@ -106,8 +106,7 @@ export default function VideoProof() {
         </Reveal>
 
         <p className="mx-auto mb-8 max-w-xl text-center text-[0.92rem] leading-relaxed text-muted-foreground">
-          Cybersecurity explainers from the <strong className="text-foreground font-medium">AI with Mike</strong> channel —
-          breaking down how common scams, threats, and attacks work so they're easier to spot and stop.
+          Short scam breakdowns from the <strong className="text-foreground font-medium">AI with Mike</strong> channel.
         </p>
 
         <Reveal>
@@ -121,7 +120,7 @@ export default function VideoProof() {
         </Reveal>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          More explainers on{" "}
+          More on{" "}
           <a
             href={CONTACT.tiktok}
             target="_blank"
@@ -130,7 +129,6 @@ export default function VideoProof() {
           >
             TikTok @aiwithmike1
           </a>
-          .
         </p>
       </div>
     </section>

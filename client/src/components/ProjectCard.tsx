@@ -112,7 +112,7 @@ function GitHubTile() {
           More repositories
         </p>
         <p className="mx-auto mt-1.5 max-w-[24ch] text-[0.85rem] leading-relaxed text-muted-foreground">
-          Experiments, scripts and prototypes that have not made it into the grid.
+          Experiments and prototypes not in the grid.
         </p>
       </div>
       <div className="mt-1 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">

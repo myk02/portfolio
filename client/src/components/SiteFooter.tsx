@@ -75,7 +75,7 @@ export default function SiteFooter() {
         </div>
       </div>
       <div className="container border-t border-background/10 pb-6 pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-background/50">
-        <p>© {new Date().getFullYear()} Mike Waitindi · Built in Nairobi · Available globally</p>
+        <p>© {new Date().getFullYear()} Mike Waitindi · Nairobi · Available worldwide</p>
         <p className="font-mono text-[11px]">
           Lotts · AI with Mike:{" "}
           <a

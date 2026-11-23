@@ -5,10 +5,10 @@ export const roleLine = "Founder · Cybersecurity · Marketing · Sales · Nairo
 export const heroTitle = "Mike Waitindi";
 
 export const heroSubline =
-  "Founder of Lotts. Sensitizing people on how to protect their systems and intellectual property through impactful content, and crafting high-converting marketing campaigns to promote tech products.";
+  "Founder of Lotts. Cybersecurity education, marketing, and sales.";
 
 export const bioLine =
-  "Mike Waitindi — Nairobi, Kenya. Founder of Lotts · Cybersecurity · Marketing · Sales. Educating audiences on digital systems and IP protection, and producing marketing content that drives growth.";
+  "Mike Waitindi — Nairobi. Founder of Lotts: cybersecurity, marketing, and sales.";
 
 export const keyMetrics = [
   { value: "Lotts", label: "Cybersecurity Brand", note: "Systems & IP Defense" },
@@ -27,7 +27,7 @@ export const services = [
       "Security Sensitization",
       "Access & Vulnerability Control",
     ],
-    proof: "Educating people and organizations to protect their digital systems, data, and intellectual property.",
+    proof: "Helping people protect their systems, data, and IP.",
   },
   {
     title: "Founder & Venture Building",
@@ -38,7 +38,7 @@ export const services = [
       "Content Channels",
       "Tech Entrepreneurship",
     ],
-    proof: "Founded Lotts from the ground up, turning cybersecurity knowledge into an impactful, educational brand.",
+    proof: "Built Lotts from zero into a cybersecurity education brand.",
   },
   {
     title: "Marketing & Content Creation",
@@ -49,7 +49,7 @@ export const services = [
       "Explainer Video Content",
       "Audience Engagement",
     ],
-    proof: "Crafting marketing content and UGC campaigns that spotlight core product value and maximize selling points.",
+    proof: "UGC and campaigns that spotlight product value.",
   },
   {
     title: "Sales & Conversion",
@@ -60,6 +60,6 @@ export const services = [
       "Value Proposition",
       "Retention & Onboarding",
     ],
-    proof: "Designing sales funnels and growth strategies that transform viewer attention into paying customers.",
+    proof: "Funnels that turn attention into customers.",
   },
 ] as const;

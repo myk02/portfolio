@@ -122,6 +122,6 @@ export default function SiteHead({
 
 export const DEFAULT_HEAD = {
   title: `Mike Waitindi — Founder · Cybersecurity · Marketing · Sales`,
-  description: `Mike Waitindi: Founder of Lotts. Cybersecurity content sensitizing on systems & IP protection, plus high-converting marketing campaigns and sales funnels.`,
+  description: `Mike Waitindi — Founder of Lotts. Cybersecurity education, marketing, and sales.`,
   canonical: SITE_URL,
 };
