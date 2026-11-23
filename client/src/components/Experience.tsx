@@ -209,10 +209,10 @@ export default function Experience() {
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className={`relative py-5 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-10 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
+                className={`group relative py-5 transition-colors hover:bg-card/30 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-10 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
               >
                 <div className="flex gap-3.5 sm:gap-4 lg:block">
-                  <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 sm:h-12 sm:w-12 bg-card">
+                  <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 bg-card transition-colors group-hover:border-foreground/30 sm:h-12 sm:w-12">
                     {job.logo}
                   </div>
                   <div className="min-w-0 flex-1 lg:mt-3">

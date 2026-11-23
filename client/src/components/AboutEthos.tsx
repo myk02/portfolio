@@ -76,7 +76,11 @@ export default function AboutEthos() {
               const Icon = pillar.icon;
               return (
                 <Reveal key={pillar.title} delay={(i % 3) as 0 | 1 | 2}>
-                  <div className="p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.06)] relative">
+                  <div className="p-5 bg-card border border-border group relative overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.06)]">
+                    <span
+                      className="absolute top-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"
+                      aria-hidden
+                    />
                     <div className="flex items-start gap-4">
                       <span
                         className="w-10 h-10 grid place-items-center border border-border bg-secondary text-foreground shrink-0 group-hover:bg-accent group-hover:text-accent-foreground group-hover:border-accent transition-colors"

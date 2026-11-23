@@ -110,9 +110,9 @@ export default function VideoProof() {
         </p>
 
         <Reveal>
-          <ul className="flex gap-4 overflow-x-auto pb-4 xl:justify-center scroll-smooth px-1">
+          <ul className="carousel-mask -mx-2 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 pb-4 xl:justify-center">
             {proofVideos.map((video, i) => (
-              <li key={video.slug} className="flex shrink-0 self-stretch">
+              <li key={video.slug} className="flex shrink-0 snap-start self-stretch">
                 <VideoCard video={video} index={i} />
               </li>
             ))}

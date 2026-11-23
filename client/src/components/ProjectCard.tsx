@@ -44,6 +44,16 @@ export default function ProjectCard({
             aria-label={`${study.name} — open demo (opens in a new tab)`}
           >
             {tile}
+            <span
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute bottom-3 left-3 inline-flex translate-y-1 items-center gap-1.5 border border-foreground/10 bg-accent px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-accent-foreground opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+              aria-hidden
+            >
+              Open demo <ArrowUpRight size={11} />
+            </span>
           </a>
         ) : (
           <div className="relative aspect-[16/10] overflow-hidden bg-muted border-b border-border/80">

@@ -181,7 +181,8 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                title="Switch theme"
+                className="grid h-9 w-9 place-items-center border border-transparent text-muted-foreground transition-colors hover:border-border hover:bg-card hover:text-foreground"
                 aria-label={
                   theme === "dark"
                     ? "Switch to light theme"
@@ -204,7 +205,7 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               ref={menuButtonRef}
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="md:hidden grid h-9 w-9 place-items-center border border-transparent text-muted-foreground transition-colors hover:border-border hover:bg-card hover:text-foreground"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-nav"
