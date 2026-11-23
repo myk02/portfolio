@@ -114,12 +114,11 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
     setIsMenuOpen(false);
   };
 
-  const navLinks = [
+  const navLinks: { id: string; label: string; href?: string }[] = [
     { id: "about", label: "About" },
     { id: "work", label: "Work" },
-    { id: "proof", label: "Proof" },
+    { id: "videos", label: "Videos", href: "/videos" },
     { id: "skills", label: "Capabilities" },
-    { id: "experience", label: "Experience" },
   ];
 
   return (
@@ -145,36 +144,39 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
           <span className="w-7 h-7 grid place-items-center bg-foreground text-background group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
             <Logo size={20} />
           </span>
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="font-display font-semibold text-[0.95rem] tracking-tight text-foreground group-hover:opacity-70 transition-opacity">
-              Mike Waitindi
-            </span>
-            <span className="hidden lg:inline text-[10px] font-mono uppercase tracking-widest text-muted-foreground border-l border-border pl-2">
-              Founder · Cybersecurity · Marketing · Sales
-            </span>
-          </div>
+          <span className="hidden sm:inline font-display font-semibold text-[0.95rem] tracking-tight text-foreground group-hover:opacity-70 transition-opacity">
+            Mike Waitindi
+          </span>
         </Link>
 
-          <nav
-            className="hidden md:flex items-center gap-6 lg:gap-8"
-            aria-label="Primary"
-          >
-            {navLinks.map(link => (
+        <nav
+          className="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-12"
+          aria-label="Primary"
+        >
+          {navLinks.map(link => {
+            const active = link.href ? location === link.href : activeSection === link.id;
+            const className = `text-[0.8125rem] font-medium tracking-[-0.005em] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-accent after:transition-all ${
+              active
+                ? "text-foreground after:w-full"
+                : "text-muted-foreground hover:text-foreground after:w-0 hover:after:w-full"
+            }`;
+            return link.href ? (
+              <Link key={link.id} href={link.href} aria-current={active ? "page" : undefined} className={className}>
+                {link.label}
+              </Link>
+            ) : (
               <button
                 key={link.id}
                 type="button"
                 onClick={() => handleNav(link.id)}
-                aria-current={activeSection === link.id ? "true" : undefined}
-                className={`text-[0.8125rem] font-medium tracking-[-0.005em] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-accent after:transition-all ${
-                  activeSection === link.id
-                    ? "text-foreground after:w-full"
-                    : "text-muted-foreground hover:text-foreground after:w-0 hover:after:w-full"
-                }`}
+                aria-current={active ? "true" : undefined}
+                className={className}
               >
                 {link.label}
               </button>
-            ))}
-          </nav>
+            );
+          })}
+        </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
             {toggleTheme && (
@@ -228,21 +230,33 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
               className="md:hidden bg-secondary border-b border-border overflow-hidden"
             >
               <div className="container py-4 space-y-4">
-                {navLinks.map(link => (
-                  <button
-                    key={link.id}
-                    type="button"
-                    onClick={() => handleNav(link.id)}
-                    aria-current={activeSection === link.id ? "true" : undefined}
-                    className={`block w-full text-left text-sm font-medium transition-opacity hover:opacity-70 ${
-                      activeSection === link.id
-                        ? "text-foreground border-l-2 border-accent pl-2"
-                        : "text-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                ))}
+                {navLinks.map(link => {
+                  const active = link.href ? location === link.href : activeSection === link.id;
+                  const className = `block w-full text-left text-sm font-medium transition-opacity hover:opacity-70 ${
+                    active ? "text-foreground border-l-2 border-accent pl-2" : "text-foreground"
+                  }`;
+                  return link.href ? (
+                    <Link
+                      key={link.id}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={className}
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      key={link.id}
+                      type="button"
+                      onClick={() => handleNav(link.id)}
+                      aria-current={active ? "true" : undefined}
+                      className={className}
+                    >
+                      {link.label}
+                    </button>
+                  );
+                })}
                 <button
                   type="button"
                   onClick={() => handleNav("contact")}

@@ -10,13 +10,14 @@ import { expect, test } from "@playwright/test";
  * routes under test are the portfolio's own pages.
  */
 
-const ROUTES = ["/", "/work"];
+const ROUTES = ["/", "/work", "/videos"];
 
 test.describe("QA gate — functional: contact form validation", () => {
   test("empty submission is rejected with inline errors (no network call)", async ({
     page,
   }) => {
     await page.goto("/");
+    await page.locator("#contact").scrollIntoViewIfNeeded();
     await page.getByRole("button", { name: "Send message" }).click();
     await expect(page.getByRole("alert")).toContainText(
       "Please fill in all fields"
@@ -32,6 +33,7 @@ test.describe("QA gate — functional: contact form validation", () => {
     page,
   }) => {
     await page.goto("/");
+    await page.locator("#contact").scrollIntoViewIfNeeded();
     await page.locator("#name").fill("QA Reviewer");
     await page.locator("#email").fill("not-an-email");
     await page.locator("#message").fill("Regression check — ignore.");
@@ -89,7 +91,7 @@ test.describe("QA gate — UI consistency across viewports", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 360, height: 800 });
-    for (const route of ["/", "/work"]) {
+    for (const route of ["/", "/work", "/videos"]) {
       await page.goto(route);
       const overflow = await page.evaluate(() => {
         const el = document.scrollingElement ?? document.documentElement;

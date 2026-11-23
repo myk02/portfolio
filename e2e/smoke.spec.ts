@@ -82,9 +82,7 @@ test.describe("home page", () => {
 });
 
 test.describe("proof videos", () => {
-  test("renders every proof video with a local source and poster", async ({
-    page,
-  }) => {
+  test("landing page shows a short video teaser", async ({ page }) => {
     await page.goto("/");
     const section = page.locator("#proof");
     await expect(
@@ -92,6 +90,21 @@ test.describe("proof videos", () => {
     ).toBeVisible();
 
     const videos = section.locator("video");
+    await expect(videos).toHaveCount(3);
+    await expect(
+      section.getByRole("link", { name: /View all \d+ videos/i })
+    ).toBeVisible();
+  });
+
+  test("videos page renders every proof video with a local source and poster", async ({
+    page,
+  }) => {
+    await page.goto("/videos");
+    await expect(
+      page.getByRole("heading", { name: "Watch the work" })
+    ).toBeVisible();
+
+    const videos = page.locator("main video");
     await expect(videos).toHaveCount(proofVideos.length);
 
     const rendered = await videos.evaluateAll(els =>
