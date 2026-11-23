@@ -82,21 +82,25 @@ test.describe("home page", () => {
 });
 
 test.describe("proof videos", () => {
-  test("landing page shows a short video teaser", async ({ page }) => {
+  test("landing page shows a short video teaser with thumbnails", async ({ page }) => {
     await page.goto("/");
     const section = page.locator("#proof");
     await expect(
       section.getByRole("heading", { name: "Watch the work" })
     ).toBeVisible();
 
-    const videos = section.locator("video");
-    await expect(videos).toHaveCount(3);
+    await expect(section.getByRole("button", { name: /Play / })).toHaveCount(3);
     await expect(
       section.getByRole("link", { name: /View all \d+ videos/i })
     ).toBeVisible();
+
+    const posters = await section.locator("img[alt='']").evaluateAll(els =>
+      els.map(el => el.getAttribute("src"))
+    );
+    expect(posters).toEqual(proofVideos.slice(0, 3).map(v => v.poster));
   });
 
-  test("videos page renders every proof video with a local source and poster", async ({
+  test("videos page renders every proof video with a thumbnail", async ({
     page,
   }) => {
     await page.goto("/videos");
@@ -104,25 +108,12 @@ test.describe("proof videos", () => {
       page.getByRole("heading", { name: "Watch the work" })
     ).toBeVisible();
 
-    const videos = page.locator("main video");
-    await expect(videos).toHaveCount(proofVideos.length);
+    await expect(page.locator("main button[aria-label^='Play ']")).toHaveCount(proofVideos.length);
 
-    const rendered = await videos.evaluateAll(els =>
-      els.map(el => ({
-        src: el.querySelector("source")?.getAttribute("src"),
-        poster: el.getAttribute("poster"),
-        controls: el.hasAttribute("controls"),
-        playsInline: el.hasAttribute("playsinline"),
-      }))
+    const posters = await page.locator("main img[alt='']").evaluateAll(els =>
+      els.map(el => el.getAttribute("src"))
     );
-    expect(rendered).toEqual(
-      proofVideos.map(video => ({
-        src: video.src,
-        poster: video.poster,
-        controls: true,
-        playsInline: true,
-      }))
-    );
+    expect(posters).toEqual(proofVideos.map(video => video.poster));
   });
 
   test("video files and posters exist in public assets", () => {

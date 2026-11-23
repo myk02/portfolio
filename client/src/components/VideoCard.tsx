@@ -20,21 +20,30 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
         aria-hidden
       />
       <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-        <video
-          ref={videoRef}
-          playsInline
-          controls
-          preload="none"
-          poster={video.poster}
-          aria-label={`${video.title} (${video.duration})`}
-          onEnded={() => setPlaying(false)}
-          className="h-full w-full object-cover"
-        >
-          <source src={video.src} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        {!playing && (
+        {playing ? (
+          <video
+            ref={videoRef}
+            playsInline
+            controls
+            autoPlay
+            preload="metadata"
+            poster={video.poster}
+            aria-label={`${video.title} (${video.duration})`}
+            onEnded={() => setPlaying(false)}
+            className="h-full w-full object-cover"
+          >
+            <source src={video.src} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
           <>
+            <img
+              src={video.poster}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
             <button
               type="button"
               onClick={start}
