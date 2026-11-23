@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ExternalLink, Play } from "lucide-react";
+import { ChevronDown, ExternalLink, Play } from "lucide-react";
 import { CONTACT } from "@/lib/site";
 import { proofVideos, type ProofVideo } from "@/data/videos";
 import { Reveal } from "@/components/Reveal";
@@ -15,7 +15,7 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
   };
 
   return (
-    <Surface className="group relative flex h-full w-[190px] shrink-0 flex-col overflow-hidden transition-all duration-300 hover:border-foreground/30 hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.12)] sm:w-[210px]">
+    <Surface className="group relative flex h-full w-full flex-col overflow-hidden transition-all duration-300 hover:border-foreground/30 hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.12)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -63,12 +63,9 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
           </span>
           <span className="shrink-0 text-muted-foreground/70">{video.duration}</span>
         </div>
-        <h3 className="mt-2 font-display font-semibold text-[0.98rem] leading-[1.25] tracking-[-0.015em] text-foreground group-hover:text-foreground/90">
+        <h3 className="mt-2 font-display font-semibold text-[0.95rem] leading-[1.2] tracking-[-0.015em] text-foreground group-hover:text-foreground/90">
           {video.title}
         </h3>
-        <p className="mt-2 text-[0.82rem] leading-relaxed text-muted-foreground line-clamp-2">
-          {video.description}
-        </p>
         <div className="pt-3 mt-auto border-t border-border/80">
           <a
             href={CONTACT.tiktok}
@@ -86,6 +83,8 @@ function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
 
 /** Video proof: short cybersecurity explainers published on the AI with Mike channel. */
 export default function VideoProof() {
+  const [showAll, setShowAll] = useState(true);
+
   return (
     <section
       id="proof"
@@ -105,19 +104,40 @@ export default function VideoProof() {
           </span>
         </Reveal>
 
-        <p className="mx-auto mb-8 max-w-xl text-center text-[0.92rem] leading-relaxed text-muted-foreground">
-          Short scam breakdowns from the <strong className="text-foreground font-medium">AI with Mike</strong> channel.
+        <p className="mx-auto mb-8 max-w-md text-center text-[0.88rem] leading-relaxed text-muted-foreground">
+          Short scam breakdowns · <strong className="text-foreground font-medium">AI with Mike</strong>
         </p>
 
         <Reveal>
-          <ul className="carousel-mask -mx-2 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 pb-4 xl:justify-center">
+          <ul
+            className={
+              showAll
+                ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                : "carousel-mask -mx-2 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-2 pb-4 xl:justify-center"
+            }
+          >
             {proofVideos.map((video, i) => (
-              <li key={video.slug} className="flex shrink-0 snap-start self-stretch">
+              <li
+                key={video.slug}
+                className={showAll ? "flex self-stretch" : "flex w-[190px] shrink-0 snap-start self-stretch sm:w-[210px]"}
+              >
                 <VideoCard video={video} index={i} />
               </li>
             ))}
           </ul>
         </Reveal>
+
+        <div className="mt-6 text-center">
+          <button
+            type="button"
+            onClick={() => setShowAll((value) => !value)}
+            aria-expanded={showAll}
+            className="inline-flex items-center gap-2 border border-border bg-card px-4 py-2 text-[0.85rem] font-medium text-foreground transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
+          >
+            {showAll ? "Browse as carousel" : `View all ${proofVideos.length} videos`}
+            <ChevronDown size={14} aria-hidden className={`transition-transform ${showAll ? "rotate-180" : ""}`} />
+          </button>
+        </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
           More on{" "}

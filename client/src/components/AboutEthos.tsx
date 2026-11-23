@@ -5,24 +5,21 @@ import { SectionLabel } from "@/components/ui/section";
 const PILLARS = [
   {
     icon: ShieldCheck,
-    title: "Proactive Sensitization",
-    subtitle: "Security without fear",
-    description:
-      "Attacks exploit confusion, not code. I break down real scams so you spot them fast.",
+    title: "Security awareness",
+    subtitle: "Spot scams fast",
+    description: "Real scam breakdowns, minus the jargon.",
   },
   {
     icon: Target,
-    title: "IP & Systems Protection",
-    subtitle: "Safeguarding what you build",
-    description:
-      "From legal records at CLE to Lotts assets: tight access and least-privilege security.",
+    title: "Systems & IP",
+    subtitle: "Least-privilege access",
+    description: "Tight access for legal and business assets.",
   },
   {
     icon: Sparkles,
-    title: "Marketing & Sales Clarity",
-    subtitle: "Stories that convert",
-    description:
-      "UGC campaigns and clear funnels that turn complex tech into reasons to buy.",
+    title: "Marketing & sales",
+    subtitle: "Stories that sell",
+    description: "Clear funnels for complex tech.",
   },
 ];
 
@@ -36,41 +33,38 @@ export default function AboutEthos() {
       <div className="container">
         <Reveal className="section-head">
           <div>
-            <SectionLabel>Perspective &amp; Ethos</SectionLabel>
+            <SectionLabel>Ethos</SectionLabel>
             <h2 id="about-heading" className="heading-section text-foreground">
-              Behind the work
+              How I work
             </h2>
           </div>
           <span className="section-note hidden sm:inline-block">
-            Nairobi · Founder &amp; Educator
+            Nairobi · Founder
           </span>
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Personal narrative */}
+          {/* Left: short personal note */}
           <Reveal className="lg:col-span-5 space-y-4">
             <div className="p-6 sm:p-7 bg-card border border-border border-l-2 border-l-accent shadow-xs space-y-4 relative">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                 <HeartHandshake size={15} className="text-accent" aria-hidden />
-                <span>The Human Philosophy</span>
+                <span>My view</span>
               </div>
               <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground leading-snug">
-                "Cybersecurity is human before it is technical."
+                “Security starts with people.”
               </h3>
               <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
-                I founded <strong className="text-foreground font-semibold">Lotts</strong> because too many creators and small teams lose data and IP to attacks they could have seen coming.
-              </p>
-              <p className="text-[0.92rem] text-muted-foreground leading-relaxed">
-                Security shouldn't need jargon. Show people <em>why</em> a threat works and they know how to stop it.
+                I founded <strong className="text-foreground font-semibold">Lotts</strong> to make security clear, not scary.
               </p>
               <div className="pt-3 border-t border-border/80 flex items-center justify-between text-xs font-mono text-foreground/80">
                 <span className="font-medium text-foreground">Mike Waitindi</span>
-                <span className="text-muted-foreground">Founder @ Lotts · Nairobi</span>
+                <span className="text-muted-foreground">Founder, Lotts · Nairobi</span>
               </div>
             </div>
           </Reveal>
 
-          {/* Right: Three core focus pillars */}
+          {/* Right: three focus areas */}
           <div className="lg:col-span-7 grid grid-cols-1 gap-3.5">
             {PILLARS.map((pillar, i) => {
               const Icon = pillar.icon;

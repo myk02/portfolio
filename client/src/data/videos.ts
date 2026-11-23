@@ -1,7 +1,6 @@
 export interface ProofVideo {
   slug: string;
   title: string;
-  description: string;
   tag: string;
   duration: string;
   src: string;
@@ -12,9 +11,7 @@ export interface ProofVideo {
 export const proofVideos: ProofVideo[] = [
   {
     slug: "fake-payment-scams",
-    title: "How fake payment scams trap you",
-    description:
-      "A fake payment alert that ends in a refund request.",
+    title: "Fake payment alerts",
     tag: "Payment fraud",
     duration: "1:14",
     src: "/videos/how-fake-payment-scams-trap-you.mp4",
@@ -22,9 +19,7 @@ export const proofVideos: ProofVideo[] = [
   },
   {
     slug: "fake-urgent-alerts",
-    title: "How hackers fake urgent alerts",
-    description:
-      "A spoofed countdown and a lookalike URL.",
+    title: "Urgent alert spoofs",
     tag: "Phishing",
     duration: "1:04",
     src: "/videos/how-hackers-fake-urgent-alerts.mp4",
@@ -32,9 +27,7 @@ export const proofVideos: ProofVideo[] = [
   },
   {
     slug: "verification-code-scams",
-    title: "How verification code scams work",
-    description:
-      "Someone asks for the one-time code on your phone.",
+    title: "Verification code theft",
     tag: "Account takeover",
     duration: "1:11",
     src: "/videos/how-verification-code-scams-work.mp4",
@@ -42,9 +35,7 @@ export const proofVideos: ProofVideo[] = [
   },
   {
     slug: "fake-job-scams",
-    title: "How fake job scams trap you",
-    description:
-      "A too-good offer that rushes you past the warning signs.",
+    title: "Fake job offers",
     tag: "Job fraud",
     duration: "1:07",
     src: "/videos/how-fake-job-scams-trap-you.mp4",
@@ -52,12 +43,114 @@ export const proofVideos: ProofVideo[] = [
   },
   {
     slug: "fake-wifi-hotspots",
-    title: "How fake Wi-Fi hotspots steal passwords",
-    description:
-      "A rogue hotspot that harvests your passwords.",
+    title: "Rogue Wi-Fi hotspots",
     tag: "Network security",
     duration: "0:33",
     src: "/videos/how-fake-wifi-hotspots-steal-passwords.mp4",
     poster: "/videos/fake-wifi-hotspots-poster.webp",
+  },
+  {
+    slug: "advance-fee-scams",
+    title: "Advance-fee fraud",
+    tag: "Advance-fee fraud",
+    duration: "1:28",
+    src: "/videos/advance-fee-scams.mp4",
+    poster: "/videos/advance-fee-scams-poster.webp",
+  },
+  {
+    slug: "fake-account-freeze-scams",
+    title: "Account-freeze alerts",
+    tag: "Phishing",
+    duration: "0:26",
+    src: "/videos/fake-account-freeze-scams.mp4",
+    poster: "/videos/fake-account-freeze-scams-poster.webp",
+  },
+  {
+    slug: "fake-app-updates",
+    title: "Fake app updates",
+    tag: "Malware",
+    duration: "0:51",
+    src: "/videos/fake-app-updates.mp4",
+    poster: "/videos/fake-app-updates-poster.webp",
+  },
+  {
+    slug: "fake-voicemail-links",
+    title: "Voicemail link scams",
+    tag: "Phishing",
+    duration: "0:51",
+    src: "/videos/fake-voicemail-links.mp4",
+    poster: "/videos/fake-voicemail-links-poster.webp",
+  },
+  {
+    slug: "fake-delivery-links",
+    title: "Delivery link traps",
+    tag: "Phishing",
+    duration: "0:33",
+    src: "/videos/fake-delivery-links.mp4",
+    poster: "/videos/fake-delivery-links-poster.webp",
+  },
+  {
+    slug: "fake-login-links",
+    title: "Fake login pages",
+    tag: "Credential theft",
+    duration: "0:35",
+    src: "/videos/fake-login-links.mp4",
+    poster: "/videos/fake-login-links-poster.webp",
+  },
+  {
+    slug: "fake-voicemail-link-trap",
+    title: "Voicemail link trap",
+    tag: "Phishing",
+    duration: "0:56",
+    src: "/videos/fake-voicemail-link-trap.mp4",
+    poster: "/videos/fake-voicemail-link-trap-poster.webp",
+  },
+  {
+    slug: "overbroad-permissions",
+    title: "Excess app permissions",
+    tag: "App security",
+    duration: "1:16",
+    src: "/videos/overbroad-permissions.mp4",
+    poster: "/videos/overbroad-permissions-poster.webp",
+  },
+  {
+    slug: "rogue-hotspots",
+    title: "Rogue hotspot data theft",
+    tag: "Network security",
+    duration: "1:13",
+    src: "/videos/rogue-hotspots.mp4",
+    poster: "/videos/rogue-hotspots-poster.webp",
+  },
+  {
+    slug: "qr-sticker-trap",
+    title: "QR sticker trap",
+    tag: "QR phishing",
+    duration: "1:11",
+    src: "/videos/qr-sticker-trap.mp4",
+    poster: "/videos/qr-sticker-trap-poster.webp",
+  },
+  {
+    slug: "fake-virus-popups",
+    title: "Fake virus pop-ups",
+    tag: "Scam defense",
+    duration: "0:27",
+    src: "/videos/fake-virus-popups.mp4",
+    poster: "/videos/fake-virus-popups-poster.webp",
+  },
+  {
+    slug: "fake-billing-alerts",
+    title: "Billing alert fraud",
+    tag: "Payment fraud",
+    duration: "1:09",
+    src: "/videos/fake-billing-alerts.mp4",
+    poster: "/videos/fake-billing-alerts-poster.webp",
+  },
+  {
+    slug: "phishing-invites",
+    title: "Phishing invites",
+    tag: "Phishing",
+    duration: "1:06",
+    src: "/videos/phishing-invites.mp4",
+    poster: "/videos/phishing-invites-poster.webp",
   },
 ];
