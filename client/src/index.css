@@ -524,19 +524,6 @@ html.js [data-reveal][data-reveal="right"].in-view {
   }
 }
 
-/* Scroll progress bar */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent);
-  transform-origin: 0 50%;
-  z-index: 60;
-  pointer-events: none;
-}
-
 section[id] {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;

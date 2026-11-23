@@ -3,7 +3,6 @@ import { MotionConfig } from "framer-motion";
 import { LightboxProvider } from "@/components/Lightbox";
 import { Toaster } from "@/components/ui/sonner";
 import Analytics from "@/components/Analytics";
-import ScrollProgress from "@/components/ScrollProgress";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -67,7 +66,6 @@ function App() {
       <MotionConfig reducedMotion="user">
         <ThemeProvider defaultTheme="dark" switchable>
           <LightboxProvider>
-            <ScrollProgress />
             <NavigateBridge />
             <ScrollToTop />
             <Toaster />
