@@ -11,11 +11,9 @@ function LottsLogo() {
       aria-hidden="true"
       focusable="false"
     >
-      <rect width="48" height="48" fill="#f1f1ef" />
-      <path d="M11 12h11v24H11z" fill="#8f9aa5" />
-      <path d="M22 12h15v8H22z" fill="#c3ccd4" />
-      <path d="M22 20h15v8H22z" fill="#aeb9c3" />
-      <path d="M22 28h15v8H22z" fill="#d7dee4" />
+      <rect width="48" height="48" fill="#0b0b0b" />
+      <path d="M15 12h7v18h11v6H15z" fill="#c8a951" />
+      <path d="M33 12h5v5h-5z" fill="#c8a951" opacity="0.55" />
     </svg>
   );
 }

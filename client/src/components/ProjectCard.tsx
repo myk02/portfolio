@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code2, ExternalLink, Github } from "lucide-react";
+import { ArrowUpRight, Code2, Download, ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { CONTACT } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
@@ -115,14 +115,23 @@ function GitHubTile() {
           Experiments, scripts and prototypes that have not made it into the grid.
         </p>
       </div>
-      <a
-        href={CONTACT.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-1 inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
-      >
-        Browse GitHub <ArrowUpRight size={13} aria-hidden />
-      </a>
+      <div className="mt-1 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <a
+          href={CONTACT.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Browse GitHub <ArrowUpRight size={13} aria-hidden />
+        </a>
+        <a
+          href="/CV.pdf"
+          download
+          className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+        >
+          Download CV <Download size={13} aria-hidden />
+        </a>
+      </div>
     </Surface>
   );
 }
