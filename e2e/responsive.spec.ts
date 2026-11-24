@@ -23,7 +23,7 @@ for (const vp of viewports) {
 
     test("landing page proof teaser shows 3 videos", async ({ page }) => {
       await page.goto("/");
-      await expect(page.locator("#proof video")).toHaveCount(3);
+      await expect(page.locator('#proof button[aria-label^="Play "]')).toHaveCount(3);
     });
   });
 }
