@@ -148,6 +148,9 @@ export default function Contact() {
               <h2 id="contact-heading" className="heading-section text-foreground">
                 Let's talk
               </h2>
+              <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+                Have a project, role, or idea? Send a message and I’ll get back to you.
+              </p>
             </div>
             <p className="section-note hidden sm:block">
               Replies in 24h · Mon–Sat, EAT
@@ -158,7 +161,7 @@ export default function Contact() {
             {/* left — info */}
             <div className="space-y-4">
               <Reveal delay={1}>
-                <Surface className="p-4 space-y-3">
+                <Surface className="p-5 sm:p-6 space-y-4 bg-card/70 backdrop-blur-sm">
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
                     Direct Contact
                   </p>
@@ -253,7 +256,7 @@ export default function Contact() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="border border-border bg-card p-4 space-y-3.5"
+                className="border border-border bg-card/80 backdrop-blur-sm p-5 sm:p-6 space-y-4 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.12)]"
               >
                 <h3 className="font-display font-semibold text-foreground text-[1rem] tracking-[-0.015em] pb-3 border-b border-border">
                   Send a message

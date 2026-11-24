@@ -14,7 +14,7 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
   };
 
   return (
-    <Surface className="group relative flex h-full w-full flex-col overflow-hidden transition-all duration-300 hover:border-foreground/30 hover:-translate-y-1 hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.12)]">
+    <Surface className="group relative flex h-full w-full flex-col overflow-hidden transition-all duration-300 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.14)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -64,7 +64,7 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
           </>
         )}
       </div>
-      <div className="p-3.5 flex flex-col flex-1">
+      <div className="p-4 flex flex-col flex-1">
         <div className="flex items-center justify-between gap-2 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
           <span className="flex items-center gap-1.5 truncate">
             <span className="text-foreground font-semibold">

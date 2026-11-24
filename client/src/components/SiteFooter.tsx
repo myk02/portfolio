@@ -11,7 +11,7 @@ import {
 export default function SiteFooter() {
   return (
     <footer className="bg-foreground text-background border-t-[3px] border-accent">
-      <div className="container py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="container py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
         <div className="min-w-0">
           <p className="text-sm font-medium">
             Mike Waitindi{" "}

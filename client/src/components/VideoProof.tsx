@@ -20,6 +20,9 @@ export default function VideoProof() {
             <h2 id="proof-heading" className="heading-section text-foreground">
               Watch the work
             </h2>
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+              Short, practical scam breakdowns from AI with Mike.
+            </p>
           </div>
           <Link
             href="/videos"

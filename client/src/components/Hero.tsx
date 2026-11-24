@@ -9,26 +9,25 @@ interface HeroProps {
 /** Simplistic, humanized hero with high visual elegance. */
 export default function Hero({ onCtaClick }: HeroProps) {
   return (
-    <section id="home" className="relative bg-secondary/60 border-b border-border overflow-hidden">
+    <section id="home" className="relative bg-background border-b border-border overflow-hidden">
       <div
-        className="hero-grid absolute inset-0 pointer-events-none opacity-60"
+        className="hero-grid absolute inset-0 pointer-events-none opacity-50"
         aria-hidden
       />
       <div
         className="hero-spotlight absolute inset-0 pointer-events-none"
         aria-hidden
       />
-      {/* Sleek top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-secondary/40 to-transparent pointer-events-none" aria-hidden />
 
-      <div className="container relative pt-16 pb-16 md:pt-24 md:pb-28">
+      <div className="container relative pt-20 pb-16 md:pt-28 md:pb-24">
         <div className="max-w-3xl mx-auto text-center">
           {/* Live status badge */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-card border border-border text-[0.75rem] font-mono text-foreground/80 shadow-xs mb-6"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-card/80 backdrop-blur-sm border border-border text-[0.72rem] font-mono tracking-wide text-foreground/75 shadow-sm mb-8"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -39,7 +38,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
 
           {/* Heading 1: Mike Waitindi */}
           <motion.h1
-            className="font-display font-semibold text-foreground tracking-tight text-4xl sm:text-5xl md:text-[3.25rem] leading-[1.08]"
+            className="font-display font-semibold text-foreground tracking-tight text-[clamp(2.5rem,7vw,4.5rem)] leading-[1.02]"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
@@ -101,12 +100,12 @@ export default function Hero({ onCtaClick }: HeroProps) {
 
           {/* 3-Pillar summary cards */}
           <motion.div
-            className="mt-12 pt-8 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-3.5 text-left"
+            className="mt-14 pt-10 border-t border-border/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.28 }}
           >
-            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-5 bg-card/70 backdrop-blur-sm border border-border group hover:border-foreground/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.12)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <Shield size={15} className="text-accent shrink-0" aria-hidden />
@@ -120,7 +119,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-5 bg-card/70 backdrop-blur-sm border border-border group hover:border-foreground/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.12)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <Sparkles size={15} className="text-accent shrink-0" aria-hidden />
@@ -134,7 +133,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="p-4.5 sm:p-5 bg-card border border-border group hover:border-foreground/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_12px_-4px_rgba(0,0,0,0.06)] relative overflow-hidden">
+            <div className="p-5 bg-card/70 backdrop-blur-sm border border-border group hover:border-foreground/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.12)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300" aria-hidden />
               <div className="flex items-center gap-2 mb-1.5">
                 <TrendingUp size={15} className="text-accent shrink-0" aria-hidden />

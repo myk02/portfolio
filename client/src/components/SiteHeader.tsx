@@ -125,8 +125,8 @@ export default function SiteHeader({ onNavClick }: SiteHeaderProps) {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/95 border-b border-border backdrop-blur-md shadow-sm"
-          : "bg-transparent"
+          ? "bg-background/90 border-b border-border/80 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.04)]"
+          : "bg-background/60 backdrop-blur-md border-b border-transparent"
       }`}
     >
       <div className="container h-16 flex items-center justify-between">

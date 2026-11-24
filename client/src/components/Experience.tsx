@@ -198,6 +198,9 @@ export default function Experience() {
             >
               Experience
             </h2>
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+              Roles across security, IT, marketing, and product delivery.
+            </p>
           </div>
           <span className="section-note hidden sm:inline-block">
             Career &amp; Leadership

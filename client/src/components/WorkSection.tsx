@@ -17,6 +17,9 @@ export default function WorkSection() {
             <h2 id="work-heading" className="heading-section text-foreground">
               Selected work
             </h2>
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+              Live products and systems I’ve designed, built, and shipped.
+            </p>
           </div>
           <span className="section-note hidden sm:inline-block">
             0{liveStudies.length} shipped builds

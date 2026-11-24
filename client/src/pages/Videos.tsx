@@ -21,7 +21,7 @@ export default function Videos() {
       <SiteHeader />
 
       <main id="main" tabIndex={-1} className="outline-none">
-        <div className="container pt-24 pb-16">
+        <div className="container pt-28 pb-20">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
@@ -29,7 +29,7 @@ export default function Videos() {
             ← Home
           </Link>
 
-          <div className="section-head mt-7">
+          <div className="section-head mt-8">
             <div>
               <span className="section-label">
                 <span className="section-label-line" aria-hidden /> Video proof
@@ -37,8 +37,8 @@ export default function Videos() {
               <h1 className="heading-section text-foreground">
                 Watch the work
               </h1>
-              <p className="mt-2 max-w-xl text-[0.92rem] leading-relaxed text-muted-foreground">
-                Short scam breakdowns from the AI with Mike channel.
+              <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+                Short, practical scam breakdowns from AI with Mike.
               </p>
             </div>
             <span className="section-note hidden sm:inline-block">
@@ -46,7 +46,7 @@ export default function Videos() {
             </span>
           </div>
 
-          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {proofVideos.map((video, i) => (
               <li key={video.slug} className="flex self-stretch">
                 <VideoCard video={video} index={i} />
