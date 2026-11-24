@@ -40,9 +40,9 @@ export default function VideoCard({ video, index }: { video: ProofVideo; index: 
             <img
               src={video.poster}
               alt=""
-              loading="lazy"
+              loading="eager"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              className="absolute inset-0 h-full w-full object-cover bg-muted transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
             <span
               className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0"
