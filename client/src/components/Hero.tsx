@@ -8,7 +8,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { CONTACT } from "@/lib/site";
-import { projects } from "@/data/projects";
+import { liveStudies } from "@/data/projects";
 import ProjectCarousel from "@/components/ProjectCarousel";
 
 interface HeroProps {
@@ -130,7 +130,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             </motion.div>
           </div>
 
-          <ProjectCarousel projects={projects} variant="hero" />
+          <ProjectCarousel projects={liveStudies} variant="hero" />
         </div>
 
         <div className="mt-16 grid border-y border-border sm:mt-20 sm:grid-cols-3">

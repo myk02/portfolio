@@ -45,7 +45,7 @@ export default function ProjectCarousel({
 
   return (
     <motion.div
-      className={`hero-showcase relative mx-auto w-full ${variant === "hero" ? "max-w-[39rem] lg:ml-auto" : "max-w-5xl"}`}
+      className={`hero-showcase relative mx-auto w-full max-w-[34rem] ${variant === "hero" ? "lg:ml-auto" : ""}`}
       initial={{ opacity: 0, y: 22, rotate: 1 }}
       animate={{ opacity: 1, y: 0, rotate: 0 }}
       transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
@@ -99,7 +99,7 @@ export default function ProjectCarousel({
           className="relative block"
         >
           <div
-            className={`relative overflow-hidden bg-secondary ${variant === "hero" ? "aspect-[1.18/1] sm:aspect-[1.3/1]" : "aspect-[16/10] sm:aspect-[16/9]"}`}
+            className="relative aspect-[1.18/1] overflow-hidden bg-secondary sm:aspect-[1.3/1]"
           >
             <motion.img
               key={activeProject.slug}
@@ -143,42 +143,24 @@ export default function ProjectCarousel({
         </a>
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[10px]">
-        <span className="truncate">{activeProject.outcomeTitle}</span>
-        <span className="inline-flex shrink-0 items-center gap-1.5">
-          <span className="live-dot" aria-hidden />{" "}
-          {activeProject.liveUrl ? "Live demo" : "Source code"}
-        </span>
+      <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[10px]">
+        <span className="min-w-0 truncate">{activeProject.outcomeTitle}</span>
+        <a
+          href={projectHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center gap-1.5 font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
+        >
+          {projectLink.label} <projectLink.Icon size={13} aria-hidden />
+        </a>
       </div>
-
-      {variant === "work" && (
-        <div className="mt-5 border border-border bg-card p-4 sm:p-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-              {activeProject.year} <span className="mx-1 text-border">·</span>{" "}
-              {activeProject.tileBadge}
-            </span>
-            <a
-              href={projectHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
-            >
-              {projectLink.label} <projectLink.Icon size={14} aria-hidden />
-            </a>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {activeProject.stack.map(tech => (
-              <span
-                key={tech}
-                className="border border-border bg-secondary px-2 py-1 font-mono text-[10px] text-muted-foreground"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="mt-1 flex min-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap font-mono text-[9px] text-muted-foreground/80">
+        <span className="shrink-0 uppercase tracking-[0.08em]">
+          {activeProject.year} · {activeProject.tileBadge}
+        </span>
+        <span className="text-border" aria-hidden>·</span>
+        <span className="truncate">{activeProject.stack.join(" · ")}</span>
+      </div>
     </motion.div>
   );
 }
