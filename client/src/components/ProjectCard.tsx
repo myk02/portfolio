@@ -1,4 +1,13 @@
-import { ArrowUpRight, Code2, Download, ExternalLink, Github } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Code2,
+  Download,
+  ExternalLink,
+  Github,
+} from "lucide-react";
+import { useState } from "react";
 import type { Project } from "@/data/projects";
 import { CONTACT } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
@@ -29,7 +38,7 @@ export default function ProjectCard({
       : null;
 
   return (
-    <Surface className="group relative h-full flex flex-col overflow-hidden transition-all duration-300 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.14)]">
+    <Surface className="glass-surface group relative h-full flex flex-col overflow-hidden transition-all duration-300 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.14)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -98,7 +107,12 @@ export default function ProjectCard({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
             >
-              {link.label} <link.Icon size={13} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              {link.label}{" "}
+              <link.Icon
+                size={13}
+                aria-hidden
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </a>
           </div>
         )}
@@ -110,7 +124,7 @@ export default function ProjectCard({
 /** Fills a partial final row with a route to the rest of the work. */
 function GitHubTile() {
   return (
-    <Surface className="group relative flex h-full min-h-56 flex-col items-center justify-center gap-3 border-dashed p-6 text-center transition-colors hover:border-foreground/30 hover:bg-card/60">
+    <Surface className="glass-surface group relative flex h-full min-h-56 flex-col items-center justify-center gap-3 border-dashed p-6 text-center transition-colors hover:border-foreground/30 hover:bg-card/60">
       <span
         className="grid h-11 w-11 place-items-center border border-border text-foreground transition-colors group-hover:border-foreground/30"
         aria-hidden
@@ -147,18 +161,54 @@ function GitHubTile() {
 }
 
 export function ProjectCardGrid({ studies }: { studies: Project[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeStudy = studies[activeIndex];
+
+  if (!activeStudy) return null;
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-      {studies.map((study, i) => (
-        <Reveal key={study.slug} delay={i} className="h-full">
-          <ProjectCard study={study} index={i} />
+    <div className="mx-auto max-w-5xl">
+      <div aria-live="polite" aria-atomic="true">
+        <Reveal key={activeStudy.slug} className="h-full">
+          <ProjectCard study={activeStudy} index={activeIndex} />
         </Reveal>
-      ))}
-      {studies.length % 3 !== 0 && (
-        <Reveal delay={studies.length % 3} className="h-full">
-          <GitHubTile />
-        </Reveal>
-      )}
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-4">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+          Project {String(activeIndex + 1).padStart(2, "0")} of{" "}
+          {String(studies.length).padStart(2, "0")}
+          <span className="mx-2 text-border" aria-hidden>
+            ·
+          </span>
+          {activeStudy.name}
+        </p>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              setActiveIndex(
+                index => (index - 1 + studies.length) % studies.length
+              )
+            }
+            className="inline-flex min-h-10 items-center gap-2 border border-border px-3 text-sm text-foreground transition-colors hover:border-foreground/40 hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+            aria-label="Previous project"
+          >
+            <ArrowLeft size={15} aria-hidden /> Previous
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              setActiveIndex(index => (index + 1) % studies.length)
+            }
+            className="inline-flex min-h-10 items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+            aria-label="Next project"
+          >
+            Next <ArrowRight size={15} aria-hidden />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
