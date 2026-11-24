@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Gem } from "lucide-react";
+import { CalendarDays, Clock3, Gem, MapPin } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
 
@@ -173,8 +173,7 @@ const JOBS: Job[] = [
     duration: "8 mos",
     location: "Remote",
     workType: "Remote",
-    description:
-      "Built secure, responsive web apps for international clients.",
+    description: "Built secure, responsive web apps for international clients.",
     skills: "Full-Stack Development · Web Security",
     logo: <FreelancerLogo />,
   },
@@ -186,7 +185,7 @@ export default function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="section-pad bg-background border-t border-border"
+      className="section-pad bg-secondary border-t border-border"
     >
       <div className="container">
         <Reveal className="section-head items-start">
@@ -203,74 +202,81 @@ export default function Experience() {
             </p>
           </div>
           <span className="section-note hidden sm:inline-block">
-            Career &amp; Leadership
+            {JOBS.length} roles · {JOBS.filter(job => job.current).length}{" "}
+            current
           </span>
         </Reveal>
 
         <Reveal>
-          <ol className="max-w-5xl list-none divide-y divide-border/80 border-y border-border/80 p-0">
+          <ol className="relative mx-auto max-w-5xl list-none space-y-4 p-0 before:absolute before:bottom-8 before:left-[1.35rem] before:top-8 before:w-px before:bg-border sm:before:left-[1.6rem]">
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className={`group relative py-6 transition-colors hover:bg-card/40 sm:py-7 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-12 ${job.current ? "pl-4 before:absolute before:left-0 before:top-6 before:bottom-6 before:w-[2px] before:bg-accent/70" : ""}`}
+                className="relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-3.5 sm:grid-cols-[3.25rem_minmax(0,1fr)] sm:gap-5"
               >
-                <div className="flex gap-3.5 sm:gap-4 lg:block">
-                  <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 bg-card transition-colors group-hover:border-foreground/30 sm:h-12 sm:w-12">
-                    {job.logo}
-                  </div>
-                  <div className="min-w-0 flex-1 lg:mt-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-display text-[1.02rem] font-semibold leading-snug text-foreground">
+                <div className="relative z-10 mt-4 h-11 w-11 overflow-hidden border border-border bg-card p-0.5 shadow-sm sm:mt-5 sm:h-13 sm:w-13">
+                  {job.logo}
+                </div>
+                <article className="group min-w-0 border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/25 hover:shadow-[0_14px_32px_-20px_rgba(0,0,0,0.24)] sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="font-display text-[1.05rem] font-semibold leading-snug tracking-[-0.015em] text-foreground sm:text-[1.15rem]">
                         {job.role}
                       </h3>
-                      {job.current && (
-                        <span className="shrink-0 bg-foreground/10 px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.1em] text-foreground/80 inline-flex items-center gap-1.5 lg:hidden">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
-                          Present
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                        <span className="font-medium text-foreground">
+                          {job.company}
                         </span>
-                      )}
+                        <span aria-hidden> · </span>
+                        {job.employment}
+                      </p>
                     </div>
-                    <p className="mt-0.5 text-[0.84rem] leading-snug text-foreground">
-                      {job.company}
-                      <span className="text-muted-foreground">
-                        {" "}
-                        · {job.employment}
+                    {job.current && (
+                      <span className="inline-flex shrink-0 items-center gap-1.5 border border-accent/40 bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-foreground">
+                        <span
+                          className="h-1.5 w-1.5 rounded-full bg-accent"
+                          aria-hidden
+                        />
+                        Current
                       </span>
-                    </p>
-                    <p className="mt-1 flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-muted-foreground">
-                      {job.period}
-                      {job.current && (
-                        <span className="hidden bg-accent/25 px-2 py-0.5 text-foreground/90 lg:inline-flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
-                          Present
-                        </span>
-                      )}
-                    </p>
+                    )}
                   </div>
-                </div>
-                <div className="mt-3 min-w-0 lg:mt-0">
-                  <p className="text-[0.78rem] leading-snug text-muted-foreground">
-                    {job.location}
-                    {job.workType !== job.location && ` · ${job.workType}`}
-                    {" · "}
-                    {job.duration}
-                  </p>
+
                   {job.description && (
-                    <p className="mt-2.5 text-[0.9rem] leading-relaxed text-foreground/90">
+                    <p className="mt-3 max-w-3xl text-[0.88rem] leading-relaxed text-muted-foreground sm:text-[0.92rem]">
                       {job.description}
                     </p>
                   )}
+
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t border-border/80 pt-3 text-[0.72rem] leading-relaxed text-muted-foreground sm:text-xs">
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays size={13} aria-hidden />
+                      {job.period}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock3 size={13} aria-hidden />
+                      {job.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <MapPin size={13} aria-hidden />
+                      {job.location} · {job.workType}
+                    </span>
+                  </div>
+
                   {job.skills && (
-                    <p className="mt-2.5 flex items-start gap-1.5 text-[0.78rem] leading-snug text-muted-foreground">
-                      <Gem
-                        size={12}
-                        className="mt-[0.2rem] shrink-0"
-                        aria-hidden
-                      />
-                      <span>{job.skills}</span>
-                    </p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {job.skills.split(" · ").map(skill => (
+                        <span
+                          key={skill}
+                          className="inline-flex items-center gap-1.5 border border-border bg-secondary/70 px-2 py-1 text-[0.68rem] leading-tight text-muted-foreground"
+                        >
+                          <Gem size={10} aria-hidden className="text-accent" />
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   )}
-                </div>
+                </article>
               </li>
             ))}
           </ol>
