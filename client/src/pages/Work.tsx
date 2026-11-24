@@ -3,7 +3,7 @@ import { liveStudies } from "@/data/projects";
 import SiteHead from "@/components/SiteHead";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { ProjectCardGrid } from "@/components/ProjectCard";
+import ProjectCarousel from "@/components/ProjectCarousel";
 import VideoProof from "@/components/VideoProof";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -45,7 +45,7 @@ export default function Work() {
           </div>
 
           <div className="mt-8">
-            <ProjectCardGrid studies={liveStudies} />
+            <ProjectCarousel projects={liveStudies} variant="work" />
           </div>
         </div>
 
