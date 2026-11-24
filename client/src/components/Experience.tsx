@@ -208,11 +208,11 @@ export default function Experience() {
         </Reveal>
 
         <Reveal>
-          <ol className="max-w-5xl list-none divide-y divide-border border-y border-border p-0">
+          <ol className="max-w-5xl list-none divide-y divide-border/80 border-y border-border/80 p-0">
             {JOBS.map(job => (
               <li
                 key={`${job.role}-${job.company}`}
-                className={`group relative py-5 transition-colors hover:bg-card/30 sm:py-6 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-12 ${job.current ? "pl-3 before:absolute before:left-0 before:top-5 before:bottom-5 before:w-[2px] before:bg-accent/70" : ""}`}
+                className={`group relative py-6 transition-colors hover:bg-card/40 sm:py-7 lg:grid lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-12 ${job.current ? "pl-4 before:absolute before:left-0 before:top-6 before:bottom-6 before:w-[2px] before:bg-accent/70" : ""}`}
               >
                 <div className="flex gap-3.5 sm:gap-4 lg:block">
                   <div className="h-11 w-11 shrink-0 overflow-hidden border border-border/70 bg-card transition-colors group-hover:border-foreground/30 sm:h-12 sm:w-12">

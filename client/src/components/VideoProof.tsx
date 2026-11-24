@@ -34,7 +34,7 @@ export default function VideoProof() {
         </Reveal>
 
         <Reveal>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             {proofVideos.slice(0, 3).map((video, i) => (
               <li key={video.slug} className="flex self-stretch">
                 <VideoCard video={video} index={i} />

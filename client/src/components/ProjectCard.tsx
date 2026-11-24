@@ -148,7 +148,7 @@ function GitHubTile() {
 
 export function ProjectCardGrid({ studies }: { studies: Project[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
       {studies.map((study, i) => (
         <Reveal key={study.slug} delay={i} className="h-full">
           <ProjectCard study={study} index={i} />
