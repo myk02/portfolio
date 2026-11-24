@@ -337,6 +337,40 @@
     0 2px 0 rgb(255 255 255 / 0.04) inset;
 }
 
+.hero-project-control {
+  display: inline-flex;
+  min-width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding-inline: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--glass-tint) 65%, transparent);
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.hero-project-control:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.hero-project-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .dark .hero-preview {
   box-shadow:
     0 40px 100px -42px rgb(0 0 0 / 0.8),

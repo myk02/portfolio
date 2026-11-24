@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowUpRight,
   BadgeCheck,
+  ChevronLeft,
+  ChevronRight,
   LockKeyhole,
   MessageCircle,
-  Play,
   Sparkles,
   TrendingUp,
 } from "lucide-react";
 import { CONTACT } from "@/lib/site";
+import { projects } from "@/data/projects";
 
 interface HeroProps {
   onCtaClick: (id: string) => void;
@@ -22,6 +25,20 @@ const principles = [
 ];
 
 export default function Hero({ onCtaClick }: HeroProps) {
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const activeProject = projects[activeProjectIndex];
+  const projectHref = activeProject.liveUrl ?? activeProject.repoUrl ?? "#work";
+  const projectDestination = activeProject.liveUrl ? "live demo" : "source repository";
+  const projectHost = projectHref.startsWith("http")
+    ? new URL(projectHref).host
+    : "Portfolio project";
+  const projectNumber = String(activeProjectIndex + 1).padStart(2, "0");
+  const projectTotal = String(projects.length).padStart(2, "0");
+
+  const showProject = (direction: -1 | 1) => {
+    setActiveProjectIndex(index => (index + direction + projects.length) % projects.length);
+  };
+
   return (
     <section id="home" className="hero relative overflow-hidden bg-background">
       <div className="hero-grid absolute inset-0 pointer-events-none opacity-50" aria-hidden />
@@ -102,47 +119,83 @@ export default function Hero({ onCtaClick }: HeroProps) {
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="absolute -right-3 -top-5 z-10 hidden border border-border bg-background px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground shadow-lg sm:block">
-              Selected work <span className="ml-2 text-accent">/ 01</span>
-            </div>
-            <a
-              href="https://kenyatrace.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Open the KenyaTrace trip planner demo in a new tab"
-              className="hero-preview group relative block overflow-hidden border border-border bg-card shadow-[0_28px_80px_-35px_rgba(0,0,0,0.5)]"
-            >
+            <div className="hero-preview group relative block overflow-hidden border border-border bg-card shadow-[0_28px_80px_-35px_rgba(0,0,0,0.5)]">
               <div className="flex h-10 items-center gap-2 border-b border-border bg-card px-3.5">
                 <span className="h-2 w-2 rounded-full bg-[#f07d64]" aria-hidden />
                 <span className="h-2 w-2 rounded-full bg-[#e7b85b]" aria-hidden />
                 <span className="h-2 w-2 rounded-full bg-[#74ba85]" aria-hidden />
-                <span className="ml-3 flex-1 border border-border/70 bg-background/70 px-3 py-1 font-mono text-[9px] text-muted-foreground">kenyatrace.vercel.app</span>
-                <ArrowUpRight size={14} className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                <a
+                  href={projectHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${activeProject.name} ${projectDestination} in a new tab`}
+                  className="ml-3 min-w-0 flex-1 truncate border border-border/70 bg-background/70 px-3 py-1 font-mono text-[9px] text-muted-foreground"
+                >
+                  {projectHost}
+                </a>
+                <span className="shrink-0 font-mono text-[9px] text-muted-foreground" aria-live="polite">
+                  {projectNumber}<span className="mx-1 text-border">/</span>{projectTotal}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => showProject(-1)}
+                  aria-label={`Previous project: ${projects[(activeProjectIndex - 1 + projects.length) % projects.length].name}`}
+                  className="hero-project-control"
+                >
+                  <ChevronLeft size={15} aria-hidden />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => showProject(1)}
+                  aria-label={`Next project: ${projects[(activeProjectIndex + 1) % projects.length].name}`}
+                  className="hero-project-control hero-project-control-next"
+                >
+                  <span>Next</span><ChevronRight size={14} aria-hidden />
+                </button>
               </div>
-              <div className="relative aspect-[1.18/1] overflow-hidden bg-secondary sm:aspect-[1.3/1]">
-                <img
-                  src="/shots/kenyatrace/plan-desktop.webp"
-                  alt="KenyaTrace trip planner interface, with destinations arranged into a Kenya itinerary"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-transparent" aria-hidden />
-                <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-4 p-5 sm:p-7">
-                  <div>
-                    <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.17em] text-white/70">Product design · Frontend</p>
-                    <h2 className="font-display text-2xl font-medium tracking-tight text-white sm:text-3xl">KenyaTrace</h2>
-                    <p className="mt-1 text-xs text-white/75 sm:text-sm">A better way to plan the journey.</p>
-                  </div>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/40 bg-white/10 text-white backdrop-blur transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                    <Play size={14} fill="currentColor" />
-                  </span>
+              <a
+                href={projectHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${activeProject.name} ${projectDestination} in a new tab`}
+                className="relative block"
+              >
+                <div className="relative aspect-[1.18/1] overflow-hidden bg-secondary sm:aspect-[1.3/1]">
+                  <motion.img
+                    key={activeProject.slug}
+                    src={activeProject.hero.src}
+                    alt={activeProject.hero.alt}
+                    fetchPriority={activeProjectIndex === 0 ? "high" : "auto"}
+                    decoding="async"
+                    initial={{ opacity: 0, scale: 1.025 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="absolute inset-0 h-full w-full object-contain p-2 transition-transform duration-700 ease-out group-hover:scale-[1.025] sm:p-4"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-transparent" aria-hidden />
+                  <motion.div
+                    key={`${activeProject.slug}-caption`}
+                    aria-live="polite"
+                    className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-4 p-5 sm:p-7"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25, delay: 0.08 }}
+                  >
+                    <div>
+                      <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.17em] text-white/70">{activeProject.role}</p>
+                      <h2 className="font-display text-2xl font-medium tracking-tight text-white sm:text-3xl">{activeProject.name}</h2>
+                      <p className="mt-1 line-clamp-2 text-xs text-white/75 sm:text-sm">{activeProject.tagline}</p>
+                    </div>
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/40 bg-white/10 text-white backdrop-blur transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                      <ArrowUpRight size={16} />
+                    </span>
+                  </motion.div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
             <div className="mt-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[10px]">
-              <span>List-first. Built for real connections.</span>
-              <span className="inline-flex items-center gap-1.5"><span className="live-dot" aria-hidden /> Live demo</span>
+              <span className="truncate">{activeProject.outcomeTitle}</span>
+              <span className="inline-flex shrink-0 items-center gap-1.5"><span className="live-dot" aria-hidden /> {activeProject.liveUrl ? "Live demo" : "Source code"}</span>
             </div>
           </motion.div>
         </div>
