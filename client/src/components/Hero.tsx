@@ -34,7 +34,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="mb-7 inline-flex items-center gap-2.5 border border-border bg-card/80 px-3 py-2 text-[0.7rem] font-mono uppercase tracking-[0.13em] text-muted-foreground shadow-sm backdrop-blur-sm"
+              className="glass-surface mb-7 inline-flex items-center gap-2.5 px-3 py-2 text-[0.7rem] font-mono uppercase tracking-[0.13em] text-muted-foreground shadow-sm"
             >
               <span className="live-dot" aria-hidden />
               Nairobi, Kenya <span className="text-border">/</span> Building Lotts
