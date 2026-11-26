@@ -98,7 +98,7 @@ export default function Contact() {
       >
         <div className="container">
           <div className="max-w-xl mx-auto">
-            <Surface className="glass-surface p-6 sm:p-8 text-center">
+            <Surface className="p-6 sm:p-8 text-center">
               <div className="w-11 h-11 mx-auto flex items-center justify-center bg-accent text-accent-foreground mb-4">
                 <CheckCircle2 size={22} />
               </div>
@@ -161,7 +161,7 @@ export default function Contact() {
             {/* left — info */}
             <div className="space-y-4">
               <Reveal delay={1}>
-                <Surface className="glass-surface p-5 sm:p-6 space-y-4">
+                <Surface className="p-5 sm:p-6 space-y-4 bg-card/70 backdrop-blur-sm">
                   <p className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
                     Direct Contact
                   </p>
@@ -256,7 +256,7 @@ export default function Contact() {
               <form
                 onSubmit={handleSubmit}
                 noValidate
-                className="glass-surface p-5 sm:p-6 space-y-4 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.12)]"
+                className="border border-border bg-card/80 backdrop-blur-sm p-5 sm:p-6 space-y-4 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.12)]"
               >
                 <h3 className="font-display font-semibold text-foreground text-[1rem] tracking-[-0.015em] pb-3 border-b border-border">
                   Send a message

@@ -46,7 +46,7 @@ export default function AboutEthos() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left: short personal note */}
           <Reveal className="lg:col-span-5 space-y-4">
-            <div className="glass-surface p-6 sm:p-7 border-l-2 border-l-accent shadow-[0_8px_24px_-16px_rgba(0,0,0,0.1)] space-y-4 relative">
+            <div className="p-6 sm:p-7 bg-card/80 backdrop-blur-sm border border-border border-l-2 border-l-accent shadow-[0_8px_24px_-16px_rgba(0,0,0,0.1)] space-y-4 relative">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground">
                 <HeartHandshake size={15} className="text-accent" aria-hidden />
                 <span>My view</span>
@@ -70,7 +70,7 @@ export default function AboutEthos() {
               const Icon = pillar.icon;
               return (
                 <Reveal key={pillar.title} delay={(i % 3) as 0 | 1 | 2}>
-                  <div className="glass-surface p-5 group relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.1)]">
+                  <div className="p-5 bg-card/70 backdrop-blur-sm border border-border group relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.1)]">
                     <span
                       className="absolute top-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full"
                       aria-hidden

@@ -1,7 +1,7 @@
 import { liveStudies } from "@/data/projects";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/ui/section";
-import ProjectCarousel from "@/components/ProjectCarousel";
+import { ProjectCardGrid } from "@/components/ProjectCard";
 
 export default function WorkSection() {
   return (
@@ -26,7 +26,7 @@ export default function WorkSection() {
           </span>
         </Reveal>
 
-        <ProjectCarousel projects={liveStudies} variant="work" />
+        <ProjectCardGrid studies={liveStudies} />
       </div>
     </section>
   );

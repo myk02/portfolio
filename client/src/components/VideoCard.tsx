@@ -4,30 +4,17 @@ import { CONTACT } from "@/lib/site";
 import { type ProofVideo } from "@/data/videos";
 import { Surface } from "@/components/ui/section";
 
-interface VideoCardProps {
-  video: ProofVideo;
-  index: number;
-  posterLoading?: "eager" | "lazy";
-  onPlayStateChange?: (slug: string, playing: boolean) => void;
-}
-
-export default function VideoCard({
-  video,
-  index,
-  posterLoading = index < 3 ? "eager" : "lazy",
-  onPlayStateChange,
-}: VideoCardProps) {
+export default function VideoCard({ video, index }: { video: ProofVideo; index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
   const start = () => {
     setPlaying(true);
-    onPlayStateChange?.(video.slug, true);
     void videoRef.current?.play();
   };
 
   return (
-    <Surface className="glass-surface group relative flex h-full w-full flex-col overflow-hidden transition-all duration-300 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.14)]">
+    <Surface className="group relative flex h-full w-full flex-col overflow-hidden transition-all duration-300 hover:border-foreground/25 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.14)]">
       <div
         className="absolute top-0 left-0 right-0 h-[3px] bg-accent opacity-0 group-hover:opacity-100 transition-opacity z-10"
         aria-hidden
@@ -42,11 +29,7 @@ export default function VideoCard({
             preload="metadata"
             poster={video.poster}
             aria-label={`${video.title} (${video.duration})`}
-            onPause={() => onPlayStateChange?.(video.slug, false)}
-            onEnded={() => {
-              setPlaying(false);
-              onPlayStateChange?.(video.slug, false);
-            }}
+            onEnded={() => setPlaying(false)}
             className="h-full w-full object-cover"
           >
             <source src={video.src} type="video/mp4" />
@@ -57,7 +40,7 @@ export default function VideoCard({
             <img
               src={video.poster}
               alt=""
-              loading={posterLoading}
+              loading="eager"
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover bg-muted transition-transform duration-500 ease-out group-hover:scale-[1.02]"
             />
