@@ -606,8 +606,8 @@ export const projects: Project[] = [
     stack: ["Rust", "egui", "Windows 10/11"],
     constraints: ["Windows x64", "Local OS sampling", "Some firewall actions require elevation"],
     outcomeLine: "Review network activity and Windows protection status from a single desktop app.",
-    tileShot: "https://raw.githubusercontent.com/myk02/LottsLab/main/docs/lotts-labs-overview.svg",
-    tileShotAlt: "Illustration of the Lotts Labs Windows security dashboard with sample network and protection data.",
+    tileShot: "https://raw.githubusercontent.com/myk02/LottsLab/main/docs/monitoring-flow.svg",
+    tileShotAlt: "Diagram showing the local Windows monitoring and user-confirmed response flow in Lotts Labs.",
     context: "Windows connection, process, firewall, and Defender details are spread across separate system views. Lotts Labs brings the local snapshot and user-controlled response actions into one desktop console.",
     ownership: [
       "Built a Rust desktop interface for live TCP peers, TCP and UDP listeners, process activity, and traffic.",
