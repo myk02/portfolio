@@ -90,16 +90,29 @@ export default function ProjectCard({
           </div>
         )}
 
-        {link && (
-          <div className="pt-3.5 mt-auto border-t border-border">
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
-            >
-              {link.label} <link.Icon size={13} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+        {(link || study.downloadUrl) && (
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-3.5 mt-auto border-t border-border">
+            {study.downloadUrl && (
+              <a
+                href={study.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Download ${study.name} for Windows from GitHub Releases (opens in a new tab)`}
+                className="inline-flex min-h-10 items-center gap-1.5 bg-foreground px-3 py-2 text-[0.82rem] font-medium text-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                Download for Windows <Download size={14} aria-hidden />
+              </a>
+            )}
+            {link && (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-foreground decoration-accent decoration-2 underline-offset-4 hover:underline"
+              >
+                {link.label} <link.Icon size={13} aria-hidden className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            )}
           </div>
         )}
       </div>
