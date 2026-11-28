@@ -36,6 +36,8 @@ export interface Project {
   timeline: string;
   liveUrl?: string;
   repoUrl?: string;
+  /** Optional platform download page or installer. */
+  downloadUrl?: string;
   stack: string[];
   constraints: string[];
   outcomeLine: string;
@@ -587,6 +589,65 @@ export const projects: Project[] = [
       quality: [
         "Conflicting Content-Length / Transfer-Encoding requests are rejected.",
         "Live counters at /__stats and X-Cache labels on responses.",
+      ],
+    },
+  },
+  {
+    slug: "lotts-labs",
+    name: "Lotts Labs",
+    year: "2026",
+    tagline: "A local-first Windows desktop view of network activity and selected protections.",
+    outcomeTitle: "Network peers, listening ports, processes, and protection in one Windows console.",
+    tileBadge: "Windows desktop",
+    role: "Product design · Rust desktop development",
+    timeline: "Ongoing",
+    repoUrl: "https://github.com/myk02/LottsLab",
+    downloadUrl: "https://github.com/myk02/LottsLab/releases/latest",
+    stack: ["Rust", "egui", "Windows 10/11"],
+    constraints: ["Windows x64", "Local OS sampling", "Some firewall actions require elevation"],
+    outcomeLine: "Review network activity and Windows protection status from a single desktop app.",
+    tileShot: "https://raw.githubusercontent.com/myk02/LottsLab/main/docs/lotts-labs-overview.svg",
+    tileShotAlt: "Illustration of the Lotts Labs Windows security dashboard with sample network and protection data.",
+    context: "Windows connection, process, firewall, and Defender details are spread across separate system views. Lotts Labs brings the local snapshot and user-controlled response actions into one desktop console.",
+    ownership: [
+      "Built a Rust desktop interface for live TCP peers, TCP and UDP listeners, process activity, and traffic.",
+      "Added overview, infrastructure, Windows security, and compact widget views with selectable color themes.",
+      "Connected explicit firewall and protection actions while keeping administrator requirements visible.",
+    ],
+    problemLead: "Review which apps are using the network and what is listening on the PC.",
+    researchLead: "Windows desktop app · Rust + egui · x64 installer",
+    ordeal: "A process or address flag is only a local behavior signal, not proof of malware. The app keeps the observed context and reason visible, avoids claiming live IP reputation, and leaves firewall changes under user control.",
+    decisions: [
+      { label: "Local", text: "Collect the network and process snapshot from Windows without packet payload inspection." },
+      { label: "Clear", text: "Show remote peers, listening ports, process owners, and protection state together." },
+      { label: "Explicit", text: "Keep firewall response actions user-confirmed and note when elevation is required." },
+    ],
+    validateBefore: "Reviewing a peer required switching between Windows views.",
+    validateAfter: "One console shows the local peer, listener, process, and protection snapshot.",
+    metricCards: [],
+    lessons: [
+      "Show the evidence behind a flag, not just a severity color.",
+      "Separate local behavior hints from verified threat intelligence.",
+      "Keep high-impact firewall actions explicit and removable.",
+    ],
+    hero: {
+      src: "https://raw.githubusercontent.com/myk02/LottsLab/main/docs/lotts-labs-overview.svg",
+      alt: "Illustrated Lotts Labs desktop security dashboard; values shown are samples.",
+      caption: "Product overview illustration · sample values",
+    },
+    screens: [],
+    buildNotes: {
+      architecture: [
+        "Native Windows desktop UI built with Rust and egui.",
+        "Local OS sampling for TCP connections, TCP/UDP listeners, process context, and traffic.",
+      ],
+      build: [
+        "Windows x64 installer published through GitHub Releases.",
+        "Compact widget and optional launch-at-sign-in flow.",
+      ],
+      quality: [
+        "Behavior flags are not IP reputation verdicts.",
+        "Windows Firewall actions are user-confirmed and may require administrator access.",
       ],
     },
   },
